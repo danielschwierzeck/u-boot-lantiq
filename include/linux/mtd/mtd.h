@@ -485,5 +485,11 @@ int add_mtd_device(struct mtd_info *mtd);
 int del_mtd_device(struct mtd_info *mtd);
 int add_mtd_partitions(struct mtd_info *, const struct mtd_partition *, int);
 int del_mtd_partitions(struct mtd_info *);
+
+struct mtd_info *__mtd_next_device(int i);
+#define mtd_for_each_device(mtd)			\
+	for ((mtd) = __mtd_next_device(0);		\
+	     (mtd) != NULL;				\
+	     (mtd) = __mtd_next_device(mtd->index + 1))
 #endif
 #endif /* __MTD_MTD_H__ */
