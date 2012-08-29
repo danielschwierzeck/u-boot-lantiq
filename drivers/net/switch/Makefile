@@ -5,3 +5,4 @@
 #
 
 obj-$(CONFIG_SWITCH_MULTI) += switch.o
+obj-$(CONFIG_SWITCH_PSB697X) += psb697x.o
