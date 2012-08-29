@@ -11,6 +11,7 @@ LIB	:= $(obj)libswitch.o
 
 COBJS-$(CONFIG_SWITCH_MULTI) += switch.o
 COBJS-$(CONFIG_SWITCH_PSB697X) += psb697x.o
+COBJS-$(CONFIG_SWITCH_ADM6996I) += adm6996i.o
 
 COBJS	:= $(COBJS-y)
 SRCS	:= $(COBJS:.o=.c)
