@@ -23,6 +23,9 @@ void switch_init(void)
 #if defined(CONFIG_SWITCH_ADM6996I)
 	switch_adm6996i_init();
 #endif
+#if defined(CONFIG_SWITCH_AR8216)
+	switch_ar8216_init();
+#endif
 
 	board_switch_init();
 }
