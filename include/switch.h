@@ -97,6 +97,7 @@ static inline void switch_setup(struct switch_device *dev)
 }
 
 /* Init functions for supported Switch drivers */
+extern void switch_psb697x_init(void);
 
 #endif /* __SWITCH_H */
 
