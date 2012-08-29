@@ -17,6 +17,10 @@ void switch_init(void)
 	INIT_LIST_HEAD(&switch_drivers);
 	INIT_LIST_HEAD(&switch_devices);
 
+#if defined(CONFIG_SWITCH_PSB697X)
+	switch_psb697x_init();
+#endif
+
 	board_switch_init();
 }
 
