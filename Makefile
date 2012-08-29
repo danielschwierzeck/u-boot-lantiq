@@ -246,6 +246,7 @@ LIBS-$(CONFIG_CMD_UBI) += drivers/mtd/ubi/
 LIBS-y += drivers/mtd/spi/
 LIBS-y += drivers/net/
 LIBS-y += drivers/net/phy/
+LIBS-y += drivers/net/switch/
 LIBS-y += drivers/pci/
 LIBS-y += drivers/power/ \
 	drivers/power/fuel_gauge/ \

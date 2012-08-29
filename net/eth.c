@@ -10,6 +10,7 @@
 #include <net.h>
 #include <miiphy.h>
 #include <phy.h>
+#include <switch.h>
 
 void eth_parse_enetaddr(const char *addr, uchar *enetaddr)
 {
@@ -286,6 +287,8 @@ int eth_initialize(bd_t *bis)
 #ifdef CONFIG_PHYLIB
 	phy_init();
 #endif
+
+	switch_init();
 
 	eth_env_init(bis);
 
