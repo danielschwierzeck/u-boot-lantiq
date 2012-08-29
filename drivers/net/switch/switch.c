@@ -20,6 +20,9 @@ void switch_init(void)
 #if defined(CONFIG_SWITCH_PSB697X)
 	switch_psb697x_init();
 #endif
+#if defined(CONFIG_SWITCH_ADM6996I)
+	switch_adm6996i_init();
+#endif
 
 	board_switch_init();
 }
