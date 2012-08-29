@@ -280,6 +280,7 @@ LIBS-y += drivers/mtd/ubi/libubi.o
 LIBS-y += drivers/mtd/spi/libspi_flash.o
 LIBS-y += drivers/net/libnet.o
 LIBS-y += drivers/net/phy/libphy.o
+LIBS-y += drivers/net/switch/libswitch.o
 LIBS-y += drivers/pci/libpci.o
 LIBS-y += drivers/pcmcia/libpcmcia.o
 LIBS-y += drivers/power/libpower.o \
