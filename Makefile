@@ -607,6 +607,7 @@ libs-$(CONFIG_CMD_UBI) += drivers/mtd/ubi/
 libs-y += drivers/mtd/spi/
 libs-y += drivers/net/
 libs-y += drivers/net/phy/
+libs-y += drivers/net/switch/
 libs-y += drivers/pci/
 libs-y += drivers/power/ \
 	drivers/power/fuel_gauge/ \
