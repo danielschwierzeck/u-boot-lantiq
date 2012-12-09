@@ -15,6 +15,10 @@ enum ltq_chip_partnum {
 	LTQ_SOC_DANUBE = 0x0129,
 	LTQ_SOC_DANUBE_S = 0x012B,
 	LTQ_SOC_TWINPASS = 0x012D,
+	LTQ_SOC_ARX188 = 0x016C,	/* ARX188 */
+	LTQ_SOC_ARX186 = 0x016D,	/* ARX186 v1.1 */
+	LTQ_SOC_ARX186_2 = 0x016E,	/* ARX186 v1.2 */
+	LTQ_SOC_ARX182 = 0x016F,	/* ARX182 */
 	LTQ_SOC_VRX288 = 0x01C0,	/* VRX288 v1.1 */
 	LTQ_SOC_VRX268 = 0x01C2,	/* VRX268 v1.1 */
 	LTQ_SOC_GRX288 = 0x01C9,	/* GRX288 v1.1 */
@@ -33,6 +37,38 @@ static inline int ltq_soc_is_danube(void)
 }
 #else
 static inline int ltq_soc_is_danube(void)
+{
+	return 0;
+}
+#endif
+
+#ifdef CONFIG_SOC_XWAY_ARX100
+static inline int ltq_soc_is_arx100(void)
+{
+	return 1;
+}
+
+static inline int ltq_soc_is_arx100_v1(void)
+{
+	return ltq_chip_version_get() == 1;
+}
+
+static inline int ltq_soc_is_arx100_v2(void)
+{
+	return ltq_chip_version_get() == 2;
+}
+#else
+static inline int ltq_soc_is_arx100(void)
+{
+	return 0;
+}
+
+static inline int ltq_soc_is_arx100_v1(void)
+{
+	return 0;
+}
+
+static inline int ltq_soc_is_arx100_v2(void)
 {
 	return 0;
 }
