@@ -18,6 +18,7 @@ enum ltq_boot_select {
 	BOOT_PCI,
 	BOOT_MII0,
 	BOOT_RMII0,
+	BOOT_RGMII0,
 	BOOT_RGMII1,
 	BOOT_UNKNOWN,
 };
