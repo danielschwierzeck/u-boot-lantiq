@@ -20,6 +20,7 @@ static const char ltq_bootsel_strings[][16] = {
 	"PCI",
 	"MII0",
 	"RMII0",
+	"RGMII0",
 	"RGMII1",
 	"unknown",
 };
