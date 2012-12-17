@@ -10,17 +10,21 @@
  * and drivers for this SoC:
  *
  * CONFIG_LTQ_SUPPORT_UART
- * - support the Danube ASC/UART interface and console
+ * - support the ARX100 ASC/UART interface and console
  *
  * CONFIG_LTQ_SUPPORT_NOR_FLASH
  * - support a parallel NOR flash via the CFI interface in flash bank 0
  *
  * CONFIG_LTQ_SUPPORT_ETHERNET
- * - support the Danube ETOP and MAC interface
+ * - support the ARX100 ETOP and MAC interface
  *
  * CONFIG_LTQ_SUPPORT_SPI_FLASH
- * - support the Danube SPI interface and serial flash drivers
+ * - support the ARX100 SPI interface and serial flash drivers
  * - specific SPI flash drivers must be configured separately
+ *
+ * CONFIG_LTQ_SUPPORT_SPL_SPI_FLASH
+ * - build a preloader that runs in the internal SRAM and loads
+ *   the U-Boot from SPI flash into RAM
  */
 
 #ifndef __ARX100_CONFIG_H__
