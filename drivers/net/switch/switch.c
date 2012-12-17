@@ -26,6 +26,9 @@ void switch_init(void)
 #if defined(CONFIG_SWITCH_AR8216)
 	switch_ar8216_init();
 #endif
+#if defined(CONFIG_SWITCH_RTL8306)
+	switch_rtl8306_init();
+#endif
 
 	board_switch_init();
 }
