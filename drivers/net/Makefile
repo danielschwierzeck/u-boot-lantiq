@@ -52,6 +52,7 @@ COBJS-$(CONFIG_INCA_IP_SWITCH) += inca-ip_sw.o
 COBJS-$(CONFIG_DRIVER_KS8695ETH) += ks8695eth.o
 COBJS-$(CONFIG_LAN91C96) += lan91c96.o
 COBJS-$(CONFIG_LANTIQ_DANUBE_ETOP) += lantiq_danube_etop.o
+COBJS-$(CONFIG_LANTIQ_ARX100_SWITCH) += lantiq_arx100_switch.o
 COBJS-$(CONFIG_LANTIQ_VRX200_SWITCH) += lantiq_vrx200_switch.o
 COBJS-$(CONFIG_MACB) += macb.o
 COBJS-$(CONFIG_MCFFEC) += mcffec.o mcfmii.o
