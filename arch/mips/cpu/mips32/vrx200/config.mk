@@ -18,6 +18,9 @@ endif
 LIBS-y += $(CPUDIR)/lantiq-common/liblantiq-common.o
 
 ifndef CONFIG_SPL_BUILD
+ifdef CONFIG_SYS_BOOT_EVA
+ALL-y += $(obj)u-boot.bin.lzma
+endif
 ifdef CONFIG_SYS_BOOT_SFSPL
 ALL-y += $(obj)u-boot.ltq.sfspl
 ALL-$(CONFIG_SPL_LZO_SUPPORT) += $(obj)u-boot.ltq.lzo.sfspl
