@@ -69,17 +69,6 @@ struct ramtron_spi_fram_params {
 	const char *name;	/* name for display and/or matching */
 };
 
-struct ramtron_spi_fram {
-	struct spi_flash flash;
-	const struct ramtron_spi_fram_params *params;
-};
-
-static inline struct ramtron_spi_fram *to_ramtron_spi_fram(struct spi_flash
-							     *flash)
-{
-	return container_of(flash, struct ramtron_spi_fram, flash);
-}
-
 /*
  * table describing supported FRAM chips:
  * chips without RDID command must have the values 0xff for id1 and id2
@@ -155,18 +144,18 @@ static const struct ramtron_spi_fram_params ramtron_spi_fram_table[] = {
 static int ramtron_common(struct spi_flash *flash,
 		u32 offset, size_t len, void *buf, u8 command)
 {
-	struct ramtron_spi_fram *sn = to_ramtron_spi_fram(flash);
+	const struct ramtron_spi_fram_params *params = flash->priv;
 	u8 cmd[4];
 	int cmd_len;
 	int ret;
 
-	if (sn->params->addr_len == 3 && sn->params->merge_cmd == 0) {
+	if (params->addr_len == 3 && params->merge_cmd == 0) {
 		cmd[0] = command;
 		cmd[1] = offset >> 16;
 		cmd[2] = offset >> 8;
 		cmd[3] = offset;
 		cmd_len = 4;
-	} else if (sn->params->addr_len == 2 && sn->params->merge_cmd == 0) {
+	} else if (params->addr_len == 2 && params->merge_cmd == 0) {
 		cmd[0] = command;
 		cmd[1] = offset >> 8;
 		cmd[2] = offset;
@@ -230,10 +219,9 @@ static int ramtron_erase(struct spi_flash *flash, u32 offset, size_t len)
  * nore: we are called here with idcode pointing to the first non-0x7f byte
  * already!
  */
-struct spi_flash *spi_fram_probe_ramtron(struct spi_slave *spi, u8 *idcode)
+int spi_fram_probe_ramtron(struct spi_flash *flash, u8 *idcode)
 {
 	const struct ramtron_spi_fram_params *params;
-	struct ramtron_spi_fram *sn;
 	unsigned int i;
 #ifdef CONFIG_SPI_FRAM_RAMTRON_NON_JEDEC
 	int ret;
@@ -259,11 +247,11 @@ struct spi_flash *spi_fram_probe_ramtron(struct spi_slave *spi, u8 *idcode)
 		 */
 		ret = spi_flash_cmd(spi, CMD_READ_STATUS, &sr, 1);
 		if (ret)
-			return NULL;
+			return 0;
 
 		/* Bits 5,4,0 are fixed 0 for all devices */
 		if ((sr & 0x31) != 0x00)
-			return NULL;
+			return 0;
 		/* now find the device */
 		for (i = 0; i < ARRAY_SIZE(ramtron_spi_fram_table); i++) {
 			params = &ramtron_spi_fram_table[i];
@@ -281,23 +269,16 @@ struct spi_flash *spi_fram_probe_ramtron(struct spi_slave *spi, u8 *idcode)
 	/* arriving here means no method has found a device we can handle */
 	debug("SF/ramtron: unsupported device id0=%02x id1=%02x id2=%02x\n",
 		idcode[0], idcode[1], idcode[2]);
-	return NULL;
+	return 0;
 
 found:
-	sn = malloc(sizeof(*sn));
-	if (!sn) {
-		debug("SF: Failed to allocate memory\n");
-		return NULL;
-	}
+	flash->priv = (void *)params;
+	flash->name = params->name;
 
-	sn->params = params;
-	sn->flash.spi = spi;
-	sn->flash.name = params->name;
+	flash->write = ramtron_write;
+	flash->read = ramtron_read;
+	flash->erase = ramtron_erase;
+	flash->size = params->size;
 
-	sn->flash.write = ramtron_write;
-	sn->flash.read = ramtron_read;
-	sn->flash.erase = ramtron_erase;
-	sn->flash.size = params->size;
-
-	return &sn->flash;
+	return 1;
 }

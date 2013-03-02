@@ -296,7 +296,7 @@ int spi_flash_cmd_write_status(struct spi_flash *flash, u8 sr)
 static const struct {
 	const u8 shift;
 	const u8 idcode;
-	struct spi_flash *(*probe) (struct spi_slave *spi, u8 *idcode);
+	int (*probe) (struct spi_flash *flash, u8 *idcode);
 } flashes[] = {
 	/* Keep it sorted by define name */
 #ifdef CONFIG_SPI_FLASH_ATMEL
@@ -339,7 +339,7 @@ struct spi_flash *spi_flash_probe(unsigned int bus, unsigned int cs,
 		unsigned int max_hz, unsigned int spi_mode)
 {
 	struct spi_slave *spi;
-	struct spi_flash *flash = NULL;
+	struct spi_flash *flash;
 	int ret, i, shift;
 	u8 idcode[IDCODE_LEN], *idp;
 
@@ -365,6 +365,15 @@ struct spi_flash *spi_flash_probe(unsigned int bus, unsigned int cs,
 	print_buffer(0, idcode, 1, sizeof(idcode), 0);
 #endif
 
+	flash = malloc(sizeof(*flash));
+	if (!flash) {
+		debug("SF: failed to alloc memory\n");
+		goto err_malloc;
+	}
+
+	memset(flash, 0, sizeof(*flash));
+	flash->spi = spi;
+
 	/* count the number of continuation bytes */
 	for (shift = 0, idp = idcode;
 	     shift < IDCODE_CONT_LEN && *idp == 0x7f;
@@ -375,12 +384,12 @@ struct spi_flash *spi_flash_probe(unsigned int bus, unsigned int cs,
 	for (i = 0; i < ARRAY_SIZE(flashes); ++i)
 		if (flashes[i].shift == shift && flashes[i].idcode == *idp) {
 			/* we have a match, call probe */
-			flash = flashes[i].probe(spi, idp);
-			if (flash)
+			ret = flashes[i].probe(flash, idp);
+			if (ret)
 				break;
 		}
 
-	if (!flash) {
+	if (ret <= 0) {
 		printf("SF: Unsupported manufacturer %02x\n", *idp);
 		goto err_manufacturer_probe;
 	}
@@ -394,6 +403,8 @@ struct spi_flash *spi_flash_probe(unsigned int bus, unsigned int cs,
 	return flash;
 
 err_manufacturer_probe:
+	free(flash);
+err_malloc:
 err_read_id:
 	spi_release_bus(spi);
 err_claim_bus:

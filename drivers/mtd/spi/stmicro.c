@@ -142,10 +142,10 @@ static const struct stmicro_spi_flash_params stmicro_spi_flash_table[] = {
 	},
 };
 
-struct spi_flash *spi_flash_probe_stmicro(struct spi_slave *spi, u8 * idcode)
+int spi_flash_probe_stmicro(struct spi_flash *flash, u8 * idcode)
 {
 	const struct stmicro_spi_flash_params *params;
-	struct spi_flash *flash;
+	struct spi_slave *spi = flash->spi;
 	unsigned int i;
 	u16 id;
 
@@ -153,13 +153,13 @@ struct spi_flash *spi_flash_probe_stmicro(struct spi_slave *spi, u8 * idcode)
 		i = spi_flash_cmd(spi, CMD_M25PXX_RES,
 				  idcode, 4);
 		if (i)
-			return NULL;
+			return 0;
 		if ((idcode[3] & 0xf0) == 0x10) {
 			idcode[0] = 0x20;
 			idcode[1] = 0x20;
 			idcode[2] = idcode[3] + 1;
 		} else
-			return NULL;
+			return 0;
 	}
 
 	id = ((idcode[1] << 8) | idcode[2]);
@@ -173,16 +173,10 @@ struct spi_flash *spi_flash_probe_stmicro(struct spi_slave *spi, u8 * idcode)
 
 	if (i == ARRAY_SIZE(stmicro_spi_flash_table)) {
 		debug("SF: Unsupported STMicro ID %04x\n", id);
-		return NULL;
+		return 0;
 	}
 
-	flash = malloc(sizeof(*flash));
-	if (!flash) {
-		debug("SF: Failed to allocate memory\n");
-		return NULL;
-	}
-
-	flash->spi = spi;
+	flash->priv = (void *)params;
 	flash->name = params->name;
 
 	flash->write = spi_flash_cmd_write_multi;
@@ -192,5 +186,5 @@ struct spi_flash *spi_flash_probe_stmicro(struct spi_slave *spi, u8 * idcode)
 	flash->sector_size = 256 * params->pages_per_sector;
 	flash->size = flash->sector_size * params->nr_sectors;
 
-	return flash;
+	return 1;
 }

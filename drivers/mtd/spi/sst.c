@@ -39,11 +39,6 @@ struct sst_spi_flash_params {
 	const char *name;
 };
 
-struct sst_spi_flash {
-	struct spi_flash flash;
-	const struct sst_spi_flash_params *params;
-};
-
 static const struct sst_spi_flash_params sst_spi_flash_table[] = {
 	{
 		.idcode1 = 0x8d,
@@ -185,11 +180,9 @@ sst_write_wp(struct spi_flash *flash, u32 offset, size_t len, const void *buf)
 	return ret;
 }
 
-struct spi_flash *
-spi_flash_probe_sst(struct spi_slave *spi, u8 *idcode)
+int spi_flash_probe_sst(struct spi_flash *flash, u8 *idcode)
 {
 	const struct sst_spi_flash_params *params;
-	struct sst_spi_flash *stm;
 	size_t i;
 
 	for (i = 0; i < ARRAY_SIZE(sst_spi_flash_table); ++i) {
@@ -200,31 +193,24 @@ spi_flash_probe_sst(struct spi_slave *spi, u8 *idcode)
 
 	if (i == ARRAY_SIZE(sst_spi_flash_table)) {
 		debug("SF: Unsupported SST ID %02x\n", idcode[1]);
-		return NULL;
+		return 0;
 	}
 
-	stm = malloc(sizeof(*stm));
-	if (!stm) {
-		debug("SF: Failed to allocate memory\n");
-		return NULL;
-	}
+	flash->priv = (void *)params;
+	flash->name = params->name;
 
-	stm->params = params;
-	stm->flash.spi = spi;
-	stm->flash.name = params->name;
-
-	if (stm->params->flags & SST_FEAT_WP)
-		stm->flash.write = sst_write_wp;
+	if (params->flags & SST_FEAT_WP)
+		flash->write = sst_write_wp;
 	else
-		stm->flash.write = spi_flash_cmd_write_multi;
-	stm->flash.erase = spi_flash_cmd_erase;
-	stm->flash.read = spi_flash_cmd_read_fast;
-	stm->flash.page_size = 256;
-	stm->flash.sector_size = 4096;
-	stm->flash.size = stm->flash.sector_size * params->nr_sectors;
+		flash->write = spi_flash_cmd_write_multi;
+	flash->erase = spi_flash_cmd_erase;
+	flash->read = spi_flash_cmd_read_fast;
+	flash->page_size = 256;
+	flash->sector_size = 4096;
+	flash->size = flash->sector_size * params->nr_sectors;
 
 	/* Flash powers up read-only, so clear BP# bits */
-	spi_flash_cmd_write_status(&stm->flash, 0);
+	spi_flash_cmd_write_status(flash, 0);
 
-	return &stm->flash;
+	return 1;
 }

@@ -40,18 +40,6 @@ struct atmel_spi_flash_params {
 	const char	*name;
 };
 
-/* spi_flash needs to be first so upper layers can free() it */
-struct atmel_spi_flash {
-	struct spi_flash flash;
-	const struct atmel_spi_flash_params *params;
-};
-
-static inline struct atmel_spi_flash *
-to_atmel_spi_flash(struct spi_flash *flash)
-{
-	return container_of(flash, struct atmel_spi_flash, flash);
-}
-
 static const struct atmel_spi_flash_params atmel_spi_flash_table[] = {
 	{
 		.idcode1		= 0x22,
@@ -156,7 +144,8 @@ static int at45_wait_ready(struct spi_flash *flash, unsigned long timeout)
  * Assemble the address part of a command for AT45 devices in
  * non-power-of-two page size mode.
  */
-static void at45_build_address(struct atmel_spi_flash *asf, u8 *cmd, u32 offset)
+static void at45_build_address(const struct atmel_spi_flash_params *params,
+				u8 *cmd, u32 offset)
 {
 	unsigned long page_addr;
 	unsigned long byte_addr;
@@ -167,7 +156,7 @@ static void at45_build_address(struct atmel_spi_flash *asf, u8 *cmd, u32 offset)
 	 * The "extra" space per page is the power-of-two page size
 	 * divided by 32.
 	 */
-	page_shift = asf->params->l2_page_size;
+	page_shift = params->l2_page_size;
 	page_size = (1 << page_shift) + (1 << (page_shift - 5));
 	page_shift++;
 	page_addr = offset / page_size;
@@ -181,11 +170,11 @@ static void at45_build_address(struct atmel_spi_flash *asf, u8 *cmd, u32 offset)
 static int dataflash_read_fast_at45(struct spi_flash *flash,
 		u32 offset, size_t len, void *buf)
 {
-	struct atmel_spi_flash *asf = to_atmel_spi_flash(flash);
+	const struct atmel_spi_flash_params *params = flash->priv;
 	u8 cmd[5];
 
 	cmd[0] = CMD_READ_ARRAY_FAST;
-	at45_build_address(asf, cmd + 1, offset);
+	at45_build_address(params, cmd + 1, offset);
 	cmd[4] = 0x00;
 
 	return spi_flash_read_common(flash, cmd, sizeof(cmd), buf, len);
@@ -197,7 +186,7 @@ static int dataflash_read_fast_at45(struct spi_flash *flash,
 static int dataflash_write_p2(struct spi_flash *flash,
 		u32 offset, size_t len, const void *buf)
 {
-	struct atmel_spi_flash *asf = to_atmel_spi_flash(flash);
+	const struct atmel_spi_flash_params *params = flash->priv;
 	unsigned long page_size;
 	u32 addr = offset;
 	size_t chunk_len;
@@ -211,7 +200,7 @@ static int dataflash_write_p2(struct spi_flash *flash,
 	 * the other is being programmed into main memory.
 	 */
 
-	page_size = (1 << asf->params->l2_page_size);
+	page_size = (1 << params->l2_page_size);
 
 	ret = spi_claim_bus(flash->spi);
 	if (ret) {
@@ -263,7 +252,7 @@ out:
 static int dataflash_write_at45(struct spi_flash *flash,
 		u32 offset, size_t len, const void *buf)
 {
-	struct atmel_spi_flash *asf = to_atmel_spi_flash(flash);
+	const struct atmel_spi_flash_params *params = flash->priv;
 	unsigned long page_addr;
 	unsigned long byte_addr;
 	unsigned long page_size;
@@ -279,7 +268,7 @@ static int dataflash_write_at45(struct spi_flash *flash,
 	 * the other is being programmed into main memory.
 	 */
 
-	page_shift = asf->params->l2_page_size;
+	page_shift = params->l2_page_size;
 	page_size = (1 << page_shift) + (1 << (page_shift - 5));
 	page_shift++;
 	page_addr = offset / page_size;
@@ -338,7 +327,7 @@ out:
  */
 static int dataflash_erase_p2(struct spi_flash *flash, u32 offset, size_t len)
 {
-	struct atmel_spi_flash *asf = to_atmel_spi_flash(flash);
+	const struct atmel_spi_flash_params *params = flash->priv;
 	unsigned long page_size;
 
 	size_t actual;
@@ -351,7 +340,7 @@ static int dataflash_erase_p2(struct spi_flash *flash, u32 offset, size_t len)
 	 * when possible.
 	 */
 
-	page_size = (1 << asf->params->l2_page_size);
+	page_size = (1 << params->l2_page_size);
 
 	if (offset % page_size || len % page_size) {
 		debug("SF: Erase offset/length not multiple of page size\n");
@@ -397,7 +386,7 @@ out:
 
 static int dataflash_erase_at45(struct spi_flash *flash, u32 offset, size_t len)
 {
-	struct atmel_spi_flash *asf = to_atmel_spi_flash(flash);
+	const struct atmel_spi_flash_params *params = flash->priv;
 	unsigned long page_addr;
 	unsigned long page_size;
 	unsigned int page_shift;
@@ -411,7 +400,7 @@ static int dataflash_erase_at45(struct spi_flash *flash, u32 offset, size_t len)
 	 * when possible.
 	 */
 
-	page_shift = asf->params->l2_page_size;
+	page_shift = params->l2_page_size;
 	page_size = (1 << page_shift) + (1 << (page_shift - 5));
 	page_shift++;
 	page_addr = offset / page_size;
@@ -458,12 +447,12 @@ out:
 	return ret;
 }
 
-struct spi_flash *spi_flash_probe_atmel(struct spi_slave *spi, u8 *idcode)
+int spi_flash_probe_atmel(struct spi_flash *flash, u8 *idcode)
 {
 	const struct atmel_spi_flash_params *params;
+	struct spi_slave *spi = flash->spi;
 	unsigned page_size;
 	unsigned int family;
-	struct atmel_spi_flash *asf;
 	unsigned int i;
 	int ret;
 	u8 status;
@@ -477,18 +466,11 @@ struct spi_flash *spi_flash_probe_atmel(struct spi_slave *spi, u8 *idcode)
 	if (i == ARRAY_SIZE(atmel_spi_flash_table)) {
 		debug("SF: Unsupported DataFlash ID %02x\n",
 				idcode[1]);
-		return NULL;
+		return 0;
 	}
 
-	asf = malloc(sizeof(struct atmel_spi_flash));
-	if (!asf) {
-		debug("SF: Failed to allocate memory\n");
-		return NULL;
-	}
-
-	asf->params = params;
-	asf->flash.spi = spi;
-	asf->flash.name = params->name;
+	flash->priv = (void *)params;
+	flash->name = params->name;
 
 	/* Assuming power-of-two page size initially. */
 	page_size = 1 << params->l2_page_size;
@@ -503,48 +485,44 @@ struct spi_flash *spi_flash_probe_atmel(struct spi_slave *spi, u8 *idcode)
 		 */
 		ret = spi_flash_cmd(spi, CMD_AT45_READ_STATUS, &status, 1);
 		if (ret)
-			goto err;
+			return -1;
 
 		debug("SF: AT45 status register: %02x\n", status);
 
 		if (!(status & AT45_STATUS_P2_PAGE_SIZE)) {
-			asf->flash.read = dataflash_read_fast_at45;
-			asf->flash.write = dataflash_write_at45;
-			asf->flash.erase = dataflash_erase_at45;
+			flash->read = dataflash_read_fast_at45;
+			flash->write = dataflash_write_at45;
+			flash->erase = dataflash_erase_at45;
 			page_size += 1 << (params->l2_page_size - 5);
 		} else {
-			asf->flash.read = spi_flash_cmd_read_fast;
-			asf->flash.write = dataflash_write_p2;
-			asf->flash.erase = dataflash_erase_p2;
+			flash->read = spi_flash_cmd_read_fast;
+			flash->write = dataflash_write_p2;
+			flash->erase = dataflash_erase_p2;
 		}
 
-		asf->flash.page_size = page_size;
-		asf->flash.sector_size = page_size;
+		flash->page_size = page_size;
+		flash->sector_size = page_size;
 		break;
 
 	case DF_FAMILY_AT26F:
 	case DF_FAMILY_AT26DF:
-		asf->flash.read = spi_flash_cmd_read_fast;
-		asf->flash.write = spi_flash_cmd_write_multi;
-		asf->flash.erase = spi_flash_cmd_erase;
-		asf->flash.page_size = page_size;
-		asf->flash.sector_size = 4096;
+		flash->read = spi_flash_cmd_read_fast;
+		flash->write = spi_flash_cmd_write_multi;
+		flash->erase = spi_flash_cmd_erase;
+		flash->page_size = page_size;
+		flash->sector_size = 4096;
 		/* clear SPRL# bit for locked flash */
-		spi_flash_cmd_write_status(&asf->flash, 0);
+		spi_flash_cmd_write_status(flash, 0);
 		break;
 
 	default:
 		debug("SF: Unsupported DataFlash family %u\n", family);
-		goto err;
+		return -1;
 	}
 
-	asf->flash.size = page_size * params->pages_per_block
+	flash->size = page_size * params->pages_per_block
 				* params->blocks_per_sector
 				* params->nr_sectors;
 
-	return &asf->flash;
-
-err:
-	free(asf);
-	return NULL;
+	return 1;
 }

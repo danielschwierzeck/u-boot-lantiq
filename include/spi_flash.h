@@ -31,6 +31,7 @@ struct spi_flash {
 	struct spi_slave *spi;
 
 	const char	*name;
+	void		*priv;
 
 	/* Total flash size */
 	u32		size;
