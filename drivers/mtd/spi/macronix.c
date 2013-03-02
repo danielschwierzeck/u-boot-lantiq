@@ -35,6 +35,8 @@
 
 #include "spi_flash_internal.h"
 
+#define MX25XX_EN4B		0xb7	/* Enter 4-byte mode */
+
 struct macronix_spi_flash_params {
 	u16 idcode;
 	u16 nr_blocks;
@@ -79,6 +81,13 @@ static const struct macronix_spi_flash_params macronix_spi_flash_table[] = {
 	},
 };
 
+static __maybe_unused int macronix_set_4byte_mode(struct spi_flash *flash)
+{
+	struct spi_slave *spi = flash->spi;
+
+	return spi_flash_cmd(spi, MX25XX_EN4B, NULL, 0);
+}
+
 int spi_flash_probe_macronix(struct spi_flash *flash, u8 *idcode)
 {
 	const struct macronix_spi_flash_params *params;
@@ -105,6 +114,11 @@ int spi_flash_probe_macronix(struct spi_flash *flash, u8 *idcode)
 	flash->page_size = 256;
 	flash->sector_size = 256 * 16 * 16;
 	flash->size = flash->sector_size * params->nr_blocks;
+
+#ifdef CONFIG_SPI_FLASH_4BYTE_MODE
+	if (flash->size > (1 << 24))
+		flash->set_4byte_mode = macronix_set_4byte_mode;
+#endif
 
 	/* Clear BP# bits for read-only flash */
 	spi_flash_cmd_write_status(flash, 0);
