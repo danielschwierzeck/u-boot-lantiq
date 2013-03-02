@@ -31,6 +31,10 @@
 
 #include "spi_flash_internal.h"
 
+#define S25FLXX_BRRD		0x16		/* Read Bank Register */
+#define S25FLXX_BRWR		0x17		/* Write Bank Register */
+#define S25FLXX_BAR_EXTADD	(1 << 7)	/* Extended address enable */
+
 struct spansion_spi_flash_params {
 	u16 idcode1;
 	u16 idcode2;
@@ -112,6 +116,23 @@ static const struct spansion_spi_flash_params spansion_spi_flash_table[] = {
 	},
 };
 
+static __maybe_unused int spansion_set_4byte_mode(struct spi_flash *flash)
+{
+	struct spi_slave *spi = flash->spi;
+	u8 bar, cmd;
+	int err;
+
+	cmd = S25FLXX_BRRD;
+	err = spi_flash_cmd(spi, cmd, &bar, 1);
+	if (err)
+		return err;
+
+	bar |= S25FLXX_BAR_EXTADD;
+	cmd = S25FLXX_BRWR;
+
+	return spi_flash_cmd_write(spi, &cmd, 1, &bar, 1);
+}
+
 int spi_flash_probe_spansion(struct spi_flash *flash, u8 *idcode)
 {
 	const struct spansion_spi_flash_params *params;
@@ -143,6 +164,11 @@ int spi_flash_probe_spansion(struct spi_flash *flash, u8 *idcode)
 	flash->page_size = 256;
 	flash->sector_size = 256 * params->pages_per_sector;
 	flash->size = flash->sector_size * params->nr_sectors;
+
+#ifdef CONFIG_SPI_FLASH_4BYTE_MODE
+	if (flash->size > (1 << 24))
+		flash->set_4byte_mode = spansion_set_4byte_mode;
+#endif
 
 	return 1;
 }
