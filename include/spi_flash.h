@@ -90,6 +90,8 @@ void *spi_flash_do_alloc(int offset, int size, struct spi_slave *spi,
 #define spi_flash_alloc_base(spi, name) \
 	spi_flash_do_alloc(0, sizeof(struct spi_flash), spi, name)
 
+int spi_flash_init(void);
+
 struct spi_flash *spi_flash_probe(unsigned int bus, unsigned int cs,
 		unsigned int max_hz, unsigned int spi_mode);
 void spi_flash_free(struct spi_flash *flash);
