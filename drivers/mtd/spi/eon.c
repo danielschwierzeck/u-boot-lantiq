@@ -11,19 +11,19 @@
 #include "spi_flash_internal.h"
 
 struct eon_spi_flash_params {
-	u8 idcode1;
+	u16 idcode;
 	u16 nr_sectors;
 	const char *name;
 };
 
 static const struct eon_spi_flash_params eon_spi_flash_table[] = {
 	{
-		.idcode1 = 0x16,
+		.idcode = 0x3016,
 		.nr_sectors = 1024,
 		.name = "EN25Q32B",
 	},
 	{
-		.idcode1 = 0x18,
+		.idcode = 0x3018,
 		.nr_sectors = 4096,
 		.name = "EN25Q128",
 	},
@@ -33,10 +33,11 @@ int spi_flash_probe_eon(struct spi_flash *flash, u8 *idcode)
 {
 	const struct eon_spi_flash_params *params;
 	unsigned int i;
+	u16 id = idcode[2] | idcode[1] << 8;
 
 	for (i = 0; i < ARRAY_SIZE(eon_spi_flash_table); ++i) {
 		params = &eon_spi_flash_table[i];
-		if (params->idcode1 == idcode[2])
+		if (params->idcode == id)
 			break;
 	}
 
