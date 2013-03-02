@@ -51,6 +51,8 @@ struct spi_flash {
 #endif
 };
 
+int spi_flash_init(void);
+
 struct spi_flash *spi_flash_probe(unsigned int bus, unsigned int cs,
 		unsigned int max_hz, unsigned int spi_mode);
 void spi_flash_free(struct spi_flash *flash);

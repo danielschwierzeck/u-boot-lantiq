@@ -468,3 +468,36 @@ void spi_flash_free(struct spi_flash *flash)
 	spi_flash_free_spl(flash);
 	free(flash);
 }
+
+#ifdef CONFIG_SPI_FLASH_MTD
+static int spi_flash_mtd_register(void)
+{
+	struct spi_flash *flash;
+	int err;
+
+	flash = spi_flash_probe(CONFIG_ENV_SPI_BUS, CONFIG_ENV_SPI_CS,
+			CONFIG_ENV_SPI_MAX_HZ, CONFIG_ENV_SPI_MODE);
+	if (!flash)
+		return -1;
+
+	err = spi_flash_mtd_init(flash);
+	if (err)
+		spi_flash_free(flash);
+
+	return err;
+}
+#else
+static int spi_flash_mtd_register(void)
+{
+	return 0;
+}
+#endif
+
+int spi_flash_init(void)
+{
+	int err;
+
+	err = spi_flash_mtd_register();
+
+	return err;
+}
