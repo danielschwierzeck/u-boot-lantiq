@@ -97,6 +97,31 @@ int spi_flash_cmd_wait_ready(struct spi_flash *flash, unsigned long timeout);
 /* Erase sectors. */
 int spi_flash_cmd_erase(struct spi_flash *flash, u32 offset, size_t len);
 
+#ifdef CONFIG_SPI_FLASH_4BYTE_MODE
+static inline int spi_flash_use_4byte_mode(struct spi_flash *flash)
+{
+	return NULL != flash->set_4byte_mode;
+}
+
+static inline int spi_flash_set_4byte_mode(struct spi_flash *flash)
+{
+	if (spi_flash_use_4byte_mode(flash))
+		return flash->set_4byte_mode(flash);
+
+	return 0;
+}
+#else
+static inline int spi_flash_use_4byte_mode(struct spi_flash *flash)
+{
+	return 0;
+}
+
+static inline int spi_flash_set_4byte_mode(struct spi_flash *flash)
+{
+	return 0;
+}
+#endif
+
 /* Manufacturer-specific probe functions */
 int spi_flash_probe_spansion(struct spi_flash *flash, u8 *idcode);
 int spi_flash_probe_atmel(struct spi_flash *flash, u8 *idcode);

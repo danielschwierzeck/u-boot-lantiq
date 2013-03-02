@@ -46,6 +46,9 @@ struct spi_flash {
 				size_t len, const void *buf);
 	int		(*erase)(struct spi_flash *flash, u32 offset,
 				size_t len);
+#ifdef CONFIG_SPI_FLASH_4BYTE_MODE
+	int		(*set_4byte_mode)(struct spi_flash *flash);
+#endif
 };
 
 struct spi_flash *spi_flash_probe(unsigned int bus, unsigned int cs,
