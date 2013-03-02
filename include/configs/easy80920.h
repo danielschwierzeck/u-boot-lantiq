@@ -79,6 +79,12 @@
 #include <asm/lantiq/config.h>
 #include <asm/arch/config.h>
 
+/* Compression */
+#define CONFIG_LZMA
+
+/* Auto boot */
+#define CONFIG_BOOTDELAY		2
+
 #define CONFIG_ENV_UPDATE_UBOOT_NOR					\
 	"update-uboot-nor=run load-uboot-norspl-lzo write-uboot-nor\0"
 
