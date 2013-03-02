@@ -2,6 +2,7 @@
 /envcrc
 /gen_eth_addr
 /img2srec
+/ltq-boot-image
 /kwboot
 /mkenvimage
 /mkimage

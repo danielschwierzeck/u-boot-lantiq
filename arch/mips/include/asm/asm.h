@@ -53,6 +53,7 @@
 		.align	2;                              \
 		.type	symbol, @function;              \
 		.ent	symbol, 0;                      \
+		.section .text.symbol,"x";              \
 symbol:		.frame	sp, 0, ra
 
 /*
@@ -62,7 +63,8 @@ symbol:		.frame	sp, 0, ra
 		.globl	symbol;                         \
 		.align	2;                              \
 		.type	symbol, @function;              \
-		.ent	symbol, 0;                       \
+		.ent	symbol, 0;                      \
+		.section .text.symbol,"x";              \
 symbol:		.frame	sp, framesize, rpc
 
 /*
