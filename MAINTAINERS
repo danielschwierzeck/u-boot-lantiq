@@ -1081,6 +1081,9 @@ Xiangfu Liu <xiangfu@openmobilefree.net>
 
 	qi_lb60		MIPS32 (XBurst Jz4740 SoC)
 
++Luka Perkov <luka@openwrt.org>
+	sx76x		MIPS24 KEc (Lantiq XWAY Danube SoC)
+
 -------------------------------------------------------------------------
 
 Unknown / orphaned boards:
