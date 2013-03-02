@@ -29,6 +29,11 @@ static const struct eon_spi_flash_params eon_spi_flash_table[] = {
 		.nr_sectors = 4096,
 		.name = "EN25Q128",
 	},
+	{
+		.idcode = 0x7019,
+		.nr_sectors = 8192,
+		.name = "EN25QH256",
+	},
 };
 
 static __maybe_unused int eon_set_4byte_mode(struct spi_flash *flash)
