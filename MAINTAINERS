@@ -1083,6 +1083,7 @@ Xiangfu Liu <xiangfu@openmobilefree.net>
 
 +Luka Perkov <luka@openwrt.org>
 	sx76x		MIPS24 KEc (Lantiq XWAY Danube SoC)
+	arv7518pw	MIPS24 KEc (Lantiq XWAY Danube SoC)
 
 -------------------------------------------------------------------------
 
