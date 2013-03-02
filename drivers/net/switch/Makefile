@@ -3,7 +3,7 @@
 # See the file COPYING in the root directory of the source tree for details.
 #
 # Copyright (C) 2000-2011 Wolfgang Denk, DENX Software Engineering, wd@denx.de
-# Copyright (C) 2011-2012 Daniel Schwierzeck, daniel.schwierzeck@gmail.com
+# Copyright (C) 2011-2013 Daniel Schwierzeck, daniel.schwierzeck@gmail.com
 #
 
 include $(TOPDIR)/config.mk
