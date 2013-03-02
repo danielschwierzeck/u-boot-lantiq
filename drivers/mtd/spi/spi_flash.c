@@ -335,18 +335,18 @@ static const struct {
 };
 #define IDCODE_LEN (IDCODE_CONT_LEN + IDCODE_PART_LEN)
 
-struct spi_flash *spi_flash_probe(unsigned int bus, unsigned int cs,
-		unsigned int max_hz, unsigned int spi_mode)
+int spi_flash_probe_spl(struct spi_flash *flash, unsigned int bus,
+			unsigned int cs, unsigned int max_hz,
+			unsigned int spi_mode)
 {
 	struct spi_slave *spi;
-	struct spi_flash *flash;
 	int ret, i, shift;
 	u8 idcode[IDCODE_LEN], *idp;
 
 	spi = spi_setup_slave(bus, cs, max_hz, spi_mode);
 	if (!spi) {
-		printf("SF: Failed to set up slave\n");
-		return NULL;
+		debug("SF: Failed to set up slave\n");
+		return -1;
 	}
 
 	ret = spi_claim_bus(spi);
@@ -365,13 +365,6 @@ struct spi_flash *spi_flash_probe(unsigned int bus, unsigned int cs,
 	print_buffer(0, idcode, 1, sizeof(idcode), 0);
 #endif
 
-	flash = malloc(sizeof(*flash));
-	if (!flash) {
-		debug("SF: failed to alloc memory\n");
-		goto err_malloc;
-	}
-
-	memset(flash, 0, sizeof(*flash));
 	flash->spi = spi;
 
 	/* count the number of continuation bytes */
@@ -390,30 +383,58 @@ struct spi_flash *spi_flash_probe(unsigned int bus, unsigned int cs,
 		}
 
 	if (ret <= 0) {
-		printf("SF: Unsupported manufacturer %02x\n", *idp);
+		debug("SF: Unsupported manufacturer %02x\n", *idp);
 		goto err_manufacturer_probe;
 	}
 
-	printf("SF: Detected %s with page size ", flash->name);
-	print_size(flash->sector_size, ", total ");
-	print_size(flash->size, "\n");
-
 	spi_release_bus(spi);
 
-	return flash;
+	return 0;
 
 err_manufacturer_probe:
-	free(flash);
-err_malloc:
 err_read_id:
 	spi_release_bus(spi);
 err_claim_bus:
 	spi_free_slave(spi);
+
+	return ret;
+}
+
+struct spi_flash *spi_flash_probe(unsigned int bus, unsigned int cs,
+		unsigned int max_hz, unsigned int spi_mode)
+{
+	struct spi_flash *flash;
+	int ret;
+
+	flash = malloc(sizeof(*flash));
+	if (!flash) {
+		debug("SF: Failed to malloc spi_flash\n");
+		return NULL;
+	}
+	memset(flash, 0, sizeof(*flash));
+
+	ret = spi_flash_probe_spl(flash, bus, cs, max_hz, spi_mode);
+	if (ret)
+		goto err_probe;
+
+	printf("SF:    %s, page size ", flash->name);
+	print_size(flash->sector_size, ", total ");
+	print_size(flash->size, "\n");
+
+	return flash;
+
+err_probe:
+	free(flash);
 	return NULL;
+}
+
+void spi_flash_free_spl(struct spi_flash *flash)
+{
+	spi_free_slave(flash->spi);
 }
 
 void spi_flash_free(struct spi_flash *flash)
 {
-	spi_free_slave(flash->spi);
+	spi_flash_free_spl(flash);
 	free(flash);
 }
