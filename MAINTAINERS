@@ -1094,6 +1094,9 @@ Unknown / orphaned boards:
 
 	dbau1x00	MIPS32 Au1000	Thomas Lange <thomas@corelatus.se>
 
+Daniel Golle <daniel.golle@gmail.com>
+	acmp252		MIPS24 KEc (Lantiq XWAY Danube SoC)
+
 #########################################################################
 # Nios-II Systems:							#
 #									#
