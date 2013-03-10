@@ -17,8 +17,8 @@ function print_header()
 	print ";                                                                            "
 	print "; generated with lantiq_ram_init_uart.awk                                    "
 	print ";                                                                            "
-	print "; Copyright (C) 2011-2012 Luka Perkov <luka@openwrt.org>                     "
-	print "; Copyright (C) 2012 Daniel Schwierzeck <daniel.schwierzeck@gmail.com>       "
+	print "; Copyright (C) 2011-2013 Luka Perkov <luka@openwrt.org>                     "
+	print "; Copyright (C) 2012-2013 Daniel Schwierzeck <daniel.schwierzeck@gmail.com>  "
 	print ";                                                                            "
 	print ""
 }
@@ -77,14 +77,13 @@ BEGIN {
 }
 
 /^#define/ {
-	printf("0x%x %s\n", reg_base, tolower($3))
-	reg_base += 0x10
-}
+	/* CCR07 contains MC enable bit and must not be set here */
+	if (tolower($2) == "mc_ccr07_value")
+		mc_ccr07_value = strtonum($3)
+	else
+		printf("0x%x %s\n", reg_base, tolower($3))
 
-/^#define(.*)MC_CCR07_VALUE/ {
-	printf("0x%x %s\n", reg_base, tolower($3))
 	reg_base += 0x10
-	mc_ccr07_value = strtonum($3)
 }
 
 END {
