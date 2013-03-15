@@ -30,7 +30,6 @@
 #include <command.h>
 #include <miiphy.h>
 #include <phy.h>
-#include <errno.h>
 #include <linux/err.h>
 
 DECLARE_GLOBAL_DATA_PTR;
