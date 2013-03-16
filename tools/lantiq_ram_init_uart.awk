@@ -23,7 +23,7 @@ function print_header()
 	print ""
 }
 
-function mc_ddr1_prologue()
+function mc_danube_prologue()
 {
 	/* Clear access error log registers */
 	print "0xbf800010", "0x0"
@@ -31,6 +31,19 @@ function mc_ddr1_prologue()
 
 	/* Enable DDR and SRAM module in memory controller */
 	print "0xbf800060", "0x5"
+
+	/* Clear start bit of DDR memory controller */
+	print "0xbf801030", "0x0"
+}
+
+function mc_ar9_prologue()
+{
+	/* Clear access error log registers */
+	print "0xbf800010", "0x0"
+	print "0xbf800020", "0x0"
+
+	/* Enable FPI, DDR and SRAM module in memory controller */
+	print "0xbf800060", "0xD"
 
 	/* Clear start bit of DDR memory controller */
 	print "0xbf801030", "0x0"
@@ -58,10 +71,14 @@ function mc_ddr2_epilogue(mc_ccr07_value)
 BEGIN {
 	switch (soc) {
 	case "danube":
+		reg_base = 0xbf801000
+		print_header()
+		mc_danube_prologue()
+		break
 	case "ar9":
 		reg_base = 0xbf801000
 		print_header()
-		mc_ddr1_prologue()
+		mc_ar9_prologue()
 		break
 	case "vr9":
 		reg_base = 0xbf401000
@@ -80,6 +97,8 @@ BEGIN {
 	/* CCR07 contains MC enable bit and must not be set here */
 	if (tolower($2) == "mc_ccr07_value")
 		mc_ccr07_value = strtonum($3)
+	if (tolower($2) == "mc_dc03_value")
+		/* CCR07 contains MC enable bit and must not be set here */
 	else
 		printf("0x%x %s\n", reg_base, tolower($3))
 
