@@ -91,6 +91,7 @@ static struct ltq_asc_regs *ltq_asc_regs =
 
 static int ltq_serial_init(void)
 {
+#if 0
 	/* Set clock divider for normal run mode to 1 and enable module */
 	ltq_writel(&ltq_asc_regs->clc, 0x100);
 
@@ -110,6 +111,7 @@ static int ltq_serial_init(void)
 
 	/* Disable error flags, enable receiver */
 	ltq_writel(&ltq_asc_regs->whbstate, LTQ_ASC_WHBSTATE_SETREN);
+#endif
 
 	return 0;
 }
@@ -163,6 +165,7 @@ static void ltq_serial_calc_br_fdv(unsigned long asc_clk,
 
 static void ltq_serial_setbrg(void)
 {
+#if 0
 	unsigned long asc_clk, baudrate;
 	u16 bg = 0;
 	u16 fdv = 511;
@@ -186,6 +189,7 @@ static void ltq_serial_setbrg(void)
 
 	/* Enable baudrate generator */
 	ltq_setbits(&ltq_asc_regs->mcon, LTQ_ASC_MCON_R);
+#endif
 }
 
 static unsigned int ltq_serial_tx_free(void)
