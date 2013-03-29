@@ -11,6 +11,7 @@
 #define CONFIG_MACH_TYPE	"P-2601HN-Fx"
 #define CONFIG_IDENT_STRING	" "CONFIG_MACH_TYPE
 #define CONFIG_BOARD_NAME	"ZyXEL P-2601HN-Fx"
+#define CONFIG_SYS_DRAM_PROBE
 
 /* Configure SoC */
 #define CONFIG_LTQ_SUPPORT_UART		/* Enable ASC and UART */
@@ -26,7 +27,7 @@
 
 /* Switch devices */
 #define CONFIG_SWITCH_MULTI
-// #define CONFIG_SWITCH_RTL8306
+#define CONFIG_SWITCH_RTL8306
 
 /* Environment */
 #if defined(CONFIG_SYS_BOOT_NOR)
@@ -53,8 +54,11 @@
 #define CONFIG_CONSOLE_ASC		1
 #define CONFIG_CONSOLE_DEV		"ttyLTQ1"
 
+/* Compression */
+#define CONFIG_LZMA
+
 /* Commands */
-// #define CONFIG_CMD_PING
+#define CONFIG_CMD_PING
 
 /* Pull in default board configs for Lantiq XWAY Danube */
 #include <asm/lantiq/config.h>
