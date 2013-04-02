@@ -187,6 +187,10 @@ static void ltq_eth_hw_init(const struct ltq_eth_port_config *port)
 	ltq_reset_once(LTQ_RESET_ETH, 1);
 #endif
 
+	/* MII/MDIO */
+	gpio_set_altfunc(42, GPIO_ALTSEL_SET, GPIO_ALTSEL_CLR, GPIO_DIR_OUT);
+	/* MII/MDC */
+	gpio_set_altfunc(43, GPIO_ALTSEL_SET, GPIO_ALTSEL_CLR, GPIO_DIR_OUT);
 
 	build_check_ar9_registers();
 }
