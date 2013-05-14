@@ -79,10 +79,9 @@ static const struct winbond_spi_flash_params winbond_spi_flash_table[] = {
 	},
 };
 
-struct spi_flash *spi_flash_probe_winbond(struct spi_slave *spi, u8 *idcode)
+int spi_flash_probe_winbond(struct spi_flash *flash, u8 *idcode)
 {
 	const struct winbond_spi_flash_params *params;
-	struct spi_flash *flash;
 	unsigned int i;
 
 	for (i = 0; i < ARRAY_SIZE(winbond_spi_flash_table); i++) {
@@ -94,18 +93,15 @@ struct spi_flash *spi_flash_probe_winbond(struct spi_slave *spi, u8 *idcode)
 	if (i == ARRAY_SIZE(winbond_spi_flash_table)) {
 		debug("SF: Unsupported Winbond ID %02x%02x\n",
 				idcode[1], idcode[2]);
-		return NULL;
+		return 0;
 	}
 
-	flash = spi_flash_alloc_base(spi, params->name);
-	if (!flash) {
-		debug("SF: Failed to allocate memory\n");
-		return NULL;
-	}
+	flash->priv = (void *)params;
+	flash->name = params->name;
 
 	flash->page_size = 256;
 	flash->sector_size = 4096;
 	flash->size = 4096 * 16 * params->nr_blocks;
 
-	return flash;
+	return 1;
 }
