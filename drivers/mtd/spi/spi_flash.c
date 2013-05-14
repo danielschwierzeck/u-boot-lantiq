@@ -18,12 +18,22 @@
 
 DECLARE_GLOBAL_DATA_PTR;
 
-static void spi_flash_addr(u32 addr, u8 *cmd)
+static void spi_flash_addr(struct spi_flash *flash, u32 addr, u8 *cmd, u8 *cmd_len)
 {
 	/* cmd[0] is actual command */
 	cmd[1] = addr >> 16;
 	cmd[2] = addr >> 8;
 	cmd[3] = addr >> 0;
+	*cmd_len = 4;
+}
+
+static void spi_flash_page_addr(struct spi_flash *flash, u32 page_addr, u32 byte_addr, u8 *cmd, u8 *cmd_len)
+{
+	/* cmd[0] is actual command */
+	cmd[1] = page_addr >> 8;
+	cmd[2] = page_addr >> 0;
+	cmd[3] = byte_addr;
+	*cmd_len = 4;
 }
 
 static int spi_flash_read_write(struct spi_slave *spi,
@@ -74,7 +84,7 @@ int spi_flash_cmd_write_multi(struct spi_flash *flash, u32 offset,
 	unsigned long page_addr, byte_addr, page_size;
 	size_t chunk_len, actual;
 	int ret;
-	u8 cmd[4];
+	u8 cmd[4], cmd_len;
 
 	page_size = flash->page_size;
 	page_addr = offset / page_size;
@@ -93,9 +103,7 @@ int spi_flash_cmd_write_multi(struct spi_flash *flash, u32 offset,
 		if (flash->spi->max_write_size)
 			chunk_len = min(chunk_len, flash->spi->max_write_size);
 
-		cmd[1] = page_addr >> 8;
-		cmd[2] = page_addr;
-		cmd[3] = byte_addr;
+		spi_flash_page_addr(flash, page_addr, byte_addr, cmd, &cmd_len);
 
 		debug("PP: 0x%p => cmd = { 0x%02x 0x%02x%02x%02x } chunk_len = %zu\n",
 		      buf + actual, cmd[0], cmd[1], cmd[2], cmd[3], chunk_len);
@@ -106,7 +114,7 @@ int spi_flash_cmd_write_multi(struct spi_flash *flash, u32 offset,
 			break;
 		}
 
-		ret = spi_flash_cmd_write(flash->spi, cmd, 4,
+		ret = spi_flash_cmd_write(flash->spi, cmd, cmd_len,
 					  buf + actual, chunk_len);
 		if (ret < 0) {
 			debug("SF: write failed\n");
@@ -147,17 +155,17 @@ int spi_flash_read_common(struct spi_flash *flash, const u8 *cmd,
 int spi_flash_cmd_read_fast(struct spi_flash *flash, u32 offset,
 		size_t len, void *data)
 {
-	u8 cmd[5];
+	u8 cmd[5], cmd_len;
 
 	/* Handle memory-mapped SPI */
 	if (flash->memory_map)
 		memcpy(data, flash->memory_map + offset, len);
 
 	cmd[0] = CMD_READ_ARRAY_FAST;
-	spi_flash_addr(offset, cmd);
-	cmd[4] = 0x00;
+	spi_flash_addr(flash, offset, cmd, &cmd_len);
+	cmd[cmd_len] = 0x00;
 
-	return spi_flash_read_common(flash, cmd, sizeof(cmd), data, len);
+	return spi_flash_read_common(flash, cmd, cmd_len + 1, data, len);
 }
 
 int spi_flash_cmd_poll_bit(struct spi_flash *flash, unsigned long timeout,
@@ -207,7 +215,7 @@ int spi_flash_cmd_erase(struct spi_flash *flash, u32 offset, size_t len)
 {
 	u32 start, end, erase_size;
 	int ret;
-	u8 cmd[4];
+	u8 cmd[4], cmd_len;
 
 	erase_size = flash->sector_size;
 	if (offset % erase_size || len % erase_size) {
@@ -229,7 +237,7 @@ int spi_flash_cmd_erase(struct spi_flash *flash, u32 offset, size_t len)
 	end = start + len;
 
 	while (offset < end) {
-		spi_flash_addr(offset, cmd);
+		spi_flash_addr(flash, offset, cmd, &cmd_len);
 		offset += erase_size;
 
 		debug("SF: erase %2x %2x %2x %2x (%x)\n", cmd[0], cmd[1],
@@ -239,7 +247,7 @@ int spi_flash_cmd_erase(struct spi_flash *flash, u32 offset, size_t len)
 		if (ret)
 			goto out;
 
-		ret = spi_flash_cmd_write(flash->spi, cmd, sizeof(cmd), NULL, 0);
+		ret = spi_flash_cmd_write(flash->spi, cmd, cmd_len, NULL, 0);
 		if (ret)
 			goto out;
 
