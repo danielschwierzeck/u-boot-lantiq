@@ -29,7 +29,11 @@
  */
 #define MIPS_MAX_CACHE_SIZE	0x10000
 
+#ifdef CONFIG_SYS_MIPS_CACHE_EXT_INIT
+#define INDEX_BASE	0x9fc00000
+#else
 #define INDEX_BASE	CKSEG0
+#endif
 
 	.macro	cache_op op addr
 	.set	push
@@ -65,7 +69,11 @@
  */
 LEAF(mips_init_icache)
 	blez		a1, 9f
+#ifdef CONFIG_SYS_MIPS_CACHE_EXT_INIT
+	mtc0		zero, CP0_ITAGLO
+#else
 	mtc0		zero, CP0_TAGLO
+#endif
 	/* clear tag to invalidate */
 	PTR_LI		t0, INDEX_BASE
 	PTR_ADDU	t1, t0, a1
@@ -90,7 +98,11 @@ LEAF(mips_init_icache)
  */
 LEAF(mips_init_dcache)
 	blez		a1, 9f
+#ifdef CONFIG_SYS_MIPS_CACHE_EXT_INIT
+	mtc0		zero, CP0_DTAGLO
+#else
 	mtc0		zero, CP0_TAGLO
+#endif
 	/* clear all tags */
 	PTR_LI		t0, INDEX_BASE
 	PTR_ADDU	t1, t0, a1

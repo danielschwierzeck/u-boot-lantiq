@@ -53,6 +53,7 @@ COBJS-$(CONFIG_NAND_JZ4740) += jz4740_nand.o
 COBJS-$(CONFIG_NAND_KB9202) += kb9202_nand.o
 COBJS-$(CONFIG_NAND_KIRKWOOD) += kirkwood_nand.o
 COBJS-$(CONFIG_NAND_KMETER1) += kmeter1_nand.o
+COBJS-$(CONFIG_NAND_LANTIQ) += lantiq_nand.o
 COBJS-$(CONFIG_NAND_MPC5121_NFC) += mpc5121_nfc.o
 COBJS-$(CONFIG_NAND_MXC) += mxc_nand.o
 COBJS-$(CONFIG_NAND_MXS) += mxs_nand.o
