@@ -25,6 +25,7 @@ COBJS-$(CONFIG_DAVINCI_SPI) += davinci_spi.o
 COBJS-$(CONFIG_EXYNOS_SPI) += exynos_spi.o
 COBJS-$(CONFIG_ICH_SPI) +=  ich.o
 COBJS-$(CONFIG_KIRKWOOD_SPI) += kirkwood_spi.o
+COBJS-$(CONFIG_LANTIQ_SPI) += lantiq_spi.o
 COBJS-$(CONFIG_MPC52XX_SPI) += mpc52xx_spi.o
 COBJS-$(CONFIG_MPC8XXX_SPI) += mpc8xxx_spi.o
 COBJS-$(CONFIG_MXC_SPI) += mxc_spi.o

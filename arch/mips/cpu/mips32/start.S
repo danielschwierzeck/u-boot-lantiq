@@ -105,7 +105,7 @@ reset:
 	mtc0	zero, CP0_COUNT
 	mtc0	zero, CP0_COMPARE
 
-#ifndef CONFIG_SKIP_LOWLEVEL_INIT
+#if !defined(CONFIG_SKIP_LOWLEVEL_INIT) || defined(CONFIG_SYS_DISABLE_CACHE)
 	/* CONFIG0 register */
 	li	t0, CONF_CM_UNCACHED
 	mtc0	t0, CP0_CONFIG
