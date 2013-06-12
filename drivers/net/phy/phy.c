@@ -16,8 +16,9 @@
 #include <command.h>
 #include <miiphy.h>
 #include <phy.h>
-#include <errno.h>
 #include <linux/err.h>
+
+DECLARE_GLOBAL_DATA_PTR;
 
 /* Generic PHY support and helper functions */
 
@@ -440,6 +441,16 @@ static LIST_HEAD(phy_drivers);
 
 int phy_init(void)
 {
+#ifdef CONFIG_NEEDS_MANUAL_RELOC
+	INIT_LIST_HEAD(&phy_drivers);
+
+	genphy_driver.config = genphy_config;
+	genphy_driver.startup = genphy_startup;
+	genphy_driver.shutdown = genphy_shutdown;
+
+	genphy_driver.name += gd->reloc_off;
+#endif
+
 #ifdef CONFIG_PHY_ATHEROS
 	phy_atheros_init();
 #endif
@@ -454,6 +465,9 @@ int phy_init(void)
 #endif
 #ifdef CONFIG_PHY_ICPLUS
 	phy_icplus_init();
+#endif
+#ifdef CONFIG_PHY_LANTIQ
+	phy_lantiq_init();
 #endif
 #ifdef CONFIG_PHY_LXT
 	phy_lxt_init();

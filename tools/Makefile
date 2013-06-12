@@ -49,6 +49,7 @@ BIN_FILES-$(CONFIG_VIDEO_LOGO) += bmp_logo$(SFX)
 BIN_FILES-$(CONFIG_BUILD_ENVCRC) += envcrc$(SFX)
 BIN_FILES-$(CONFIG_CMD_NET) += gen_eth_addr$(SFX)
 BIN_FILES-$(CONFIG_CMD_LOADS) += img2srec$(SFX)
+BIN_FILES-$(CONFIG_SOC_LANTIQ) += ltq-boot-image$(SFX)
 BIN_FILES-$(CONFIG_XWAY_SWAP_BYTES) += xway-swap-bytes$(SFX)
 BIN_FILES-y += mkenvimage$(SFX)
 BIN_FILES-y += mkimage$(SFX)
@@ -95,6 +96,7 @@ OBJ_FILES-$(CONFIG_MX28) += mxsboot.o
 OBJ_FILES-$(CONFIG_NETCONSOLE) += ncb.o
 OBJ_FILES-$(CONFIG_SHA1_CHECK_UB_IMG) += ubsha1.o
 OBJ_FILES-$(CONFIG_SMDK5250) += mkexynosspl.o
+OBJ_FILES-$(CONFIG_SOC_LANTIQ) += ltq-boot-image.o
 OBJ_FILES-$(CONFIG_VIDEO_LOGO) += bmp_logo.o
 OBJ_FILES-$(CONFIG_XWAY_SWAP_BYTES) += xway-swap-bytes.o
 
@@ -192,6 +194,10 @@ $(obj)gen_eth_addr$(SFX):	$(obj)gen_eth_addr.o
 	$(HOSTSTRIP) $@
 
 $(obj)img2srec$(SFX):	$(obj)img2srec.o
+	$(HOSTCC) $(HOSTCFLAGS) $(HOSTLDFLAGS) -o $@ $^
+	$(HOSTSTRIP) $@
+
+$(obj)ltq-boot-image$(SFX):	$(obj)ltq-boot-image.o
 	$(HOSTCC) $(HOSTCFLAGS) $(HOSTLDFLAGS) -o $@ $^
 	$(HOSTSTRIP) $@
 
