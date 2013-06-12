@@ -100,6 +100,8 @@ LIBS-$(CONFIG_SPL_USBETH_SUPPORT) += drivers/net/phy/libphy.o
 LIBS-$(CONFIG_SPL_MUSB_NEW_SUPPORT) += drivers/usb/musb-new/libusb_musb-new.o
 LIBS-$(CONFIG_SPL_USBETH_SUPPORT) += drivers/usb/gadget/libusb_gadget.o
 LIBS-$(CONFIG_SPL_WATCHDOG_SUPPORT) += drivers/watchdog/libwatchdog.o
+LIBS-$(CONFIG_SPL_LZMA_SUPPORT) += lib/lzma/liblzma.o
+LIBS-$(CONFIG_SPL_LZO_SUPPORT) += lib/lzo/liblzo.o
 
 ifneq ($(CONFIG_OMAP_COMMON),)
 LIBS-y += $(CPUDIR)/omap-common/libomap-common.o

@@ -435,6 +435,12 @@ $(obj)u-boot.bin:	$(obj)u-boot
 		$(OBJCOPY) ${OBJCFLAGS} -O binary $< $@
 		$(BOARD_SIZE_CHECK)
 
+$(obj)u-boot.bin.lzma:	$(obj)u-boot.bin
+		cat $< | lzma -9 -f - > $@
+
+$(obj)u-boot.bin.lzo:	$(obj)u-boot.bin
+		cat $< | lzop -9 -f - > $@
+
 $(obj)u-boot.ldr:	$(obj)u-boot
 		$(CREATE_LDR_ENV)
 		$(LDR) -T $(CONFIG_BFIN_CPU) -c $@ $< $(LDR_FLAGS)
@@ -454,13 +460,23 @@ ifndef CONFIG_SYS_UBOOT_START
 CONFIG_SYS_UBOOT_START := 0
 endif
 
-$(obj)u-boot.img:	$(obj)u-boot.bin
-		$(obj)tools/mkimage -A $(ARCH) -T firmware -C none \
+define GEN_UBOOT_IMAGE
+		$(obj)tools/mkimage -A $(ARCH) -T firmware -C $(1) \
 		-O u-boot -a $(CONFIG_SYS_TEXT_BASE) \
 		-e $(CONFIG_SYS_UBOOT_START) \
 		-n $(shell sed -n -e 's/.*U_BOOT_VERSION//p' $(VERSION_FILE) | \
 			sed -e 's/"[	 ]*$$/ for $(BOARD) board"/') \
 		-d $< $@
+endef
+
+$(obj)u-boot.img:	$(obj)u-boot.bin
+		$(call GEN_UBOOT_IMAGE,none)
+
+$(obj)u-boot.lzma.img:	$(obj)u-boot.bin.lzma
+		$(call GEN_UBOOT_IMAGE,lzma)
+
+$(obj)u-boot.lzo.img:	$(obj)u-boot.bin.lzo
+		$(call GEN_UBOOT_IMAGE,lzo)
 
 $(obj)u-boot.imx: $(obj)u-boot.bin depend
 		$(MAKE) -C $(SRCTREE)/arch/arm/imx-common $(OBJTREE)/u-boot.imx
@@ -570,6 +586,27 @@ $(obj)u-boot-img-spl-at-end.bin: $(obj)spl/u-boot-spl.bin $(obj)u-boot.img
 		dd if=$(obj)u-boot.img of=$(obj)u-boot-pad.img \
 			conv=notrunc 2>/dev/null
 		cat $(obj)u-boot-pad.img $(obj)spl/u-boot-spl.bin > $@
+
+$(obj)u-boot.ltq.sfspl:	$(obj)u-boot.img $(obj)spl/u-boot-spl.bin
+		$(obj)tools/ltq-boot-image -t sfspl -e $(CONFIG_SPL_TEXT_BASE) \
+			-s $(obj)spl/u-boot-spl.bin -u $< -o $@
+
+$(obj)u-boot.ltq.lzo.sfspl: $(obj)u-boot.lzo.img $(obj)spl/u-boot-spl.bin
+		$(obj)tools/ltq-boot-image -t sfspl -e $(CONFIG_SPL_TEXT_BASE) \
+			-s $(obj)spl/u-boot-spl.bin -u $< -o $@
+
+$(obj)u-boot.ltq.lzma.sfspl: $(obj)u-boot.lzma.img $(obj)spl/u-boot-spl.bin
+		$(obj)tools/ltq-boot-image -t sfspl -e $(CONFIG_SPL_TEXT_BASE) \
+			-s $(obj)spl/u-boot-spl.bin -u $< -o $@
+
+$(obj)u-boot.ltq.norspl: $(obj)u-boot.img $(obj)spl/u-boot-spl.bin
+	cat $(obj)spl/u-boot-spl.bin $< > $@
+
+$(obj)u-boot.ltq.lzo.norspl: $(obj)u-boot.lzo.img $(obj)spl/u-boot-spl.bin
+	cat $(obj)spl/u-boot-spl.bin $< > $@
+
+$(obj)u-boot.ltq.lzma.norspl: $(obj)u-boot.lzma.img $(obj)spl/u-boot-spl.bin
+	cat $(obj)spl/u-boot-spl.bin $< > $@
 
 ifeq ($(CONFIG_SANDBOX),y)
 GEN_UBOOT = \

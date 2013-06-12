@@ -24,6 +24,7 @@ COBJS-$(CONFIG_SYS_NS16550_SERIAL) += serial_ns16550.o
 COBJS-$(CONFIG_IMX_SERIAL) += serial_imx.o
 COBJS-$(CONFIG_IXP_SERIAL) += serial_ixp.o
 COBJS-$(CONFIG_KS8695_SERIAL) += serial_ks8695.o
+COBJS-$(CONFIG_LANTIQ_SERIAL) += serial_lantiq.o
 COBJS-$(CONFIG_MAX3100_SERIAL) += serial_max3100.o
 COBJS-$(CONFIG_MXC_UART) += serial_mxc.o
 COBJS-$(CONFIG_PL010_SERIAL) += serial_pl01x.o

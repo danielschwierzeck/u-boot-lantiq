@@ -49,6 +49,13 @@
 /u-boot.sb
 /u-boot.bd
 /u-boot.geany
+/u-boot.bin.lzma
+/u-boot.bin.lzo
+/u-boot.ltq.lzma.norspl
+/u-boot.ltq.lzo.norspl
+/u-boot.ltq.norspl
+/u-boot.lzma.img
+/u-boot.lzo.img
 
 #
 # Generated files
