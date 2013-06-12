@@ -161,6 +161,18 @@ u64 flash_read64(void *addr)__attribute__((weak, alias("__flash_read64")));
 #define flash_read64	__flash_read64
 #endif
 
+static inline void *__flash_swap_addr(unsigned long addr)
+{
+	return (void *) addr;
+}
+
+#ifdef CONFIG_CFI_FLASH_USE_WEAK_ADDR_SWAP
+void *flash_swap_addr(unsigned long addr)
+		__attribute__((weak, alias("__flash_swap_addr")));
+#else
+#define flash_swap_addr	__flash_swap_addr
+#endif
+
 /*-----------------------------------------------------------------------
  */
 #if defined(CONFIG_ENV_IS_IN_FLASH) || defined(CONFIG_ENV_ADDR_REDUND) || (CONFIG_SYS_MONITOR_BASE >= CONFIG_SYS_FLASH_BASE)
@@ -196,7 +208,7 @@ flash_map (flash_info_t * info, flash_sect_t sect, uint offset)
 {
 	unsigned int byte_offset = offset * info->portwidth;
 
-	return (void *)(info->start[sect] + byte_offset);
+	return flash_swap_addr(info->start[sect] + byte_offset);
 }
 
 static inline void flash_unmap(flash_info_t *info, flash_sect_t sect,
