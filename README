@@ -468,6 +468,11 @@ The following options need to be configured:
 			CONF_CM_CACHABLE_CUW
 			CONF_CM_CACHABLE_ACCELERATED
 
+		CONFIG_SYS_MIPS_CACHE_EXT_INIT
+
+		Enable this to use extended cache initialization for recent
+		MIPS CPU cores.
+
 		CONFIG_SYS_XWAY_EBU_BOOTCFG
 
 		Special option for Lantiq XWAY SoCs for booting from NOR flash.
