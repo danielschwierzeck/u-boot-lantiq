@@ -18,13 +18,6 @@
 #define CONFIG_LTQ_SUPPORT_ETHERNET	/* Enable ethernet */
 #define CONFIG_LTQ_SUPPORT_NOR_FLASH	/* Have a parallel NOR flash */
 
-#if 0
-#define CONFIG_LTQ_SUPPORT_SPL_NOR_FLASH	/* Build NOR flash SPL */
-
-#define CONFIG_LTQ_SPL_COMP_LZO
-#define CONFIG_LTQ_SPL_CONSOLE
-#endif
-
 /* Switch devices */
 #define CONFIG_SWITCH_MULTI
 #define CONFIG_SWITCH_RTL8306
@@ -57,6 +50,9 @@
 /* Compression */
 #define CONFIG_LZMA
 
+/* Auto boot */
+#define CONFIG_BOOTDELAY		2
+
 /* Commands */
 #define CONFIG_CMD_PING
 
@@ -64,16 +60,21 @@
 #include <asm/lantiq/config.h>
 #include <asm/arch/config.h>
 
+/* Environment configuration */
+#define CONFIG_BOOTCOMMAND			\
+	"run addeth; bootm ${kernel_addr}"
+
 #define CONFIG_ENV_UPDATE_UBOOT_NOR					\
 	"update-uboot-nor=run load-uboot-norspl-lzo write-uboot-nor\0"
 
 #define CONFIG_EXTRA_ENV_SETTINGS	\
 	CONFIG_ENV_LANTIQ_DEFAULTS	\
-	CONFIG_ENV_UPDATE_UBOOT_NOR
+	CONFIG_ENV_UPDATE_UBOOT_NOR	\
+	"kernel_addr=0xB0040000\0"
 
 /* temporary */
-// #define CONFIG_ETHADDR		38:46:08:D4:7D:63
-// #define CONFIG_SERVERIP		192.168.1.100
-// #define CONFIG_IPADDR		192.168.1.1
+#define CONFIG_ETHADDR		00:11:22:33:44:55
+#define CONFIG_SERVERIP		192.168.1.103
+#define CONFIG_IPADDR		192.168.1.50
 
 #endif /* __CONFIG_H */
