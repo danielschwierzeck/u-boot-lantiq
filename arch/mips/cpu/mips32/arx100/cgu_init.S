@@ -111,10 +111,15 @@ LEAF(ltq_cgu_init)
 	 * This bit is latched in via pin strapping. If bit is set then
 	 * clock source is a 36 MHz crystal. Otherwise a 35.328 MHz crystal.
 	 */
-	 li	t1, (LTQ_RCU_BASE | KSEG1)
-	 lw	t2, LTQ_RCU_RST_STAT(t1)
-	 and	t2, t2, LTQ_RCU_RST_STAT_XTAL_F
-	 beq	t2, LTQ_RCU_RST_STAT_XTAL_F, boot_36mhz
+	li	t1, (LTQ_RCU_BASE | KSEG1)
+	lw	t2, LTQ_RCU_RST_STAT(t1)
+	and	t2, t2, LTQ_RCU_RST_STAT_XTAL_F
+
+	/* disable clock detection */
+	b	finished
+
+	beq	t2, LTQ_RCU_RST_STAT_XTAL_F, boot_36mhz
+
 
 boot_35mhz:
 	/* Configure PLL for 35.328 MHz */
@@ -144,8 +149,12 @@ do_reset:
 	li	t2, LTQ_RCU_RST_REQ_VALUE
 	sw	t2, LTQ_RCU_RST_REQ(t1)
 
+
+#if 0
 wait_reset:
 	b	wait_reset
+         nop
+#endif
 
 finished:
 	jr	ra
