@@ -112,9 +112,11 @@ main:
 	mtc0	t0, CP0_STATUS
 
 	/* Initialize CGU */
+#if 0
 	la	t9, ltq_cgu_init
 	jalr	t9
 	 nop
+#endif
 
 	/* Initialize memory controller */
 	la	t9, ltq_mem_init
