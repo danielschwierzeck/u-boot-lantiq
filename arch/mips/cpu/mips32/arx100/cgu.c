@@ -15,7 +15,7 @@
 #define CGU_SYS_CPU_SEL		(1 << 2)
 #define CGU_SYS_SYS_SHIFT	3
 #define CGU_SYS_SYS_MASK	(0x3 << CGU_SYS_SYS_SHIFT)
-#define CGU_SYS_FPI_SEL		(1 << 6)
+#define CGU_SYS_FPI_SEL		(1 << 0)
 #define CGU_SYS_PPE_SEL		(1 << 7)
 
 struct ltq_cgu_regs {
@@ -64,19 +64,25 @@ static unsigned long ltq_get_system_clock(void)
 	return clk;
 }
 
-unsigned long ltq_get_io_region_clock(void)
+
+unsigned long ltq_get_bus_clock(void)
 {
-	u32 ddr_sel;
+	u32 fpi_sel;
 	unsigned long clk;
 
-	ddr_sel = ltq_cgu_sys_readl(1, CGU_SYS_DDR_SEL);
+	fpi_sel = ltq_cgu_sys_readl(1, CGU_SYS_FPI_SEL);
 
-	if (ddr_sel)
-		clk = ltq_get_system_clock() / 3;
+	if (fpi_sel)
+		clk = ltq_get_system_clock();
 	else
 		clk = ltq_get_system_clock() / 2;
 
 	return clk;
+}
+
+unsigned long ltq_get_io_region_clock(void)
+{
+	return ltq_get_bus_clock();
 }
 
 unsigned long ltq_get_cpu_clock(void)
@@ -87,24 +93,9 @@ unsigned long ltq_get_cpu_clock(void)
 	cpu_sel = ltq_cgu_sys_readl(1, CGU_SYS_CPU_SEL);
 
 	if (cpu_sel)
-		clk = ltq_get_io_region_clock();
+		clk = ltq_get_bus_clock();
 	else
 		clk = ltq_get_system_clock();
-
-	return clk;
-}
-
-unsigned long ltq_get_bus_clock(void)
-{
-	u32 fpi_sel;
-	unsigned long clk;
-
-	fpi_sel = ltq_cgu_sys_readl(1, CGU_SYS_FPI_SEL);
-
-	if (fpi_sel)
-		clk = ltq_get_io_region_clock() / 2;
-	else
-		clk = ltq_get_io_region_clock();
 
 	return clk;
 }
