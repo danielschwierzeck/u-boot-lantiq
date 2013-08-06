@@ -12,15 +12,19 @@
 #define CONFIG_IDENT_STRING	" "CONFIG_MACH_TYPE
 #define CONFIG_BOARD_NAME	"ZyXEL P-2601HN-Fx"
 #define CONFIG_SYS_DRAM_PROBE
+#define CONFIG_LTQ_SPL_CONSOLE
+#define CONFIG_LTQ_SPL_DEBUG
+
+#define CONFIG_XWAY_SWAP_BYTES
 
 /* Configure SoC */
 #define CONFIG_LTQ_SUPPORT_UART		/* Enable ASC and UART */
-#define CONFIG_LTQ_SUPPORT_ETHERNET	/* Enable ethernet */
+// #define CONFIG_LTQ_SUPPORT_ETHERNET	/* Enable ethernet */
 #define CONFIG_LTQ_SUPPORT_NOR_FLASH	/* Have a parallel NOR flash */
 
 /* Switch devices */
-#define CONFIG_SWITCH_MULTI
-#define CONFIG_SWITCH_RTL8306
+// #define CONFIG_SWITCH_MULTI
+// #define CONFIG_SWITCH_RTL8306
 
 /* Environment */
 #if defined(CONFIG_SYS_BOOT_NOR)
@@ -42,19 +46,19 @@
 #define CONFIG_LOADADDR			CONFIG_SYS_LOAD_ADDR
 
 /* Console */
-#define CONFIG_LTQ_ADVANCED_CONSOLE
+// #define CONFIG_LTQ_ADVANCED_CONSOLE
 #define CONFIG_BAUDRATE			115200
 #define CONFIG_CONSOLE_ASC		1
 #define CONFIG_CONSOLE_DEV		"ttyLTQ1"
 
 /* Compression */
-#define CONFIG_LZMA
+// #define CONFIG_LZMA
 
 /* Auto boot */
-#define CONFIG_BOOTDELAY		2
+// #define CONFIG_BOOTDELAY		2
 
 /* Commands */
-#define CONFIG_CMD_PING
+// #define CONFIG_CMD_PING
 
 /* Pull in default board configs for Lantiq XWAY Danube */
 #include <asm/lantiq/config.h>
@@ -70,7 +74,7 @@
 #define CONFIG_EXTRA_ENV_SETTINGS	\
 	CONFIG_ENV_LANTIQ_DEFAULTS	\
 	CONFIG_ENV_UPDATE_UBOOT_NOR	\
-	"kernel_addr=0xB0040000\0"
+	"kernel_addr=0xb0060000\0"
 
 /* temporary */
 #define CONFIG_ETHADDR		00:11:22:33:44:55
