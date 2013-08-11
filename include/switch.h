@@ -78,7 +78,14 @@ extern int switch_device_register(struct switch_device *dev);
  * Probe the available switch chips and connect the found one
  * with the given MII bus
  */
+#ifdef CONFIG_SWITCH_MULTI
 extern struct switch_device *switch_connect(struct mii_dev *bus);
+#else
+static inline struct switch_device *switch_connect(struct mii_dev *bus)
+{
+	return NULL;
+}
+#endif
 
 /*
  * Setup the given switch device
