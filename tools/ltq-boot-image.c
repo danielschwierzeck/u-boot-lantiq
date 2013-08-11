@@ -15,7 +15,8 @@
 
 enum image_types {
 	IMAGE_NONE,
-	IMAGE_SFSPL
+	IMAGE_SFSPL,
+	IMAGE_NANDSPL
 };
 
 /* Lantiq non-volatile bootstrap command IDs */
@@ -44,6 +45,8 @@ enum nvb_cmd_flags {
 struct args {
 	enum image_types type;
 	__u32		entry_addr;
+	loff_t		uboot_offset;
+	unsigned int	page_size;
 	const char	*uboot_bin;
 	const char	*spl_bin;
 	const char	*out_bin;
@@ -51,10 +54,11 @@ struct args {
 
 static void usage_msg(const char *name)
 {
-	fprintf(stderr, "%s: [-h] -t type -e entry-addr -u uboot-bin [-s spl-bin] -o out-bin\n",
+	fprintf(stderr, "%s: [-h] -t type -e entry-addr [-x uboot-offset] [-p page-size] -u uboot-bin [-s spl-bin] -o out-bin\n",
 		name);
 	fprintf(stderr, " Image types:\n"
-			"  sfspl  - SPL + [compressed] U-Boot for SPI flash\n");
+			"  sfspl   - SPL + [compressed] U-Boot for SPI flash\n"
+			"  nandspl - SPL + [compressed] U-Boot for NAND flash\n");
 }
 
 static enum image_types parse_image_type(const char *type)
@@ -65,6 +69,9 @@ static enum image_types parse_image_type(const char *type)
 	if (!strncmp(type, "sfspl", 6))
 		return IMAGE_SFSPL;
 
+	if (!strncmp(type, "nandspl", 6))
+		return IMAGE_NANDSPL;
+
 	return IMAGE_NONE;
 }
 
@@ -74,7 +81,7 @@ static int parse_args(int argc, char *argv[], struct args *arg)
 
 	memset(arg, 0, sizeof(*arg));
 
-	while ((opt = getopt(argc, argv, "ht:e:u:s:o:")) != -1) {
+	while ((opt = getopt(argc, argv, "ht:e:x:p:u:s:o:")) != -1) {
 		switch (opt) {
 		case 'h':
 			usage_msg(argv[0]);
@@ -84,6 +91,12 @@ static int parse_args(int argc, char *argv[], struct args *arg)
 			break;
 		case 'e':
 			arg->entry_addr = strtoul(optarg, NULL, 16);
+			break;
+		case 'x':
+			arg->uboot_offset = strtoul(optarg, NULL, 16);
+			break;
+		case 'p':
+			arg->page_size = strtoul(optarg, NULL, 10);
 			break;
 		case 'u':
 			arg->uboot_bin = optarg;
@@ -115,8 +128,19 @@ static int parse_args(int argc, char *argv[], struct args *arg)
 		goto parse_error;
 	}
 
-	if (arg->type == IMAGE_SFSPL && !arg->spl_bin) {
+	if ((arg->type == IMAGE_SFSPL || arg->type == IMAGE_NANDSPL) &&
+		!arg->spl_bin) {
 		fprintf(stderr, "Missing SPL binary\n");
+		goto parse_error;
+	}
+
+	if (arg->type == IMAGE_NANDSPL && !arg->uboot_offset) {
+		fprintf(stderr, "Missing U-Boot offset\n");
+		goto parse_error;
+	}
+
+	if (arg->type == IMAGE_NANDSPL && !arg->page_size) {
+		fprintf(stderr, "Missing NAND page size\n");
 		goto parse_error;
 	}
 
@@ -171,6 +195,17 @@ static int write_nvb_start_header(int fd, __u32 addr)
 	hdr[0] = build_nvb_command(NVB_CMD_START, NVB_FLAG_SDBG);
 	hdr[1] = cpu_to_be32(4);
 	hdr[2] = cpu_to_be32(addr);
+
+	return write_header(fd, hdr, sizeof(hdr));
+}
+
+static int write_nvb_regcfg_header(int fd, __u32 addr)
+{
+	__u32 hdr[2];
+
+	hdr[0] = build_nvb_command(NVB_CMD_REGCFG, NVB_FLAG_SDBG |
+					NVB_FLAG_DBG);
+	hdr[1] = cpu_to_be32(addr);
 
 	return write_header(fd, hdr, sizeof(hdr));
 }
@@ -239,9 +274,37 @@ static int open_output_bin(const char *name)
 	return fd;
 }
 
-static int create_sfspl(const struct args *arg)
+static int pad_to_offset(int fd, loff_t offset)
 {
-	int out_fd, uboot_fd, spl_fd, ret;
+	loff_t pos;
+	size_t size;
+	ssize_t n;
+	__u8 *buf;
+
+	pos = lseek(fd, 0, SEEK_CUR);
+	size = offset - pos;
+
+	buf = malloc(size);
+	if (!buf) {
+		fprintf(stderr, "Failed to malloc buffer\n");
+		return -1;
+	}
+
+	memset(buf, 0xff, size);
+	n = write(fd, buf, size);
+	free(buf);
+
+	if (n != size) {
+		fprintf(stderr, "Failed to write pad bytes\n");
+		return -1;
+	}
+
+	return 0;
+}
+
+static int create_spl_image(const struct args *arg)
+{
+	int out_fd, uboot_fd, spl_fd, ret = 0;
 	void *uboot_ptr, *spl_ptr;
 	size_t uboot_size, spl_size;
 
@@ -257,9 +320,20 @@ static int create_sfspl(const struct args *arg)
 	if (0 > uboot_fd)
 		goto err_uboot;
 
+	ret = write_nvb_regcfg_header(out_fd, 0);
+	if (ret)
+		goto err_write;
+
 	ret = write_nvb_dwnld_header(out_fd, spl_size, arg->entry_addr);
 	if (ret)
 		goto err_write;
+#if 0
+	if (arg->page_size) {
+		ret = pad_to_offset(out_fd, arg->page_size);
+		if (ret)
+			goto err_write;
+	}
+#endif
 
 	ret = copy_bin(out_fd, spl_ptr, spl_size);
 	if (ret)
@@ -269,15 +343,15 @@ static int create_sfspl(const struct args *arg)
 	if (ret)
 		goto err_write;
 
+	if (arg->uboot_offset) {
+		ret = pad_to_offset(out_fd, arg->uboot_offset);
+		if (ret)
+			goto err_write;
+	}
+
 	ret = copy_bin(out_fd, uboot_ptr, uboot_size);
 	if (ret)
 		goto err_write;
-
-	close_input_bin(uboot_fd, uboot_ptr, uboot_size);
-	close_input_bin(spl_fd, spl_ptr, spl_size);
-	close(out_fd);
-
-	return 0;
 
 err_write:
 	close_input_bin(uboot_fd, uboot_ptr, uboot_size);
@@ -286,7 +360,7 @@ err_uboot:
 err_spl:
 	close(out_fd);
 err:
-	return -1;
+	return ret;
 }
 
 int main(int argc, char *argv[])
@@ -300,7 +374,8 @@ int main(int argc, char *argv[])
 
 	switch (arg.type) {
 	case IMAGE_SFSPL:
-		ret = create_sfspl(&arg);
+	case IMAGE_NANDSPL:
+		ret = create_spl_image(&arg);
 		break;
 	default:
 		fprintf(stderr, "Image type not implemented\n");
