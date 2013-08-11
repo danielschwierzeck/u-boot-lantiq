@@ -8,6 +8,7 @@
 #include <image.h>
 #include <version.h>
 #include <spi_flash.h>
+#include <nand.h>
 #include <linux/compiler.h>
 #include <lzma/LzmaDec.h>
 #include <linux/lzo.h>
@@ -61,6 +62,18 @@
 #define spl_boot_nor_flash	1
 #else
 #define spl_boot_nor_flash	0
+#endif
+
+#if defined(CONFIG_LTQ_SUPPORT_SPL_NAND_FLASH) && defined(CONFIG_SYS_BOOT_NANDSPL)
+#define spl_boot_nand_flash	1
+#else
+#define spl_boot_nand_flash	0
+#ifndef CONFIG_SYS_NAND_U_BOOT_OFFS
+#define CONFIG_SYS_NAND_U_BOOT_OFFS	0
+#endif
+#ifndef CONFIG_SYS_NAND_PAGE_SIZE
+#define CONFIG_SYS_NAND_PAGE_SIZE	0
+#endif
 #endif
 
 #define spl_sync()	__asm__ __volatile__("sync");
@@ -337,6 +350,58 @@ static int spl_load_nor_flash(struct spl_image *spl)
 	return ret;
 }
 
+static int spl_load_nand_flash(struct spl_image *spl)
+{
+	image_header_t *hdr;
+	int ret;
+	unsigned long loadaddr;
+
+	/*
+	 * Image format:
+	 *
+	 * - 12 byte non-volatile bootstrap header
+	 * - SPL binary
+	 * - 12 byte non-volatile bootstrap header
+	 * - padding bytes up to CONFIG_SYS_NAND_U_BOOT_OFFS
+	 * - 64 byte U-Boot mkimage header
+	 * - U-Boot binary
+	 */
+	spl->data_addr = CONFIG_SYS_NAND_U_BOOT_OFFS;
+
+	spl_puts("SPL: initializing NAND flash\n");
+	nand_init();
+
+	spl_debug("SPL: reading image header at page offset %lx\n",
+		  spl->data_addr);
+
+	hdr = (image_header_t *) CONFIG_LOADADDR;
+	ret = nand_spl_load_image(spl->data_addr,
+				  CONFIG_SYS_NAND_PAGE_SIZE, hdr);
+	if (ret)
+		return ret;
+
+	spl_debug("SPL: checking image header at address %p\n", hdr);
+
+	ret = spl_parse_image(hdr, spl);
+	if (ret)
+		return ret;
+
+	if (spl_is_compressed(spl))
+		loadaddr = CONFIG_LOADADDR;
+	else
+		loadaddr = spl->entry_addr;
+
+	spl_puts("SPL: loading U-Boot to RAM\n");
+
+	ret = nand_spl_load_image(spl->data_addr, spl->data_size,
+				  (void *) loadaddr);
+
+	if (spl_is_compressed(spl))
+		ret = spl_uncompress(spl, loadaddr);
+
+	return ret;
+}
+
 static int spl_load(struct spl_image *spl)
 {
 	int ret;
@@ -345,6 +410,8 @@ static int spl_load(struct spl_image *spl)
 		ret = spl_load_spi_flash(spl);
 	else if (spl_boot_nor_flash)
 		ret = spl_load_nor_flash(spl);
+	else if (spl_boot_nand_flash)
+		ret = spl_load_nand_flash(spl);
 	else
 		ret = 1;
 
