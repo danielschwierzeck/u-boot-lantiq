@@ -599,6 +599,24 @@ $(obj)u-boot.ltq.lzma.sfspl: $(obj)u-boot.lzma.img $(obj)spl/u-boot-spl.bin
 		$(obj)tools/ltq-boot-image -t sfspl -e $(CONFIG_SPL_TEXT_BASE) \
 			-s $(obj)spl/u-boot-spl.bin -u $< -o $@
 
+$(obj)u-boot.ltq.nandspl:	$(obj)u-boot.img $(obj)spl/u-boot-spl.bin
+		$(obj)tools/ltq-boot-image -t nandspl -e $(CONFIG_SPL_TEXT_BASE) \
+			-x $(CONFIG_SYS_NAND_U_BOOT_OFFS) \
+			-p $(CONFIG_SYS_NAND_PAGE_SIZE) \
+			-s $(obj)spl/u-boot-spl.bin -u $< -o $@
+
+$(obj)u-boot.ltq.lzo.nandspl: $(obj)u-boot.lzo.img $(obj)spl/u-boot-spl.bin
+		$(obj)tools/ltq-boot-image -t nandspl -e $(CONFIG_SPL_TEXT_BASE) \
+			-x $(CONFIG_SYS_NAND_U_BOOT_OFFS) \
+			-p $(CONFIG_SYS_NAND_PAGE_SIZE) \
+			-s $(obj)spl/u-boot-spl.bin -u $< -o $@
+
+$(obj)u-boot.ltq.lzma.nandspl: $(obj)u-boot.lzma.img $(obj)spl/u-boot-spl.bin
+		$(obj)tools/ltq-boot-image -t nandspl -e $(CONFIG_SPL_TEXT_BASE) \
+			-x $(CONFIG_SYS_NAND_U_BOOT_OFFS) \
+			-p $(CONFIG_SYS_NAND_PAGE_SIZE) \
+			-s $(obj)spl/u-boot-spl.bin -u $< -o $@
+
 $(obj)u-boot.ltq.norspl: $(obj)u-boot.img $(obj)spl/u-boot-spl.bin
 	cat $(obj)spl/u-boot-spl.bin $< > $@
 
