@@ -40,6 +40,26 @@
 #define CONFIG_SPI_SPL_SIMPLE
 #endif
 
+/*
+ * NAND flash SPL
+ * BOOT CFG 06 only (address cycle based probing, 2KB or 512B page size)
+ */
+#if defined(CONFIG_LTQ_SUPPORT_SPL_NAND_FLASH) && defined(CONFIG_SYS_BOOT_NANDSPL)
+#define CONFIG_SPL
+#define CONFIG_SPL_NAND_SUPPORT
+#define CONFIG_SPL_NAND_DRIVERS
+#define CONFIG_SPL_NAND_SIMPLE
+#define CONFIG_SPL_NAND_ECC
+
+/* use software ECC until driver supports HW ECC */
+#define CONFIG_SPL_NAND_SOFTECC
+#define CONFIG_SYS_NAND_ECCSIZE		256
+#define CONFIG_SYS_NAND_ECCBYTES	3
+#define CONFIG_SYS_NAND_ECCPOS		{40, 41, 42, 43, 44, 45, 46, 47, \
+					48, 49, 50, 51, 52, 53, 54, 55, \
+					56, 57, 58, 59, 60, 61, 62, 63}
+#endif
+
 #if defined(CONFIG_LTQ_SUPPORT_SPL_NOR_FLASH) && defined(CONFIG_SYS_BOOT_NORSPL)
 #define CONFIG_SPL
 #endif
@@ -148,6 +168,21 @@
 #define CONFIG_ENV_LOAD_UBOOT_SF
 #endif
 
+#if defined(CONFIG_LTQ_SUPPORT_NAND_FLASH)
+#define CONFIG_ENV_WRITE_UBOOT_NAND				\
+	"write-uboot-nand="					\
+	"nand erase 0 $filesize && "				\
+	"nand write $fileaddr 0 $filesize\0"
+
+#define CONFIG_ENV_LOAD_UBOOT_NAND						\
+	"load-uboot-nandspl=tftpboot u-boot.ltq.nandspl\0"			\
+	"load-uboot-nandspl-lzo=tftpboot u-boot.ltq.lzo.nandspl\0"		\
+	"load-uboot-nandspl-lzma=tftpboot u-boot.ltq.lzma.nandspl\0"
+#else
+#define CONFIG_ENV_WRITE_UBOOT_NAND
+#define CONFIG_ENV_LOAD_UBOOT_NAND
+#endif
+
 #define CONFIG_ENV_LANTIQ_DEFAULTS	\
 	CONFIG_ENV_CONSOLEDEV		\
 	CONFIG_ENV_ADDCONSOLE		\
@@ -159,6 +194,8 @@
 	CONFIG_ENV_LOAD_UBOOT_NOR	\
 	CONFIG_ENV_SF_PROBE		\
 	CONFIG_ENV_WRITE_UBOOT_SF	\
-	CONFIG_ENV_LOAD_UBOOT_SF
+	CONFIG_ENV_LOAD_UBOOT_SF	\
+	CONFIG_ENV_WRITE_UBOOT_NAND	\
+	CONFIG_ENV_LOAD_UBOOT_NAND
 
 #endif /* __LANTIQ_CONFIG_H__ */
