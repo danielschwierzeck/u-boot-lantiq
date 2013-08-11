@@ -939,6 +939,21 @@ LTQBOOTIMAGEFLAGS_u-boot.ltq.lzo.sfspl = -t sfspl -u u-boot.lzo.img
 u-boot.ltq.lzo.sfspl: u-boot.lzo.img spl/u-boot-spl.bin
 	$(call if_changed,ltqbootimage)
 
+LTQBOOTIMAGEFLAGS_u-boot.ltq.nandspl = -t nandspl -u u-boot.img \
+	-x $(CONFIG_SYS_NAND_U_BOOT_OFFS) -p $(CONFIG_SYS_NAND_PAGE_SIZE)
+u-boot.ltq.nandspl: u-boot.img spl/u-boot-spl.bin
+	$(call if_changed,ltqbootimage)
+
+LTQBOOTIMAGEFLAGS_u-boot.ltq.lzma.nandspl = -t nandspl -u u-boot.lzma.img \
+	-x $(CONFIG_SYS_NAND_U_BOOT_OFFS) -p $(CONFIG_SYS_NAND_PAGE_SIZE)
+u-boot.ltq.lzma.nandspl: u-boot.lzma.img spl/u-boot-spl.bin
+	$(call if_changed,ltqbootimage)
+
+LTQBOOTIMAGEFLAGS_u-boot.ltq.lzo.nandspl = -t nandspl -u u-boot.lzo.img \
+	-x $(CONFIG_SYS_NAND_U_BOOT_OFFS) -p $(CONFIG_SYS_NAND_PAGE_SIZE)
+u-boot.ltq.lzo.nandspl: u-boot.lzo.img spl/u-boot-spl.bin
+	$(call if_changed,ltqbootimage)
+
 u-boot.ltq.norspl: spl/u-boot-spl.bin u-boot.img
 	$(call if_changed,cat)
 
