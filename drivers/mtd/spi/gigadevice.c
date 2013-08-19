@@ -47,10 +47,9 @@ static const struct gigadevice_spi_flash_params gigadevice_spi_flash_table[] = {
 	},
 };
 
-struct spi_flash *spi_flash_probe_gigadevice(struct spi_slave *spi, u8 *idcode)
+int spi_flash_probe_gigadevice(struct spi_flash *flash, u8 *idcode)
 {
 	const struct gigadevice_spi_flash_params *params;
-	struct spi_flash *flash;
 	unsigned int i;
 
 	for (i = 0; i < ARRAY_SIZE(gigadevice_spi_flash_table); i++) {
@@ -62,14 +61,12 @@ struct spi_flash *spi_flash_probe_gigadevice(struct spi_slave *spi, u8 *idcode)
 	if (i == ARRAY_SIZE(gigadevice_spi_flash_table)) {
 		debug("SF: Unsupported Gigadevice ID %02x%02x\n",
 				idcode[1], idcode[2]);
-		return NULL;
+		return 0;
 	}
 
-	flash = spi_flash_alloc_base(spi, params->name);
-	if (!flash) {
-		debug("SF: Failed to allocate memory\n");
-		return NULL;
-	}
+	flash->priv = (void *)params;
+	flash->name = params->name;
+
 	/* page_size */
 	flash->page_size = 256;
 	/* sector_size = page_size * pages_per_sector */
@@ -77,5 +74,5 @@ struct spi_flash *spi_flash_probe_gigadevice(struct spi_slave *spi, u8 *idcode)
 	/* size = sector_size * sector_per_block * number of blocks */
 	flash->size = flash->sector_size * 16 * params->nr_blocks;
 
-	return flash;
+	return 1;
 }

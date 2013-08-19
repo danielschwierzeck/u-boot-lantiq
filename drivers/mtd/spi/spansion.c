@@ -119,10 +119,9 @@ static const struct spansion_spi_flash_params spansion_spi_flash_table[] = {
 	},
 };
 
-struct spi_flash *spi_flash_probe_spansion(struct spi_slave *spi, u8 *idcode)
+int spi_flash_probe_spansion(struct spi_flash *flash, u8 *idcode)
 {
 	const struct spansion_spi_flash_params *params;
-	struct spi_flash *flash;
 	unsigned int i;
 	unsigned short jedec, ext_jedec;
 
@@ -139,18 +138,15 @@ struct spi_flash *spi_flash_probe_spansion(struct spi_slave *spi, u8 *idcode)
 
 	if (i == ARRAY_SIZE(spansion_spi_flash_table)) {
 		debug("SF: Unsupported SPANSION ID %04x %04x\n", jedec, ext_jedec);
-		return NULL;
+		return 0;
 	}
 
-	flash = spi_flash_alloc_base(spi, params->name);
-	if (!flash) {
-		debug("SF: Failed to allocate memory\n");
-		return NULL;
-	}
+	flash->priv = (void *)params;
+	flash->name = params->name;
 
 	flash->page_size = 256;
 	flash->sector_size = 256 * params->pages_per_sector;
 	flash->size = flash->sector_size * params->nr_sectors;
 
-	return flash;
+	return 1;
 }

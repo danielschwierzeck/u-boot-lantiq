@@ -79,10 +79,9 @@ static const struct macronix_spi_flash_params macronix_spi_flash_table[] = {
 	},
 };
 
-struct spi_flash *spi_flash_probe_macronix(struct spi_slave *spi, u8 *idcode)
+int spi_flash_probe_macronix(struct spi_flash *flash, u8 *idcode)
 {
 	const struct macronix_spi_flash_params *params;
-	struct spi_flash *flash;
 	unsigned int i;
 	u16 id = idcode[2] | idcode[1] << 8;
 
@@ -94,14 +93,11 @@ struct spi_flash *spi_flash_probe_macronix(struct spi_slave *spi, u8 *idcode)
 
 	if (i == ARRAY_SIZE(macronix_spi_flash_table)) {
 		debug("SF: Unsupported Macronix ID %04x\n", id);
-		return NULL;
+		return 0;
 	}
 
-	flash = spi_flash_alloc_base(spi, params->name);
-	if (!flash) {
-		debug("SF: Failed to allocate memory\n");
-		return NULL;
-	}
+	flash->priv = (void *)params;
+	flash->name = params->name;
 
 	flash->page_size = 256;
 	flash->sector_size = 256 * 16 * 16;
@@ -110,5 +106,5 @@ struct spi_flash *spi_flash_probe_macronix(struct spi_slave *spi, u8 *idcode)
 	/* Clear BP# bits for read-only flash */
 	spi_flash_cmd_write_status(flash, 0);
 
-	return flash;
+	return 1;
 }
