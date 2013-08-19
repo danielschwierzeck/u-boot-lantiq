@@ -132,6 +132,9 @@ int spi_flash_cmd_wait_ready(struct spi_flash *flash, unsigned long timeout);
 /* Erase sectors. */
 int spi_flash_cmd_erase(struct spi_flash *flash, u32 offset, size_t len);
 
+/* SPI flash MTD adapter init */
+int spi_flash_mtd_init(struct spi_flash *flash);
+
 /* Manufacturer-specific probe functions */
 int spi_flash_probe_spansion(struct spi_flash *flash, u8 *idcode);
 int spi_flash_probe_atmel(struct spi_flash *flash, u8 *idcode);
