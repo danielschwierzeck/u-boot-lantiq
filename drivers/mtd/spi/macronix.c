@@ -77,6 +77,11 @@ static const struct macronix_spi_flash_params macronix_spi_flash_table[] = {
 		.nr_blocks = 256,
 		.name = "MX25L12855E",
 	},
+	{
+		.idcode = 0x2019,
+		.nr_blocks = 512,
+		.name = "MX25L25635E",
+	},
 };
 
 int spi_flash_probe_macronix(struct spi_flash *flash, u8 *idcode)
