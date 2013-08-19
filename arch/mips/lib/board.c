@@ -32,6 +32,7 @@
 #include <nand.h>
 #include <onenand_uboot.h>
 #include <spi.h>
+#include <spi_flash.h>
 
 #ifdef CONFIG_BITBANGMII
 #include <miiphy.h>
@@ -296,6 +297,16 @@ void board_init_r(gd_t *id, ulong dest_addr)
 	onenand_init();
 #endif
 
+#ifdef CONFIG_CMD_SPI
+	puts("SPI:   ");
+	spi_init();		/* go init the SPI */
+	puts("ready\n");
+#endif
+
+#if defined(CONFIG_SPI_FLASH)
+	spi_flash_init();
+#endif
+
 	/* relocate environment function pointers etc. */
 	env_relocate();
 
@@ -318,12 +329,6 @@ void board_init_r(gd_t *id, ulong dest_addr)
 
 	/* Initialize from environment */
 	load_addr = getenv_ulong("loadaddr", 16, load_addr);
-
-#ifdef CONFIG_CMD_SPI
-	puts("SPI:   ");
-	spi_init();		/* go init the SPI */
-	puts("ready\n");
-#endif
 
 #if defined(CONFIG_MISC_INIT_R)
 	/* miscellaneous platform dependent initialisations */
