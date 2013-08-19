@@ -50,6 +50,8 @@ struct spi_flash {
 	/* Poll cmd - for flash erase/program */
 	u8		poll_cmd;
 
+	u8		addr_width;
+
 	void *memory_map;	/* Address of read-only SPI flash access */
 	int		(*read)(struct spi_flash *flash, u32 offset,
 				size_t len, void *buf);
