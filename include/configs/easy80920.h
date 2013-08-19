@@ -119,12 +119,12 @@
 
 #define CONFIG_MISC_INIT_R
 
-/* Commands */
-#define CONFIG_CMD_PING
-
 /* Pull in default board configs for Lantiq XWAY VRX200 */
 #include <asm/lantiq/config.h>
 #include <asm/arch/config.h>
+
+/* Pull in default OpenWrt configs for Lantiq SoC */
+#include "openwrt-lantiq-common.h"
 
 #define CONFIG_ENV_UPDATE_UBOOT_NOR					\
 	"update-uboot-nor=run load-uboot-norspl-lzo write-uboot-nor\0"
