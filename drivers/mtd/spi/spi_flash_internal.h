@@ -28,6 +28,8 @@
 #define CMD_ERASE_32K			0x52
 #define CMD_ERASE_64K			0xd8
 #define CMD_ERASE_CHIP			0xc7
+#define CMD_EN4B			0xb7
+#define CMD_EX4B			0xe9
 
 #define SPI_FLASH_16MB_BOUN		0x1000000
 
@@ -35,14 +37,14 @@
 #define SPI_FLASH_SPANSION_IDCODE0	0x01
 #define SPI_FLASH_STMICRO_IDCODE0	0x20
 #define SPI_FLASH_WINBOND_IDCODE0	0xef
+#define SPI_FLASH_MACRONIX_IDCODE0	0xc2
+#define SPI_FLASH_EON_IDCODE0		0x1c
 
-#ifdef CONFIG_SPI_FLASH_BAR
 /* Bank addr access commands */
-# define CMD_BANKADDR_BRWR		0x17
-# define CMD_BANKADDR_BRRD		0x16
-# define CMD_EXTNADDR_WREAR		0xC5
-# define CMD_EXTNADDR_RDEAR		0xC8
-#endif
+#define CMD_BANKADDR_BRWR		0x17
+#define CMD_BANKADDR_BRRD		0x16
+#define CMD_EXTNADDR_WREAR		0xC5
+#define CMD_EXTNADDR_RDEAR		0xC8
 
 /* Common status */
 #define STATUS_WIP			0x01
@@ -101,6 +103,8 @@ int spi_flash_cmd_bankaddr_write(struct spi_flash *flash, u8 bank_sel);
 /* Configure the BAR - discover the bank cmds */
 int spi_flash_bank_config(struct spi_flash *flash, u8 idcode0);
 #endif
+
+int spi_flash_4byte_set(struct spi_flash *flash, u8 idcode0, int enable);
 
 /*
  * Same as spi_flash_cmd_read() except it also claims/releases the SPI
