@@ -68,8 +68,9 @@
 struct spl_image {
 	ulong data_addr;
 	ulong entry_addr;
-	size_t data_size;
-	size_t entry_size;
+	ulong data_size;
+	ulong entry_size;
+	ulong data_crc;
 	u8 comp;
 };
 
@@ -126,23 +127,40 @@ static void spl_console_init(void)
 
 static int spl_parse_image(const image_header_t *hdr, struct spl_image *spl)
 {
-	u32 magic;
-
 	spl_puts("SPL: checking U-Boot image\n");
 
-	magic = image_get_magic(hdr);
-	if (magic != IH_MAGIC)
+	if (!image_check_magic(hdr)) {
+		spl_puts("SPL: invalid magic\n");
 		return -1;
+	}
+
+        if (!image_check_hcrc(hdr)) {
+		spl_puts("SPL: invalid header CRC\n");
+		return -1;
+	}
 
 	spl->data_addr += image_get_header_size();
 	spl->entry_addr = image_get_load(hdr);
 	spl->data_size = image_get_data_size(hdr);
+	spl->data_crc = image_get_dcrc(hdr);
 	spl->comp = image_get_comp(hdr);
 
-	spl_debug("SPL: data %08lx, size %zu, entry %08lx, comp %u\n",
+	spl_debug("SPL: data %08lx, size %lu, entry %08lx, comp %u\n",
 		spl->data_addr, spl->data_size, spl->entry_addr, spl->comp);
 
 	return 0;
+}
+
+static int spl_check_data(const struct spl_image *spl, ulong loadaddr)
+{
+	ulong dcrc = crc32(0, (unsigned char *)loadaddr, spl->data_size);
+
+	if (dcrc != spl->data_crc) {
+		spl_puts("SPL: invalid data CRC\n");
+		return 0;
+	}
+
+	return 1;
 }
 
 static void *spl_lzma_alloc(void *p, size_t size)
@@ -280,6 +298,9 @@ static int spl_load_spi_flash(struct spl_image *spl)
 
 	ret = spi_flash_read(&sf, spl->data_addr, spl->data_size,
 				(void *) loadaddr);
+
+	if (!spl_check_data(spl, loadaddr))
+		return -1;
 
 	if (spl_is_compressed(spl))
 		ret = spl_uncompress(spl, loadaddr);
