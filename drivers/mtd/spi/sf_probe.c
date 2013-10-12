@@ -90,7 +90,7 @@ static int spi_flash_set_qeb(struct spi_flash *flash, u8 idcode0)
 		return 0;
 #endif
 	default:
-		printf("SF: Need set QEB func for %02x flash\n", idcode0);
+		debug("SF: Need set QEB func for %02x flash\n", idcode0);
 		return -1;
 	}
 }
@@ -117,8 +117,8 @@ static struct spi_flash *spi_flash_validate_params(struct spi_slave *spi,
 	}
 
 	if (!params->name) {
-		printf("SF: Unsupported flash IDs: ");
-		printf("manuf %02x, jedec %04x, ext_jedec %04x\n",
+		debug("SF: Unsupported flash IDs: ");
+		debug("manuf %02x, jedec %04x, ext_jedec %04x\n",
 		       idcode[0], jedec, ext_jedec);
 		return NULL;
 	}
@@ -289,7 +289,7 @@ static struct spi_flash *spi_flash_probe_slave(struct spi_slave *spi)
 
 	/* Setup spi_slave */
 	if (!spi) {
-		printf("SF: Failed to set up slave\n");
+		debug("SF: Failed to set up slave\n");
 		return NULL;
 	}
 
@@ -303,7 +303,7 @@ static struct spi_flash *spi_flash_probe_slave(struct spi_slave *spi)
 	/* Read the ID codes */
 	ret = spi_flash_cmd(spi, CMD_READ_ID, idcode, sizeof(idcode));
 	if (ret) {
-		printf("SF: Failed to get idcodes\n");
+		debug("SF: Failed to get idcodes\n");
 		goto err_read_id;
 	}
 
@@ -347,8 +347,8 @@ static struct spi_flash *spi_flash_probe_slave(struct spi_slave *spi)
 	     (flash->size > SPI_FLASH_16MB_BOUN)) ||
 	     ((flash->dual_flash > SF_SINGLE_FLASH) &&
 	     (flash->size > SPI_FLASH_16MB_BOUN << 1))) {
-		puts("SF: Warning - Only lower 16MiB accessible,");
-		puts(" Full access #define CONFIG_SPI_FLASH_BAR\n");
+		debug("SF: Warning - Only lower 16MiB accessible,");
+		debug(" Full access #define CONFIG_SPI_FLASH_BAR\n");
 	}
 #endif
 
