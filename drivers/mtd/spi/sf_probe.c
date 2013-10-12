@@ -95,11 +95,10 @@ static int spi_flash_set_qeb(struct spi_flash *flash, u8 idcode0)
 	}
 }
 
-static struct spi_flash *spi_flash_validate_params(struct spi_slave *spi,
+static int spi_flash_validate_params(struct spi_flash *flash,
 		u8 *idcode)
 {
 	const struct spi_flash_params *params;
-	struct spi_flash *flash;
 	u8 cmd;
 	u16 jedec = idcode[1] << 8 | idcode[2];
 	u16 ext_jedec = idcode[3] << 8 | idcode[4];
@@ -120,19 +119,12 @@ static struct spi_flash *spi_flash_validate_params(struct spi_slave *spi,
 		debug("SF: Unsupported flash IDs: ");
 		debug("manuf %02x, jedec %04x, ext_jedec %04x\n",
 		       idcode[0], jedec, ext_jedec);
-		return NULL;
-	}
-
-	flash = calloc(1, sizeof(*flash));
-	if (!flash) {
-		debug("SF: Failed to allocate spi_flash\n");
-		return NULL;
+		return -1;
 	}
 
 	/* Assign spi data */
-	flash->spi = spi;
 	flash->name = params->name;
-	flash->memory_map = spi->memory_map;
+	flash->memory_map = flash->spi->memory_map;
 	flash->dual_flash = flash->spi->option;
 
 	/* Assign spi_flash ops */
@@ -235,7 +227,7 @@ static struct spi_flash *spi_flash_validate_params(struct spi_slave *spi,
 		if (spi_flash_read_common(flash, &flash->bank_read_cmd, 1,
 					  &curr_bank, 1)) {
 			debug("SF: fail to read bank addr register\n");
-			return NULL;
+			return -1;
 		}
 		flash->bank_curr = curr_bank;
 	} else {
@@ -250,7 +242,7 @@ static struct spi_flash *spi_flash_validate_params(struct spi_slave *spi,
 		spi_flash_cmd_write_status(flash, 0);
 #endif
 
-	return flash;
+	return 0;
 }
 
 #ifdef CONFIG_OF_CONTROL
@@ -283,14 +275,20 @@ int spi_flash_decode_fdt(const void *blob, struct spi_flash *flash)
 
 static struct spi_flash *spi_flash_probe_slave(struct spi_slave *spi)
 {
-	struct spi_flash *flash = NULL;
+	struct spi_flash *flash;
 	u8 idcode[5];
 	int ret;
+
+	flash = calloc(1, sizeof(*flash));
+	if (!flash) {
+		debug("SF: Failed to allocate spi_flash\n");
+		return NULL;
+	}
 
 	/* Setup spi_slave */
 	if (!spi) {
 		debug("SF: Failed to set up slave\n");
-		return NULL;
+		goto err_setup;
 	}
 
 	/* Claim spi bus */
@@ -313,8 +311,9 @@ static struct spi_flash *spi_flash_probe_slave(struct spi_slave *spi)
 #endif
 
 	/* Validate params from spi_flash_params table */
-	flash = spi_flash_validate_params(spi, idcode);
-	if (!flash)
+	flash->spi = spi;
+	ret = spi_flash_validate_params(flash, idcode);
+	if (ret)
 		goto err_read_id;
 
 	/* Set the quad enable bit - only for quad commands */
@@ -323,7 +322,7 @@ static struct spi_flash *spi_flash_probe_slave(struct spi_slave *spi)
 	    (flash->write_cmd == CMD_QUAD_PAGE_PROGRAM)) {
 		if (spi_flash_set_qeb(flash, idcode[0])) {
 			debug("SF: Fail to set QEB for %02x\n", idcode[0]);
-			return NULL;
+			goto err_read_id;
 		}
 	}
 
@@ -361,6 +360,9 @@ err_read_id:
 	spi_release_bus(spi);
 err_claim_bus:
 	spi_free_slave(spi);
+err_setup:
+	free(flash);
+
 	return NULL;
 }
 
