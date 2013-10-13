@@ -153,6 +153,25 @@ static const struct spi_flash_params spi_flash_params_table[] = {
 	 */
 };
 
+int spi_flash_4byte_set(struct spi_flash *flash, u8 idcode0, int enable)
+{
+	u8 cmd, bankaddr;
+
+	switch (idcode0) {
+	case 0xc2:
+	case 0xef:
+	case 0x1c:
+		/* Macronix style */
+		cmd = enable ? CMD_EN4B : CMD_EX4B;
+		return spi_flash_cmd(flash->spi, cmd, NULL, 0);
+	default:
+		/* Spansion style */
+		cmd = CMD_BANKADDR_BRWR;
+		bankaddr = enable << 7;
+		return spi_flash_cmd_write(flash->spi, &cmd, 1, &bankaddr, 1);
+	}
+}
+
 static int spi_flash_validate_params(struct spi_flash *flash,
 		u8 *idcode)
 {
@@ -218,8 +237,18 @@ static int spi_flash_validate_params(struct spi_flash *flash,
 		flash->poll_cmd = CMD_FLAG_STATUS;
 #endif
 
+#ifndef CONFIG_SPI_FLASH_BAR
+	/* enable 4-byte addressing if the device exceeds 16MiB */
+	if (flash->size > SPI_FLASH_16MB_BOUN) {
+		flash->addr_width = 4;
+		spi_flash_4byte_set(flash, idcode[0], 1);
+	} else {
+		flash->addr_width = 3;
+	}
+#else
 	/* Configure default 3-byte addressing */
 	flash->addr_width = 3;
+#endif
 
 	/* Configure the BAR - discover bank cmds and read current bank */
 #ifdef CONFIG_SPI_FLASH_BAR
