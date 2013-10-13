@@ -114,6 +114,7 @@ struct spi_flash {
 	u8 read_cmd;
 	u8 write_cmd;
 	u8 dummy_byte;
+	u8 addr_width;
 
 	void *memory_map;
 	int (*read)(struct spi_flash *flash, u32 offset, size_t len, void *buf);

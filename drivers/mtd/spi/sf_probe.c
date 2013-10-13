@@ -215,6 +215,9 @@ static int spi_flash_validate_params(struct spi_flash *flash,
 		flash->poll_cmd = CMD_FLAG_STATUS;
 #endif
 
+	/* Configure default 3-byte addressing */
+	flash->addr_width = SPI_FLASH_3B_ADDR_LEN;
+
 	/* Configure the BAR - discover bank cmds and read current bank */
 #ifdef CONFIG_SPI_FLASH_BAR
 	u8 curr_bank = 0;
