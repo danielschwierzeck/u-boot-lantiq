@@ -53,6 +53,7 @@ static const struct spi_flash_params spi_flash_params_table[] = {
 	{"EN25Q64",	   0x1c3017, 0x0,	64 * 1024,   128,	       SECT_4K},
 	{"EN25Q128B",	   0x1c3018, 0x0,       64 * 1024,   256,	             0},
 	{"EN25S64",	   0x1c3817, 0x0,	64 * 1024,   128,		     0},
+	{"EN25QH256",	   0x1c7019, 0x0,	64 * 1024,   512,		     0},
 #endif
 #ifdef CONFIG_SPI_FLASH_GIGADEVICE	/* GIGADEVICE */
 	{"GD25Q64B",	   0xc84017, 0x0,	64 * 1024,   128,	       SECT_4K},
