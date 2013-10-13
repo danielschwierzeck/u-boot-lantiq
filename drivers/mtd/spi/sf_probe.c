@@ -365,3 +365,58 @@ void spi_flash_free(struct spi_flash *flash)
 	spi_free_slave(flash->spi);
 	free(flash);
 }
+
+#ifdef CONFIG_SPI_SPL_SIMPLE
+int spl_spi_flash_probe(struct spi_flash *flash)
+{
+	struct spi_slave *spi;
+	u8 idcode[5];
+	int ret;
+
+	/* Setup spi_slave */
+	spi = spi_setup_slave(CONFIG_SPL_SPI_BUS, CONFIG_SPL_SPI_CS,
+		CONFIG_SPL_SPI_MAX_HZ, CONFIG_SPL_SPI_MODE);
+	if (!spi) {
+		debug("SF: Failed to set up slave\n");
+		return -1;
+	}
+
+	/* Claim spi bus */
+	ret = spi_claim_bus(spi);
+	if (ret) {
+		debug("SF: Failed to claim SPI bus: %d\n", ret);
+		goto err_claim_bus;
+	}
+
+	/* Read the ID codes */
+	ret = spi_flash_cmd(spi, CMD_READ_ID, idcode, sizeof(idcode));
+	if (ret) {
+		debug("SF: Failed to get idcodes\n");
+		goto err_read_id;
+	}
+
+	/* Validate params from spi_flash_params table */
+	flash->spi = spi;
+	ret = spi_flash_validate_params(flash, idcode);
+	if (ret)
+		goto err_read_id;
+
+	/* Release spi bus */
+	spi_release_bus(spi);
+
+	return 0;
+
+err_read_id:
+	spi_release_bus(spi);
+err_claim_bus:
+	spi_free_slave(spi);
+	flash->spi = NULL;
+
+	return ret;
+}
+
+void spl_spi_flash_free(struct spi_flash *flash)
+{
+	spi_free_slave(flash->spi);
+}
+#endif
