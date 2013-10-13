@@ -57,6 +57,7 @@ struct spi_flash {
 #endif
 	u8 poll_cmd;
 	u8 erase_cmd;
+	u8 addr_width;
 
 	void *memory_map;
 	int (*read)(struct spi_flash *flash, u32 offset, size_t len, void *buf);
