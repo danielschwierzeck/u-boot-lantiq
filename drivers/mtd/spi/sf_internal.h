@@ -38,12 +38,14 @@
 #define CMD_READ_ID			0x9f
 
 /* Bank addr access commands */
-#ifdef CONFIG_SPI_FLASH_BAR
-# define CMD_BANKADDR_BRWR		0x17
-# define CMD_BANKADDR_BRRD		0x16
-# define CMD_EXTNADDR_WREAR		0xC5
-# define CMD_EXTNADDR_RDEAR		0xC8
-#endif
+#define CMD_BANKADDR_BRWR		0x17
+#define CMD_BANKADDR_BRRD		0x16
+#define CMD_EXTNADDR_WREAR		0xC5
+#define CMD_EXTNADDR_RDEAR		0xC8
+
+/* Macronix style 4-byte addressing */
+#define CMD_EN4B			0xb7
+#define CMD_EX4B			0xe9
 
 /* Common status */
 #define STATUS_WIP			0x01
