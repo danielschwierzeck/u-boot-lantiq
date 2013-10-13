@@ -22,6 +22,7 @@ static void spi_flash_addr(const struct spi_flash *flash, u32 addr, u8 *cmd)
 	cmd[1] = addr >> (flash->addr_width * 8 - 8);
 	cmd[2] = addr >> (flash->addr_width * 8 - 16);
 	cmd[3] = addr >> (flash->addr_width * 8 - 24);
+	cmd[4] = addr >> (flash->addr_width * 8 - 32);
 }
 
 static int spi_flash_cmdsz(const struct spi_flash *flash)
@@ -275,8 +276,8 @@ int spi_flash_cmd_erase_ops(struct spi_flash *flash, u32 offset, size_t len)
 #endif
 		spi_flash_addr(flash, erase_addr, cmd);
 
-		debug("SF: erase %2x %2x %2x %2x (%x)\n", cmd[0], cmd[1],
-		      cmd[2], cmd[3], erase_addr);
+		debug("SF: erase %2x %2x %2x %2x %2x (%x)\n", cmd[0], cmd[1],
+		      cmd[2], cmd[3], cmd[4], erase_addr);
 
 		ret = spi_flash_write_common(flash, cmd, cmdsz, NULL, 0);
 		if (ret < 0) {
@@ -333,8 +334,8 @@ int spi_flash_cmd_write_ops(struct spi_flash *flash, u32 offset,
 
 		spi_flash_addr(flash, write_addr, cmd);
 
-		debug("SF: 0x%p => cmd = { 0x%02x 0x%02x%02x%02x } chunk_len = %zu\n",
-		      buf + actual, cmd[0], cmd[1], cmd[2], cmd[3], chunk_len);
+		debug("SF: 0x%p => cmd = { 0x%02x 0x%02x%02x%02x%02x } chunk_len = %zu\n",
+		      buf + actual, cmd[0], cmd[1], cmd[2], cmd[3], cmd[4], chunk_len);
 
 		ret = spi_flash_write_common(flash, cmd, cmdsz,
 					buf + actual, chunk_len);
@@ -371,9 +372,12 @@ int spi_flash_cmd_read_ops(struct spi_flash *flash, u32 offset,
 		size_t len, void *data)
 {
 	u8 cmd[SPI_FLASH_CMD_LEN + 1], cmdsz;
-	u32 remain_len, read_len, read_addr;
-	int bank_sel = 0;
+	u32 read_len, read_addr;
 	int ret = -1;
+#ifdef CONFIG_SPI_FLASH_BAR
+	u8 bank_sel = 0;
+	u32 remain_len;
+#endif
 
 	ret = spi_claim_bus(flash->spi);
 	if (ret) {
@@ -410,13 +414,16 @@ int spi_flash_cmd_read_ops(struct spi_flash *flash, u32 offset,
 		bank_sel = spi_flash_bank(flash, read_addr);
 		if (bank_sel < 0)
 			goto done;
-#endif
+
 		remain_len = ((SPI_FLASH_16MB_BOUN << flash->shift) *
 				(bank_sel + 1)) - offset;
 		if (len < remain_len)
 			read_len = len;
 		else
 			read_len = remain_len;
+#else
+		read_len = len;
+#endif
 
 		spi_flash_addr(flash, read_addr, cmd);
 
