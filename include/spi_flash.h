@@ -139,6 +139,9 @@ struct spi_flash *spi_flash_probe_fdt(const void *blob, int slave_node,
 
 void spi_flash_free(struct spi_flash *flash);
 
+int spl_spi_flash_probe(struct spi_flash *flash);
+void spl_spi_flash_free(struct spi_flash *flash);
+
 static inline int spi_flash_read(struct spi_flash *flash, u32 offset,
 		size_t len, void *buf)
 {
