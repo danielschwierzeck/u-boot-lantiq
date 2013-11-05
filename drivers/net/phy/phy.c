@@ -16,7 +16,6 @@
 #include <command.h>
 #include <miiphy.h>
 #include <phy.h>
-#include <errno.h>
 #include <linux/err.h>
 
 /* Generic PHY support and helper functions */
