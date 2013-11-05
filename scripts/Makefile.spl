@@ -120,6 +120,7 @@ libs-$(CONFIG_SPL_WATCHDOG_SUPPORT) += drivers/watchdog/
 libs-$(CONFIG_SPL_USB_HOST_SUPPORT) += drivers/usb/host/
 libs-$(CONFIG_OMAP_USB_PHY) += drivers/usb/phy/
 libs-$(CONFIG_SPL_SATA_SUPPORT) += drivers/block/
+libs-$(CONFIG_SPL_LZO_SUPPORT) += lib/lzo/
 
 ifneq (,$(CONFIG_MX23)$(CONFIG_MX35)$(filter $(SOC), mx25 mx27 mx5 mx6 mx31 mx35))
 libs-y += arch/$(ARCH)/imx-common/
