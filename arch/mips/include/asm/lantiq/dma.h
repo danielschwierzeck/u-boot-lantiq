@@ -32,6 +32,7 @@ struct ltq_dma_channel {
 	u16 num_desc;
 	struct ltq_dma_desc *desc_base;
 	void *mem_base;
+	size_t size;
 	u32 dma_addr;
 };
 
@@ -43,6 +44,7 @@ struct ltq_dma_device {
 	struct ltq_dma_channel rx_chan;
 	struct ltq_dma_channel tx_chan;
 	u8 port;
+	bool debug;
 };
 
 /**
@@ -56,6 +58,7 @@ void ltq_dma_init(void);
  * @returns 0 on success, negative value otherwise
  */
 int ltq_dma_register(struct ltq_dma_device *dev);
+void ltq_dma_unregister(struct ltq_dma_device *dev);
 
 /**
  * Reset and halt all channels related to given DMA client
@@ -80,13 +83,16 @@ int ltq_dma_rx_poll(struct ltq_dma_device *dev, int index);
 
 int ltq_dma_rx_length(struct ltq_dma_device *dev, int index);
 
+int ltq_dma_rx_wait(struct ltq_dma_device *dev, int index,
+			unsigned long timeout);
+
 /**
  * Map TX DMA descriptor to memory region
  *
  * @returns 0 on success, negative value otherwise
  */
-int ltq_dma_tx_map(struct ltq_dma_device *dev, int index, void *data, int len,
-			unsigned long timeout);
+int ltq_dma_tx_map(struct ltq_dma_device *dev, int index, const void *data,
+			int len, unsigned long timeout);
 
 int ltq_dma_tx_wait(struct ltq_dma_device *dev, int index,
 			unsigned long timeout);
