@@ -23,3 +23,4 @@ static inline unsigned long image_copy_end(void)
 }
 
 extern int incaip_set_cpuclk(void);
+extern int arch_cpu_init(void);

@@ -33,6 +33,16 @@ static char *failed = "*** failed ***\n";
  */
 const unsigned long mips_io_port_base = -1;
 
+int __arch_cpu_init(void)
+{
+	/*
+	 * Nothing to do in this dummy implementation
+	 */
+	return 0;
+}
+int arch_cpu_init(void)
+	__attribute__((weak, alias("__arch_cpu_init")));
+
 int __board_early_init_f(void)
 {
 	/*
@@ -106,6 +116,7 @@ static int init_baudrate(void)
 typedef int (init_fnc_t)(void);
 
 init_fnc_t *init_sequence[] = {
+	arch_cpu_init,
 	board_early_init_f,
 	timer_init,
 	env_init,		/* initialize environment */
