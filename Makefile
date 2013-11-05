@@ -742,6 +742,12 @@ append = cat $(filter-out $< $(PHONY), $^) >> $@
 quiet_cmd_pad_cat = CAT     $@
 cmd_pad_cat = $(cmd_objcopy) && $(append) || rm -f $@
 
+quiet_cmd_lzma = LZMA    $@
+cmd_lzma = cat $< | lzma -9 -f - > $@
+
+quiet_cmd_lzop = LZOP    $@
+cmd_lzop = cat $< | lzop -9 -f - > $@
+
 all:		$(ALL-y)
 
 PHONY += dtbs
@@ -774,6 +780,12 @@ u-boot.bin: u-boot FORCE
 	$(call DO_STATIC_RELA,$<,$@,$(CONFIG_SYS_TEXT_BASE))
 	$(BOARD_SIZE_CHECK)
 
+u-boot.bin.lzma: u-boot.bin
+	$(call if_changed,lzma)
+
+u-boot.bin.lzo: u-boot.bin
+	$(call if_changed,lzop)
+
 u-boot.ldr:	u-boot
 		$(CREATE_LDR_ENV)
 		$(LDR) -T $(CONFIG_BFIN_CPU) -c $@ $< $(LDR_FLAGS)
@@ -798,6 +810,14 @@ MKIMAGEFLAGS_u-boot.img = -A $(ARCH) -T firmware -C none -O u-boot \
 	-a $(CONFIG_SYS_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
 	-n "U-Boot $(UBOOTRELEASE) for $(BOARD) board"
 
+MKIMAGEFLAGS_u-boot.lzma.img = -A $(ARCH) -T firmware -C lzma -O u-boot \
+	-a $(CONFIG_SYS_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
+	-n "U-Boot $(UBOOTRELEASE) for $(BOARD) board"
+
+MKIMAGEFLAGS_u-boot.lzo.img = -A $(ARCH) -T firmware -C lzo -O u-boot \
+	-a $(CONFIG_SYS_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
+	-n "U-Boot $(UBOOTRELEASE) for $(BOARD) board"
+
 MKIMAGEFLAGS_u-boot.kwb = -n $(srctree)/$(CONFIG_SYS_KWD_CONFIG:"%"=%) \
 	-T kwbimage -a $(CONFIG_SYS_TEXT_BASE) -e $(CONFIG_SYS_TEXT_BASE)
 
@@ -805,6 +825,12 @@ MKIMAGEFLAGS_u-boot.pbl = -n $(srctree)/$(CONFIG_SYS_FSL_PBL_RCW:"%"=%) \
 		-R $(srctree)/$(CONFIG_SYS_FSL_PBL_PBI:"%"=%) -T pblimage
 
 u-boot.img u-boot.kwb u-boot.pbl: u-boot.bin FORCE
+	$(call if_changed,mkimage)
+
+u-boot.lzma.img: u-boot.bin.lzma FORCE
+	$(call if_changed,mkimage)
+
+u-boot.lzo.img: u-boot.bin.lzo FORCE
 	$(call if_changed,mkimage)
 
 u-boot.sha1:	u-boot.bin
@@ -895,6 +921,32 @@ OBJCOPYFLAGS_u-boot-img-spl-at-end.bin := -I binary -O binary \
 	--pad-to=$(CONFIG_UBOOT_PAD_TO) --gap-fill=0xff
 u-boot-img-spl-at-end.bin: u-boot.img spl/u-boot-spl.bin FORCE
 	$(call if_changed,pad_cat)
+
+# Lantiq SPL images
+quiet_cmd_ltqbootimage = LTQBOOT $@
+cmd_ltqbootimage = tools/ltq-boot-image $(LTQBOOTIMAGEFLAGS_$(@F)) \
+	-e $(CONFIG_SPL_TEXT_BASE) -s spl/u-boot-spl.bin -o $@
+
+LTQBOOTIMAGEFLAGS_u-boot.ltq.sfspl = -t sfspl -u u-boot.img
+u-boot.ltq.sfspl: u-boot.img spl/u-boot-spl.bin
+	$(call if_changed,ltqbootimage)
+
+LTQBOOTIMAGEFLAGS_u-boot.ltq.lzma.sfspl = -t sfspl -u u-boot.lzma.img
+u-boot.ltq.lzma.sfspl: u-boot.lzma.img spl/u-boot-spl.bin
+	$(call if_changed,ltqbootimage)
+
+LTQBOOTIMAGEFLAGS_u-boot.ltq.lzo.sfspl = -t sfspl -u u-boot.lzo.img
+u-boot.ltq.lzo.sfspl: u-boot.lzo.img spl/u-boot-spl.bin
+	$(call if_changed,ltqbootimage)
+
+u-boot.ltq.norspl: spl/u-boot-spl.bin u-boot.img
+	$(call if_changed,cat)
+
+u-boot.ltq.lzma.norspl: spl/u-boot-spl.bin u-boot.lzma.img
+	$(call if_changed,cat)
+
+u-boot.ltq.lzo.norspl: spl/u-boot-spl.bin u-boot.lzo.img
+	$(call if_changed,cat)
 
 # Create a new ELF from a raw binary file.  This is useful for arm64
 # where static relocation needs to be performed on the raw binary,
