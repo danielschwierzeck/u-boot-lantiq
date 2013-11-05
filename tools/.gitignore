@@ -4,6 +4,7 @@
 /fit_info
 /gen_eth_addr
 /img2srec
+/ltq-boot-image
 /kwboot
 /dumpimage
 /mkenvimage
