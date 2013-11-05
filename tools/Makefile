@@ -57,6 +57,9 @@ HOSTCFLAGS_img2srec$(SFX).o := -pedantic
 hostprogs-$(CONFIG_XWAY_SWAP_BYTES) += xway-swap-bytes$(SFX)
 HOSTCFLAGS_xway-swap-bytes$(SFX).o := -pedantic
 
+hostprogs-$(CONFIG_SOC_LANTIQ) += ltq-boot-image$(SFX)
+HOSTCFLAGS_ltq-boot-image$(SFX).o := -pedantic
+
 hostprogs-y += mkenvimage$(SFX)
 mkenvimage$(SFX)-objs := crc32.o mkenvimage.o os_support.o
 
