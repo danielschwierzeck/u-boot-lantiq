@@ -49,6 +49,9 @@ HOSTCFLAGS_img2srec.o := -pedantic
 hostprogs-$(CONFIG_XWAY_SWAP_BYTES) += xway-swap-bytes
 HOSTCFLAGS_xway-swap-bytes.o := -pedantic
 
+hostprogs-$(CONFIG_SOC_LANTIQ) += ltq-boot-image
+HOSTCFLAGS_ltq-boot-image.o := -pedantic
+
 hostprogs-y += mkenvimage
 mkenvimage-objs := mkenvimage.o os_support.o lib/crc32.o
 
