@@ -46,7 +46,10 @@
 #define CP0_ENTRYLO1 $3
 #define CP0_CONF $3
 #define CP0_CONTEXT $4
+#define CP0_CONTEXTCONFIG $4,1
+#define CP0_USERLOCAL $4,1
 #define CP0_PAGEMASK $5
+#define CP0_PAGEGRAIN $5,1
 #define CP0_WIRED $6
 #define CP0_INFO $7
 #define CP0_BADVADDR $8
@@ -54,10 +57,19 @@
 #define CP0_ENTRYHI $10
 #define CP0_COMPARE $11
 #define CP0_STATUS $12
+#define CP0_INTCTL $12,1
+#define CP0_SRSCTL $12,2
+#define CP0_SRSMAP $12,3
+#define CP0_SRSHIGH $12,4
 #define CP0_CAUSE $13
 #define CP0_EPC $14
 #define CP0_PRID $15
+#define CP0_EBASE $15,1
 #define CP0_CONFIG $16
+#define CP0_CONFIG1 $16,1
+#define CP0_CONFIG2 $16,2
+#define CP0_CONFIG3 $16,3
+#define CP0_CONFIG7 $16,7
 #define CP0_LLADDR $17
 #define CP0_WATCHLO $18
 #define CP0_WATCHHI $19
@@ -70,7 +82,17 @@
 #define CP0_ECC $26
 #define CP0_CACHEERR $27
 #define CP0_TAGLO $28
+#define CP0_ITAGLO $28
+#define CP0_IDATALO $28,1
+#define CP0_DTAGLO $28,2
+#define CP0_DDATALO $28,3
+#define CP0_L23TAGLO $28,4
+#define CP0_L23DATALO $28,5
 #define CP0_TAGHI $29
+#define CP0_IDATAHI $29,1
+#define CP0_DTAGHI $29,2
+#define CP0_L23TAGHI $29,4
+#define CP0_L23DATAHI $29,5
 #define CP0_ERROREPC $30
 #define CP0_DESAVE $31
 
@@ -393,6 +415,12 @@
 #define  CAUSEF_CE		(_ULCAST_(3)   << 28)
 #define  CAUSEB_BD		31
 #define  CAUSEF_BD		(_ULCAST_(1)   << 31)
+
+/*
+ * Bits in the coprocessor 0 EBase register.
+ */
+#define EBASEB_CPUNUM		0
+#define EBASEF_CPUNUM		(_ULCAST_(1023))
 
 /*
  * Bits in the coprocessor 0 config register.
