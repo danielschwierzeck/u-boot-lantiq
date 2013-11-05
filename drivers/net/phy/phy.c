@@ -456,6 +456,9 @@ int phy_init(void)
 #ifdef CONFIG_PHY_ICPLUS
 	phy_icplus_init();
 #endif
+#ifdef CONFIG_PHY_LANTIQ
+	phy_lantiq_init();
+#endif
 #ifdef CONFIG_PHY_LXT
 	phy_lxt_init();
 #endif
