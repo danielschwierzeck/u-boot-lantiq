@@ -49,8 +49,10 @@ static inline void build_check_ar9_registers(void)
 #define SW_GCTL0_SE		(1 << 31)
 
 #define RGMII_CTL_P1_SHIFT	10
-#define RGMII_CTL_P1_MASK	(0x3FF << RGMII_CTL_P1_SHIFT)
-#define RGMII_CTL_P0_MASK	0x3FF
+#define RGMII_CTL_P1_MASK	((0x3FF << RGMII_CTL_P1_SHIFT) | RGMII_CTL_P1_OC)
+#define RGMII_CTL_P0_MASK	(0x3FF | RGMII_CTL_P0_OC)
+#define RGMII_CTL_P1_OC		(1 << 23)
+#define RGMII_CTL_P0_OC		(1 << 21)
 #define RGMII_CTL_P0IS_SHIFT	8
 #define RGMII_CTL_P0IS_RGMII	(0x0 << RGMII_CTL_P0IS_SHIFT)
 #define RGMII_CTL_P0IS_MII	(0x1 << RGMII_CTL_P0IS_SHIFT)

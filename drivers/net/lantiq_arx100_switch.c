@@ -3,7 +3,6 @@
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */
-#define DEBUG
 #include <common.h>
 #include <malloc.h>
 #include <netdev.h>
@@ -300,6 +299,31 @@ static void ltq_eth_port_config(struct ltq_eth_priv *priv,
 			port_ctl |= P0_CTL_FLP;
 		}
 
+		break;
+	case PHY_INTERFACE_MODE_RMII:
+		port_xmii = RGMII_CTL_P0IS_RMII;
+		
+		if (!(port->flags & LTQ_ETH_PORT_PHY)) {
+			port_xmii |= (RGMII_CTL_P0SPD_100 |
+			RGMII_CTL_P0DUP_FULL);
+			port_ctl |= P0_CTL_FLP;
+		}
+		
+		break;
+	case PHY_INTERFACE_MODE_RMII_OC:
+		port_xmii = RGMII_CTL_P0IS_RMII;
+		
+		if (!(port->flags & LTQ_ETH_PORT_PHY)) {
+			port_xmii |= (RGMII_CTL_P0SPD_100 |
+			RGMII_CTL_P0DUP_FULL);
+			port_ctl |= P0_CTL_FLP;
+		}
+		
+		if (port->num == 1)
+			port_xmii |= RGMII_CTL_P1_OC;
+		else
+			port_xmii |= RGMII_CTL_P0_OC;
+		
 		break;
 	default:
 		break;
