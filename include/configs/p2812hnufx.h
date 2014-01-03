@@ -31,6 +31,18 @@
 
 #define CONFIG_SYS_DRAM_PROBE
 
+/* UBI */
+#define MTDIDS_DEFAULT			"nand0=nand"
+#define MTDPARTS_DEFAULT		"mtdparts=nand:256k(uboot),128k(uboot_env),-@0x60000(rootfs);"
+
+#define CONFIG_CMD_UBI
+#define CONFIG_CMD_UBIFS
+#define CONFIG_RBTREE
+#define CONFIG_MTD_DEVICE
+#define CONFIG_MTD_PARTITIONS
+#define CONFIG_CMD_MTDPARTS
+#define CONFIG_LZO
+
 /* Environment */
 #if defined(CONFIG_SYS_BOOT_NANDSPL)
 #define CONFIG_ENV_IS_IN_NAND
@@ -62,6 +74,7 @@
 
 #define CONFIG_EXTRA_ENV_SETTINGS	\
 	CONFIG_ENV_LANTIQ_DEFAULTS	\
-	CONFIG_ENV_UPDATE_UBOOT_NAND
+	CONFIG_ENV_UPDATE_UBOOT_NAND	\
+	"kernel_addr=0xB0060000\0"
 
 #endif /* __CONFIG_H */
