@@ -24,6 +24,13 @@ all:	$(LIB)
 $(LIB):	$(obj).depend $(OBJS)
 	$(call cmd_link_o_target, $(OBJS))
 
+
+PRELOAD = nandpreload.o
+PRELOAD	:= $(addprefix $(obj),$(PRELOAD))
+
+$(OBJTREE)/nand_preload.ltq: $(PRELOAD)
+	$(OBJCOPY) -O binary $(PRELOAD) $@
+
 #########################################################################
 
 # defines $(obj).depend target

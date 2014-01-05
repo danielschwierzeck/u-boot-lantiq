@@ -32,4 +32,9 @@ ALL-y += $(obj)u-boot.ltq.nandspl
 ALL-$(CONFIG_SPL_LZO_SUPPORT) += $(obj)u-boot.ltq.lzo.nandspl
 ALL-$(CONFIG_SPL_LZMA_SUPPORT) += $(obj)u-boot.ltq.lzma.nandspl
 endif
+ifdef CONFIG_SYS_BOOT_NANDTPL
+ALL-y += $(obj)u-boot.ltq.nandtpl
+ALL-$(CONFIG_SPL_LZO_SUPPORT) += $(obj)u-boot.ltq.lzo.nandtpl
+ALL-$(CONFIG_SPL_LZMA_SUPPORT) += $(obj)u-boot.ltq.lzma.nandtpl
+endif
 endif

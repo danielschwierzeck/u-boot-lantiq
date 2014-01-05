@@ -44,7 +44,8 @@
  * NAND flash SPL
  * BOOT CFG 06 only (address cycle based probing, 2KB or 512B page size)
  */
-#if defined(CONFIG_LTQ_SUPPORT_SPL_NAND_FLASH) && defined(CONFIG_SYS_BOOT_NANDSPL)
+#if defined(CONFIG_LTQ_SUPPORT_SPL_NAND_FLASH) && \
+	(defined(CONFIG_SYS_BOOT_NANDSPL) || defined(CONFIG_SYS_BOOT_NANDTPL))
 #define CONFIG_SPL
 #define CONFIG_SPL_NAND_SUPPORT
 #define CONFIG_SPL_NAND_DRIVERS
@@ -177,7 +178,10 @@
 #define CONFIG_ENV_LOAD_UBOOT_NAND						\
 	"load-uboot-nandspl=tftpboot u-boot.ltq.nandspl\0"			\
 	"load-uboot-nandspl-lzo=tftpboot u-boot.ltq.lzo.nandspl\0"		\
-	"load-uboot-nandspl-lzma=tftpboot u-boot.ltq.lzma.nandspl\0"
+	"load-uboot-nandspl-lzma=tftpboot u-boot.ltq.lzma.nandspl\0"		\
+	"load-uboot-nandtpl=tftpboot u-boot.ltq.nandtpl\0"			\
+	"load-uboot-nandtpl-lzo=tftpboot u-boot.ltq.lzo.nandtpl\0"		\
+	"load-uboot-nandtpl-lzma=tftpboot u-boot.ltq.lzma.nandtpl\0"
 #else
 #define CONFIG_ENV_WRITE_UBOOT_NAND
 #define CONFIG_ENV_LOAD_UBOOT_NAND

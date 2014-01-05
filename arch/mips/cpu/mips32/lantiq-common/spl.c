@@ -64,7 +64,8 @@
 #define spl_boot_nor_flash	0
 #endif
 
-#if defined(CONFIG_LTQ_SUPPORT_SPL_NAND_FLASH) && defined(CONFIG_SYS_BOOT_NANDSPL)
+#if defined(CONFIG_LTQ_SUPPORT_SPL_NAND_FLASH) && \
+	(defined(CONFIG_SYS_BOOT_NANDSPL) || defined(CONFIG_SYS_BOOT_NANDTPL))
 #define spl_boot_nand_flash	1
 #else
 #define spl_boot_nand_flash	0
@@ -241,6 +242,7 @@ static int spl_uncompress_lzo(struct spl_image *spl, unsigned long loadaddr)
 	int ret;
 
 	spl_puts("SPL: decompressing U-Boot with LZO\n");
+
 	loadaddr += 64; // skip the U-Boot header
 	ret = lzop_decompress(
 		(const unsigned char*) loadaddr, spl->data_size,

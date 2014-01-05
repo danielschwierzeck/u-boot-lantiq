@@ -617,6 +617,31 @@ $(obj)u-boot.ltq.lzma.nandspl: $(obj)u-boot.lzma.img $(obj)spl/u-boot-spl.bin
 			-p $(CONFIG_SYS_NAND_PAGE_SIZE) \
 			-s $(obj)spl/u-boot-spl.bin -u $< -o $@
 
+$(obj)u-boot.ltq.nandtpl: $(obj)spl/u-boot-spl.bin $(obj)u-boot.img
+		$(MAKE) -C $(SRCTREE)/arch/mips/cpu/mips32/lantiq-common \
+			$(OBJTREE)/nand_preload.ltq
+		$(obj)tools/ltq-boot-image -t nandspl -e $(CONFIG_TPL_TEXT_BASE) \
+			-x $(CONFIG_SYS_NAND_PAGE_SIZE) \
+			-p $(CONFIG_SYS_NAND_PAGE_SIZE) \
+			-s $(OBJTREE)/nand_preload.ltq -u $< -o $@
+		$(call SPL_PAD_APPEND,$@,$(obj)u-boot.img,u-boot-tpl-pad.bin,$(CONFIG_SYS_NAND_U_BOOT_OFFS))
+
+$(obj)u-boot.ltq.lzo.nandtpl: $(obj)spl/u-boot-spl.bin $(obj)u-boot.lzo.img
+		$(MAKE) -C $(SRCTREE)/arch/mips/cpu/mips32/lantiq-common \
+			$(OBJTREE)/nand_preload.ltq
+		$(obj)tools/ltq-boot-image -t nandspl -e $(CONFIG_TPL_TEXT_BASE) \
+			-x $(CONFIG_SYS_NAND_PAGE_SIZE) \
+			-p $(CONFIG_SYS_NAND_PAGE_SIZE) \
+			-s $(OBJTREE)/nand_preload.ltq -u $< -o $@
+		$(call SPL_PAD_APPEND,$@,$(obj)u-boot.lzo.img,u-boot-tpl-pad.bin,$(CONFIG_SYS_NAND_U_BOOT_OFFS))
+
+$(obj)u-boot.ltq.lzma.nandtpl: $(obj)spl/u-boot-spl.bin $(obj)u-boot.lzma.img
+		$(obj)tools/ltq-boot-image -t nandspl -e $(CONFIG_TPL_TEXT_BASE) \
+			-x $(CONFIG_SYS_NAND_PAGE_SIZE) \
+			-p $(CONFIG_SYS_NAND_PAGE_SIZE) \
+			-s $(OBJTREE)/nand_preload.ltq -u $< -o $@
+		$(call SPL_PAD_APPEND,$@,$(obj)u-boot.lzma.img,u-boot-tpl-pad.bin,$(CONFIG_SYS_NAND_U_BOOT_OFFS))
+
 $(obj)u-boot.ltq.norspl: $(obj)u-boot.img $(obj)spl/u-boot-spl.bin
 	cat $(obj)spl/u-boot-spl.bin $< > $@
 
