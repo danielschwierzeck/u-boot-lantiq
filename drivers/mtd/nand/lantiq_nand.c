@@ -98,6 +98,15 @@ static void ltq_nand_cmd_ctrl(struct mtd_info *mtd, int cmd, unsigned int ctrl)
 	}
 }
 
+static void ltq_nand_read_buf(struct mtd_info *mtd, uint8_t *buf, int len)
+{
+	int i;
+	struct nand_chip *chip = mtd->priv;
+
+	for (i = 0; i < len; i++)
+		buf[i] = readb(chip->IO_ADDR_R);
+}
+
 int ltq_nand_init(struct nand_chip *nand)
 {
 	/* Enable NAND, set NAND CS to EBU CS1, enable EBU CS mux */
@@ -108,6 +117,7 @@ int ltq_nand_init(struct nand_chip *nand)
 	nand->dev_ready = ltq_nand_dev_ready;
 	nand->select_chip = ltq_nand_select_chip;
 	nand->cmd_ctrl = ltq_nand_cmd_ctrl;
+	nand->read_buf = ltq_nand_read_buf;
 
 	nand->chip_delay = 30;
 	nand->options = 0;
