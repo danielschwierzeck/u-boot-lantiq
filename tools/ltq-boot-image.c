@@ -89,13 +89,13 @@ static int parse_args(int argc, char *argv[], struct args *arg)
 			arg->type = parse_image_type(optarg);
 			break;
 		case 'e':
-			arg->entry_addr = strtoul(optarg, NULL, 16);
+			arg->entry_addr = strtoul(optarg, NULL, 0);
 			break;
 		case 'x':
-			arg->uboot_offset = strtoul(optarg, NULL, 16);
+			arg->uboot_offset = strtoul(optarg, NULL, 0);
 			break;
 		case 'p':
-			arg->page_size = strtoul(optarg, NULL, 10);
+			arg->page_size = strtoul(optarg, NULL, 0);
 			break;
 		case 'u':
 			arg->uboot_bin = optarg;
