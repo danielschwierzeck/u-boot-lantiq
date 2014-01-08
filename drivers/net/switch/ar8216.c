@@ -106,7 +106,7 @@ static struct switch_driver ar8216_drv = {
 
 void switch_ar8216_init(void)
 {
-	/* for archs with manual relocation */
+	/* For archs with manual relocation */
 	ar8216_drv.probe = ar8216_probe;
 	ar8216_drv.setup = ar8216_setup;
 
