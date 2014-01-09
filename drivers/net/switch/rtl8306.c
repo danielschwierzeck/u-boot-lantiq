@@ -6,7 +6,7 @@
  *
  * SPDX-License-Identifier:	GPL-2.0+
  */
-#define DEBUG
+
 #include <common.h>
 #include <malloc.h>
 #include <switch.h>
@@ -22,6 +22,18 @@
 #define RTL8306_PORT_CPU		5
 #define RTL8306_NUM_PAGES		4
 #define RTL8306_NUM_REGS		32
+
+#define RTL_VLAN_REGOFS(name) \
+	(RTL_REG_VLAN1_##name - RTL_REG_VLAN0_##name)
+
+#define RTL_PORT_REGOFS(name) \
+	(RTL_REG_PORT1_##name - RTL_REG_PORT0_##name)
+
+#define RTL_PORT_REG(id, reg) \
+	(RTL_REG_PORT0_##reg + (id * RTL_PORT_REGOFS(reg)))
+
+#define RTL_VLAN_REG(id, reg) \
+	(RTL_REG_VLAN0_##reg + (id * RTL_VLAN_REGOFS(reg)))
 
 enum {
 	RTL_TYPE_S,
@@ -280,6 +292,20 @@ static __maybe_unused int rtl_set(struct mii_dev *bus, enum rtl_regidx s, unsign
 	return rtl_rmw(bus, r->page, r->phy, r->reg, mask, val);
 }
 
+static void rtl_port_set_enable(struct switch_device *dev, int port, int enabled)
+{
+	struct mii_dev *bus = dev->bus;
+	
+	rtl_set(bus, RTL_PORT_REG(port, RXEN), enabled);
+	rtl_set(bus, RTL_PORT_REG(port, TXEN), enabled);
+	
+	if ((port >= 5) || !enabled)
+		return;
+	
+	/* Restart autonegotiation if enabled */
+	rtl_set(bus, RTL_PORT_REG(port, NRESTART), 1);
+}
+
 static int rtl8306_probe(struct switch_device *dev)
 {
 	struct mii_dev *bus = dev->bus;
@@ -301,21 +327,92 @@ static int rtl8306_probe(struct switch_device *dev)
 static void rtl8306_setup(struct switch_device *dev)
 {
 	struct mii_dev *bus = dev->bus;
+	int cpu_mask = (1 << dev->cpu_port);
+	int i;
+	int trunk_en, trunk_psel;
+	int phy_nway, phy_speed, phy_dup;
 
-	/* initialize cpu port settings */
+	rtl_set(bus, RTL_REG_VLAN_ENABLE, 0);
+	rtl_set(bus, RTL_REG_VLAN_FILTER, 0);
+	rtl_set(bus, RTL_REG_EN_TRUNK, 0);
+	rtl_set(bus, RTL_REG_TRUNK_PORTSEL, 0);
+
+	/* Initialize cpu port settings */
 	rtl_set(bus, RTL_REG_CPUPORT, dev->cpu_port);
 	rtl_set(bus, RTL_REG_EN_CPUPORT, 1);
 
-	/* enable phy 5 link status */
-	rtl_set(bus, RTL_REG_CPU_LINKUP, 1);
-//	rtl_set(bus, RTL_REG_PORT5_TXEN, 1);
-//	rtl_set(bus, RTL_REG_PORT5_RXEN, 1);
-//	rtl_set(bus, RTL_REG_PORT5_LRNEN, 1);
-#ifdef DEBUG
- debug("%s: CPU link up: %i\n",
-		__func__, rtl_get(bus, RTL_REG_PORT5_LINK));
-#endif
+	rtl_set(bus, RTL_REG_EN_TAG_OUT, 0);
+	rtl_set(bus, RTL_REG_EN_TAG_IN, 0);
+	rtl_set(bus, RTL_REG_EN_TAG_CLR, 0);
 
+	/* Reset all vlans */
+	for (i = 0; i < RTL8306_NUM_VLANS; i++) {
+		rtl_set(bus, RTL_VLAN_REG(i, VID), i);
+		rtl_set(bus, RTL_VLAN_REG(i, PORTMASK), 0);
+	}
+	
+	/* Default to port isolation */
+	for (i = 0; i < RTL8306_NUM_PORTS; i++) {
+		unsigned long mask;
+		
+		if ((1 << i) == cpu_mask)
+			mask = ((1 << RTL8306_NUM_PORTS) - 1) & ~cpu_mask; /* all bits set */
+		else
+			mask = cpu_mask | (1 << i);
+
+		rtl_set(bus, RTL_VLAN_REG(i, PORTMASK), mask);
+		rtl_set(bus, RTL_PORT_REG(i, PVID), i);
+		rtl_set(bus, RTL_PORT_REG(i, NULL_VID_REPLACE), 1);
+		rtl_set(bus, RTL_PORT_REG(i, VID_INSERT), 1);
+		rtl_set(bus, RTL_PORT_REG(i, TAG_INSERT), 3);
+	}
+
+	/* PHY save */
+	phy_nway = rtl_get(bus, RTL_PORT_REG(5, NWAY));
+	phy_speed = rtl_get(bus, RTL_PORT_REG(5, SPEED));
+	phy_dup = rtl_get(bus, RTL_PORT_REG(5, DUPLEX));
+
+	/* Disable RX/TX from PHYs */
+	for (i = 0; i < RTL8306_NUM_PORTS - 1; i++) {
+		rtl_port_set_enable(dev, i, 0);
+	}
+
+	/* Save trunking status */
+	trunk_en = rtl_get(bus, RTL_REG_EN_TRUNK);
+	trunk_psel = rtl_get(bus, RTL_REG_TRUNK_PORTSEL);
+
+	/*
+	 * Trunk port 3 and 4
+	 * Big WTF, but RealTek seems to do it
+	 */
+	rtl_set(bus, RTL_REG_EN_TRUNK, 1);
+	rtl_set(bus, RTL_REG_TRUNK_PORTSEL, 1);
+
+	rtl_set(bus, RTL_REG_RESET, 1);
+
+	/* Wait for the reset to complete, but don't wait for too long */
+	for (i = 0; i < 10; i++) {
+		if (rtl_get(bus, RTL_REG_RESET) == 0)
+			break;
+
+		__udelay(1000);
+	}
+
+	/* Enable RX/TX from PHYs */
+	for (i = 0; i < RTL8306_NUM_PORTS - 1; i++) {
+		rtl_port_set_enable(dev, i, 1);
+	}
+
+	/* Restore trunking settings */
+	rtl_set(bus, RTL_REG_EN_TRUNK, trunk_en);
+	rtl_set(bus, RTL_REG_TRUNK_PORTSEL, trunk_psel);
+
+	/* PHY restore */
+	rtl_set(bus, RTL_PORT_REG(5, NWAY), phy_nway);
+	rtl_set(bus, RTL_PORT_REG(5, SPEED), phy_speed);
+	rtl_set(bus, RTL_PORT_REG(5, DUPLEX), phy_dup);
+
+	rtl_set(bus, RTL_REG_CPU_LINKUP, 1);
 }
 
 static struct switch_driver rtl8306_drv = {
