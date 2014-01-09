@@ -26,7 +26,7 @@ int checkboard(void)
 
 static const struct ltq_eth_port_config eth_port_config[] = {
 	/* MAC0: REALTEK RTL8306 switch */
-	{ 0, 0x0, LTQ_ETH_PORT_SWITCH, PHY_INTERFACE_MODE_RMII },
+	{ 0, 0x0, LTQ_ETH_PORT_SWITCH, PHY_INTERFACE_MODE_RMII_OC },
 };
 
 static const struct ltq_eth_board_config eth_board_config = {

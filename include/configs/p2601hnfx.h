@@ -14,11 +14,17 @@
 /* Configure SoC */
 #define CONFIG_LTQ_SUPPORT_UART			/* Enable ASC and UART */
 
+#define CONFIG_LTQ_SUPPORT_ETHERNET		/* Enable ethernet */
+
 #define CONFIG_LTQ_SUPPORT_NOR_FLASH		/* Have a parallel NOR flash */
 
 #define CONFIG_LTQ_SUPPORT_SPL_NOR_FLASH	/* Build NOR flash SPL */
 #define CONFIG_LTQ_SPL_COMP_LZO			/* Compress SPL with LZO */
 #define CONFIG_LTQ_SPL_CONSOLE			/* Enable SPL console */
+
+/* Switch devices */
+#define CONFIG_SWITCH_MULTI
+#define CONFIG_SWITCH_RTL8306
 
 /* Environment */
 #if defined(CONFIG_SYS_BOOT_NOR)
@@ -62,6 +68,6 @@
 #define CONFIG_EXTRA_ENV_SETTINGS	\
 	CONFIG_ENV_LANTIQ_DEFAULTS	\
 	CONFIG_ENV_UPDATE_UBOOT_NOR	\
-	"kernel_addr=0xB0040000\0"
+	"kernel_addr=0xB0060000\0"
 
 #endif /* __CONFIG_H */
