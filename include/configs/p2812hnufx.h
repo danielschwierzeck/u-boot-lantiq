@@ -22,6 +22,7 @@
 #define CONFIG_LTQ_SPL_COMP_LZO			/* Compress SPL with LZO */
 #define CONFIG_LTQ_SPL_CONSOLE			/* Enable SPL console */
 
+#define CONFIG_SYS_NAND_SIZE		(128 * 1024 * 1024)
 #define CONFIG_SYS_NAND_PAGE_COUNT	64
 #define CONFIG_SYS_NAND_PAGE_SIZE	2048
 #define CONFIG_SYS_NAND_OOBSIZE		64
@@ -44,7 +45,7 @@
 #define CONFIG_LZO
 
 /* Environment */
-#if defined(CONFIG_SYS_BOOT_NANDSPL)
+#if defined(CONFIG_SYS_BOOT_NANDSPL) || defined(CONFIG_SYS_BOOT_NANDTPL)
 #define CONFIG_ENV_IS_IN_NAND
 #define CONFIG_ENV_OVERWRITE
 #define CONFIG_ENV_OFFSET		(256 * 1024)
@@ -70,7 +71,7 @@
 #include "openwrt-lantiq-common.h"
 
 #define CONFIG_ENV_UPDATE_UBOOT_NAND					\
-	"update-uboot-nand=run load-uboot-nandspl-lzo write-uboot-nand\0"
+	"update-uboot-nand=run load-uboot-nandtpl-lzo write-uboot-nand\0"
 
 #define CONFIG_EXTRA_ENV_SETTINGS	\
 	CONFIG_ENV_LANTIQ_DEFAULTS	\
