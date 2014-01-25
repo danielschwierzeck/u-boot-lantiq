@@ -9,7 +9,6 @@
  */
 
 #include <common.h>
-#include <malloc.h>
 #include <spi.h>
 #include <spi_flash.h>
 #include <watchdog.h>
@@ -363,7 +362,7 @@ int spi_flash_read_common(struct spi_flash *flash, const u8 *cmd,
 int spi_flash_cmd_read_ops(struct spi_flash *flash, u32 offset,
 		size_t len, void *data)
 {
-	u8 *cmd, cmdsz;
+	u8 cmd[SPI_FLASH_READ_CMD_LEN], cmdsz;
 	u32 remain_len, read_len, read_addr;
 	int bank_sel = 0;
 	int ret = -1;
@@ -389,7 +388,6 @@ int spi_flash_cmd_read_ops(struct spi_flash *flash, u32 offset,
 	}
 
 	cmdsz = SPI_FLASH_CMD_LEN + flash->dummy_byte;
-	cmd = malloc(cmdsz);
 	memset(cmd, 0, cmdsz);
 
 	cmd[0] = flash->read_cmd;
