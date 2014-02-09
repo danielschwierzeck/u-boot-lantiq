@@ -3,6 +3,10 @@
 #
 
 #fw-shipped-$(CONFIG_XXX) += xxx/xxx.bin
+fw-shipped-$(CONFIG_FW_VRX200_PHY11G_A1X) += lantiq/vrx200_phy11g_a1x.fw
+fw-shipped-$(CONFIG_FW_VRX200_PHY11G_A2X) += lantiq/vrx200_phy11g_a2x.fw
+fw-shipped-$(CONFIG_FW_VRX200_PHY22F_A1X) += lantiq/vrx200_phy22f_a1x.fw
+fw-shipped-$(CONFIG_FW_VRX200_PHY22F_A2X) += lantiq/vrx200_phy22f_a2x.fw
 
 fw-shipped-all := $(fw-shipped-y) $(fw-shipped-m) $(fw-shipped-)
 
