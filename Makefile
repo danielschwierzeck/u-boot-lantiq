@@ -599,6 +599,7 @@ libs-y += disk/
 libs-y += drivers/
 libs-$(CONFIG_DM) += drivers/core/
 libs-y += drivers/dma/
+libs-$(CONFIG_FW_LOADER) += drivers/firmware/
 libs-y += drivers/gpio/
 libs-y += drivers/i2c/
 libs-y += drivers/input/
@@ -635,6 +636,7 @@ libs-$(CONFIG_HAS_POST) += post/
 libs-y += test/
 libs-y += test/dm/
 libs-$(CONFIG_DM_DEMO) += drivers/demo/
+libs-y += firmware/
 
 ifneq (,$(filter $(SOC), mx25 mx27 mx5 mx6 mx31 mx35 mxs vf610))
 libs-y += arch/$(ARCH)/imx-common/
