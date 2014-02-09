@@ -15,6 +15,7 @@
 #define CONFIG_LTQ_SUPPORT_UART		/* Enable ASC and UART */
 
 #define CONFIG_LTQ_SUPPORT_ETHERNET	/* Enable ethernet */
+#define CONFIG_FW_VRX200_PHY11G_A1X
 
 #define CONFIG_LTQ_SUPPORT_NOR_FLASH	/* Have a parallel NOR flash */
 
