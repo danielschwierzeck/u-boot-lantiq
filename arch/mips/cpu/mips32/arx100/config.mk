@@ -14,17 +14,17 @@ PF_PIE			:=
 USE_PRIVATE_LIBGCC	:= yes
 endif
 
-LIBS-y += $(CPUDIR)/lantiq-common/
+libs-y += $(CPUDIR)/lantiq-common/
 
 ifndef CONFIG_SPL_BUILD
 ifdef CONFIG_SYS_BOOT_SFSPL
-ALL-y += $(obj)u-boot.ltq.sfspl
-ALL-$(CONFIG_SPL_LZO_SUPPORT) += $(obj)u-boot.ltq.lzo.sfspl
-ALL-$(CONFIG_SPL_LZMA_SUPPORT) += $(obj)u-boot.ltq.lzma.sfspl
+ALL-y += u-boot.ltq.sfspl
+ALL-$(CONFIG_SPL_LZO_SUPPORT) += u-boot.ltq.lzo.sfspl
+ALL-$(CONFIG_SPL_LZMA_SUPPORT) += u-boot.ltq.lzma.sfspl
 endif
 ifdef CONFIG_SYS_BOOT_NORSPL
-ALL-y += $(obj)u-boot.ltq.norspl
-ALL-$(CONFIG_SPL_LZO_SUPPORT) += $(obj)u-boot.ltq.lzo.norspl
-ALL-$(CONFIG_SPL_LZMA_SUPPORT) += $(obj)u-boot.ltq.lzma.norspl
+ALL-y += u-boot.ltq.norspl
+ALL-$(CONFIG_SPL_LZO_SUPPORT) += u-boot.ltq.lzo.norspl
+ALL-$(CONFIG_SPL_LZMA_SUPPORT) += u-boot.ltq.lzma.norspl
 endif
 endif
