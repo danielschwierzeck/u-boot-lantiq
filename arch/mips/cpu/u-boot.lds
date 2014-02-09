@@ -52,6 +52,13 @@ SECTIONS
 	}
 
 	. = ALIGN(4);
+	.builtin_fw : {
+		__start_builtin_fw = .;
+		KEEP(*(.builtin_fw))
+		__end_builtin_fw = .;
+	}
+
+	. = ALIGN(4);
 	__image_copy_end = .;
 	__init_end = .;
 
