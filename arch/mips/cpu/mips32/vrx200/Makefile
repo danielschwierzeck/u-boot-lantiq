@@ -6,4 +6,3 @@
 
 obj-y	+= cgu.o chipid.o dcdc.o ebu.o gphy.o mem.o pmu.o rcu.o
 obj-y	+= cgu_init.o mem_init.o
-obj-y	+= gphy_fw.o

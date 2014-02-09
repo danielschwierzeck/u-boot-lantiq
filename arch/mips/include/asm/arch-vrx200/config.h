@@ -130,6 +130,8 @@
 
 #define CONFIG_CMD_MII
 #define CONFIG_CMD_NET
+
+#define CONFIG_FW_LOADER
 #endif
 
 #define CONFIG_SPL_MAX_SIZE		(32 * 1024)

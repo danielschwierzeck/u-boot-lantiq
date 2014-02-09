@@ -5,54 +5,40 @@
  */
 
 #include <common.h>
+#include <firmware.h>
 #include <asm/lantiq/io.h>
 #include <asm/arch/soc.h>
 #include <asm/arch/gphy.h>
 
-static inline void ltq_gphy_copy(const void *fw_start, const void *fw_end,
-				ulong dst_addr)
+static void ltq_fw_load(const char *name, ulong dst_addr)
 {
-	const ulong fw_len = (ulong) fw_end - (ulong) fw_start;
 	const ulong addr = CKSEG1ADDR(dst_addr);
+	const struct firmware *fw;
+	int err;
 
-	debug("ltq_gphy_copy: addr %08lx, fw_start %p, fw_end %p\n",
-		addr, fw_start, fw_end);
+	err = request_firmware(&fw, name);
+	if (!err)
+		memcpy((void *) addr, fw->data, fw->size);
 
-	memcpy((void *) addr, fw_start, fw_len);
+	release_firmware(fw);
 }
 
 void ltq_gphy_phy11g_a1x_load(ulong addr)
 {
-	extern ulong __ltq_fw_phy11g_a1x_start;
-	extern ulong __ltq_fw_phy11g_a1x_end;
-
-	ltq_gphy_copy(&__ltq_fw_phy11g_a1x_start, &__ltq_fw_phy11g_a1x_end,
-			addr);
+	ltq_fw_load("lantiq/vrx200_phy11g_a1x.bin", addr);
 }
 
 void ltq_gphy_phy11g_a2x_load(ulong addr)
 {
-	extern ulong __ltq_fw_phy11g_a2x_start;
-	extern ulong __ltq_fw_phy11g_a2x_end;
-
-	ltq_gphy_copy(&__ltq_fw_phy11g_a2x_start, &__ltq_fw_phy11g_a2x_end,
-			addr);
+	ltq_fw_load("lantiq/vrx200_phy11g_a2x.bin", addr);
 }
 
 void ltq_gphy_phy22f_a1x_load(ulong addr)
 {
-	extern ulong __ltq_fw_phy22f_a1x_start;
-	extern ulong __ltq_fw_phy22f_a1x_end;
-
-	ltq_gphy_copy(&__ltq_fw_phy22f_a1x_start, &__ltq_fw_phy22f_a1x_end,
-			addr);
+	ltq_fw_load("lantiq/vrx200_phy22f_a1x.bin", addr);
 }
 
 void ltq_gphy_phy22f_a2x_load(ulong addr)
 {
-	extern ulong __ltq_fw_phy22f_a2x_start;
-	extern ulong __ltq_fw_phy22f_a2x_end;
-
-	ltq_gphy_copy(&__ltq_fw_phy22f_a2x_start, &__ltq_fw_phy22f_a2x_end,
-			addr);
+	ltq_fw_load("lantiq/vrx200_phy22f_a2x.bin", addr);
 }
