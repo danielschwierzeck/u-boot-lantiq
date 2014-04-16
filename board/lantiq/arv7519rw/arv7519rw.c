@@ -75,17 +75,15 @@ int checkboard(void)
 
 static const struct ltq_eth_port_config eth_port_config[] = {
 	/* GMAC0: external Lantiq PEF7071 v1.5 10/100/1000 PHY for LAN port 0 */
-	{ 0, 0x0, LTQ_ETH_PORT_PHY, PHY_INTERFACE_MODE_RGMII },
-	/* GMAC1: unused */
-	{ 1, 0x1, LTQ_ETH_PORT_NONE, LTQ_ETH_PORT_NONE },
-	/* GMAC2: internal GPHY0 with 10/100/1000 firmware for LAN port 2 */
-	{ 2, 0x11, LTQ_ETH_PORT_PHY, PHY_INTERFACE_MODE_GMII },
-	/* GMAC3: unused */
-	{ 3, 0x3, LTQ_ETH_PORT_NONE, LTQ_ETH_PORT_NONE },
-	/* GMAC4: internal GPHY1 with 10/100/1000 firmware for LAN port 4 */
-	{ 4, 0x13, LTQ_ETH_PORT_PHY, PHY_INTERFACE_MODE_GMII },
-	/* GMAC5: unused */
-	{ 5, 0x5, LTQ_ETH_PORT_NONE, LTQ_ETH_PORT_NONE },
+	{ 0, 0x0,  LTQ_ETH_PORT_PHY, PHY_INTERFACE_MODE_RGMII },
+	/* GMAC1: internal GPHY1 with 10/100/1000 firmware for LAN port 1 */
+	{ 2, 0x11, LTQ_ETH_PORT_PHY, PHY_INTERFACE_MODE_MII },
+	/* GMAC3: internal GPHY1 with 10/100/1000 firmware for LAN port 2 */
+	{ 3, 0x12, LTQ_ETH_PORT_PHY, PHY_INTERFACE_MODE_MII },
+	/* GMAC4: internal GPHY1 with 10/100/1000 firmware for LAN port 3 */
+	{ 4, 0x13, LTQ_ETH_PORT_PHY, PHY_INTERFACE_MODE_MII },
+	/* GMAC5: internal GPHY1 with 10/100/1000 firmware for LAN port 4 */
+	{ 5, 0x14, LTQ_ETH_PORT_PHY, PHY_INTERFACE_MODE_MII },
 };
 
 static const struct ltq_eth_board_config eth_board_config = {
@@ -101,11 +99,11 @@ int board_eth_init(bd_t * bis)
 	switch ( ltq_chip_version_get() ) {
 		
 		case 1:
-				ltq_gphy_phy11g_a1x_load(fw_addr);
+				ltq_gphy_phy22f_a1x_load(fw_addr);
 				break;
 				
 		case 2:
-				ltq_gphy_phy11g_a2x_load(fw_addr);
+				ltq_gphy_phy22f_a2x_load(fw_addr);
 				break;
 			
 		}
