@@ -37,7 +37,7 @@ int do_ubifs_mount(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 		ubifs_initialized = 1;
 	}
 
-	ret = ubifs_mount(vol_name);
+	ret = uboot_ubifs_mount(vol_name);
 	if (ret)
 		return -1;
 
