@@ -48,7 +48,7 @@ PLATFORM_CPPFLAGS += -DCONFIG_MIPS -D__MIPS__
 PF_ABICALLS			?= -mabicalls
 PF_PIC				?= -fpic
 PF_PIE				?= -pie
-PF_OBJCOPY			?= -j .got -j .u_boot_list -j .rel.dyn
+PF_OBJCOPY			?= -j .got -j .u_boot_list -j .rel.dyn -j .padding
 
 PLATFORM_CPPFLAGS		+= -G 0 $(PF_ABICALLS) $(PF_PIC) $(ENDIANNESS)
 PLATFORM_CPPFLAGS		+= -msoft-float
