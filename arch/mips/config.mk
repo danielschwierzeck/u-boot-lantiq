@@ -55,4 +55,4 @@ PLATFORM_LDFLAGS		+= -G 0 -static -n -nostdlib $(ENDIANNESS)
 PLATFORM_RELFLAGS		+= -ffunction-sections -fdata-sections
 LDFLAGS_FINAL			+= --gc-sections -pie
 OBJCOPYFLAGS			+= -j .text -j .rodata -j .data -j .got
-OBJCOPYFLAGS			+= -j .u_boot_list -j .rel.dyn
+OBJCOPYFLAGS			+= -j .u_boot_list -j .rel.dyn -j .padding
