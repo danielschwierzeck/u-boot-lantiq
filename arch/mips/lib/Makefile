@@ -8,6 +8,7 @@
 ifndef CONFIG_SYS_GENERIC_BOARD
 obj-y	+= board.o
 endif
+obj-y	+= cache.o
 obj-y	+= io.o
 
 obj-$(CONFIG_CMD_BOOTM) += bootm.o
