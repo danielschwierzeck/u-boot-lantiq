@@ -12,6 +12,7 @@ endif
 
 obj-$(CONFIG_CMD_SF) += sf.o
 obj-$(CONFIG_SPI_FLASH) += sf_params.o sf_probe.o sf_ops.o
+obj-$(CONFIG_SPI_FLASH_MTD) += sf_mtd.o
 obj-$(CONFIG_SPI_FRAM_RAMTRON) += ramtron.o
 obj-$(CONFIG_SPI_FLASH_SANDBOX) += sandbox.o
 obj-$(CONFIG_SPI_M95XXX) += eeprom_m95xxx.o
