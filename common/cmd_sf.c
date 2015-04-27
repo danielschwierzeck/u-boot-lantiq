@@ -121,6 +121,9 @@ static int do_spi_flash_probe(int argc, char * const argv[])
 			return -1;
 	}
 
+	if (flash)
+		spi_flash_free(flash);
+
 	new = spi_flash_probe(bus, cs, speed, mode);
 	if (!new) {
 		printf("Failed to initialize SPI flash at %u:%u\n", bus, cs);
