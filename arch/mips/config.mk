@@ -48,11 +48,11 @@ PLATFORM_CPPFLAGS += -DCONFIG_MIPS -D__MIPS__
 PF_ABICALLS			?= -mabicalls
 PF_PIC				?= -fpic
 PF_PIE				?= -pie
+PF_OBJCOPY			?= -j .got -j .u_boot_list -j .rel.dyn
 
 PLATFORM_CPPFLAGS		+= -G 0 $(PF_ABICALLS) $(PF_PIC) $(ENDIANNESS)
 PLATFORM_CPPFLAGS		+= -msoft-float
 PLATFORM_LDFLAGS		+= -G 0 -static -n -nostdlib $(ENDIANNESS)
 PLATFORM_RELFLAGS		+= -ffunction-sections -fdata-sections
 LDFLAGS_FINAL			+= --gc-sections $(PF_PIE)
-OBJCFLAGS			+= -j .text -j .rodata -j .data -j .got
-OBJCFLAGS			+= -j .u_boot_list -j .rel.dyn
+OBJCFLAGS			+= -j .text -j .rodata -j .data $(PF_OBJCOPY)
