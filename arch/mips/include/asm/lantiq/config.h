@@ -56,7 +56,8 @@
 #define CONFIG_SPL_NAND_SOFTECC
 #define CONFIG_SYS_NAND_ECCSIZE		256
 #define CONFIG_SYS_NAND_ECCBYTES	3
-#define CONFIG_SYS_NAND_ECCPOS		{40, 41, 42, 43, 44, 45, 46, 47, \
+#define CONFIG_SYS_NAND_ECCPOS		{0, 1, 2, 3, 6, 7, \
+					40, 41, 42, 43, 44, 45, 46, 47, \
 					48, 49, 50, 51, 52, 53, 54, 55, \
 					56, 57, 58, 59, 60, 61, 62, 63}
 #endif
