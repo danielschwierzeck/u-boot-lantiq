@@ -1,13 +1,18 @@
 /*
- * Copyright (C) 2011-2013 Daniel Schwierzeck, daniel.schwierzeck@gmail.com
+ * This file is released under the terms of GPL v2 and any later version.
+ * See the file COPYING in the root directory of the source tree for details.
  *
- * SPDX-License-Identifier:	GPL-2.0+
+ * Copyright (C) 2011-2013 Daniel Schwierzeck, daniel.schwierzeck@gmail.com
  */
 
 #include <common.h>
 #include <asm/lantiq/io.h>
 #include <asm/arch/soc.h>
 #include <asm/arch/gphy.h>
+
+#include <lzma/LzmaTypes.h>
+#include <lzma/LzmaDec.h>
+#include <lzma/LzmaTools.h>
 
 static inline void ltq_gphy_copy(const void *fw_start, const void *fw_end,
 				ulong dst_addr)
@@ -18,7 +23,12 @@ static inline void ltq_gphy_copy(const void *fw_start, const void *fw_end,
 	debug("ltq_gphy_copy: addr %08lx, fw_start %p, fw_end %p\n",
 		addr, fw_start, fw_end);
 
-	memcpy((void *) addr, fw_start, fw_len);
+	SizeT lzma_len = 65536;
+	int ret = lzmaBuffToBuffDecompress(
+	(unsigned char *)addr, &lzma_len,
+	(unsigned char *)fw_start, fw_len);
+
+	//memcpy((void *) addr, fw_start, fw_len);
 }
 
 void ltq_gphy_phy11g_a1x_load(ulong addr)
