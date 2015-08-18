@@ -1058,6 +1058,15 @@ static inline phys_addr_t map_to_sysmem(const void *ptr)
 #define DEFINE_CACHE_ALIGN_BUFFER(type, name, size)			\
 	DEFINE_ALIGN_BUFFER(type, name, size, ARCH_DMA_MINALIGN)
 
+#ifndef __ASSEMBLY__
+#include <malloc.h>
+
+static inline void *malloc_cache_aligned(size_t size)
+{
+	return memalign(ARCH_DMA_MINALIGN, ALIGN(size, ARCH_DMA_MINALIGN));
+}
+#endif
+
 /* Pull in stuff for the build system */
 #ifdef DO_DEPS_ONLY
 # include <environment.h>
