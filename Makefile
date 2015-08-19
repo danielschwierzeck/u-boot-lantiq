@@ -981,6 +981,29 @@ OBJCOPYFLAGS_u-boot-img-spl-at-end.bin := -I binary -O binary \
 u-boot-img-spl-at-end.bin: u-boot.img spl/u-boot-spl.bin FORCE
 	$(call if_changed,pad_cat)
 
+# Lantiq SPL images
+quiet_cmd_ltqbootimage = LTQBOOT $@
+cmd_ltqbootimage = tools/ltq-boot-image $(LTQBOOTIMAGEFLAGS_$(@F)) -o $@
+
+LTQBOOTIMAGEFLAGS_u-boot.ltq.lzo.sfspl = -t sfspl -e $(CONFIG_SPL_TEXT_BASE) \
+	-x $(CONFIG_SPL_U_BOOT_OFFS) -U $(CONFIG_SPL_U_BOOT_SIZE) \
+	-s spl/u-boot-spl.bin -u u-boot-lzo.img
+u-boot.ltq.lzo.sfspl: u-boot-lzo.img spl/u-boot-spl.bin
+	$(call if_changed,ltqbootimage)
+
+LTQBOOTIMAGEFLAGS_u-boot.ltq.lzo.nandspl = -t nandspl -e $(CONFIG_SPL_TEXT_BASE) \
+	-x $(CONFIG_SPL_U_BOOT_OFFS) -U $(CONFIG_SPL_U_BOOT_SIZE) \
+	-p $(CONFIG_SYS_NAND_PAGE_SIZE) -X $(CONFIG_SPL_TPL_OFFS) \
+	-s spl/u-boot-spl.bin -T tpl/u-boot-tpl.bin -u u-boot-lzo.img
+u-boot.ltq.lzo.nandspl: u-boot-lzo.img spl/u-boot-spl.bin tpl/u-boot-tpl.bin
+	$(call if_changed,ltqbootimage)
+
+LTQBOOTIMAGEFLAGS_u-boot.ltq.lzo.norspl = -t norspl -x $(CONFIG_SPL_U_BOOT_OFFS) \
+	-X $(CONFIG_SPL_TPL_OFFS) -U $(CONFIG_SPL_U_BOOT_SIZE) \
+	-s spl/u-boot-spl.bin -T tpl/u-boot-tpl.bin -u u-boot-lzo.img
+u-boot.ltq.lzo.norspl: u-boot-lzo.img spl/u-boot-spl.bin tpl/u-boot-tpl.bin
+	$(call if_changed,ltqbootimage)
+
 # Create a new ELF from a raw binary file.  This is useful for arm64
 # where static relocation needs to be performed on the raw binary,
 # but certain simulators only accept an ELF file (but don't do the
