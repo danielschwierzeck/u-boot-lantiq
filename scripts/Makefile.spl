@@ -159,9 +159,6 @@ endif
 ifeq ($(wildcard $(LDSCRIPT)),)
 	LDSCRIPT := $(srctree)/arch/$(ARCH)/cpu/u-boot-spl.lds
 endif
-ifeq ($(wildcard $(LDSCRIPT)),)
-$(error could not find linker script)
-endif
 
 # Special flags for CPP when processing the linker script.
 # Pass the version down so we can handle backwards compatibility
