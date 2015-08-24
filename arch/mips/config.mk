@@ -49,10 +49,16 @@ __HAVE_ARCH_GENERIC_BOARD := y
 # On the other hand, we want PIC in the U-Boot code to relocate it from ROM
 # to RAM. $28 is always used as gp.
 #
-PF_ABICALLS			?= -mabicalls
-PF_PIC				?= -fpic
-PF_PIE				?= -pie
-PF_OBJCOPY			?= -j .got -j .u_boot_list -j .rel.dyn -j .padding
+ifdef CONFIG_SPL_BUILD
+PF_ABICALLS			:= -mno-abicalls
+PF_PIC				:= -fno-pic
+PF_PIE				:=
+else
+PF_ABICALLS			:= -mabicalls
+PF_PIC				:= -fpic
+PF_PIE				:= -pie
+PF_OBJCOPY			:= -j .got -j .u_boot_list -j .rel.dyn -j .padding
+endif
 
 PLATFORM_CPPFLAGS		+= -G 0 $(PF_ABICALLS) $(PF_PIC) $(ENDIANNESS)
 PLATFORM_CPPFLAGS		+= -msoft-float
