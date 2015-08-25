@@ -10,7 +10,9 @@ obj-y	+= board.o
 endif
 obj-y	+= cache.o
 obj-y	+= cache_init.o
+obj-y	+= genex.o
 obj-y	+= io.o
+obj-y	+= traps.o
 
 obj-$(CONFIG_CMD_BOOTM) += bootm.o
 

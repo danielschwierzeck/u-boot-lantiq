@@ -79,7 +79,8 @@ ENTRY(_start)
 
 	.org 0x380
 	/* General exception */
-1:	b	1b
+	PTR_LA	k1, handle_reserved
+	jr	k1
 	 nop
 
 	.org 0x400
