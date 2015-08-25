@@ -79,7 +79,8 @@ ENTRY(_start)
 
 	.org 0x380
 	/* General exception */
-1:	b	1b
+	PTR_LA	k1, handle_reserved
+	jr	k1
 	 nop
 
 	.org 0x400
@@ -89,8 +90,8 @@ ENTRY(_start)
 
 	.org 0x480
 	/* EJTAG debug exception */
-1:	b	1b
-	 nop
+	PTR_LA	k1, handle_ejtag_debug
+	jr	k1
 
 	.align 4
 reset:
