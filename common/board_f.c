@@ -341,6 +341,7 @@ static int setup_ram_buf(void)
 }
 #endif
 
+#ifdef CONFIG_OF_CONTROL
 static int setup_fdt(void)
 {
 #ifdef CONFIG_OF_EMBED
@@ -358,8 +359,10 @@ static int setup_fdt(void)
 	/* Allow the early environment to override the fdt address */
 	gd->fdt_blob = (void *)getenv_ulong("fdtcontroladdr", 16,
 						(uintptr_t)gd->fdt_blob);
+
 	return 0;
 }
+#endif
 
 /* Get the top of usable RAM */
 __weak ulong board_get_usable_ram_top(ulong total_size)
@@ -555,6 +558,7 @@ static int reserve_global_data(void)
 	return 0;
 }
 
+#ifdef CONFIG_OF_CONTROL
 static int reserve_fdt(void)
 {
 	/*
@@ -573,6 +577,7 @@ static int reserve_fdt(void)
 
 	return 0;
 }
+#endif
 
 static int reserve_stacks(void)
 {
@@ -722,6 +727,7 @@ static int setup_dram_config(void)
 	return 0;
 }
 
+#ifdef CONFIG_OF_CONTROL
 static int reloc_fdt(void)
 {
 	if (gd->new_fdt) {
@@ -731,6 +737,7 @@ static int reloc_fdt(void)
 
 	return 0;
 }
+#endif
 
 static int setup_reloc(void)
 {
@@ -787,7 +794,9 @@ static init_fnc_t init_sequence_f[] = {
 	setup_ram_buf,
 #endif
 	setup_mon_len,
+#ifdef CONFIG_OF_CONTROL
 	setup_fdt,
+#endif
 	trace_early_init,
 #if defined(CONFIG_MPC85xx) || defined(CONFIG_MPC86xx)
 	/* TODO: can this go into arch_cpu_init()? */
@@ -943,7 +952,9 @@ static init_fnc_t init_sequence_f[] = {
 #endif
 	setup_machine,
 	reserve_global_data,
+#ifdef CONFIG_OF_CONTROL
 	reserve_fdt,
+#endif
 	reserve_stacks,
 	setup_dram_config,
 	show_dram_config,
@@ -957,7 +968,9 @@ static init_fnc_t init_sequence_f[] = {
 	setup_board_extra,
 #endif
 	INIT_FUNC_WATCHDOG_RESET
+#ifdef CONFIG_OF_CONTROL
 	reloc_fdt,
+#endif
 	setup_reloc,
 #if !defined(CONFIG_ARM) && !defined(CONFIG_SANDBOX)
 	jump_to_copy,
