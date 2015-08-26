@@ -46,9 +46,7 @@
 
 	.set noreorder
 
-	.globl _start
-	.text
-_start:
+ENTRY(_start)
 	/* U-boot entry point */
 	b	reset
 	 nop
@@ -141,6 +139,8 @@ reset:
 	jr	t9
 	 move	ra, zero
 
+	END(_start)
+
 /*
  * void relocate_code (addr_sp, gd, addr_moni)
  *
@@ -151,9 +151,7 @@ reset:
  * a1 = gd
  * a2 = destination address
  */
-	.globl	relocate_code
-	.ent	relocate_code
-relocate_code:
+ENTRY(relocate_code)
 	move	sp, a0			# set new stack pointer
 	move	fp, sp
 
@@ -266,4 +264,4 @@ in_ram:
 	jr	t9
 	 move	ra, zero
 
-	.end	relocate_code
+	END(relocate_code)
