@@ -617,6 +617,13 @@ static int reserve_stacks(void)
 	s = (ulong *) gd->start_addr_sp;
 	*s = 0; /* Terminate back chain */
 	*++s = 0; /* NULL return address */
+# elif defined(CONFIG_MIPS)
+	/* reserve exception vector */
+	gd->start_addr_sp -= 0x500;
+	gd->start_addr_sp &= ~0xFFF;
+	gd->irq_sp = gd->start_addr_sp;
+	debug("Reserving %zu Bytes for exception vector at: %08lx\n",
+		0x500, gd->start_addr_sp);
 # endif /* Architecture specific code */
 
 	return 0;

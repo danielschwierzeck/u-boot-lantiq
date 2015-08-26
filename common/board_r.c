@@ -170,7 +170,7 @@ static int initr_serial(void)
 	return 0;
 }
 
-#ifdef CONFIG_PPC
+#if defined(CONFIG_PPC) || defined(CONFIG_MIPS)
 static int initr_trap(void)
 {
 	/*
@@ -746,7 +746,7 @@ init_fnc_t init_sequence_r[] = {
 	initr_serial,
 	initr_announce,
 	INIT_FUNC_WATCHDOG_RESET
-#ifdef CONFIG_PPC
+#if defined(CONFIG_PPC) || defined(CONFIG_MIPS)
 	initr_trap,
 #endif
 #ifdef CONFIG_ADDR_MAP
