@@ -18,7 +18,11 @@
 #define CONFIG_SYS_MIPS_CACHE_MODE CONF_CM_CACHABLE_NONCOHERENT
 #endif
 
+#ifdef CONFIG_SYS_MIPS_CACHE_BASE
+#define INDEX_BASE	CONFIG_SYS_MIPS_CACHE_BASE
+#else
 #define INDEX_BASE	CKSEG0
+#endif
 
 	.macro	f_fill64 dst, offset, val
 	LONG_S	\val, (\offset +  0 * LONGSIZE)(\dst)
