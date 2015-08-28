@@ -383,10 +383,6 @@ static struct spi_flash *spi_flash_probe_slave(struct spi_slave *spi)
 	}
 #endif
 
-	ret = spi_flash_mtd_register(flash);
-	if (ret)
-		goto err_read_id;
-
 	/* Release spi bus */
 	spi_release_bus(spi);
 
@@ -424,7 +420,6 @@ struct spi_flash *spi_flash_probe_fdt(const void *blob, int slave_node,
 
 void spi_flash_free(struct spi_flash *flash)
 {
-	spi_flash_mtd_unregister();
 	spi_free_slave(flash->spi);
 	free(flash);
 }
@@ -481,5 +476,24 @@ err_claim_bus:
 void spl_spi_flash_free(struct spi_flash *flash)
 {
 	spi_free_slave(flash->spi);
+}
+#endif
+
+#ifdef CONFIG_SPI_FLASH_MTD
+int spi_flash_mtd_init(void)
+{
+	struct spi_flash *flash;
+	int ret = 0;
+
+	flash = spi_flash_probe(CONFIG_ENV_SPI_BUS, CONFIG_ENV_SPI_CS,
+			CONFIG_ENV_SPI_MAX_HZ, CONFIG_ENV_SPI_MODE);
+	if (!flash)
+		return -1;
+
+	ret = spi_flash_mtd_register(flash);
+	if (ret)
+		spi_flash_free(flash);
+
+	return ret;
 }
 #endif

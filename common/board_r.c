@@ -42,6 +42,7 @@
 #include <scsi.h>
 #include <serial.h>
 #include <spi.h>
+#include <spi_flash.h>
 #include <stdio_dev.h>
 #include <trace.h>
 #include <watchdog.h>
@@ -801,6 +802,9 @@ init_fnc_t init_sequence_r[] = {
 #endif
 #if defined(CONFIG_X86) && defined(CONFIG_SPI)
 	init_func_spi,
+#endif
+#ifdef CONFIG_SPI_FLASH_MTD
+	spi_flash_mtd_init,
 #endif
 #ifdef CONFIG_CMD_NAND
 	initr_nand,
