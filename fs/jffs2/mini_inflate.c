@@ -151,7 +151,7 @@ static void decompress_huffman(struct bitstream *stream, unsigned char *dest)
 			*(dest++) = symbol; /* symbol is a literal */
 			stream->decoded++;
 		} else if (symbol > 256) {
-			/* Determine the length of the repitition
+			/* Determine the length of the repetition
 			 * (section 3.2.5) */
 			if (symbol < 265) length = symbol - 254;
 			else if (symbol == 285) length = 258;
