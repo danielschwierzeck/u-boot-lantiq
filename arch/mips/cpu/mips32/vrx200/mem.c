@@ -81,7 +81,7 @@ void mc_ccr_dump(u32 index)
 {
 	const void *addr = (void *)(mc_ddr_base +
 		LTQ_MC_DDR_CCR_OFFSET(index));
-	debug("CCR%02u: 0x%p = 0x%08x\n", index, addr, ltq_readl(addr));
+	spl_debug("CCR%02u: 0x%p = 0x%08x\n", index, addr, ltq_readl(addr));
 }
 
 static __always_inline
@@ -379,14 +379,14 @@ int mc_tune_perform(struct mc_tune_cfg *cfg)
 	int ret;
 
 #if 0
-	ltq_mc_ccr_dump(3);
-	ltq_mc_ccr_dump(11);
-	ltq_mc_ccr_dump(39);
-	ltq_mc_ccr_dump(40);
-	ltq_mc_ccr_dump(43);
-	ltq_mc_ccr_dump(44);
-	ltq_mc_ccr_dump(53);
-	ltq_mc_ccr_dump(54);
+	mc_ccr_dump(3);
+	mc_ccr_dump(11);
+	mc_ccr_dump(39);
+	mc_ccr_dump(40);
+	mc_ccr_dump(43);
+	mc_ccr_dump(44);
+	mc_ccr_dump(53);
+	mc_ccr_dump(54);
 #endif
 
 	ltq_writel(&mc_global_regs->ddr_echo_dll0, echo_dll_init);
