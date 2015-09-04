@@ -126,19 +126,7 @@
 #include <asm/lantiq/config.h>
 #include <asm/arch/config.h>
 
-#define CONFIG_ENV_UPDATE_UBOOT_NOR					\
-	"update-uboot-nor=run load-uboot-norspl-lzo write-uboot-nor\0"
-
-#define CONFIG_ENV_UPDATE_UBOOT_SF					\
-	"update-uboot-sf=run load-uboot-sfspl-lzo write-uboot-sf\0"
-
-#define CONFIG_ENV_UPDATE_UBOOT_NAND					\
-	"update-uboot-nand=run load-uboot-nandspl-lzo write-uboot-nand\0"
-
 #define CONFIG_EXTRA_ENV_SETTINGS	\
-	CONFIG_ENV_LANTIQ_DEFAULTS	\
-	CONFIG_ENV_UPDATE_UBOOT_NOR	\
-	CONFIG_ENV_UPDATE_UBOOT_SF	\
-	CONFIG_ENV_UPDATE_UBOOT_NAND
+	CONFIG_ENV_LANTIQ_DEFAULTS
 
 #endif /* __CONFIG_H */
