@@ -104,30 +104,7 @@
 #define CONFIG_MIPS_BOOT_FDT
 
 /* Default environment */
-#define CONFIG_ENV_CONSOLEDEV					\
-	"consoledev=ttyLTQ0\0"
-
-#define CONFIG_ENV_ADDCONSOLE					\
-	"addconsole=setenv bootargs $bootargs"			\
-	" console=$consoledev,$baudrate\0"
-
-#if defined(CONFIG_NET_DEV)
-#define CONFIG_ENV_NETDEV					\
-	"netdev=" CONFIG_NET_DEV "\0"
-#else
-#define CONFIG_ENV_NETDEV					\
-	"netdev=eth0\0"
-#endif
-
-#define CONFIG_ENV_ADDIP					\
-	"addip=setenv bootargs $bootargs"			\
-	" ip=$ipaddr:$serverip::::$netdev:off\0"
-
-#define CONFIG_ENV_ADDETH					\
-	"addeth=setenv bootargs $bootargs"			\
-	" ethaddr=$ethaddr\0"
-
-#if defined(CONFIG_LTQ_SUPPORT_NOR_FLASH)
+#if defined(CONFIG_LTQ_SUPPORT_SPL_NOR_FLASH)
 #define CONFIG_ENV_WRITE_UBOOT_NOR					\
 	"write-uboot-nor="						\
 	"protect off " __stringify(CONFIG_SYS_FLASH_BASE) " +$filesize && " \
@@ -135,16 +112,17 @@
 	"cp.b $fileaddr " __stringify(CONFIG_SYS_FLASH_BASE) " $filesize\0"
 
 #define CONFIG_ENV_LOAD_UBOOT_NOR					\
-	"load-uboot-nor=tftpboot u-boot.bin\0"				\
-	"load-uboot-norspl=tftpboot u-boot.ltq.norspl\0"		\
-	"load-uboot-norspl-lzo=tftpboot u-boot.ltq.lzo.norspl\0"	\
-	"load-uboot-norspl-lzma=tftpboot u-boot.ltq.lzma.norspl\0"
+	"load-uboot-nor=tftpboot u-boot.ltq.lzo.norspl\0"
+
+#define CONFIG_ENV_UPDATE_UBOOT_NOR					\
+	"update-uboot-nor=run load-uboot-nor write-uboot-nor\0"
 #else
 #define CONFIG_ENV_WRITE_UBOOT_NOR
 #define CONFIG_ENV_LOAD_UBOOT_NOR
+#define CONFIG_ENV_UPDATE_UBOOT_NOR
 #endif
 
-#if defined(CONFIG_LTQ_SUPPORT_SPI_FLASH)
+#if defined(CONFIG_LTQ_SUPPORT_SPL_SPI_FLASH)
 #define CONFIG_ENV_SF_PROBE					\
 	"sf-probe=sf probe " __stringify(CONFIG_ENV_SPI_CS) " "	\
 	__stringify(CONFIG_ENV_SPI_MAX_HZ) " "			\
@@ -156,42 +134,44 @@
 	"sf write $fileaddr 0 $filesize\0"
 
 #define CONFIG_ENV_LOAD_UBOOT_SF					\
-	"load-uboot-sfspl=tftpboot u-boot.ltq.sfspl\0"			\
-	"load-uboot-sfspl-lzo=tftpboot u-boot.ltq.lzo.sfspl\0"		\
-	"load-uboot-sfspl-lzma=tftpboot u-boot.ltq.lzma.sfspl\0"
+	"load-uboot-sf=tftpboot u-boot.ltq.lzo.sfspl\0"
+
+#define CONFIG_ENV_UPDATE_UBOOT_SF					\
+	"update-uboot-sf=run load-uboot-sf write-uboot-sf\0"
 #else
 #define CONFIG_ENV_SF_PROBE
 #define CONFIG_ENV_WRITE_UBOOT_SF
 #define CONFIG_ENV_LOAD_UBOOT_SF
+#define CONFIG_ENV_UPDATE_UBOOT_SF
 #endif
 
-#if defined(CONFIG_LTQ_SUPPORT_NAND_FLASH)
+#if defined(CONFIG_LTQ_SUPPORT_SPL_NAND_FLASH)
 #define CONFIG_ENV_WRITE_UBOOT_NAND				\
 	"write-uboot-nand="					\
 	"nand erase 0 $filesize && "				\
 	"nand write $fileaddr 0 $filesize\0"
 
 #define CONFIG_ENV_LOAD_UBOOT_NAND						\
-	"load-uboot-nandspl=tftpboot u-boot.ltq.nandspl\0"			\
-	"load-uboot-nandspl-lzo=tftpboot u-boot.ltq.lzo.nandspl\0"		\
-	"load-uboot-nandspl-lzma=tftpboot u-boot.ltq.lzma.nandspl\0"
+	"load-uboot-nand=tftpboot u-boot.ltq.lzo.nandspl\0"
+
+#define CONFIG_ENV_UPDATE_UBOOT_NAND					\
+	"update-uboot-nand=run load-uboot-nand write-uboot-nand\0"
 #else
 #define CONFIG_ENV_WRITE_UBOOT_NAND
 #define CONFIG_ENV_LOAD_UBOOT_NAND
+#define CONFIG_ENV_UPDATE_UBOOT_NAND
 #endif
 
 #define CONFIG_ENV_LANTIQ_DEFAULTS	\
-	CONFIG_ENV_CONSOLEDEV		\
-	CONFIG_ENV_ADDCONSOLE		\
-	CONFIG_ENV_NETDEV		\
-	CONFIG_ENV_ADDIP		\
-	CONFIG_ENV_ADDETH		\
 	CONFIG_ENV_WRITE_UBOOT_NOR	\
 	CONFIG_ENV_LOAD_UBOOT_NOR	\
+	CONFIG_ENV_UPDATE_UBOOT_NOR	\
 	CONFIG_ENV_SF_PROBE		\
 	CONFIG_ENV_WRITE_UBOOT_SF	\
 	CONFIG_ENV_LOAD_UBOOT_SF	\
+	CONFIG_ENV_UPDATE_UBOOT_SF	\
 	CONFIG_ENV_WRITE_UBOOT_NAND	\
-	CONFIG_ENV_LOAD_UBOOT_NAND
+	CONFIG_ENV_LOAD_UBOOT_NAND	\
+	CONFIG_ENV_UPDATE_UBOOT_NAND
 
 #endif /* __LANTIQ_CONFIG_H__ */
