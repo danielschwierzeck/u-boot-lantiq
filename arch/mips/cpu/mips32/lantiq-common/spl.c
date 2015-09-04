@@ -347,13 +347,15 @@ void __noreturn spl_lantiq_init(void)
 		ret = spl_load_mem_ctrl_cfg();
 		if (ret) {
 			spl_puts("SPL: tuning DDR SDRAM\n");
-			mc_tune_perform(mc_tune_cfg);
+			ret = mc_tune_perform(mc_tune_cfg);
 		} else {
 			spl_puts("SPL: applying tuned DDR SDRAM settings\n");
 			mc_tune_apply(mc_tune_cfg);
 		}
-		mc_tune_dump(mc_tune_cfg);
-		mc_tune_store_ram(mc_tune_cfg);
+		if (!ret) {
+			mc_tune_dump(mc_tune_cfg);
+			mc_tune_store_ram(mc_tune_cfg);
+		}
 	}
 
 	memset(&spl, 0, sizeof(spl));
