@@ -22,6 +22,9 @@ enum ltq_chip_partnum {
 	LTQ_SOC_VRX288 = 0x01C0,	/* VRX288 v1.1 */
 	LTQ_SOC_VRX268 = 0x01C2,	/* VRX268 v1.1 */
 	LTQ_SOC_GRX288 = 0x01C9,	/* GRX288 v1.1 */
+	LTQ_SOC_GRX387 = 0x0F,
+	LTQ_SOC_GRX369 = 0x11,
+	LTQ_SOC_GRX389 = 0x12,
 };
 
 extern unsigned int ltq_chip_version_get(void);
@@ -101,6 +104,25 @@ static inline int ltq_soc_is_vrx200_v1(void)
 }
 
 static inline int ltq_soc_is_vrx200_v2(void)
+{
+	return 0;
+}
+#endif
+
+#ifdef CONFIG_SOC_XWAY_XRX330
+static inline int ltq_soc_is_grx330(void)
+{
+	return 1;
+}
+
+int ltq_soc_is_grx389_720(void);
+#else
+static inline int ltq_soc_is_grx330(void)
+{
+	return 0;
+}
+
+static inline int ltq_soc_is_grx389_720(void)
 {
 	return 0;
 }

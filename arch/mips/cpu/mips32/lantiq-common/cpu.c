@@ -10,13 +10,18 @@
 #include <asm/lantiq/reset.h>
 #include <asm/lantiq/cpu.h>
 
-static const char ltq_bootsel_strings[][16] = {
+static const char ltq_bootsel_strings[][20] = {
 	"NOR",
 	"NOR w/o BootROM",
 	"UART",
 	"UART w/o EEPROM",
 	"SPI",
 	"NAND",
+	"NAND Samsung 2kB",
+	"NAND Samsung 1kB",
+	"HSNAND Samsung 2kB",
+	"HSNAND Samsung 1kB",
+	"HSNAND ONFI",
 	"PCI",
 	"MII0",
 	"RMII0",
@@ -34,7 +39,7 @@ const char *ltq_boot_select_str(void)
 	return ltq_bootsel_strings[bootsel];
 }
 
-void ltq_chip_print_info(void)
+__weak void ltq_chip_print_info(void)
 {
 	char buf[32];
 
