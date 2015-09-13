@@ -106,6 +106,13 @@ config ARCH_JZ47XX
 	select OF_CONTROL
 	select DM
 
+config ARCH_INTEL_XWAY
+	bool "Support Intel XWAY SoCs"
+	select OF_CONTROL
+	select DM
+	select CLK
+	select RAM
+
 config MACH_PIC32
 	bool "Support Microchip PIC32"
 	select DM
@@ -157,6 +164,7 @@ source "board/qemu-mips/Kconfig"
 source "arch/mips/mach-ath79/Kconfig"
 source "arch/mips/mach-mscc/Kconfig"
 source "arch/mips/mach-bmips/Kconfig"
+source "arch/mips/mach-intel-xway/Kconfig"
 source "arch/mips/mach-jz47xx/Kconfig"
 source "arch/mips/mach-pic32/Kconfig"
 source "arch/mips/mach-mtmips/Kconfig"

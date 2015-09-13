@@ -1,0 +1,23 @@
+menu "Intel XWAY platforms"
+	depends on ARCH_INTEL_XWAY
+
+config SYS_SOC
+	default "none"
+
+choice
+	prompt "Boot mode"
+
+config INTEL_BOOT_RAM
+	bool "RAM boot"
+	depends on INTEL_SUPPORTS_BOOT_RAM
+	help
+	  This builds an image that is linked to a RAM address. Caches are
+	  disabled and environment is built in. The RAM boot mode is suited for
+	  use with EJTAG.
+
+endchoice
+
+config INTEL_SUPPORTS_BOOT_RAM
+	bool
+
+endmenu

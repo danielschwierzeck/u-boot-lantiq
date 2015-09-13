@@ -728,6 +728,12 @@ F:	drivers/sysreset/sysreset_gpio.c
 F:	drivers/watchdog/xilinx_tb_wdt.c
 N:	xilinx
 
+MIPS INTEL XWAY
+M:	Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+S:	Maintained
+F:	arch/mips/mach-intel-xway/
+F:	include/configs/intel_xway_*
+
 MIPS
 M:	Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
 S:	Maintained
