@@ -2,10 +2,22 @@ menu "Intel XWAY platforms"
 	depends on ARCH_INTEL_XWAY
 
 config SYS_SOC
+	default "danube" if SOC_INTEL_XWAY_DANUBE
 	default "vrx200" if SOC_INTEL_XWAY_VRX200
 
 choice
 	prompt "Intel XWAY SoC select"
+
+config SOC_INTEL_XWAY_DANUBE
+	bool "Intel XWAY Danube family"
+	select SUPPORTS_BIG_ENDIAN
+	select SUPPORTS_CPU_MIPS32_R1
+	select SUPPORTS_CPU_MIPS32_R2
+	select MIPS_TUNE_24KC
+	select MIPS_INIT_STACK_IN_SRAM
+	help
+	  This supports Intel XWAY Danube family including Danube, Danube-S
+	  and Twinpass.
 
 config SOC_INTEL_XWAY_VRX200
 	bool "Intel XWAY VRX200 family"
