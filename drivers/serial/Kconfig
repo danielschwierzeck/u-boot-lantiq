@@ -314,6 +314,14 @@ config DEBUG_UART_APBUART
 	  will need to provide parameters to make this work. The driver will
 	  be available until the real driver model serial is running.
 
+config DEBUG_UART_INTEL_XWAY
+	bool "Intel XWAY UART"
+	depends on INTEL_XWAY_SERIAL
+	help
+	  Select this to enable a debug UART on Intel XWAY SoCs. You
+	  will need to provide parameters to make this work. The driver will
+	  be available until the real driver model serial is running.
+
 config DEBUG_UART_PL010
 	bool "pl010"
 	depends on PL01X_SERIAL
@@ -722,6 +730,12 @@ config SCIF_CONSOLE
 	  Select this to enable Renesas SCIF UART. To operate serial ports
 	  on systems with RCar or SH SoCs, say Y to this option. If unsure,
 	  say N.
+
+config INTEL_XWAY_SERIAL
+	bool "Support for Intel XWAY UART"
+	depends on ARCH_INTEL_XWAY && DM_SERIAL
+	help
+	  Select this to enable UART on Intel XWAY SoCs.
 
 config UNIPHIER_SERIAL
 	bool "Support for UniPhier on-chip UART"
