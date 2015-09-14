@@ -630,7 +630,7 @@ static int display_new_sp(void)
 	return 0;
 }
 
-#ifdef CONFIG_PPC
+#if defined(CONFIG_PPC) || defined(CONFIG_MIPS)
 static int setup_board_part1(void)
 {
 	bd_t *bd = gd->bd;
@@ -660,7 +660,9 @@ static int setup_board_part1(void)
 
 	return 0;
 }
+#endif
 
+#ifdef CONFIG_PPC
 static int setup_board_part2(void)
 {
 	bd_t *bd = gd->bd;
@@ -958,8 +960,10 @@ static init_fnc_t init_sequence_f[] = {
 	reserve_stacks,
 	setup_dram_config,
 	show_dram_config,
-#ifdef CONFIG_PPC
+#if defined(CONFIG_PPC) || defined(CONFIG_MIPS)
 	setup_board_part1,
+#endif
+#ifdef CONFIG_PPC
 	INIT_FUNC_WATCHDOG_RESET
 	setup_board_part2,
 #endif
