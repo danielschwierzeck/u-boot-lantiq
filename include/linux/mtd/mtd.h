@@ -445,7 +445,7 @@ static inline void mtd_erase_callback(struct erase_info *instr)
 #define MTD_DEBUG_LEVEL3	(3)	/* Noisy   */
 
 #ifdef CONFIG_MTD_DEBUG
-#define pr_debug(args...)	MTDDEBUG(MTD_DEBUG_LEVEL0, args)
+#define pr_debug(args...)	MTDDEBUG(MTD_DEBUG_LEVEL2, args)
 #define MTDDEBUG(n, args...)				\
 	do {						\
 		if (n <= CONFIG_MTD_DEBUG_VERBOSE)	\
@@ -460,7 +460,7 @@ static inline void mtd_erase_callback(struct erase_info *instr)
 	} while(0)
 #endif /* CONFIG_MTD_DEBUG */
 #define pr_info(args...)	MTDDEBUG(MTD_DEBUG_LEVEL0, args)
-#define pr_warn(args...)	MTDDEBUG(MTD_DEBUG_LEVEL0, args)
+#define pr_warn(args...)	MTDDEBUG(MTD_DEBUG_LEVEL1, args)
 #define pr_err(args...)		MTDDEBUG(MTD_DEBUG_LEVEL0, args)
 #define pr_crit(args...)	MTDDEBUG(MTD_DEBUG_LEVEL0, args)
 #define pr_cont(args...)	MTDDEBUG(MTD_DEBUG_LEVEL0, args)
