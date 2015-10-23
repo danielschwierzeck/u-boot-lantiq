@@ -998,6 +998,15 @@ LTQBOOTIMAGEFLAGS_u-boot.ltq.lzo.nandspl = -t nandspl -e $(CONFIG_SPL_TEXT_BASE)
 u-boot.ltq.lzo.nandspl: u-boot-lzo.img spl/u-boot-spl.bin tpl/u-boot-tpl.bin
 	$(call if_changed,ltqbootimage)
 
+LTQBOOTIMAGEFLAGS_u-boot.ltq.lzo.nandhwspl = -t nandhwspl \
+	-x $(CONFIG_SPL_U_BOOT_OFFS) -U $(CONFIG_SPL_U_BOOT_SIZE) \
+	-p $(CONFIG_SYS_NAND_PAGE_SIZE) -E $(CONFIG_SYS_NAND_BLOCK_SIZE) \
+	-s spl/u-boot-spl.bin -u u-boot-lzo.img \
+	$(if $(CONFIG_LTQ_SPL_SWAP),-b) \
+	$(if $(CONFIG_LTQ_SPL_REDUND_IMAGES),-r $(CONFIG_LTQ_SPL_REDUND_IMAGES))
+u-boot.ltq.lzo.nandhwspl: u-boot-lzo.img spl/u-boot-spl.bin
+	$(call if_changed,ltqbootimage)
+
 LTQBOOTIMAGEFLAGS_u-boot.ltq.lzo.norspl = -t norspl -x $(CONFIG_SPL_U_BOOT_OFFS) \
 	-X $(CONFIG_SPL_TPL_OFFS) -U $(CONFIG_SPL_U_BOOT_SIZE) \
 	-s spl/u-boot-spl.bin -T tpl/u-boot-tpl.bin -u u-boot-lzo.img
