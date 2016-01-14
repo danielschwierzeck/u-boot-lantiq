@@ -2,7 +2,23 @@ menu "Intel XWAY platforms"
 	depends on ARCH_INTEL_XWAY
 
 config SYS_SOC
-	default "none"
+	default "vrx200" if SOC_INTEL_XWAY_VRX200
+
+choice
+	prompt "Intel XWAY SoC select"
+
+config SOC_INTEL_XWAY_VRX200
+	bool "Intel XWAY VRX200 family"
+	select SUPPORTS_BIG_ENDIAN
+	select SUPPORTS_CPU_MIPS32_R1
+	select SUPPORTS_CPU_MIPS32_R2
+	select MIPS_TUNE_34KC
+	select MIPS_INIT_STACK_IN_SRAM
+	help
+	  This supports Intel XWAY VRX200 family including VRX220, VRX268
+	  and VRX288.
+
+endchoice
 
 choice
 	prompt "Boot mode"

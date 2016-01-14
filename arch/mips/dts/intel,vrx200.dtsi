@@ -1,0 +1,74 @@
+// SPDX-License-Identifier: GPL-2.0+
+/*
+ * Copyright (C) 2016-2020 Daniel Schwierzeck, daniel.schwierzeck@gmail.com
+ */
+
+#include <dt-bindings/clock/intel,xway.h>
+#include "skeleton.dtsi"
+
+/ {
+	compatible = "intel,vrx200";
+
+	cpus {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		cpu@0 {
+			compatible = "mips,mips34kc";
+			reg = <0>;
+		};
+	};
+
+	fpi@10000000 {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		compatible = "intel,xway-fpi", "simple-bus";
+		reg = <0x10000000 0xf000000>;
+		ranges = <0x0 0x10000000 0xeffffff>;
+
+		stp: gpio@e100bb0 {
+			compatible = "intel,vrx200-stp";
+			reg = <0xe100bb0 0x40>;
+			#gpio-cells = <2>;
+			gpio-controller;
+			status = "disabled";
+		};
+
+		uart1: serial@e100c00 {
+			compatible = "intel,xway-uart";
+			reg = <0xe100c00 0x100>;
+			clocks = <&cgu XWAY_CLK_ASC>;
+			clock-names = "asc";
+		};
+	};
+
+	sram: sram@1f000000 {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		compatible = "intel,xway-sram", "simple-bus";
+		reg = <0x1f000000 0x800000>;
+		ranges = <0x0 0x1f000000 0x7fffff>;
+
+		pmu: power-controller@f102000 {
+			compatible = "intel,vrx200-pmu";
+			reg = <0xf102000 0x1000>;
+		};
+
+		cgu: clock-controller@f103000 {
+			compatible = "intel,vrx200-cgu";
+			reg = <0xf103000 0x1000>;
+			#clock-cells = <1>;
+		};
+
+		rcu: reset-controller@f203000 {
+			compatible = "intel,vrx200-rcu";
+			reg = <0xf203000 0x1000>;
+		};
+
+		mc: memory-controller@f400000 {
+			compatible = "intel,vrx200-mc";
+			reg = <0xf140000 0x200
+				0xf1401000 0x1000>;
+		};
+	};
+};
