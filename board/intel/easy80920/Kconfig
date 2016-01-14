@@ -1,0 +1,12 @@
+if TARGET_EASY80920
+
+config SYS_BOARD
+	default "easy80920"
+
+config SYS_VENDOR
+	default "intel"
+
+config SYS_CONFIG_NAME
+	default "easy80920"
+
+endif

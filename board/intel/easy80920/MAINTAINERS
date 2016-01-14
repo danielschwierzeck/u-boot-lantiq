@@ -1,0 +1,6 @@
+INTEL EASY80920 BOARD
+M:	Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+S:	Maintained
+F:	board/intel/easy80920/
+F:	include/configs/easy80920.h
+F:	configs/easy80920*_defconfig

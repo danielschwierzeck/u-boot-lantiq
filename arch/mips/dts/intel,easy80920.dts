@@ -1,0 +1,41 @@
+// SPDX-License-Identifier: GPL-2.0+
+/*
+ * Copyright (C) 2016-2020 Daniel Schwierzeck, daniel.schwierzeck@gmail.com
+ */
+
+/dts-v1/;
+
+#include "intel,vrx200.dtsi"
+
+/ {
+	model = "Intel EASY80920 evaluation board";
+	compatible = "intel,easy80920", "intel,vrx200";
+
+	aliases {
+		serial0 = &uart1;
+	};
+
+	chosen {
+		stdout-path = "serial0:115200n8";
+	};
+};
+
+&stp {
+	status = "ok";
+};
+
+&sram {
+	u-boot,dm-pre-reloc;
+};
+
+&uart1 {
+	u-boot,dm-pre-reloc;
+};
+
+&cgu {
+	u-boot,dm-pre-reloc;
+};
+
+&mc {
+	u-boot,dm-pre-reloc;
+};
