@@ -47,6 +47,11 @@ endchoice
 choice
 	prompt "Board select"
 
+config TARGET_EASY330
+	bool "Intel EASY330 evaluation board"
+	depends on SOC_INTEL_XWAY_GRX330
+	select INTEL_SUPPORTS_BOOT_RAM
+
 config TARGET_EASY50712
 	bool "Intel EASY50712 evaluation board"
 	depends on SOC_INTEL_XWAY_DANUBE
@@ -75,6 +80,7 @@ endchoice
 config INTEL_SUPPORTS_BOOT_RAM
 	bool
 
+source "board/intel/easy330/Kconfig"
 source "board/intel/easy50712/Kconfig"
 source "board/intel/easy80920/Kconfig"
 

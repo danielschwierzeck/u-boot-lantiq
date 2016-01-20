@@ -1,0 +1,6 @@
+INTEL EASY330 BOARD
+M:	Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+S:	Maintained
+F:	board/intel/easy330/
+F:	include/configs/easy330.h
+F:	configs/easy330*_defconfig

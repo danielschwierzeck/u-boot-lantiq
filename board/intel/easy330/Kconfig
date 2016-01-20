@@ -1,0 +1,12 @@
+if TARGET_EASY330
+
+config SYS_BOARD
+	default "easy330"
+
+config SYS_VENDOR
+	default "intel"
+
+config SYS_CONFIG_NAME
+	default "easy330"
+
+endif
