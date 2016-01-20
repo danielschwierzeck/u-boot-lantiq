@@ -1,0 +1,12 @@
+if TARGET_EASY50712
+
+config SYS_BOARD
+	default "easy50712"
+
+config SYS_VENDOR
+	default "intel"
+
+config SYS_CONFIG_NAME
+	default "easy50712"
+
+endif

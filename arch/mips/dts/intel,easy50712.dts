@@ -1,0 +1,37 @@
+// SPDX-License-Identifier: GPL-2.0+
+/*
+ * Copyright (C) 2016-2020 Daniel Schwierzeck, daniel.schwierzeck@gmail.com
+ */
+
+/dts-v1/;
+
+#include "intel,danube.dtsi"
+
+/ {
+	model = "Intel EASY50712 evaluation board";
+	compatible = "intel,easy50712", "intel,danube";
+
+	aliases {
+		serial0 = &uart1;
+	};
+
+	chosen {
+		stdout-path = "serial0:115200n8";
+	};
+};
+
+&sram {
+	u-boot,dm-pre-reloc;
+};
+
+&uart1 {
+	u-boot,dm-pre-reloc;
+};
+
+&cgu {
+	u-boot,dm-pre-reloc;
+};
+
+&mc {
+	u-boot,dm-pre-reloc;
+};

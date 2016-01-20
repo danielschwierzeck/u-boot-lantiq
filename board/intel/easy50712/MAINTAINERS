@@ -1,0 +1,6 @@
+INTEL EASY50712 BOARD
+M:	Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+S:	Maintained
+F:	board/intel/easy50712/
+F:	include/configs/easy50712.h
+F:	configs/easy50712*_defconfig

@@ -7,6 +7,7 @@ dtb-$(CONFIG_TARGET_AP121) += ap121.dtb
 dtb-$(CONFIG_TARGET_AP143) += ap143.dtb
 dtb-$(CONFIG_TARGET_AP152) += ap152.dtb
 dtb-$(CONFIG_TARGET_BOSTON) += img,boston.dtb
+dtb-$(CONFIG_TARGET_EASY50712) += intel,easy50712.dtb
 dtb-$(CONFIG_TARGET_EASY80920) += intel,easy80920.dtb
 dtb-$(CONFIG_TARGET_MALTA) += mti,malta.dtb
 dtb-$(CONFIG_TARGET_PIC32MZDASK) += pic32mzda_sk.dtb
