@@ -4,6 +4,7 @@ menu "Intel XWAY platforms"
 config SYS_SOC
 	default "danube" if SOC_INTEL_XWAY_DANUBE
 	default "vrx200" if SOC_INTEL_XWAY_VRX200
+	default "grx330" if SOC_INTEL_XWAY_GRX330
 
 choice
 	prompt "Intel XWAY SoC select"
@@ -29,6 +30,17 @@ config SOC_INTEL_XWAY_VRX200
 	help
 	  This supports Intel XWAY VRX200 family including VRX220, VRX268
 	  and VRX288.
+
+config SOC_INTEL_XWAY_GRX330
+	bool "Intel XWAY GRX330 family"
+	select SUPPORTS_BIG_ENDIAN
+	select SUPPORTS_CPU_MIPS32_R1
+	select SUPPORTS_CPU_MIPS32_R2
+	select MIPS_TUNE_34KC
+	select MIPS_INIT_STACK_IN_SRAM
+	help
+	  This supports Intel XWAY GRX330 family including GRX369, GRX387
+	  and GRX389.
 
 endchoice
 
