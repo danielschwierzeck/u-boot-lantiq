@@ -358,6 +358,14 @@ config MVEBU_GPIO
 	help
 	  Say yes here to support Marvell MVEBU (Armada XP/38x) GPIOs.
 
+config XWAY_GPIO
+	bool "Intel XWAY GPIO driver"
+	depends on DM_GPIO && ARCH_INTEL_XWAY
+	help
+	  This driver supports the GPIO banks on Intel XWAY SoCs. The GPIOs are
+	  arranged into a number of banks (different for each SoC type) each
+	  with 16 GPIOs.
+
 config ZYNQ_GPIO
 	bool "Zynq GPIO driver"
 	depends on DM_GPIO && (ARCH_ZYNQ || ARCH_ZYNQMP || ARCH_VERSAL)
