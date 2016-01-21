@@ -366,6 +366,15 @@ config XWAY_GPIO
 	  arranged into a number of banks (different for each SoC type) each
 	  with 16 GPIOs.
 
+config INTEL_XWAY_STP
+        bool "Intel XWAY STP (serial-to-parallel) driver"
+        depends on DM_GPIO && ARCH_INTEL_XWAY
+        help
+          This driver supports the STP (serial-to-parallel) GPIO module on
+          Intel XWAY SoCs. The STP module works as GPIO expander with up to
+          three externally connected shift registers (8 bit). Therefore up to
+          24 additional GPIOs could be made available with STP.
+
 config ZYNQ_GPIO
 	bool "Zynq GPIO driver"
 	depends on DM_GPIO && (ARCH_ZYNQ || ARCH_ZYNQMP || ARCH_VERSAL)
