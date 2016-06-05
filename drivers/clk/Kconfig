@@ -188,4 +188,10 @@ config SANDBOX_CLK_CCF
 	  Enable this option if you want to test the Linux kernel's Common
 	  Clock Framework [CCF] code in U-Boot's Sandbox clock driver.
 
+config CLK_XWAY
+	bool "Enable clock driver support for Intel XWAY SoCs"
+	depends on CLK && ARCH_INTEL_XWAY
+	help
+	  This clock driver adds support for clocks on Intel XWAY SoCs.
+
 endmenu
