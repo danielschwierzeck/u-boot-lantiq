@@ -8,7 +8,7 @@
  * Sysgo Real-Time Solutions, GmbH <www.elinos.com>
  * Marius Groeger <mgroeger@sysgo.de>
  */
-
+#define DEBUG
 #include <common.h>
 #include <bloblist.h>
 #include <bootstage.h>
