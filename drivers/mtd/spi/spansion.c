@@ -124,6 +124,22 @@ static const struct spansion_spi_flash_params spansion_spi_flash_table[] = {
 		.nr_sectors = 64,
 		.name = "S25FL128P_256K",
 	},
+	{
+	    .idcode1 = 0x2018,
+	    .idcode2 = 0x4d01,
+		.page_size = 256,
+	    .pages_per_sector = 256,
+	    .nr_sectors = 256,
+	    .name = "S25FL128S",
+	},
+	{
+	    .idcode1 = 0x2018,
+	    .idcode2 = 0x4d01,
+	    .page_size = 256,
+	    .pages_per_sector = 256,
+	    .nr_sectors = 512,
+	    .name = "S25FL256S",
+	},
 };
 
 static int spansion_wait_ready(struct spi_flash *flash, unsigned long timeout)

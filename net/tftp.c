@@ -481,12 +481,12 @@ TftpHandler (uchar * pkt, unsigned dest, unsigned src, unsigned len)
 					pkt + 2, ntohs(*(ushort *)pkt));
 
 		switch (ntohs(*(ushort *)pkt)) {
-		case TFTP_ERR_FILE_NOT_FOUND:
 		case TFTP_ERR_ACCESS_DENIED:
 			puts("Not retrying...\n");
 			eth_halt();
 			NetState = NETLOOP_FAIL;
 			break;
+		case TFTP_ERR_FILE_NOT_FOUND:
 		case TFTP_ERR_UNDEFINED:
 		case TFTP_ERR_DISK_FULL:
 		case TFTP_ERR_UNEXPECTED_OPCODE:

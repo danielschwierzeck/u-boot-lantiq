@@ -139,11 +139,13 @@ static int do_spi_flash_erase(int argc, char *argv[])
 	if (*argv[2] == 0 || *endp != 0)
 		goto usage;
 
+	puts("Erasing SPI flash...");
 	ret = spi_flash_erase(flash, offset, len);
 	if (ret) {
 		printf("SPI flash %s failed\n", argv[0]);
 		return 1;
 	}
+	puts("Done\n");
 
 	return 0;
 

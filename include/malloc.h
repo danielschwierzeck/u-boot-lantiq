@@ -831,7 +831,7 @@ Void_t *(*__morecore)() = __default_morecore_init;
 
 #define MORECORE (*__morecore)
 #define MORECORE_FAILURE 0
-#define MORECORE_CLEARS 1
+#define MORECORE_CLEARS 0
 
 #else /* INTERNAL_LINUX_C_LIB */
 
@@ -850,7 +850,7 @@ extern Void_t*     sbrk();
 #endif
 
 #ifndef MORECORE_CLEARS
-#define MORECORE_CLEARS 1
+#define MORECORE_CLEARS 0
 #endif
 
 #endif /* INTERNAL_LINUX_C_LIB */

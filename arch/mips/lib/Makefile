@@ -33,7 +33,9 @@ COBJS-y	+= bootm_qemu_mips.o
 else
 COBJS-y	+= bootm.o
 endif
+ifneq ($(CONFIG_DRIVER_VBG400),y)
 COBJS-y	+= time.o
+endif
 
 SRCS	:= $(SOBJS-y:.o=.S) $(COBJS-y:.o=.c)
 OBJS	:= $(addprefix $(obj),$(SOBJS-y) $(COBJS-y))

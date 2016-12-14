@@ -50,8 +50,8 @@ extern void nand_wait_ready(struct mtd_info *mtd);
  * is supported now. If you add a chip with bigger oobsize/page
  * adjust this accordingly.
  */
-#define NAND_MAX_OOBSIZE	218
-#define NAND_MAX_PAGESIZE	4096
+#define NAND_MAX_OOBSIZE	576
+#define NAND_MAX_PAGESIZE	8192
 
 /*
  * Constants for hardware specific CLE/ALE/NCE function
@@ -85,6 +85,7 @@ extern void nand_wait_ready(struct mtd_info *mtd);
 #define NAND_CMD_RNDIN		0x85
 #define NAND_CMD_READID		0x90
 #define NAND_CMD_ERASE2		0xd0
+#define NAND_CMD_PARAM    0xec
 #define NAND_CMD_RESET		0xff
 
 /* Extended commands for large page devices */
@@ -129,6 +130,7 @@ typedef enum {
 	NAND_ECC_HW,
 	NAND_ECC_HW_SYNDROME,
 	NAND_ECC_HW_OOB_FIRST,
+    NAND_ECC_SOFT_BCH,
 } nand_ecc_modes_t;
 
 /*
@@ -190,7 +192,7 @@ typedef enum {
 					&& (chip->page_shift > 9))
 
 /* Mask to zero out the chip options, which come from the id table */
-#define NAND_CHIPOPTIONS_MSK	(0x0000ffff & ~NAND_NO_AUTOINCR)
+#define NAND_CHIPOPTIONS_MSK	(0x0000ffff & ~NAND_NO_AUTOINCR & ~NAND_NO_SUBPAGE_WRITE)
 
 /* Non chip related options */
 /* Use a flash based bad block table. This option is passed to the
@@ -213,6 +215,71 @@ typedef enum {
 
 /* Keep gcc happy */
 struct nand_chip;
+
+
+struct nand_onfi_params {
+	/* rev info and features block */
+	/* 'O' 'N' 'F' 'I'  */
+	u8 sig[4];
+	__le16 revision;
+	__le16 features;
+	__le16 opt_cmd;
+	u8 reserved[22];
+
+	/* manufacturer information block */
+	char manufacturer[12];
+	char model[20];
+	u8 jedec_id;
+	__le16 date_code;
+	u8 reserved2[13];
+
+	/* memory organization block */
+	__le32 byte_per_page;
+	__le16 spare_bytes_per_page;
+	__le32 data_bytes_per_ppage;
+	__le16 spare_bytes_per_ppage;
+	__le32 pages_per_block;
+	__le32 blocks_per_lun;
+	u8 lun_count;
+	u8 addr_cycles;
+	u8 bits_per_cell;
+	__le16 bb_per_lun;
+	__le16 block_endurance;
+	u8 guaranteed_good_blocks;
+	__le16 guaranteed_block_endurance;
+	u8 programs_per_page;
+	u8 ppage_attr;
+	u8 ecc_bits;
+	u8 interleaved_bits;
+	u8 interleaved_ops;
+	u8 reserved3[13];
+
+	/* electrical parameter block */
+	u8 io_pin_capacitance_max;
+	__le16 async_timing_mode;
+	__le16 program_cache_timing_mode;
+	__le16 t_prog;
+	__le16 t_bers;
+	__le16 t_r;
+	__le16 t_ccs;
+	__le16 src_sync_timing_mode;
+	__le16 src_ssync_features;
+	__le16 clk_pin_capacitance_typ;
+	__le16 io_pin_capacitance_typ;
+	__le16 input_pin_capacitance_typ;
+	u8 input_pin_capacitance_max;
+	u8 driver_strenght_support;
+	__le16 t_int_r;
+	__le16 t_ald;
+	u8 reserved4[7];
+
+	/* vendor */
+	u8 reserved5[90];
+
+	__le16 crc;
+} __attribute__((packed));
+
+#define ONFI_CRC_BASE   0x4F4E
 
 /**
  * struct nand_hw_control - Control structure for hardware controller (e.g ECC generator) shared among independent devices
@@ -260,6 +327,7 @@ struct nand_ecc_ctrl {
 	int			prepad;
 	int			postpad;
 	struct nand_ecclayout	*layout;
+	void        *priv;
 	void			(*hwctl)(struct mtd_info *mtd, int mode);
 	int			(*calculate)(struct mtd_info *mtd,
 					     const uint8_t *dat,
@@ -380,6 +448,8 @@ struct nand_chip {
 	int		(*block_markbad)(struct mtd_info *mtd, loff_t ofs);
 	void		(*cmd_ctrl)(struct mtd_info *mtd, int dat,
 				    unsigned int ctrl);
+	int (*init_size)(struct mtd_info *mtd, struct nand_chip *this,
+                        u8 *id_data);
 	int		(*dev_ready)(struct mtd_info *mtd);
 	void		(*cmdfunc)(struct mtd_info *mtd, unsigned command, int column, int page_addr);
 	int		(*waitfunc)(struct mtd_info *mtd, struct nand_chip *this);
@@ -403,6 +473,9 @@ struct nand_chip {
 	int		subpagesize;
 	uint8_t		cellinfo;
 	int		badblockpos;
+
+  int onfi_version;
+	struct nand_onfi_params	onfi_params;
 
 	int 		state;
 

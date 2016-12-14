@@ -39,11 +39,12 @@ extern uint32_t __div64_32(uint64_t *dividend, uint32_t divisor);
 /* Wrapper for do_div(). Doesn't modify dividend and returns
  * the result, not reminder.
  */
+#if !defined(BUILD_FROM_IFX_UTILITIES)
 static inline uint64_t lldiv(uint64_t dividend, uint32_t divisor)
 {
 	uint64_t __res = dividend;
 	do_div(__res, divisor);
 	return(__res);
 }
-
+#endif
 #endif /* _ASM_GENERIC_DIV64_H */

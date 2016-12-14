@@ -1,0 +1,43 @@
+menu "libs"
+
+config ADDR_MAP
+   bool "addr map"
+
+config BZIP2
+   bool "bzip2"
+
+config BCH
+   bool "BCH"
+
+config USB_TTY
+   bool "usb tty"
+
+config GZIP
+   bool "gzip"
+
+config LMB
+   bool "lmb"
+
+config MD5
+   bool "md5"
+
+config SHA1
+   bool "SHA1"
+
+config SHA256
+   bool "SHA256"
+
+config ZLIB
+   bool "ZLIB"
+
+config RBTREE
+   bool "RBTREE"
+
+config LZO
+   bool "LZO"
+
+config LZMA
+   bool "LZMA"
+   default y
+
+endmenu

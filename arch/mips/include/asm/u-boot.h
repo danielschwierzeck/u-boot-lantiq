@@ -31,6 +31,10 @@
 #ifndef _U_BOOT_H_
 #define _U_BOOT_H_	1
 
+#ifdef BUILD_FROM_LTQ_APPS
+  typedef unsigned long phys_size_t;
+#endif
+
 typedef struct bd_info {
 	int		bi_baudrate;	/* serial console baudrate */
 	unsigned long	bi_ip_addr;	/* IP Address */
