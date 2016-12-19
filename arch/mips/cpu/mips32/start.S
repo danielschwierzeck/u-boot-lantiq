@@ -141,7 +141,7 @@ reset:
 	/* Set up temporary stack */
 	li	sp, CONFIG_SYS_INIT_SP_ADDR
 	move	fp, sp
-
+	move	a0, zero	# a0 <-- boot_flags = 0
 	la	t9, board_init_f
 	jr	t9
 	 move	ra, zero
