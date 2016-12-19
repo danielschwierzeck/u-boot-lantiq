@@ -42,6 +42,10 @@ static void gpio_init(void)
 	gpio_set_altfunc(48, GPIO_ALTSEL_SET, GPIO_ALTSEL_CLR, GPIO_DIR_IN);
 	/* GPIO 3.1 as output for NAND Read */
 	gpio_set_altfunc(49, GPIO_ALTSEL_SET, GPIO_ALTSEL_CLR, GPIO_DIR_OUT);
+
+	/* phy reset */
+	gpio_direction_output(37, 1);
+	gpio_direction_output(44, 1);
 }
 
 int board_early_init_f(void)
