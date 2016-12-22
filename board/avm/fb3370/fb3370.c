@@ -49,6 +49,9 @@ static void gpio_init(void)
 
 	/* power LED on */
 	gpio_direction_output(0x20, 0);
+
+	/* keep the device powered on */
+	gpio_direction_output(0x2D, 0);
 }
 
 int board_early_init_f(void)
