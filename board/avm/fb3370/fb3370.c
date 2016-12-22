@@ -46,6 +46,9 @@ static void gpio_init(void)
 	/* phy reset */
 	gpio_direction_output(37, 1);
 	gpio_direction_output(44, 1);
+
+	/* power LED on */
+	gpio_direction_output(0x20, 0);
 }
 
 int board_early_init_f(void)
