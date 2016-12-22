@@ -106,7 +106,10 @@ int board_eth_init(bd_t * bis)
 	const enum ltq_gphy_clk clk = LTQ_GPHY_CLK_25MHZ_PLL0;
 	const ulong fw_addr = 0x80FF0000;
 
-	ltq_gphy_phy11g_a1x_load(fw_addr);
+	if (ltq_chip_version_get() == 1)
+		ltq_gphy_phy11g_a1x_load(fw_addr);
+	else
+		ltq_gphy_phy11g_a2x_load(fw_addr);
 
 	ltq_cgu_gphy_clk_src(clk);
 
