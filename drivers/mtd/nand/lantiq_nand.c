@@ -117,8 +117,11 @@ static void ltq_nand_read_buf(struct mtd_info *mtd, uint8_t *buf, int len)
 int ltq_nand_init(struct nand_chip *nand)
 {
 	/* Enable NAND, set NAND CS to EBU CS1, enable EBU CS mux */
-	ltq_writel(&ltq_nand_regs->con, NAND_CON_LATCH_ALL | NAND_CON_OUT_CS1 |
-		NAND_CON_IN_CS1 | NAND_CON_PRE_P | NAND_CON_WP_P |
+	ltq_writel(&ltq_nand_regs->con, NAND_CON_LATCH_ALL |
+#ifndef CONFIG_LTQ_SUPPORT_NAND_FLASH_CS0
+		NAND_CON_OUT_CS1 | NAND_CON_IN_CS1 |
+#endif
+		NAND_CON_PRE_P | NAND_CON_WP_P |
 		NAND_CON_SE_P | NAND_CON_CS_P | NAND_CON_CSMUX | NAND_CON_NANDM);
 
 	nand->dev_ready = ltq_nand_dev_ready;
@@ -267,8 +270,11 @@ int nand_spl_load_image(uint32_t offs, unsigned int size, void *dst)
 void nand_init(void)
 {
 	/* Enable NAND, set NAND CS to EBU CS1, enable EBU CS mux */
-	ltq_writel(&ltq_nand_regs->con, NAND_CON_LATCH_ALL | NAND_CON_OUT_CS1 |
-		NAND_CON_IN_CS1 | NAND_CON_PRE_P | NAND_CON_WP_P |
+	ltq_writel(&ltq_nand_regs->con, NAND_CON_LATCH_ALL |
+#ifndef CONFIG_LTQ_SUPPORT_NAND_FLASH_CS0
+		NAND_CON_OUT_CS1 | NAND_CON_IN_CS1 |
+#endif
+		NAND_CON_PRE_P | NAND_CON_WP_P |
 		NAND_CON_SE_P | NAND_CON_CS_P | NAND_CON_CSMUX | NAND_CON_NANDM);
 }
 #endif
