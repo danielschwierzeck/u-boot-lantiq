@@ -35,9 +35,9 @@
 #define EBU_CON_CMULT_16		0x3
 
 #if defined(CONFIG_LTQ_SUPPORT_NOR_FLASH)
-#define ebu_region0_enable		1
+#define ebu_region0_enable_nor		1
 #else
-#define ebu_region0_enable		0
+#define ebu_region0_enable_nor		0
 #endif
 
 #if ((CONFIG_SYS_MAX_FLASH_BANKS == 2) && defined(CONFIG_LTQ_SUPPORT_NOR_FLASH) )
@@ -46,7 +46,14 @@
 #define ebu_region0_addrsel_mask	1
 #endif
 
-#if defined(CONFIG_LTQ_SUPPORT_NAND_FLASH) || ((CONFIG_SYS_MAX_FLASH_BANKS == 2) && defined(CONFIG_LTQ_SUPPORT_NOR_FLASH) )
+#if defined(CONFIG_LTQ_SUPPORT_NAND_FLASH_CS0)
+#define ebu_region0_enable_nand		1
+#else
+#define ebu_region0_enable_nand		0
+#endif
+
+#if (defined(CONFIG_LTQ_SUPPORT_NAND_FLASH) && !defined(CONFIG_LTQ_SUPPORT_NAND_FLASH_CS0)) || \
+	((CONFIG_SYS_MAX_FLASH_BANKS == 2) && defined(CONFIG_LTQ_SUPPORT_NOR_FLASH))
 #define ebu_region1_enable		1
 #else
 #define ebu_region1_enable		0
@@ -76,7 +83,7 @@ static struct ltq_ebu_regs *ltq_ebu_regs =
 void ltq_ebu_init(void)
 {
 
-	if (ebu_region0_enable) {
+	if (ebu_region0_enable_nor) {
 		/*
 		 * Map EBU region 0 to range 0x10000000-0x13ffffff and enable
 		 * region control. This supports up to 32 MiB NOR flash in
@@ -91,6 +98,20 @@ void ltq_ebu_init(void)
 			EBU_CON_WAITWRC(7) | EBU_CON_WAITRDC(3) |
 			EBU_CON_HOLDC(3) | EBU_CON_RECOVC(3) |
 			EBU_CON_CMULT_16);
+	} else if (ebu_region0_enable_nand) {
+		/* Map EBU region 1 to range 0x14000000-0x13ffffff and enable
+		 * region control. This supports NAND flash in bank 0.
+		 */
+		ltq_writel(&ltq_ebu_regs->addr_sel_0, LTQ_EBU_REGION1_BASE |
+			EBU_ADDRSEL_MASK(3) | EBU_ADDRSEL_REGEN);
+
+		ltq_writel(&ltq_ebu_regs->con_0, EBU_CON_AGEN_DEMUX |
+			EBU_CON_SETUP | EBU_CON_WAIT_DIS | EBU_CON_PW_8BIT |
+			EBU_CON_ALEC(3) | EBU_CON_BCGEN_INTEL |
+			EBU_CON_WAITWRC(2) | EBU_CON_WAITRDC(2) |
+			EBU_CON_HOLDC(1) | EBU_CON_RECOVC(1) |
+			EBU_CON_CMULT_4);
+
 	} else
 		ltq_clrbits(&ltq_ebu_regs->addr_sel_0, EBU_ADDRSEL_REGEN);
 
