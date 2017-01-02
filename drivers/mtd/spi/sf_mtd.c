@@ -81,6 +81,7 @@ int spi_flash_mtd_register(struct spi_flash *flash)
 	sf_mtd_info.type = MTD_NORFLASH;
 	sf_mtd_info.flags = MTD_CAP_NORFLASH;
 	sf_mtd_info.writesize = 1;
+	sf_mtd_info.writebufsize = flash->page_size;
 
 	sf_mtd_info._erase = spi_flash_mtd_erase;
 	sf_mtd_info._read = spi_flash_mtd_read;
