@@ -4158,12 +4158,10 @@ int nand_scan_tail(struct mtd_info *mtd)
 			ecc->read_page_raw = nand_read_page_raw;
 		if (!ecc->write_page_raw)
 			ecc->write_page_raw = nand_write_page_raw;
-		if (!ecc->write_page)
-			ecc->write_page = nand_write_page_raw;
-		if (!ecc->read_oob)
-			ecc->read_oob = nand_read_oob_std;
-		if (!ecc->write_oob)
-			ecc->write_oob = nand_write_oob_std;
+
+		ecc->write_page = ecc->write_page_raw;
+		ecc->read_oob = nand_read_oob_std;
+		ecc->write_oob = nand_write_oob_std;
 
 		ecc->bytes = 0;
 		break;
