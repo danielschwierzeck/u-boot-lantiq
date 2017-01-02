@@ -47,6 +47,11 @@ extern void nand_command(struct mtd_info *mtd, unsigned int command,
 extern void nand_command_lp(struct mtd_info *mtd, unsigned int command,
 			    int column, int page_addr);
 
+extern int nand_check_erased_ecc_chunk(void *data, int datalen,
+				       void *ecc, int ecclen,
+				       void *extraoob, int extraooblen,
+				       int threshold);
+
 /*
  * This constant declares the max. oobsize / page, which
  * is supported now. If you add a chip with bigger oobsize/page
