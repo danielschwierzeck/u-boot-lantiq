@@ -87,6 +87,7 @@ extern int nand_check_erased_ecc_chunk(void *data, int datalen,
 #define NAND_CMD_READOOB	0x50
 #define NAND_CMD_ERASE1		0x60
 #define NAND_CMD_STATUS		0x70
+#define NAND_CMD_ECC_STATUS	0x7a
 #define NAND_CMD_SEQIN		0x80
 #define NAND_CMD_RNDIN		0x85
 #define NAND_CMD_READID		0x90
@@ -190,12 +191,16 @@ typedef enum {
 /* Device supports subpage reads */
 #define NAND_SUBPAGE_READ	0x00001000
 
+/* Device supports on-die ECC */
+#define NAND_ONDIE_ECC		0x00002000
+
 /* Options valid for Samsung large page devices */
 #define NAND_SAMSUNG_LP_OPTIONS NAND_CACHEPRG
 
 /* Macros to identify the above */
 #define NAND_HAS_CACHEPROG(chip) ((chip->options & NAND_CACHEPRG))
 #define NAND_HAS_SUBPAGE_READ(chip) ((chip->options & NAND_SUBPAGE_READ))
+#define NAND_HAS_ONDIE_ECC(chip) ((chip->options & NAND_ONDIE_ECC))
 
 /* Non chip related options */
 /* This option skips the bbt scan during initialization. */
@@ -667,6 +672,9 @@ struct nand_buffers {
  *			additional error status checks (determine if errors are
  *			correctable).
  * @write_page:		[REPLACEABLE] High-level page write function
+ * @ecc_status:		[INTERN] chip specific function to read ECC status
+ *			from chips with on-die ECC engine to get the count of
+ *			corrected bits.
  */
 
 struct nand_chip {
@@ -700,6 +708,7 @@ struct nand_chip {
 	int (*onfi_get_features)(struct mtd_info *mtd, struct nand_chip *chip,
 			int feature_addr, uint8_t *subfeature_para);
 	int (*setup_read_retry)(struct mtd_info *mtd, int retry_mode);
+	int (*ecc_status)(struct mtd_info *mtd, struct nand_chip *chip);
 
 	int chip_delay;
 	unsigned int options;
