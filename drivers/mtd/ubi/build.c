@@ -106,11 +106,7 @@ static struct miscdevice ubi_ctrl_cdev = {
 #endif
 
 /* All UBI devices in system */
-#ifndef __UBOOT__
 static struct ubi_device *ubi_devices[UBI_MAX_DEVICES];
-#else
-struct ubi_device *ubi_devices[UBI_MAX_DEVICES];
-#endif
 
 #ifndef __UBOOT__
 /* Serializes UBI devices creations and removals */
@@ -1395,7 +1391,11 @@ module_exit(ubi_exit);
  * This function returns positive resulting integer in case of success and a
  * negative error code in case of failure.
  */
+#ifndef __UBOOT__
 static int __init bytes_str_to_int(const char *str)
+#else
+int bytes_str_to_int(const char *str)
+#endif
 {
 	char *endp;
 	unsigned long result;
