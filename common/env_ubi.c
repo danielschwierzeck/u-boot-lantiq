@@ -30,6 +30,10 @@ int env_init(void)
 	return 0;
 }
 
+#ifndef CONFIG_ENV_UBI_VID_HDR_OFF
+#define CONFIG_ENV_UBI_VID_HDR_OFF	NULL
+#endif
+
 #ifdef CONFIG_CMD_SAVEENV
 #ifdef CONFIG_SYS_REDUNDAND_ENVIRONMENT
 static unsigned char env_flags;
@@ -43,7 +47,7 @@ int saveenv(void)
 	if (ret)
 		return ret;
 
-	if (ubi_part(CONFIG_ENV_UBI_PART, NULL)) {
+	if (ubi_part(CONFIG_ENV_UBI_PART, CONFIG_ENV_UBI_VID_HDR_OFF)) {
 		printf("\n** Cannot find mtd partition \"%s\"\n",
 		       CONFIG_ENV_UBI_PART);
 		return 1;
@@ -87,7 +91,7 @@ int saveenv(void)
 	if (ret)
 		return ret;
 
-	if (ubi_part(CONFIG_ENV_UBI_PART, NULL)) {
+	if (ubi_part(CONFIG_ENV_UBI_PART, CONFIG_ENV_UBI_VID_HDR_OFF)) {
 		printf("\n** Cannot find mtd partition \"%s\"\n",
 		       CONFIG_ENV_UBI_PART);
 		return 1;
@@ -117,7 +121,7 @@ void env_relocate_spec(void)
 	tmp_env1 = (env_t *)env1_buf;
 	tmp_env2 = (env_t *)env2_buf;
 
-	if (ubi_part(CONFIG_ENV_UBI_PART, NULL)) {
+	if (ubi_part(CONFIG_ENV_UBI_PART, CONFIG_ENV_UBI_VID_HDR_OFF)) {
 		printf("\n** Cannot find mtd partition \"%s\"\n",
 		       CONFIG_ENV_UBI_PART);
 		set_default_env(NULL);
@@ -173,7 +177,7 @@ void env_relocate_spec(void)
 {
 	ALLOC_CACHE_ALIGN_BUFFER(char, buf, CONFIG_ENV_SIZE);
 
-	if (ubi_part(CONFIG_ENV_UBI_PART, NULL)) {
+	if (ubi_part(CONFIG_ENV_UBI_PART, CONFIG_ENV_UBI_VID_HDR_OFF)) {
 		printf("\n** Cannot find mtd partition \"%s\"\n",
 		       CONFIG_ENV_UBI_PART);
 		set_default_env(NULL);
