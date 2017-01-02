@@ -467,6 +467,9 @@ ifeq ($(config-targets),1)
 %_config:: outputmakefile
 	@$(MKCONFIG) -A $(@:_config=)
 
+%_defconfig:: outputmakefile
+	@$(MKCONFIG) -A $(@:_defconfig=)
+
 else
 # ===========================================================================
 # Build targets only - this includes vmlinux, arch specific targets, clean
