@@ -55,12 +55,12 @@
 
 #if defined(CONFIG_SYS_BOOT_SFSPL)
 #define CONFIG_SPL_U_BOOT_OFFS		0x6800
-#define CONFIG_SPL_U_BOOT_SIZE		0x38000
+#define CONFIG_SPL_U_BOOT_SIZE		0x37800
 #define CONFIG_SPL_MC_TUNE_OFFS		0x3f800
 #define CONFIG_ENV_IS_IN_SPI_FLASH
 #define CONFIG_ENV_OVERWRITE
-#define CONFIG_ENV_OFFSET		(192 * 1024)
-#define CONFIG_ENV_SECT_SIZE		(64 * 1024)
+#define CONFIG_ENV_OFFSET		0x3e000
+#define CONFIG_ENV_SECT_SIZE	        0x1000
 
 #define MTDPARTS_DEFAULT		\
 	"mtdparts=spi0.4:192k(uboot),64k(uboot_env)"
@@ -70,7 +70,7 @@
 #define MTDPARTS_DEFAULT		"mtdparts="
 #endif
 
-#define CONFIG_ENV_SIZE			(8 * 1024)
+#define CONFIG_ENV_SIZE			(0x1000)
 #define CONFIG_LOADADDR			CONFIG_SYS_LOAD_ADDR
 
 #if defined(CONFIG_SYS_BOOT_EVA)
