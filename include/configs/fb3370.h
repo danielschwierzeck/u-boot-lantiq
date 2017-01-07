@@ -10,6 +10,9 @@
 #define CONFIG_IDENT_STRING	" fb3370"
 #define CONFIG_BOARD_NAME	"AVM FritzBox 3370"
 
+#define CONFIG_AUTOBOOT
+#define CONFIG_BOOTDELAY 2
+
 /* Configure SoC */
 #define CONFIG_LTQ_SUPPORT_UART			/* Enable ASC and UART */
 
