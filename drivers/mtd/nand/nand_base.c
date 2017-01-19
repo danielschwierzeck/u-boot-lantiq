@@ -3294,7 +3294,7 @@ static int nand_flash_detect_jedec(struct mtd_info *mtd, struct nand_chip *chip,
  * nand_id_has_period - Check if an ID string has a given wraparound period
  * @id_data: the ID string
  * @arrlen: the length of the @id_data array
- * @period: the period of repitition
+ * @period: the period of repetition
  *
  * Check if an ID string is repeated within a given sequence of bytes at
  * specific repetition interval period (e.g., {0x20,0x01,0x7F,0x20} has a
