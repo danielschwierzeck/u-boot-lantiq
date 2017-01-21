@@ -86,6 +86,9 @@
 #if defined(CONFIG_LTQ_SPL_COMP_LZO)
 #define CONFIG_LZO
 #define CONFIG_SPL_LZO_SUPPORT
+#elif defined(CONFIG_LTQ_SPL_COMP_LZMA)
+#define CONFIG_LZMA
+#define CONFIG_SPL_LZMA_SUPPORT
 #endif
 
 /* Basic commands */
@@ -143,8 +146,13 @@
 	"run sf-probe && sf erase 0 +$filesize && "		\
 	"sf write $fileaddr 0 $filesize\0"
 
+#if defined(CONFIG_LTQ_SPL_COMP_LZO)
 #define CONFIG_ENV_LOAD_UBOOT_SF					\
 	"load-uboot-sf=tftpboot u-boot.ltq.lzo.sfspl\0"
+#elif defined(CONFIG_LTQ_SPL_COMP_LZMA)
+#define CONFIG_ENV_LOAD_UBOOT_SF					\
+	"load-uboot-sf=tftpboot u-boot.ltq.lzma.sfspl\0"
+#endif
 
 #define CONFIG_ENV_UPDATE_UBOOT_SF					\
 	"update-uboot-sf=run load-uboot-sf write-uboot-sf\0"

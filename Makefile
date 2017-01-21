@@ -767,6 +767,9 @@ cmd_pad_cat = $(cmd_objcopy) && $(append) || rm -f $@
 quiet_cmd_lzop = LZOP    $@
 cmd_lzop = cat $< | lzop -9 -f - > $@
 
+quiet_cmd_lzma = LZMA    $@
+cmd_lzma = cat $< | lzma --stdout > $@
+
 all:		$(ALL-y)
 
 PHONY += dtbs
@@ -815,6 +818,9 @@ u-boot.bin: u-boot FORCE
 u-boot.bin.lzo: u-boot.bin
 	$(call if_changed,lzop)
 
+u-boot.bin.lzma: u-boot.bin
+	$(call if_changed,lzma)
+
 u-boot.ldr:	u-boot
 		$(CREATE_LDR_ENV)
 		$(LDR) -T $(CONFIG_BFIN_CPU) -c $@ $< $(LDR_FLAGS)
@@ -843,6 +849,10 @@ MKIMAGEFLAGS_u-boot-lzo.img = -A $(ARCH) -T firmware -C lzo -O u-boot \
 	-a $(CONFIG_SYS_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
 	-n "U-Boot $(UBOOTRELEASE) for $(BOARD) board"
 
+MKIMAGEFLAGS_u-boot-lzma.img = -A $(ARCH) -T firmware -C lzma -O u-boot \
+	-a $(CONFIG_SYS_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
+	-n "U-Boot $(UBOOTRELEASE) for $(BOARD) board"
+
 MKIMAGEFLAGS_u-boot.kwb = -n $(srctree)/$(CONFIG_SYS_KWD_CONFIG:"%"=%) \
 	-T kwbimage -a $(CONFIG_SYS_TEXT_BASE) -e $(CONFIG_SYS_TEXT_BASE)
 
@@ -853,6 +863,9 @@ u-boot.img u-boot.kwb u-boot.pbl: u-boot.bin FORCE
 	$(call if_changed,mkimage)
 
 u-boot-lzo.img: u-boot.bin.lzo FORCE
+	$(call if_changed,mkimage)
+
+u-boot-lzma.img: u-boot.bin.lzma FORCE
 	$(call if_changed,mkimage)
 
 MKIMAGEFLAGS_u-boot-dtb.img = $(MKIMAGEFLAGS_u-boot.img)
@@ -989,6 +1002,12 @@ LTQBOOTIMAGEFLAGS_u-boot.ltq.lzo.sfspl = -t sfspl -e $(CONFIG_SPL_TEXT_BASE) \
 	-x $(CONFIG_SPL_U_BOOT_OFFS) -U $(CONFIG_SPL_U_BOOT_SIZE) \
 	-s spl/u-boot-spl.bin -u u-boot-lzo.img
 u-boot.ltq.lzo.sfspl: u-boot-lzo.img spl/u-boot-spl.bin
+	$(call if_changed,ltqbootimage)
+
+LTQBOOTIMAGEFLAGS_u-boot.ltq.lzma.sfspl = -t sfspl -e $(CONFIG_SPL_TEXT_BASE) \
+	-x $(CONFIG_SPL_U_BOOT_OFFS) -U $(CONFIG_SPL_U_BOOT_SIZE) \
+	-s spl/u-boot-spl.bin -u u-boot-lzma.img
+u-boot.ltq.lzma.sfspl: u-boot-lzma.img spl/u-boot-spl.bin
 	$(call if_changed,ltqbootimage)
 
 LTQBOOTIMAGEFLAGS_u-boot.ltq.lzo.nandspl = -t nandspl -e $(CONFIG_SPL_TEXT_BASE) \

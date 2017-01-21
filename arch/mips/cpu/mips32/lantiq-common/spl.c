@@ -10,7 +10,7 @@
 #include <spi_flash.h>
 #include <nand.h>
 #include <linux/compiler.h>
-#include <lzma/LzmaDec.h>
+#include <lzma/LzmaTools.h>
 #include <linux/lzo.h>
 #include <asm/mipsregs.h>
 #include <asm/lantiq/spl.h>
@@ -41,6 +41,8 @@ static int spl_is_compressed(const struct spl_image *spl)
 
 #if defined(CONFIG_LTQ_SPL_COMP_LZO)
 	return spl->comp == IH_COMP_LZO;
+#elif defined(CONFIG_LTQ_SPL_COMP_LZMA)
+	return spl->comp == IH_COMP_LZMA;
 #endif
 
 	spl_puts("SPL: unsupported compression type\n");
@@ -116,12 +118,21 @@ static int spl_uncompress(struct spl_image *spl, unsigned long addr)
 	size_t len = CONFIG_SYS_LOAD_SIZE;
 	int ret;
 
+#if defined(CONFIG_LTQ_SPL_COMP_LZO)
 	spl_puts("SPL: decompressing U-Boot with LZO\n");
 
 	ret = lzop_decompress(
 		(const unsigned char*)addr, spl->data_size,
 		(unsigned char *) spl->entry_addr, &len);
 
+#elif defined(CONFIG_LTQ_SPL_COMP_LZMA)
+	spl_puts("SPL: decompressing U-Boot with LZMA\n");
+
+	ret = lzmaBuffToBuffDecompress(
+		(unsigned char *)spl->entry_addr, &len,
+		(unsigned char *)addr, spl->data_size);
+
+#endif
 	spl->entry_size = len;
 
 	return ret;
@@ -432,6 +443,11 @@ void __noreturn spl_lantiq_init(void)
 #if spl_boot_hsnand_flash
 	spl_debug("SPL: initializing NAND flash\n");
 	nand_init();
+#endif
+
+#ifdef CONFIG_SYS_SPL_MALLOC_START
+	mem_malloc_init(CONFIG_SYS_SPL_MALLOC_START,
+			CONFIG_SYS_SPL_MALLOC_SIZE);
 #endif
 
 	memset(&spl, 0, sizeof(spl));
