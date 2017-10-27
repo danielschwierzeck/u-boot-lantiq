@@ -114,6 +114,16 @@
   "f_overlay_size=" MK_STR(IFX_CFG_FLASH_OVERLAY_IMAGE_SIZE) "\0"   
   "f_overlay_end=" MK_STR(IFX_CFG_FLASH_OVERLAY_IMAGE_END_ADDR) "\0"
 #endif
+#ifdef CONFIG_DRIVER_VBG400
+  "wlanm=31M\0"
+  "tftp_flash="CONFIG_TFTP_FLASH"\0"
+  "tftp_nfs="CONFIG_TFTP_NFS"\0"
+  "flash_nfs="CONFIG_FLASH_NFS"\0"
+  "update_tftp_flash="CONFIG_UPDATE_TFTP_FLASH"\0"
+  "upfate_tftp_nfs="CONFIG_UPDATE_TFTP_NFS"\0"
+  "upfate_flash_flash="CONFIG_UPDATE_FLASH_FLASH"\0"
+  "upfate_flash_nfs="CONFIG_UPDATE_FLASH_NFS"\0"
+#endif
 #endif
   ""
 	
