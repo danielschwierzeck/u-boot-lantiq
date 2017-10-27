@@ -156,6 +156,7 @@
 #define IH_TYPE_FLATDT		8	/* Binary Flat Device Tree Blob	*/
 #define IH_TYPE_KWBIMAGE	9	/* Kirkwood Boot Image		*/
 #define IH_TYPE_IMXIMAGE	10	/* Freescale IMXBoot Image	*/
+#define IH_TYPE_UBOOT       11
 
 /*
  * Compression Types
@@ -279,6 +280,11 @@ typedef struct bootm_headers {
 
 #ifndef CHUNKSZ_SHA1
 #define CHUNKSZ_SHA1 (64 * 1024)
+#endif
+
+#ifdef BUILD_FROM_LTQ_APPS
+  #define be32_to_cpu(x)		(x)
+  #define cpu_to_be32(x)		(x)
 #endif
 
 #define uimage_to_cpu(x)		be32_to_cpu(x)

@@ -55,12 +55,16 @@ ulong get_timer(ulong base)
 
 	/* Check to see if we have missed any timestamps. */
 	count = read_c0_count();
-	while ((count - expirelo) < 0x7fffffff) {
-		expirelo += CYCLES_PER_JIFFY;
-		timestamp++;
+    asm("sync");
+    while ((count - expirelo) < 0x7fffffff) {
+        asm("sync");
+        expirelo += CYCLES_PER_JIFFY;
+	    asm("sync");
+	    timestamp++;
 	}
+	asm("sync");
 	write_c0_compare(expirelo);
-
+    
 	return (timestamp - base);
 }
 
@@ -78,6 +82,18 @@ void __udelay(unsigned long usec)
 	while ((tmo - read_c0_count()) < 0x7fffffff)
 		/*NOP*/;
 }
+
+
+void mdelay (unsigned long msec)
+{
+       int i,j;
+	   for(i=0;i<msec;i++)
+	   {
+	      __udelay(1000);
+	   }
+
+}
+									  
 
 /*
  * This function is derived from PowerPC code (read timebase as long long).

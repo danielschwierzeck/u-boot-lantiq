@@ -63,6 +63,41 @@ else
 XECHO = :
 endif
 
+######################################menuconfig ##########################
+menuconfig:
+	@rm -f Kconfig
+	@[ -f preconfig ] && cp preconfig Kconfig || touch Kconfig	
+	@echo "config LANTIQ_UBOOT_$(BOARD)" >>Kconfig
+	@echo "bool" >>Kconfig
+	@echo "default y" >>Kconfig
+	@echo "source scripts_platform/Kconfig" >>Kconfig
+	@make -f Makefile.menu menuconfig
+	@make -f Makefile.menu silentoldconfig
+
+oldconfig:
+	@rm -f Kconfig
+	@[ -f preconfig ] && cp preconfig Kconfig || touch Kconfig
+	@echo "config LANTIQ_UBOOT_$(BOARD)" >>Kconfig
+	@echo "bool" >>Kconfig
+	@echo "default y" >>Kconfig
+	@echo "source scripts_platform/Kconfig" >>Kconfig
+	@make -f Makefile.menu silentoldconfig
+
+xconfig:
+	@rm -f Kconfig
+	@[ -f preconfig ] && cp preconfig Kconfig || touch Kconfig
+	@echo "config LANTIQ_UBOOT_$(BOARD)" >>Kconfig
+	@echo "bool" >>Kconfig
+	@echo "default y" >>Kconfig
+	@echo "source scripts_platform/Kconfig" >>Kconfig
+	@make -f Makefile.menu xconfig
+					
+	
+###########################################################################
+											
+
+
+
 #########################################################################
 #
 # U-boot build supports producing a object files to the separate external
@@ -147,8 +182,8 @@ ifeq ($(obj)include/config.mk,$(wildcard $(obj)include/config.mk))
 # to all top level build files.  We need the dummy all: target to prevent the
 # dependency target in autoconf.mk.dep from being the default.
 all:
-sinclude $(obj)include/autoconf.mk.dep
-sinclude $(obj)include/autoconf.mk
+#sinclude $(obj)include/autoconf.mk.dep
+#sinclude $(obj)include/autoconf.mk
 
 # load ARCH, BOARD, and CPU configuration
 include $(obj)include/config.mk
@@ -165,7 +200,7 @@ include $(TOPDIR)/config.mk
 #########################################################################
 # U-Boot objects....order is important (i.e. start must be first)
 
-OBJS  = $(CPUDIR)/start.o
+OBJS  = $(CPUDIR)/$(BOARD)/start.o
 ifeq ($(CPU),i386)
 OBJS += $(CPUDIR)/start16.o
 OBJS += $(CPUDIR)/resetvec.o
@@ -184,7 +219,7 @@ LIBS += lib/lzma/liblzma.a
 LIBS += lib/lzo/liblzo.a
 LIBS += $(shell if [ -f board/$(VENDOR)/common/Makefile ]; then echo \
 	"board/$(VENDOR)/common/lib$(VENDOR).a"; fi)
-LIBS += $(CPUDIR)/lib$(CPU).a
+LIBS += $(CPUDIR)/$(BOARD)/lib$(CPU).a
 ifdef SOC
 LIBS += $(CPUDIR)/$(SOC)/lib$(SOC).a
 endif
@@ -290,6 +325,7 @@ __LIBS := $(subst $(obj),,$(LIBS)) $(subst $(obj),,$(LIBBOARD))
 
 # Always append ALL so that arch config.mk's can add custom ones
 ALL += $(obj)u-boot.srec $(obj)u-boot.bin $(obj)System.map $(U_BOOT_NAND) $(U_BOOT_ONENAND)
+-include board/$(BOARDDIR)/Makefile.lq
 
 all:		$(ALL)
 
@@ -297,7 +333,7 @@ $(obj)u-boot.hex:	$(obj)u-boot
 		$(OBJCOPY) ${OBJCFLAGS} -O ihex $< $@
 
 $(obj)u-boot.srec:	$(obj)u-boot
-		$(OBJCOPY) -O srec $< $@
+		$(OBJCOPY) ${OBJCFLAGS} -O srec $< $@
 
 $(obj)u-boot.bin:	$(obj)u-boot
 		$(OBJCOPY) ${OBJCFLAGS} -O binary $< $@
@@ -367,13 +403,24 @@ $(LDSCRIPT):	depend
 $(obj)u-boot.lds: $(LDSCRIPT)
 		$(CPP) $(CPPFLAGS) $(LDPPFLAGS) -ansi -D__ASSEMBLY__ -P - <$^ >$@
 
-$(NAND_SPL):	$(TIMESTAMP_FILE) $(VERSION_FILE) $(obj)include/autoconf.mk
-		$(MAKE) -C nand_spl/board/$(BOARDDIR) all
+ifeq ($(CONFIG_LTQ_SECURE_BOOT)$(CONFIG_DRIVER_VR9)$(DRIVER_AR10),yy) 
+$(NAND_SPL):    $(TIMESTAMP_FILE) $(VERSION_FILE) stage2.bin
+		$(MAKE) -C nand_spl/board/lantiq all
 
-$(U_BOOT_NAND):	$(NAND_SPL) $(obj)u-boot.bin
-		cat $(obj)nand_spl/u-boot-spl-16k.bin $(obj)u-boot.bin > $(obj)u-boot-nand.bin
+$(U_BOOT_NAND): $(NAND_SPL) $(obj)u-boot.ltq stage2.bin stage3.bin
+		cp nand_spl/u-boot-spl-16k.bin u-boot-nand.bin
+		cat stage2.enc >> u-boot-nand.bin
+		cat stage3.bin >> u-boot-nand.bin
+else
+$(NAND_SPL):    $(TIMESTAMP_FILE) $(VERSION_FILE)
+		$(MAKE) -C nand_spl/board/lantiq all
 
-$(ONENAND_IPL):	$(TIMESTAMP_FILE) $(VERSION_FILE) $(obj)include/autoconf.mk
+$(U_BOOT_NAND):	$(obj)u-boot.ltq $(NAND_SPL)
+		cp nand_spl/u-boot-spl-16k.bin u-boot-nand.bin
+		cat u-boot.ltq >> u-boot-nand.bin
+endif
+
+$(ONENAND_IPL):	$(TIMESTAMP_FILE) $(VERSION_FILE) 
 		$(MAKE) -C onenand_ipl/board/$(BOARDDIR) all
 
 $(U_BOOT_ONENAND):	$(ONENAND_IPL) $(obj)u-boot.bin
@@ -399,7 +446,7 @@ env:
 
 # Explicitly make _depend in subdirs containing multiple targets to prevent
 # parallel sub-makes creating .depend files simultaneously.
-depend dep:	$(TIMESTAMP_FILE) $(VERSION_FILE) $(obj)include/autoconf.mk
+depend dep:	$(TIMESTAMP_FILE) $(VERSION_FILE) 
 		for dir in $(SUBDIRS) $(CPUDIR) $(dir $(LDSCRIPT)) ; do \
 			$(MAKE) -C $$dir _depend ; done
 
@@ -425,28 +472,7 @@ SYSTEM_MAP = \
 $(obj)System.map:	$(obj)u-boot
 		@$(call SYSTEM_MAP,$<) > $(obj)System.map
 
-#
-# Auto-generate the autoconf.mk file (which is included by all makefiles)
-#
-# This target actually generates 2 files; autoconf.mk and autoconf.mk.dep.
-# the dep file is only include in this top level makefile to determine when
-# to regenerate the autoconf.mk file.
-$(obj)include/autoconf.mk.dep: $(obj)include/config.h include/common.h
-	@$(XECHO) Generating $@ ; \
-	set -e ; \
-	: Generate the dependancies ; \
-	$(CC) -x c -DDO_DEPS_ONLY -M $(HOSTCFLAGS) $(CPPFLAGS) \
-		-MQ $(obj)include/autoconf.mk include/common.h > $@
 
-$(obj)include/autoconf.mk: $(obj)include/config.h
-	@$(XECHO) Generating $@ ; \
-	set -e ; \
-	: Extract the config macros ; \
-	$(CPP) $(CFLAGS) -DDO_DEPS_ONLY -dM include/common.h | \
-		sed -n -f tools/scripts/define2mk.sed > $@.tmp && \
-	mv $@.tmp $@
-
-#########################################################################
 else	# !config.mk
 all $(obj)u-boot.hex $(obj)u-boot.srec $(obj)u-boot.bin \
 $(obj)u-boot.img $(obj)u-boot.dis $(obj)u-boot \
@@ -473,7 +499,9 @@ include/license.h: tools/bin2header COPYING
 unconfig:
 	@rm -f $(obj)include/config.h $(obj)include/config.mk \
 		$(obj)board/*/config.tmp $(obj)board/*/*/config.tmp \
-		$(obj)include/autoconf.mk $(obj)include/autoconf.mk.dep
+		$(obj)include/autoconf.mk $(obj)include/autoconf.mk.dep \
+		.config Kconfig preconfig
+	@rm -rf include/config
 
 %: %_config
 	$(MAKE)
@@ -3387,6 +3415,55 @@ incaip_config: unconfig
 		}
 	@$(MKCONFIG) -a $(call xtract_incaip,$@) mips mips incaip
 
+danube_config:  unconfig
+	@$(MKCONFIG) $(@:_config=) mips mips danube
+	@ln -s -f danube_cfg.h include/configs/lq_cfg.h
+	@ln -s -f danube_cfg.h include/configs/ifx_cfg.h
+
+amazon_se_config: unconfig
+	@$(MKCONFIG) $(@:_config=) mips mips amazon_se
+	@ln -s -f amazon_se_cfg.h include/configs/lq_cfg.h
+	@ln -s -f amazon_se_cfg.h include/configs/ifx_cfg.h
+
+ar9_config: unconfig
+	@$(MKCONFIG) $(@:_config=) mips mips ar9
+	@ln -s -f ar9_cfg.h include/configs/lq_cfg.h
+	@ln -s -f ar9_cfg.h include/configs/ifx_cfg.h
+
+vr9_config: unconfig
+	@$(MKCONFIG) $(@:_config=) mips mips vr9
+	@ln -s -f vr9_cfg.h include/configs/lq_cfg.h
+	@ln -s -f vr9_cfg.h include/configs/ifx_cfg.h
+								
+hn1_config: unconfig
+	@$(MKCONFIG) $(@:_config=) mips mips hn1
+	@ln -s -f hn1_cfg.h include/configs/lq_cfg.h
+	@ln -s -f hn1_cfg.h include/configs/ifx_cfg.h
+								
+ar10_config: unconfig
+	@$(MKCONFIG) $(@:_config=) mips mips ar10
+	@ln -s -f ar10_cfg.h include/configs/lq_cfg.h
+	@ln -s -f ar10_cfg.h include/configs/ifx_cfg.h
+
+vbg400_config: unconfig
+	@$(MKCONFIG) $(@:_config=) mips mips vbg400
+	@ln -s -f vbg400_cfg.h include/configs/lq_cfg.h
+	@ln -s -f vbg400_cfg.h include/configs/ifx_cfg.h
+
+grx390_config: unconfig
+	@$(MKCONFIG) $(@:_config=) mips mips ar10
+	@ln -s -f ar10.h include/configs/grx390.h
+	@ln -s -f ar10_cfg.h include/configs/lq_cfg.h
+	@ln -s -f ar10_cfg.h include/configs/ifx_cfg.h
+	@echo "config LANTIQ_UBOOT_grx390" >preconfig
+	@echo "bool" >>preconfig
+	@echo "default y" >>preconfig
+
+grx500_config: unconfig
+	@$(MKCONFIG) $(@:_config=) mips mips grx500
+	@ln -s -f grx500_cfg.h include/configs/lq_cfg.h
+	@ln -s -f grx500_cfg.h include/configs/ifx_cfg.h
+
 tb0229_config: unconfig
 	@$(MKCONFIG) $(@:_config=) mips mips tb0229
 
@@ -3710,6 +3787,7 @@ clean:
 	       $(obj)board/netstar/{eeprom,crcek,crcit,*.srec,*.bin}	  \
 	       $(obj)board/trab/trab_fkt   $(obj)board/voiceblue/eeprom   \
 	       $(obj)board/armltd/{integratorap,integratorcp}/u-boot.lds  \
+	       $(obj)board/grx500/{init_ddr,bch_enc.c,ddr.conf}  \
 	       $(obj)arch/blackfin/lib/u-boot.lds				  \
 	       $(obj)u-boot.lds						  \
 	       $(obj)arch/blackfin/cpu/bootrom-asm-offsets.[chs]
@@ -3723,6 +3801,19 @@ clean:
 		\( -name 'core' -o -name '*.bak' -o -name '*~' \
 		-o -name '*.o'	-o -name '*.a' -o -name '*.exe'	\) -print \
 		| xargs rm -f
+	@[ ! -d $(obj)nand_spl ] || find $(obj)nand_spl -name "*" -type l -print | xargs rm -f
+	@rm -rf u-boot u-boot*.* *.dis *.map
+	@rm -rf bootstrap bootstrap.*
+	@rm -f nand_spl/u-boot-spl.bin nand_spl/u-boot-spl-16k.bin
+	@rm -f nand_spl/board/lantiqu-boot-spl nand_spl/board/lantiqu-boot*.*
+	@rm -f nand_spl/board/lantiq/nandpreload.bin nand_spl/board/lantiq/nandpreload nand_spl/board/lantiq/stools
+	@rm -f nand_spl/board/lantiq/bch_enc
+	@rm -f sfddr sfddr.bin sfddr.map board/$(BOARD)/sfddr sfpreload sfpreload.img
+	@rm -f u-boot.gphy.lq dummy
+	@rm -f ether ether.bin ether.srec *.asc
+	@rm -f ubootenv.img
+	@rm -f header.ltq header.bch tail.bin u-boot-gphy.bin bch_enc
+	@$(MAKE) -C $(TOPDIR)/stage2 clean;rm -rf stage2.bin stage2.enc stage3.bin
 
 clobber:	clean
 	@find $(OBJTREE) -type f \( -name .depend \
@@ -3739,6 +3830,10 @@ clobber:	clean
 	@rm -f $(obj)include/asm/proc $(obj)include/asm/arch $(obj)include/asm
 	@[ ! -d $(obj)nand_spl ] || find $(obj)nand_spl -name "*" -type l -print | xargs rm -f
 	@[ ! -d $(obj)onenand_ipl ] || find $(obj)onenand_ipl -name "*" -type l -print | xargs rm -f
+	@rm -f u-boot-nand.bin
+	@find ./ -type l |xargs rm -rf
+	@rm -f include/configs/autoconf.h include/configs/lq_cfg.h include/configs/ifx_cfg.h
+	@rm -f ubootenv.img
 
 ifeq ($(OBJTREE),$(SRCTREE))
 mrproper \

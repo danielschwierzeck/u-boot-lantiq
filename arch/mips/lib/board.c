@@ -39,13 +39,7 @@
 
 DECLARE_GLOBAL_DATA_PTR;
 
-#if ( ((CONFIG_ENV_ADDR+CONFIG_ENV_SIZE) < CONFIG_SYS_MONITOR_BASE) || \
-      (CONFIG_ENV_ADDR >= (CONFIG_SYS_MONITOR_BASE + CONFIG_SYS_MONITOR_LEN)) ) || \
-    defined(CONFIG_ENV_IS_IN_NVRAM)
-#define	TOTAL_MALLOC_LEN	(CONFIG_SYS_MALLOC_LEN + CONFIG_ENV_SIZE)
-#else
 #define	TOTAL_MALLOC_LEN	CONFIG_SYS_MALLOC_LEN
-#endif
 
 #undef DEBUG
 
@@ -168,7 +162,8 @@ void board_init_f(ulong bootflag)
 	gd_t gd_data, *id;
 	bd_t *bd;
 	init_fnc_t **init_fnc_ptr;
-	ulong addr, addr_sp, len = (ulong)&uboot_end - CONFIG_SYS_MONITOR_BASE;
+	//ulong addr, addr_sp, len = (ulong)&uboot_end - CONFIG_SYS_MONITOR_BASE;
+	ulong addr, addr_sp, len = CONFIG_SYS_MONITOR_LEN;
 	ulong *s;
 #ifdef CONFIG_PURPLE
 	void copy_code (ulong);
@@ -203,10 +198,10 @@ void board_init_f(ulong bootflag)
 	debug ("Top of RAM usable for U-Boot at: %08lx\n", addr);
 
 	/* Reserve memory for U-Boot code, data & bss
-	 * round down to next 16 kB limit
+	 * round down to next 64 kB limit
 	 */
 	addr -= len;
-	addr &= ~(16 * 1024 - 1);
+	addr &= ~(64 * 1024 - 1);
 
 	debug ("Reserving %ldk for U-Boot at: %08lx\n", len >> 10, addr);
 
@@ -350,7 +345,6 @@ void board_init_r (gd_t *id, ulong dest_addr)
 	display_flash_config (size);
 	bd->bi_flashsize = size;
 #endif
-
 	bd->bi_flashstart = CONFIG_SYS_FLASH_BASE;
 #if CONFIG_SYS_MONITOR_BASE == CONFIG_SYS_FLASH_BASE
 	bd->bi_flashoffset = monitor_flash_len;	/* reserved area for U-Boot */
@@ -388,12 +382,13 @@ void board_init_r (gd_t *id, ulong dest_addr)
 
 	/* Initialize the console (after the relocation and devices init) */
 	console_init_r ();
-/** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
 
+/** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
 	/* Initialize from environment */
 	if ((s = getenv ("loadaddr")) != NULL) {
 		load_addr = simple_strtoul (s, NULL, 16);
 	}
+
 #if defined(CONFIG_CMD_NET)
 	if ((s = getenv ("bootfile")) != NULL) {
 		copy_filename (BootFile, s, sizeof (BootFile));
@@ -414,6 +409,11 @@ void board_init_r (gd_t *id, ulong dest_addr)
 #ifdef CONFIG_BITBANGMII
 	bb_miiphy_init();
 #endif
+    
+#ifdef CONFIG_TUNE_DDR
+    save_ddr_param();
+#endif
+
 #if defined(CONFIG_CMD_NET)
 #if defined(CONFIG_NET_MULTI)
 	puts ("Net:   ");

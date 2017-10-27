@@ -134,7 +134,7 @@ uchar default_environment[] = {
 	"pcidelay="	MK_STR(CONFIG_PCI_BOOTDELAY)	"\0"
 #endif
 #ifdef  CONFIG_EXTRA_ENV_SETTINGS
-	CONFIG_EXTRA_ENV_SETTINGS
+#include	CONFIG_EXTRA_ENV_SETTINGS
 #endif
 	"\0"
 };

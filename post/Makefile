@@ -22,7 +22,6 @@
 #
 
 include $(TOPDIR)/config.mk
-include $(OBJTREE)/include/autoconf.mk
 
 LIB				= libpost.a
 GPLIB-$(CONFIG_HAS_POST)	+= libgenpost.a

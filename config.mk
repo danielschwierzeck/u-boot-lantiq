@@ -116,7 +116,8 @@ RANLIB	= $(CROSS_COMPILE)RANLIB
 #########################################################################
 
 # Load generated board configuration
-sinclude $(OBJTREE)/include/autoconf.mk
+#sinclude $(OBJTREE)/include/autoconf.mk
+sinclude $(TOPDIR)/.config
 
 # Some architecture config.mk files need to know what CPUDIR is set to,
 # so calculate CPUDIR before including ARCH/SOC/CPU config.mk files.
@@ -151,14 +152,14 @@ ARFLAGS = crv
 endif
 RELFLAGS= $(PLATFORM_RELFLAGS)
 DBGFLAGS= -g # -DDEBUG
-OPTFLAGS= -Os #-fomit-frame-pointer
+OPTFLAGS= -Os -fomit-frame-pointer
 ifndef LDSCRIPT
 #LDSCRIPT := $(TOPDIR)/board/$(BOARDDIR)/u-boot.lds.debug
-ifeq ($(CONFIG_NAND_U_BOOT),y)
-LDSCRIPT := $(TOPDIR)/board/$(BOARDDIR)/u-boot-nand.lds
-else
+#ifeq ($(CONFIG_NAND_U_BOOT),y)
+#LDSCRIPT := $(TOPDIR)/board/$(BOARDDIR)/u-boot-nand.lds
+#else
 LDSCRIPT := $(TOPDIR)/board/$(BOARDDIR)/u-boot.lds
-endif
+#endif
 endif
 OBJCFLAGS += --gap-fill=0xff
 
