@@ -1,0 +1,221 @@
+menu "Supported commands"
+
+config CMD_BDI
+     bool "bdinfo"
+	 
+config CMD_BEDBUG
+     bool "bedbug"
+
+config CMD_BMP
+     bool "bmp"
+
+config CMD_CACHE
+     bool "cache"
+
+config CMD_CONSOLE
+     bool "console"
+	 
+config CMD_DATE
+     bool "date"
+
+config CMD_SETGETDCR
+     bool "dcr"
+
+config CMD_DIAG
+     bool "diag"
+
+config CMD_DOC
+     bool "doc"
+
+config CMD_DTT
+     bool "dtt"
+
+config CMD_DISPLAY
+     bool "display"
+
+config CMD_ECHO
+     bool "echo"
+	 default y
+
+config CMD_EEPROM
+     bool "eeprom"
+	 depends on SPI_EEPROM
+
+config CMD_ELF
+     bool "elf"
+
+config CMD_EXT2
+     bool "ext2"
+
+config CMD_FAT
+     bool "fat"
+
+config CMD_FDC
+     bool "fdc"
+
+config OF_LIBFDT
+     bool "libfdt"
+
+config SYS_BOOTMAPSZ
+     hex "SYS_BOOTMAPSZ"
+     depends on OF_LIBFDT
+
+config CMD_LOADB
+     bool "loadb"
+
+config CMD_LOADS
+	 bool "loads"
+
+config CMD_FDOS
+     bool "fdos"
+
+config CMD_FLASH
+     bool "flash"
+     depends on NOR_FLASH
+config CMD_FPGA
+     bool "fpga"
+
+config CMD_HTTPD
+     bool "httpd"
+
+config CMD_I2C
+     bool "i2c"
+
+config CMD_IDE
+     bool "ide"
+
+config CMD_IMMAP
+     bool "immap"
+
+config CMD_ITEST
+     bool "itest"
+
+config CMD_JFFS2
+     bool "jffs2"
+
+config CMD_LOGBUFFER
+     bool "log"
+
+config CMD_MEMORY
+     bool "mem"
+     default y
+
+config MII
+     bool "miibase"
+     default y
+
+config CMD_MII
+     bool "mii"
+     depends on MII
+
+config CMD_MTDPARTS
+     bool "mtdparts"
+
+config MTD_DEVICE
+     bool
+	 default y
+	 depends on CMD_MTDPARTS
+	 
+config MTD_PARTITIONS
+     bool
+	 default y
+	 depends on CMD_MTDPARTS
+			   
+
+config PHY_GIGE
+     bool "MII gphy detection"
+	 depends on MII
+
+config CMD_MISC
+     bool "misc"
+
+config CMD_MMC
+     bool "mmc"
+
+config CMD_NAND
+     bool "nand"
+	 depends on NAND_FLASH
+	 
+config CMD_NET
+     bool "net"
+     default y
+
+config CMD_PCI
+     bool "pci"
+
+config CMD_PCMCIA
+     bool "pcmcia"
+
+config CMD_PING
+     bool "ping"
+
+config CMD_PORTIO
+     bool "portio"
+
+config CMD_REGINFO
+     bool "reginfo"
+
+config CMD_RUN
+	 bool "run"
+     default y
+
+config CMD_SAVEENV
+     bool "saveenv"
+	 default y
+	 
+config CMD_SAVES
+     bool "saves"
+	 depends on CMD_LOADS
+
+config CMD_SF
+     bool "sf"
+     depends on SPI_FLASH 
+
+config CMD_SCSI
+     bool "scsi"
+
+config CMD_SOURCE
+     bool "source"
+
+config CMD_SPI
+     bool "spi"
+
+config CMD_UBI
+	 bool "ubi"
+
+config UBI_WL_THRESHOLD
+     int "UBI wear-leveling threshold"
+	 default 4096
+     depends on CMD_UBI
+
+config CMD_UBIFS
+     bool "ubifs"
+
+config CMD_UNIVERSE
+     bool "universe"
+
+config CMD_UPGRADE
+     bool "upgrade"
+	 default y
+     depends on !ENV_IS_NOWHERE
+
+config CMD_USB
+     bool "usb"
+
+config USB_STORAGE
+     bool "usb storage"
+     depends on CMD_USB
+	 
+config CMD_VFD
+     bool "vfd"
+
+config CMD_KGDB
+     bool "kgdb"
+
+config CMD_LCD
+     bool "lcd"
+
+config YAFFS2
+     bool "YAFFS2"
+	 
+endmenu
