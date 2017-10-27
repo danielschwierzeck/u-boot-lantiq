@@ -606,6 +606,31 @@ U_BOOT_CMD(
 #endif
 
 
+int do_chkset(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
+{
+   char* varname;
+   ulong address;
+   ulong value;
+   
+   if (argc < 4) {
+           cmd_usage(cmdtp);
+           return 1;
+		       }
+
+   varname=argv[1];
+   address=simple_strtoul(argv[2], NULL, 16);
+   value=simple_strtoul(argv[3], NULL, 16);;
+   
+   if(*(ulong*)address==value){
+     setenv(varname, "1");
+   }else{
+     setenv(varname, "0"); 
+   }
+
+   return 0;
+}
+
+
 /************************************************************************
  * Match a name / name=value pair
  *
@@ -680,3 +705,13 @@ U_BOOT_CMD(
 	"    - run the commands in the environment variable(s) 'var'"
 );
 #endif
+
+#if defined(CONFIG_CMD_CHKSET)
+U_BOOT_CMD(
+    chkset, CONFIG_SYS_MAXARGS, 3, do_chkset,
+    "Set var depending on the value of specified address",
+	"chkset var address value\n "
+);
+#endif
+
+

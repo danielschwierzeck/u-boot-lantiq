@@ -12,6 +12,9 @@ config CMD_BMP
 config CMD_CACHE
      bool "cache"
 
+config CMD_CHKSET
+	 bool "chkset"
+
 config CMD_CONSOLE
      bool "console"
 	 
