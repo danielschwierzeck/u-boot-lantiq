@@ -21,71 +21,53 @@
 #include <common.h>
 #include <nand.h>
 #include <asm/io.h>
-#include <image.h>
 #include <asm/boot.h>
 
-extern int cpu_is_cps(void);
-extern struct nand_bch_control *nand_bch_init(struct mtd_info *mtd, 
-			unsigned int eccsize, unsigned int eccbytes,
-			struct nand_ecclayout **ecclayout);
+#ifndef CONFIG_DRIVER_GRX500
+extern void init_ddr(void);
+extern void tune_ddr(void);
+#endif
 
-static int bbt_valid=0;
-
-#define TOTAL_MALLOC_LEN    CONFIG_SYS_MALLOC_LEN
 #define CONFIG_SYS_NAND_READ_DELAY \
 	{ volatile int dummy; int i; for (i=0; i<10000; i++) dummy = i; }
-
-#ifdef CONFIG_DRIVER_GRX500
- #if defined (CONFIG_NAND_ECC_SOFT)
- static int nand_ecc_pos[] = CONFIG_SYS_NAND_ECCPOS;
- #elif defined (CONFIG_NAND_ECC_BCH) 
- static int *nand_ecc_pos;
- #endif
-#else 
- static int nand_ecc_pos[] = CONFIG_SYS_NAND_ECCPOS;
- #define CONFIG_NAND_SPL_OOBSIZE		CONFIG_SYS_NAND_OOBSIZE	
-#endif /* CONFIG_DRIVER_GRX500 */
 
 #if defined (CONFIG_DRIVER_GRX500)
 static int check_4kec_header(u32 src, u32 *jmp_addr, u32 dst_size)
 {
-	int image_len;
+    int image_len;
     u8 *image_start = NULL;
     u32 ret_check, checksum = 0;
-	u32 hdr_len, load_addr;
-	image_header_t *pimg_header = (image_header_t *)src;
+    u32 hdr_len, load_addr; 
+    image_header_t *pimg_header = (image_header_t *)src;
     
-	/* check magic number */
-	if (ntohl(pimg_header->ih_magic) != IH_MAGIC)
-		return -1;
+    /* check magic number */
+    if (ntohl(pimg_header->ih_magic) != IH_MAGIC)
+        return -1;
 
-	asm("sync");
-	/* mkimage type kernel without the 8B offset */
-	image_start = (u8 *)pimg_header + sizeof(image_header_t);
+    asm("sync");
+    /* mkimage type kernel without the 8B offset */
+    image_start = (u8 *)pimg_header + sizeof(image_header_t);
     image_len = ntohl(pimg_header->ih_size);
-	load_addr = ntohl(pimg_header->ih_load);
-	*jmp_addr = load_addr;
-	asm("sync");
+    load_addr = ntohl(pimg_header->ih_load);
+    *jmp_addr = load_addr;
+    asm("sync");
+    
+    hdr_len = sizeof(image_header_t);
+    checksum = ntohl(pimg_header->ih_hcrc);
+    pimg_header->ih_hcrc = 0;
+    
+    asm("sync");
+    ret_check = crc32(0, (unsigned char *) src, hdr_len);
+    if (ret_check != checksum)
+        return -1;
 
-	hdr_len = sizeof(image_header_t);
-	checksum = ntohl(pimg_header->ih_hcrc);
-	pimg_header->ih_hcrc = 0;
+    asm("sync");
+    memcpy((u32 *) load_addr, (u32 *)image_start, image_len);
 
-	asm("sync");
-	ret_check = crc32(0, (unsigned char *) src, hdr_len);
-	if (ret_check != checksum)
-		return -1;
-
-	asm("sync");
-	memcpy((u32 *) load_addr, (u32 *)image_start, image_len);
-
-	return 0; // success
+    return 0; // success
 }
 
-#endif /* CONFIG_DRIVER_GRX500 */ 
-
 #ifdef CONFIG_LTQ_SECURE_BOOT
-
 #define ROLLBACKID_BUFF 0xBF806100
 //#define ROLLBACKID_BUFF 0xA0100000
 
@@ -311,6 +293,7 @@ void rollback_id_chk_do()
     return;
 }
 
+// make sure to put image in 0xa0800000
 void bootrom_auth(u32 addr)
 {
     ulong *img_p = (ulong *)addr;
@@ -333,49 +316,8 @@ void bootrom_auth(u32 addr)
 }
 #endif /* CONFIG_LTQ_SECURE_BOOT */
 
-#if (CONFIG_SYS_NAND_PAGE_SIZE <= 512)
-/*
- * NAND command for small page NAND devices (512)
- */
-static int nand_command(struct mtd_info *mtd, int block, int page, int offs, u8 cmd)
-{
-	struct nand_chip *this = mtd->priv;
-	int page_addr = page + block * CONFIG_SYS_NAND_PAGE_COUNT;
+#endif /* CONFIG_DRIVER_GRX500 */
 
-	if (this->dev_ready)
-		while (!this->dev_ready(mtd))
-			;
-	else
-		CONFIG_SYS_NAND_READ_DELAY;
-
-	/* Begin command latch cycle */
-	this->cmd_ctrl(mtd, cmd, NAND_CTRL_CLE | NAND_CTRL_CHANGE);
-	/* Set ALE and clear CLE to start address cycle */
-	/* Column address */
-	this->cmd_ctrl(mtd, offs, NAND_CTRL_ALE | NAND_CTRL_CHANGE);
-	this->cmd_ctrl(mtd, page_addr & 0xff, NAND_CTRL_ALE); /* A[16:9] */
-	this->cmd_ctrl(mtd, (page_addr >> 8) & 0xff,
-		       NAND_CTRL_ALE); /* A[24:17] */
-#ifdef CONFIG_SYS_NAND_4_ADDR_CYCLE
-	/* One more address cycle for devices > 32MiB */
-	this->cmd_ctrl(mtd, (page_addr >> 16) & 0x0f,
-		       NAND_CTRL_ALE); /* A[28:25] */
-#endif
-	/* Latch in address */
-	this->cmd_ctrl(mtd, NAND_CMD_NONE, NAND_NCE | NAND_CTRL_CHANGE);
-
-	/*
-	 * Wait a while for the data to be ready
-	 */
-	if (this->dev_ready)
-		while (!this->dev_ready(mtd))
-			;
-	else
-		CONFIG_SYS_NAND_READ_DELAY;
-
-	return 0;
-}
-#else
 /*
  * NAND command for large page NAND devices (2k)
  */
@@ -428,114 +370,21 @@ static int nand_command(struct mtd_info *mtd, int block, int page, int offs, u8 
 
 	return 0;
 }
-#endif
 
 static int nand_is_bad_block(struct mtd_info *mtd, int block)
 {
-	struct nand_chip *this = mtd->priv;
-#ifdef CONFIG_NAND_SPL_BBT	
-	if(bbt_valid){
-      return nand_isbad_bbt(mtd, block<<this->bbt_erase_shift, 1);
-	}else{
-#endif	
-	 nand_command(mtd, block, 0, CONFIG_SYS_NAND_BAD_BLOCK_POS, NAND_CMD_READOOB);
 
-	 /*
-	 * Read one byte
-	 */
-	if (readb(this->IO_ADDR_R) != 0xff)
-		return 1;
-#ifdef CONFIG_NAND_SPL_BBT    
-	}
-#endif	
 	return 0;
 }
 
-#ifndef CONFIG_NAND_BENAND
-#ifdef CONFIG_NAND_SPL_BBT
-int nand_read_page(struct mtd_info *mtd, int block, int page, uchar *dst)
-#else
 static int nand_read_page(struct mtd_info *mtd, int block, int page, uchar *dst)
-#endif
 {
 	struct nand_chip *this = mtd->priv;
-	u_char *ecc_calc;
-	u_char *ecc_code;
-	u_char *oob_data;
-	int i, j=0;
-    int eccsize = CONFIG_SYS_NAND_ECCSIZE;
-    int eccbytes = CONFIG_SYS_NAND_ECCBYTES;
-    int eccsteps = CONFIG_SYS_NAND_ECCSTEPS;
-
-	uint8_t *p = dst;
-	int stat;
-
 	nand_command(mtd, block, page, 0, NAND_CMD_READ0);
-
-	/* No malloc available for now, just use some temporary locations
-	 * in SDRAM
-
-	 */
-	ecc_calc = (u_char *)(CONFIG_SYS_SDRAM_BASE + 0x10000);
-	ecc_code = ecc_calc + 0x10000;
-	oob_data = ecc_calc + 0x20000;
-
-	for (i = 0; eccsteps; eccsteps--, i += eccbytes, p += eccsize) {
-		this->ecc.hwctl(mtd, NAND_ECC_READ);
-		this->read_buf(mtd, p, eccsize);
-		this->ecc.calculate(mtd, p, &ecc_calc[i]);
-	}
-	this->read_buf(mtd, oob_data, CONFIG_NAND_SPL_OOBSIZE);
-
-	/* Pick the ECC bytes out of the oob data */
-	for (i = 0; i < CONFIG_SYS_NAND_ECCTOTAL; i++) {
-		ecc_code[i] = oob_data[nand_ecc_pos[i]];
-	}
-
-	eccsteps = this->ecc.steps;
-	p = dst;
-
-	for (i = 0; eccsteps > 0; eccsteps--, i += eccbytes, p += eccsize) {
-		/* No chance to do something with the possible error message
-		 * from correct_data(). We just hope that all possible errors
-		 * are corrected by this routine.
-		 */
-		stat = this->ecc.correct(mtd, p, &ecc_code[i], &ecc_calc[i]);
-		if (stat < 0)
-			goto error;
-	}
+    this->ecc.read_page(mtd, this, dst, page);
+							
 	return 0;
-
-error:
-	return stat;
 }
-#else
-static int nand_read_page(struct mtd_info *mtd, int block, int page, uchar *dst)
-{
-	struct nand_chip *this = mtd->priv;
-	this->oob_poi = (u_char *)(CONFIG_SYS_SDRAM_BASE + 0x10000);
-	int err = 0;
-	
-	nand_command(mtd, block, page, 0, NAND_CMD_READ0);
-	/* ecc is handled by benand */
-	err = this->ecc.read_page(mtd, this, dst, page);
-
-	return err;
-}
-#endif /* CONFIG_NAND_BENAND */
-
-#ifdef CONFIG_NAND_SPL_BBT
-int scan_read_raw(struct mtd_info *mtd, uint8_t *buf, loff_t offs, size_t len)
-{
-	 struct nand_chip *this = mtd->priv;
-	 int block,page;
-	 block=offs>>this->bbt_erase_shift;
-	 page=0;/*always the first page for bbt*/
-	
-	 nand_command(mtd, block, page, 0, NAND_CMD_READ0);
-	 this->read_buf(mtd, buf, mtd->writesize+mtd->oobsize);
-}			 
-#endif
 
 static int nand_load(struct mtd_info *mtd, unsigned int offs,
 		     unsigned int uboot_size, uchar *dst)
@@ -551,7 +400,7 @@ static int nand_load(struct mtd_info *mtd, unsigned int offs,
 	page = (offs % CONFIG_SYS_NAND_BLOCK_SIZE) / CONFIG_SYS_NAND_PAGE_SIZE;
 
 	while (block <= lastblock) {
-				if (!nand_is_bad_block(mtd,block)){
+		if (!nand_is_bad_block(mtd, block)) {
 			/*
 			 * Skip bad blocks
 			 */
@@ -582,110 +431,125 @@ void nand_boot(void)
 	struct nand_chip nand_chip;
 	nand_info_t nand_info;
 	int ret;
+	int i;
+	ulong  ecc;
+        ulong  buffer[8];
+        ulong ddr_magic=0x88888888;
 	__attribute__((noreturn)) void (*uboot)(void);
-
-#if defined(CONFIG_LTQ_SECURE_BOOT) && !CONFIG_DRIVER_GRX500
-    int i;
-    unsigned char aes_key[32];
-    unsigned char iv[]={0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-	unsigned char* masked_key=(unsigned char*)(CONFIG_NAND_SPL_TEXT_BASE+0x6000);
+    
+#if defined(CONFIG_LTQ_SECURE_BOOT) && (!CONFIG_DRIVER_GRX500)
+        unsigned char aes_key[32];
+        unsigned char iv[]={0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+        unsigned char* masked_key=(unsigned char*)(CONFIG_NAND_SPL_TEXT_BASE+0x6000);
 #endif
 
 #if defined(CONFIG_DRIVER_GRX500) && !defined(CONFIG_GRX500_BOOT_4KEC_ONLY)
-    /* Since IAP has already initialised the H/W, we do not want to 
-     * reset the nand datapath when 4kec boots. Otherwise, there will
-     * be an unknown state for the controller when IAP access the EBU bus 
+	/* Since IAP has already initialised the H/W, we do not want to 
+	 * reset the nand datapath when 4kec boots. Otherwise, there will
+	 * be a write hang issue 
      */
-    if (!cpu_is_cps())
-        goto cpy_bootcore;
+	if (!cpu_is_cps())
+		goto cpy_bootcore;
 #endif
-
-	memset(&nand_chip, 0, sizeof(struct nand_chip));
+    	
 	/*
 	 * Init board specific nand support
 	 */
 	nand_info.priv = &nand_chip;
-	
 	nand_chip.IO_ADDR_R = nand_chip.IO_ADDR_W = (void  __iomem *)CONFIG_SYS_NAND_BASE;
 	nand_chip.dev_ready = NULL;	/* preset to NULL */
 	board_nand_init(&nand_chip);
 
 	if (nand_chip.select_chip)
 		nand_chip.select_chip(&nand_info, 0);
-#ifdef CONFIG_NAND_SPL_BBT
-   /*search and setup bbt in the memory*/
-
-    nand_info.size=CONFIG_NAND_FLASH_SIZE*(1<<20);
-    nand_info.erasesize=CONFIG_NAND_BLOCK_SIZE;
-    nand_info.writesize=CONFIG_NAND_PAGE_SIZE;
-    nand_info.oobsize=64;
-    nand_chip.page_shift=ffs(nand_info.writesize)-1;
-    nand_chip.bbt_erase_shift=ffs(nand_info.erasesize)-1;
-    nand_chip.numchips=1;
-    nand_chip.bbt_td=NULL;
-    nand_chip.bbt_md=NULL;
-    nand_chip.chipsize=nand_info.size;
-    nand_chip.badblock_pattern=NULL;
-
-    if(nand_default_bbt(&nand_info)){
-    		bbt_valid=1;
-    }else{
-    	  bbt_valid=0;
+  
+    NAND_WRITE(WRITE_CMD, 0xff);
+    while(!NAND_READY){}
+  
+    nand_info.erasesize = CONFIG_NAND_BLOCK_SIZE; 
+    nand_info.writesize = CONFIG_NAND_PAGE_SIZE;
+    nand_chip.onfi_version = 1;
+#ifndef CONFIG_DRIVER_GRX500
+    init_ddr();
+#endif
+#ifdef CONFIG_TUNE_DDR    
+    nand_load(&nand_info, IFX_CFG_FLASH_DDR_CFG_END_ADDR+1-CONFIG_SYS_NAND_PAGE_SIZE, CONFIG_SYS_NAND_PAGE_SIZE, (u8*)0xa0100000);
+    buffer[0] = 0;
+    for(i=0;i<8;i++){
+    buffer[i] = *(volatile u32*)((u8*)0xa0100000+CONFIG_NAND_PAGE_SIZE-32+i*4); 
+     }
+    if(buffer[0]==ddr_magic)
+       {
+             ecc=buffer[1]^buffer[2]^buffer[3]^buffer[4]^buffer[5]^buffer[6];
+               if(ecc!=buffer[7]){
+                  REG32(CONFIG_TUNING_STATUS)=0xff;
+                }else{
+                    REG32(CONFIG_TUNING_STATUS)=0;
+                }
+         }
+     else{
+        REG32(CONFIG_TUNING_STATUS)=0xff;
     }
-#endif
+     if(REG32(CONFIG_TUNING_STATUS)!=0xff){
+          REG32(0xBF801000) = 0x0 ; 	    
+          REG32(0xBF8014C0) = buffer[1]; /*PHYR6*/
+          REG32(0xBF8014D0) = buffer[2]; /*PHYR8*/
+          REG32(0xBF8014E0) = buffer[3]; /*PHYR7*/
+          REG32(0xBF8014F0) = buffer[4]; /*PHYR9*/
+          REG32(CSS_DDR_ECHO_DLL0) = buffer[5];
+          REG32(CSS_DDR_ECHO_DLL1) = buffer[6];
+          REG32(0xBF801000) = 0x401;
+          mdelay(1);
+      }
+    tune_ddr();
+#endif	
 
-#ifdef CONFIG_NAND_BENAND
-   nand_info.writesize = CONFIG_SYS_NAND_PAGE_SIZE;
-   nand_info.oobsize = (CONFIG_SYS_NAND_PAGE_SIZE == 0x1000) ? 128 : 64;
-#endif
-
-#if  defined(CONFIG_NAND_ECC_BCH) && defined(CONFIG_DRIVER_GRX500)
-	struct nand_ecclayout *ecc;
-	struct nand_ecc_ctrl *ctrl;
-	ulong malloc_base;
-
-	malloc_base = 0x82000000;
-	mem_malloc_init(malloc_base, TOTAL_MALLOC_LEN);
-    nand_info.size=CONFIG_NAND_FLASH_SIZE*(1<<20);
-    nand_info.erasesize=CONFIG_NAND_BLOCK_SIZE;
-    nand_info.writesize=CONFIG_NAND_PAGE_SIZE;
-    nand_info.oobsize=CONFIG_NAND_SPL_OOBSIZE;
-    nand_chip.page_shift=ffs(nand_info.writesize)-1;
-    nand_chip.bbt_erase_shift=ffs(nand_info.erasesize)-1;
-    nand_chip.numchips=1;
-    nand_chip.bbt_td=NULL;
-    nand_chip.bbt_md=NULL;
-    nand_chip.chipsize=nand_info.size;
-    nand_chip.badblock_pattern=NULL;
-
-	nand_chip.ecc.size = CONFIG_SYS_NAND_ECCSIZE;
-	nand_chip.ecc.bytes = CONFIG_SYS_NAND_ECCBYTES;
-	nand_chip.ecc.steps = CONFIG_SYS_NAND_ECCSTEPS;
-    nand_chip.ecc.priv = nand_bch_init(&nand_info,
-			                    nand_chip.ecc.size, 
-								nand_chip.ecc.bytes, 
-								&nand_chip.ecc.layout);
-
-	ctrl = &nand_chip.ecc;
-	ecc = ctrl->layout;
-	nand_ecc_pos = &ecc->eccpos;
-#endif
-
+#if defined(CONFIG_DRIVER_GRX500) && !defined(CONFIG_GRX500_BOOT_4KEC_ONLY)
 cpy_bootcore:
-#if !defined(CONFIG_GRX500_BOOT_4KEC_ONLY) && defined(CONFIG_DRIVER_GRX500)
-    if (cpu_is_cps()) {
-#endif /* CONFIG_GRX500_BOOT_4KEC_ONLY && CONFIG_DRIVER_GRX500 */
+	if (!cpu_is_cps()) { /* 4Kec only */
+		ulong load_address;
+		ulong jump_address;
+		ulong ddr_address, bootcore_size;
+		asm("sync");
 
-    /*
+		load_address = REG32(MPS_LOAD_ADDR); /* 4Kec load addr */
+		ddr_address = REG32(MPS_DDR_LOC);	 /* ddr where TOS is copied to */
+		bootcore_size = REG32(MPS_SIZE_LOC); /* size of TOS/bootcore img */
+
+		#if defined(CONFIG_LTQ_SECURE_BOOT) && !defined(CONFIG_MANUBOOT)
+		/* reuse ddr loc only */
+		bootrom_auth((u32)ddr_address);
+
+		/* safeguard , but shall never come here in first place*/
+		while(1);
+		#else /* defined(CONFIG_LTQ_SECURE_BOOT) && !defined(CONFIG_MANUBOOT) */
+		/* copy bootcore image */ 
+		memcpy((unsigned char *) load_address,
+				(unsigned char *) ddr_address,
+				bootcore_size);
+
+		ret = check_4kec_header(load_address,
+							&jump_address,
+							bootcore_size);
+        if (ret)
+            while(1); // if img is bad, we prevent 4kec from loading it
+
+		uboot = (void*)jump_address;
+		(*uboot)();
+		#endif /*  defined(CONFIG_LTQ_SECURE_BOOT) && !defined(CONFIG_MANUBOOT) */
+	} 
+#endif /* CONFIG_DRIVER_GRX500 && !CONFIG_GRX500_BOOT_4KEC_ONLY */
+
+	/*
 	 * Load U-Boot image from NAND into RAM
 	 */
-#if defined(CONFIG_LTQ_SECURE_BOOT) && defined(CONFIG_DRIVER_GRX500) && !defined(CONFIG_MANUBOOT)
-        ret = nand_load(&nand_info, CONFIG_SYS_NAND_U_BOOT_OFFS, CONFIG_SYS_NAND_U_BOOT_SIZE,
-                        (uchar *)0xa0800000);
-#else
-        ret = nand_load(&nand_info, CONFIG_SYS_NAND_U_BOOT_OFFS, CONFIG_SYS_NAND_U_BOOT_SIZE,
+    #if defined(CONFIG_LTQ_SECURE_BOOT) && defined(CONFIG_DRIVER_GRX500) && !defined(CONFIG_MANUBOOT)
+    ret = nand_load(&nand_info, CONFIG_SYS_NAND_U_BOOT_OFFS, CONFIG_SYS_NAND_U_BOOT_SIZE,
+                    (uchar *)0xa0800000);
+    #else
+	ret = nand_load(&nand_info, CONFIG_SYS_NAND_U_BOOT_OFFS, CONFIG_SYS_NAND_U_BOOT_SIZE,
 			(uchar *)CONFIG_SYS_NAND_U_BOOT_DST);
-#endif /* CONFIG_LTQ_SECURE_BOOT && CONFIG_DRIVER_GRX500 */
+    #endif /* defined(CONFIG_LTQ_SECURE_BOOT) && defined(CONFIG_DRIVER_GRX500) && !defined(CONFIG_MANUBOOT) */
 
 #ifdef CONFIG_NAND_ENV_DST
 	nand_load(&nand_info, CONFIG_ENV_OFFSET, CONFIG_ENV_SIZE,
@@ -694,30 +558,26 @@ cpy_bootcore:
 #ifdef CONFIG_ENV_OFFSET_REDUND
 	nand_load(&nand_info, CONFIG_ENV_OFFSET_REDUND, CONFIG_ENV_SIZE,
 		  (uchar *)CONFIG_NAND_ENV_DST + CONFIG_ENV_SIZE);
-#endif /* CONFIG_ENV_OFFSET_REDUND */
-#endif /* CONFIG_NAND_ENV_DST */
-
+#endif
+#endif
 	if (nand_chip.select_chip)
 		nand_chip.select_chip(&nand_info, -1);
 
-       asm("sync");
-
-#if defined(CONFIG_LTQ_SECURE_BOOT) && (!CONFIG_DRIVER_GRX500) 
+#ifndef CONFIG_MANUBOOT
+#ifdef CONFIG_LTQ_SECURE_BOOT
+#ifndef CONFIG_DRIVER_GRX500
 #include "mask.h"
 extern secure_decrypt(u8 *key, u8 *iv, u8 *src, u8 *dst, u32 nbytes);
 extern void flush_dcache_range(ulong start_addr, ulong stop);
        for(i=0;i<32;i++){
-          aes_key[i]=masked_key[i]^mask[i];
-		  masked_key[i]=mask[i]=0xff;
-	   }
-       secure_decrypt(aes_key, iv,(u8*)CONFIG_STAGE2_LOADADDR,\
-	                (u8*)CONFIG_STAGE2_LOADADDR, CONFIG_STAGE2_SIZE);
+           aes_key[i]=masked_key[i]^mask[i];
+           masked_key[i]=mask[i]=0xff;
+    			          }
+	   secure_decrypt(aes_key, iv,(u8*)CONFIG_STAGE2_LOADADDR,\
+	                 (u8*)CONFIG_STAGE2_LOADADDR, CONFIG_STAGE2_SIZE);
 	   flush_dcache_range((ulong)CONFIG_STAGE2_LOADADDR,\
-	                      (ulong)(CONFIG_STAGE2_LOADADDR+CONFIG_STAGE2_SIZE));			
-#endif
-
-#ifndef CONFIG_MANUBOOT
-#if defined(CONFIG_LTQ_SECURE_BOOT) && defined(CONFIG_DRIVER_GRX500)
+	                      (ulong)(CONFIG_STAGE2_LOADADDR+CONFIG_STAGE2_SIZE));
+#else
     #if defined(CONFIG_GRX500_BOOT_4KEC_ONLY)
     bootrom_auth(0xa0800000);
     #else /* defined(CONFIG_GRX500_BOOT_4KEC_ONLY) */
@@ -729,45 +589,13 @@ extern void flush_dcache_range(ulong start_addr, ulong stop);
     REG32(SRAMFLAG) = 0;
     asm("sync");
     #endif /* defined(CONFIG_GRX500_BOOT_4KEC_ONLY) */
-#endif /* CONFIG_LTQ_SECURE_BOOT && CONFIG_DRIVER_GRX500 && CONFIG_GRX500_A21 */ 
+#endif
+#endif
 #endif /* CONFIG_MANUBOOT */
+
 	/*
 	 * Jump to U-Boot image
 	 */
 	uboot = (void *)CONFIG_SYS_NAND_U_BOOT_START;
 	(*uboot)();
-
-#if !defined(CONFIG_GRX500_BOOT_4KEC_ONLY) && defined(CONFIG_DRIVER_GRX500)
-    } else {
-        ulong load_address;
-        ulong jump_address;
-		ulong ddr_address, bootcore_size;
-
-		asm("sync");
-		load_address = REG32(MPS_LOAD_ADDR); /* 4Kec load addr */
-		ddr_address = REG32(MPS_DDR_LOC);	 /* ddr where TOS is copied to */
-		bootcore_size = REG32(MPS_SIZE_LOC); /* size of TOS/bootcore img */
-
-        #if defined(CONFIG_LTQ_SECURE_BOOT) && !defined(CONFIG_MANUBOOT)
-        /* reuse ddr loc only */
-        bootrom_auth((u32)ddr_address);
-
-        /* safeguard , but shall never come here in first place*/
-        while(1);
-        #else /* defined(CONFIG_LTQ_SECURE_BOOT) && !defined(CONFIG_MANUBOOT) */
-		memcpy((unsigned char *) load_address, 
-				(unsigned char *) ddr_address, 
-				bootcore_size);
-
-		ret = check_4kec_header(load_address, 
-								&jump_address, 
-								bootcore_size);
-		if (ret)
-			while(1); // if img is bad, we prevent 4kec from loading it
-
-        uboot = (void*)jump_address;
-        (*uboot)();
-        #endif /* defined(CONFIG_LTQ_SECURE_BOOT) && !defined(CONFIG_MANUBOOT) */
-    }
-#endif /* CONFIG_GRX500_BOOT_4KEC_ONLY  && CONFIG_DRIVER_GRX500 */
 }
