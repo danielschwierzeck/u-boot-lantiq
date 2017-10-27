@@ -98,7 +98,7 @@ int do_upgrade( cmd_tbl_t *cmdtp, int flag, int argc, char *argv[]) {
 	ulong srcHeader=0;
 	int curParSize=0, dir, pad;
 	image_header_t *pimg_header = NULL;
-	char name[16], strimg_crc[32], buf[32];;
+	char name[16], strimg_crc[32], buf[32];
 #ifdef CONFIG_CMD_UBI
     int ubi = 0;
 #endif
@@ -148,7 +148,10 @@ int do_upgrade( cmd_tbl_t *cmdtp, int flag, int argc, char *argv[]) {
 			#ifdef CONFIG_CMD_UBI
 			    if(strncmp(pimg_header->ih_name, "LTQCPE UBI_Kernel", sizeof(pimg_header->ih_name)) == 0) ubi=1;
 			#endif	
-				sprintf(name, "kernel");
+				if (strncmp(pimg_header->ih_name, "MIPS 4Kec Bootcore", sizeof(pimg_header->ih_name)) == 0)
+					sprintf(name, "bootcore");
+				else
+					sprintf(name, "kernel");
 				dir = 1;
 				break;
 			case IH_TYPE_FIRMWARE:
@@ -376,7 +379,10 @@ int do_upgrade( int file_fd , int srcLen) {
 				dir = 0;
 				break;
 			case IH_TYPE_KERNEL:
-				sprintf(name, "kernel");
+				if (strncmp(xImgHeader.ih_name, "MIPS 4Kec Bootcore", sizeof(xImgHeader.ih_name)) == 0)
+          sprintf(name, "bootcore");
+				else
+					sprintf(name, "kernel");
 				dir = 1;
 				break;
 			case IH_TYPE_FIRMWARE:

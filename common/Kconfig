@@ -14,6 +14,11 @@ config CMD_BEDBUG
 config CMD_BMP
      bool "bmp"
 
+config CMD_BOOT_TOS
+	bool "boot tos"
+	default n
+	depends on DRIVER_GRX500
+
 config CMD_CACHE
      bool "cache"
 
@@ -244,4 +249,3 @@ config SYS_PROMPT_HUSH_PS2
     string "Hush PS2 Prompt"
        default "> "
        depends on SYS_HUSH_PARSER
-
