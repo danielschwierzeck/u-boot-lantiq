@@ -60,58 +60,22 @@ uchar env_get_char_spec(int index)
 
 int saveenv(void)
 {
-	u32 saved_size, saved_offset;
-	char *saved_buffer = NULL;
-	u32 sector = 1;
 	int ret;
 
 	if (!env_flash) {
 		puts("Environment SPI flash not initialized\n");
 		return 1;
 	}
-
-	/* Is the sector larger than the env (i.e. embedded) */
-	if (CONFIG_ENV_SECT_SIZE > CONFIG_ENV_SIZE) {
-		saved_size = CONFIG_ENV_SECT_SIZE - CONFIG_ENV_SIZE;
-		saved_offset = CONFIG_ENV_OFFSET + CONFIG_ENV_SIZE;
-		saved_buffer = malloc(saved_size);
-		if (!saved_buffer) {
-			ret = 1;
-			goto done;
-		}
-		ret = spi_flash_read(env_flash, saved_offset, saved_size, saved_buffer);
-		if (ret)
-			goto done;
-	}
-
-	if (CONFIG_ENV_SIZE > CONFIG_ENV_SECT_SIZE) {
-		sector = CONFIG_ENV_SIZE / CONFIG_ENV_SECT_SIZE;
-		if (CONFIG_ENV_SIZE % CONFIG_ENV_SECT_SIZE)
-			sector++;
-	}
-
-	puts("Erasing SPI flash...");
-	ret = spi_flash_erase(env_flash, CONFIG_ENV_OFFSET, sector * CONFIG_ENV_SECT_SIZE);
-	if (ret)
-		goto done;
-
+	
 	puts("Writing to SPI flash...");
 	ret = spi_flash_write(env_flash, CONFIG_ENV_OFFSET, CONFIG_ENV_SIZE, env_ptr);
 	if (ret)
 		goto done;
 
-	if (CONFIG_ENV_SECT_SIZE > CONFIG_ENV_SIZE) {
-		ret = spi_flash_write(env_flash, saved_offset, saved_size, saved_buffer);
-		if (ret)
-			goto done;
-	}
-
 	ret = 0;
 	puts("done\n");
 
  done:
-	if (saved_buffer)
-		free(saved_buffer);
 	return ret;
 }
 
