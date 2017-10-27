@@ -235,3 +235,13 @@ config YAFFS2
      bool "YAFFS2"
 	 
 endmenu
+
+config SYS_HUSH_PARSER
+    bool "Hush Parser"
+       default n
+
+config SYS_PROMPT_HUSH_PS2
+    string "Hush PS2 Prompt"
+       default "> "
+       depends on SYS_HUSH_PARSER
+
