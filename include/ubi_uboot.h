@@ -38,7 +38,7 @@ do {									\
 } while (0)
 
 /* configurable */
-#define CONFIG_MTD_UBI_WL_THRESHOLD	4096
+#define CONFIG_MTD_UBI_WL_THRESHOLD	CONFIG_UBI_WL_THRESHOLD
 #define CONFIG_MTD_UBI_BEB_RESERVE	1
 #define UBI_IO_DEBUG			0
 
