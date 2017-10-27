@@ -1,0 +1,206 @@
+
+;********************************************************************
+;Trace 32 script to load DDR tuning software for Danube
+;Written by NG AIK ANN (IFAP DC COM WL SD)
+;Infineon Technology Asia Pacific
+;Last Update : 15th Feb 2008
+;********************************************************************
+;This script is to be use with ddr_tune.bin for AR9
+;For Detail on how to use this script pls refer to
+;DDR tuning documentation which come with this script
+;Please keep a default copy of this script with default value before
+;modified the MC_DC parameter to suit the DDR device you use
+;You also need the board console connected to activate the test
+;and display the result
+;********************************************************************
+; Target : (Pls update according to target DDR device)
+;********************************************************************
+
+; Setup Lauterbach debugger for AR9
+SYStem.mode down
+SYStem.cpu MIPS34k
+SYStem.JTAGCLOCK 20000000.
+SYSTEM.OPTION ENDIANESS BIG
+SYStem.mode nodebug
+SYStem.mode up
+
+; Setup AR9 CPU 111Mhz, DDR 111Mhz, FPI 111Mhz
+;data.set 0xbf103008 %long 0x9800f25e
+data.set 0xbf103010 %long 0x85
+data.set 0xbf103014 %long 0x01
+;data.set 0xbf203010 %long 0x40000000
+wait 1s
+
+; Do not use this setting.
+; CPU 266Mhz, DDR 133Mhz, FPI 67Mhz
+;data.set 0xbf103010 %long 0x0e9
+;data.set 0xbf103014 %long 0x01
+
+;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;Initialize memory controller register
+;Pls refer to the documentation to change the necessary parameter to
+;Suit the DDR device you are using
+;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+;General MC register (no change required)
+data.set 0xbf800060 %long 0xf
+data.set 0xbf800010 %long 0x0
+data.set 0xbf800020 %long 0x0
+data.set 0xbf800200 %long 0x02
+data.set 0xbf800210 %long 0x0
+
+;DDR Register
+;REG32(MC_DC0) = 0x00001B1B;
+data.set 0xbf801000 %long 0x1b1b
+;REG32(MC_DC1) = 0x00000000;
+data.set 0xbf801010 %long 0x0
+;REG32(MC_DC2) = 0x00000000;
+data.set 0xbf801020 %long 0x0
+;REG32(MC_DC3) = 0x00000000;
+data.set 0xbf801030 %long 0x0
+;REG32(MC_DC4) = 0x00000000;
+data.set 0xbf801040 %long 0x0
+;REG32(MC_DC5) = 0x00000200;
+data.set 0xbf801050 %long 0x200
+;REG32(MC_DC6) = 0x00000605;
+data.set 0xbf801060 %long 0x0605   ;Program base on DDR device use (Infineon type use 2.5 value 605)
+;REG32(MC_DC7) = 0x00000303;
+data.set 0xbf801070 %long 0x302    ;Program for burst lenght and write recovry time
+;REG32(MC_DC8) = 0x00000102;
+data.set 0xbf801080 %long 0x102
+;REG32(MC_DC9) = 0x0000070A;
+data.set 0xbf801090 %long 0x70a
+;REG32(MC_DC10) = 0x00000203;
+data.set 0xbf8010a0 %long 0x203
+;REG32(MC_DC11) = 0x00000C02;
+data.set 0xbf8010b0 %long 0xc02    ;Parameter needed from DDR spec.
+;REG32(MC_DC12) = 0x000001C8;
+data.set 0xbf8010c0 %long 0x1c8
+;REG32(MC_DC13) = 0x00000001;
+data.set 0xbf8010d0 %long 0x1
+;REG32(MC_DC14) = 0x00000000;
+data.set 0xbf8010e0 %long 0x0
+;REG32(MC_DC15) = 0x00000F20;
+data.set 0xbf8010f0 %long 0x138    ;Default Write DQS Out to 0x20
+;REG32(MC_DC16) = 0x0000C800;
+data.set 0xbf801100 %long 0x2200
+;REG32(MC_DC17) = 0x0000000D;
+;data.set 0xbf801110 %long 0xd
+data.set 0xbf801110 %long 0xd      ; if txsnr = 75ns; value = 75/6 ~= 13 = 0xd
+;REG32(MC_DC18) = 0x00000301;
+data.set 0xbf801120 %long 0x301
+;REG32(MC_DC19) = 0x00000200;
+data.set 0xbf801130 %long 0x200    ;use 0x200 to have 2 pin less than 15 for address for 256Mbit DDR
+;REG32(MC_DC20) = 0x00000A04;
+data.set 0xbf801140 %long 0xa04    ;use 0xa03 as we are going to use column size of 10 address
+;REG32(MC_DC21) = 0x00001c00;
+data.set 0xbf801150 %long 0x1700    ;default read delay use for Danube Ref. Board with Qimonda DDR, tuning will be done
+;REG32(MC_DC22) = 0x00001E1E;
+data.set 0xbf801160 %long 0x1717    ;default read delay use for Danube Ref. Board with Qimonda DDR, tuning will be done
+;REG32(MC_DC23) = 0x00000000;
+data.set 0xbf801170 %long 0x0      ;disable ECC
+;REG32(MC_DC24) = 0x00000052;
+data.set 0xbf801180 %long 0x05b    ;Default DQS out shift.. tuning will be done to it.
+;REG32(MC_DC25) = 0x00000000;
+data.set 0xbf801190 %long 0x0
+;REG32(MC_DC26) = 0x00000000;
+data.set 0xbf8011a0 %long 0x0
+;REG32(MC_DC27) = 0x00000000;
+data.set 0xbf8011b0 %long 0x0
+;REG32(MC_DC28) = 0x00000512;
+data.set 0xbf8011c0 %long 0x514    ;this is periodic refresh cycle? 7.8us /6ns 0x514
+;REG32(MC_DC29) = 0x00002D92;
+data.set 0xbf8011d0 %long 0x2d93   ;calculate value is 2d92-2d93..
+;REG32(MC_DC30) = 0x00008235;
+data.set 0xbf8011e0 %long 0x8236   ;init delay spec stated 200us needed 0x8235
+;REG32(MC_DC31) = 0x00000000;
+data.set 0xbf8011f0 %long 0x0      ;Extended mode register programming... not req
+;REG32(MC_DC32) = 0x00000000;
+data.set 0xbf801200 %long 0x0
+;REG32(MC_DC33) = 0x00000000;
+data.set 0xbf801210 %long 0x0
+;REG32(MC_DC34) = 0x00000000;
+data.set 0xbf801220 %long 0x0
+;REG32(MC_DC35) = 0x00000000;
+data.set 0xbf801230 %long 0x0
+;REG32(MC_DC36) = 0x00000000;
+data.set 0xbf801240 %long 0x0
+;REG32(MC_DC37) = 0x00000000;
+data.set 0xbf801250 %long 0x0
+;REG32(MC_DC38) = 0x00000000;
+data.set 0xbf801260 %long 0x0
+;REG32(MC_DC39) = 0x00000000;
+data.set 0xbf801270 %long 0x0
+;REG32(MC_DC40) = 0x00000000;
+data.set 0xbf801280 %long 0x0
+;REG32(MC_DC41) = 0x00000000;
+data.set 0xbf801290 %long 0x0
+;REG32(MC_DC42) = 0x00000000;
+data.set 0xbf8012a0 %long 0x0
+;REG32(MC_DC43) = 0x00000000;
+data.set 0xbf8012b0 %long 0x0
+;REG32(MC_DC44) = 0x00000000;
+data.set 0xbf8012c0 %long 0x0
+;REG32(MC_DC45) = 0x00000600;
+data.set 0xbf8012d0 %long 0x500   ;optional can try 0x500 for 2.5 cycle cas
+;REG32(MC_DC46) = 0x00000000;
+data.set 0xbf8012e0 %long 0x0
+
+data.set 0xbf800060 %long 0x0d
+
+;Enable memory controller and DDR
+;REG32(MC_DC3) = 0x00000100;
+data.set 0xbf801030 %long 0x100
+
+wait 1s
+
+;Makesure that PPE and MPS are power up in PMU
+;TODO: Program PMU register (to confirm correct)
+
+data.set 0xbf10201c %l 0x211829b
+
+;load the tuning program
+; TODO: confirm
+;data.load.binary ddr166_tune.bin 0xbe1a0000
+;data.load.binary w:\tftpboot\ddr_tune.bin 0xbe1a0000
+;data.load.elf w:\home\ngai\amazon-s\ddr_tune\ddr_tune
+;go
+;wait 1s
+;break
+;data.load.elf w:\home\ngai\amazon-s\chiptest\objects\chiptest.elf
+;data.load.elf w:\home\ngai\amazon-s\ddr_tune\ddr_tune
+
+wait 1s
+
+;set the program counter to PPE share buffer
+;r.s pc 0xbe1a0000
+
+;wait 1s
+
+;Start running the tuning program
+;Prepare to press a key at console to start
+;This may take a few minutes to complete
+;go
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
