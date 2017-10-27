@@ -340,7 +340,7 @@ int upgrade_img(ulong srcAddr, ulong srcLen, char *imgName, enum ExpandDir dir, 
 	if (FindNPImgLoc(img_addr,&nextStartAddr,&preEndAddr))
 		return 1;
 	pimg_header = (image_header_t *)srcAddr;
-	if (pimg_header->ih_magic == IH_MAGIC) {
+	if (ntohl(pimg_header->ih_magic) == IH_MAGIC) {
 		printf("Image contains header with name [%s]\n",pimg_header->ih_name);
 		if(pimg_header->ih_type != IH_TYPE_KERNEL) {
 			upgrade_debug_printf("This is not kernel image and so removing header\n");

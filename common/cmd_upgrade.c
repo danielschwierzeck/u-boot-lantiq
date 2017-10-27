@@ -200,7 +200,7 @@ int http_upgrade(ulong srcAddr, int srcLen) {
 		srcHeader = (!srcHeader ? srcAddr : srcHeader + curParSize);
 		printf("srcHeader=0x%08x\n",srcHeader);
 		pimg_header = (image_header_t *)srcHeader;		
-		curParSize = sizeof(image_header_t) + pimg_header->ih_size;
+		curParSize = sizeof(image_header_t) + ntohl(pimg_header->ih_size);
 		printf("curParSize=0x%x\n",curParSize);
 		
 		pad = (16 - (curParSize % 16)) % 16;
