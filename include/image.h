@@ -156,7 +156,9 @@
 #define IH_TYPE_FLATDT		8	/* Binary Flat Device Tree Blob	*/
 #define IH_TYPE_KWBIMAGE	9	/* Kirkwood Boot Image		*/
 #define IH_TYPE_IMXIMAGE	10	/* Freescale IMXBoot Image	*/
-#define IH_TYPE_UBOOT       11
+#define IH_TYPE_UBOOT       11  /* Lantiq uboot image*/
+#define IH_TYPE_UBOOTENV    12  /* Lantiq uboot environment image*/ 
+#define IH_TYPE_SYSTEMSW    13  /* Lantiq ubinized image*/
 
 /*
  * Compression Types
@@ -187,6 +189,14 @@ typedef struct image_header {
 	uint8_t		ih_type;	/* Image Type			*/
 	uint8_t		ih_comp;	/* Compression Type		*/
 	uint8_t		ih_name[IH_NMLEN];	/* Image Name		*/
+#ifdef CONFIG_LTQ_IMAGE_EXTRA_CHECKS
+    uint8_t     ih_vendor[IH_NMLEN]; /* 32 char Vendor Name String */
+    uint8_t     ih_board[IH_NMLEN]; /* 32 char Board Name String */
+    uint8_t     ih_boardVer[VERSIONLEN]; /* Board Version 16 char str */
+    uint8_t     ih_chip[IH_NMLEN]; /* 32 char Chip Name String */
+    uint8_t     ih_chipVer[VERSIONLEN]; /* Chip Version16 char string */
+    uint8_t     ih_swVer[VERSIONLEN]; /* Software Version-16 char string*/
+#endif // IFX_IMAGE_EXTRA_CHECKS
 } image_header_t;
 
 typedef struct image_info {

@@ -35,7 +35,7 @@ static image_header_t header;
 
 static int image_check_image_types (uint8_t type)
 {
-	if ((type > IH_TYPE_INVALID) && (type < IH_TYPE_FLATDT))
+	if ((type > IH_TYPE_INVALID) && (type <= IH_TYPE_UBOOT))
 		return EXIT_SUCCESS;
 	else
 		return EXIT_FAILURE;
