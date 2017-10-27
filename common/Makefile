@@ -131,6 +131,7 @@ COBJS-y += cmd_pcmcia.o
 COBJS-$(CONFIG_CMD_PORTIO) += cmd_portio.o
 COBJS-$(CONFIG_CMD_REGINFO) += cmd_reginfo.o
 COBJS-$(CONFIG_CMD_REISER) += cmd_reiser.o
+COBJS-$(CONFIG_CMD_ROT) += cmd_rot.o
 COBJS-$(CONFIG_CMD_SATA) += cmd_sata.o
 COBJS-$(CONFIG_CMD_SF) += cmd_sf.o
 COBJS-$(CONFIG_CMD_SCSI) += cmd_scsi.o
@@ -169,6 +170,7 @@ COBJS-$(CONFIG_CMD_UPGRADE) += upgrade.o cmd_upgrade.o
 COBJS-$(CONFIG_CMD_WDT) += cmd_wdt.o
 COBJS-$(CONFIG_CMD_AUTH) += cmd_auth.o
 COBJS-$(CONFIG_CMD_BOOT_TOS) += cmd_secboot.o
+COBJS-$(CONFIG_MANUBOOT_OTP_SUPPORT) += otp.o
 
 COBJS	:= $(sort $(COBJS-y))
 SRCS	:= $(AOBJS:.o=.S) $(COBJS:.o=.c)
@@ -188,6 +190,30 @@ $(obj)env_embedded.o: $(src)env_embedded.c $(obj)../tools/envcrc
 
 $(obj)../tools/envcrc:
 	$(MAKE) -C ../tools
+
+ifeq ($(CONFIG_MANUBOOT_OTP_SUPPORT)$(CONFIG_GRX500_BOOT_4KEC_ONLY),yy)
+OTP_H := otp_bin.h
+# OTP_HEX := $(shell hexdump -ve '1/1 "%02x"' $(CONFIG_MANUBOOT_OTP)  )
+
+# old method depend on hexdump
+# .PHONY : $(OTP_H)
+# $(OTP_H):
+#	@echo "Generate OTP content"
+# 	-@rm -f  $(TOPDIR)/include/$(OTP_H)
+# 	@$(TOPDIR)/scripts_platform/hex2array.pl oem_keys $(OTP_HEX) > $(TOPDIR)/include/$(OTP_H)
+
+.PHONY : $(OTP_H)
+$(OTP_H):
+	@echo "Generate OTP content"
+	-@rm -f  $(TOPDIR)/include/$(OTP_H)
+	@$(TOPDIR)/scripts_platform/bin2array.pl $(CONFIG_MANUBOOT_OTP) $(TOPDIR)/include/$(OTP_H) oem_keys
+
+# phony target to force it to rebuild otp_bin.h everytime
+otp.c: $(OTP_H)
+
+# WW: TODO this run multiple time since they add sinclude $(obj).depend below
+# oh well but it still work
+endif
 
 #########################################################################
 

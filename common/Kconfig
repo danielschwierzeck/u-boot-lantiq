@@ -172,6 +172,10 @@ config CMD_RUN
 	 bool "run"
      default y
 
+config CMD_ROT
+     bool "rot"
+	 depends on DRIVER_GRX500 && MANUBOOT_OTP_SUPPORT
+
 config CMD_SAVEENV
      bool "saveenv"
 	 default y
