@@ -57,7 +57,9 @@
 #define CP0_CAUSE $13
 #define CP0_EPC $14
 #define CP0_PRID $15
+#define CP0_EBASE $15,1
 #define CP0_CONFIG $16
+#define CP0_CONFIG5 $16,5
 #define CP0_LLADDR $17
 #define CP0_WATCHLO $18
 #define CP0_WATCHHI $19
@@ -494,11 +496,17 @@
 #define MIPS_CONF1_PC		(_ULCAST_(1) <<  4)
 #define MIPS_CONF1_MD		(_ULCAST_(1) <<  5)
 #define MIPS_CONF1_C2		(_ULCAST_(1) <<  6)
+#define MIPS_CONF1_DA_SHIFT	7
 #define MIPS_CONF1_DA		(_ULCAST_(7) <<  7)
+#define MIPS_CONF1_DL_SHIFT	10
 #define MIPS_CONF1_DL		(_ULCAST_(7) << 10)
+#define MIPS_CONF1_DS_SHIFT	13
 #define MIPS_CONF1_DS		(_ULCAST_(7) << 13)
+#define MIPS_CONF1_IA_SHIFT	16
 #define MIPS_CONF1_IA		(_ULCAST_(7) << 16)
+#define MIPS_CONF1_IL_SHIFT	19
 #define MIPS_CONF1_IL		(_ULCAST_(7) << 19)
+#define MIPS_CONF1_IS_SHIFT	22
 #define MIPS_CONF1_IS		(_ULCAST_(7) << 22)
 #define MIPS_CONF1_TLBS		(_ULCAST_(63)<< 25)
 
@@ -981,6 +989,8 @@ do {									\
 
 #define read_c0_ebase()		__read_32bit_c0_register($15, 1)
 #define write_c0_ebase(val)	__write_32bit_c0_register($15, 1, val)
+
+#define read_c0_tcbind()	__read_32bit_c0_register($2, 2)
 
 /*
  * Macros to access the floating point coprocessor control registers

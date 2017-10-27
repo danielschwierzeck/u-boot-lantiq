@@ -9,7 +9,11 @@
 /***********************************************************************/
 /*  Module      :  SSC1 register address and bits                      */
 /***********************************************************************/
+#ifdef CONFIG_LANTIQ_UBOOT_grx500
+#define IFX_SPI_BASE        (0xb6800000)
+#else
 #define IFX_SPI_BASE        (0xbe100800)
+#endif
 #define SPI_CLC             ((volatile u32*)(IFX_SPI_BASE+0x0000))
 #define SPI_PISEL           ((volatile u32*)(IFX_SPI_BASE+0x0004))
 #define SPI_ID              ((volatile u32*)(IFX_SPI_BASE+0x0008))
