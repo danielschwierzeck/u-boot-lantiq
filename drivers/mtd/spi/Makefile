@@ -29,7 +29,13 @@ COBJS-$(CONFIG_SPI_FLASH)	+= spi_flash.o
 COBJS-$(CONFIG_SPI_FLASH_ATMEL)	+= atmel.o
 COBJS-$(CONFIG_SPI_FLASH_MACRONIX)	+= macronix.o
 COBJS-$(CONFIG_SPI_FLASH_MXIC) += mxic.o
+# vbg400 has a unique spansion driver, but the code uses CONFIG_SPI_FLASH_SPANSION as well.
+#so prevent spansion.c to compile
+ifeq ($(CONFIG_DRIVER_VBG400),y)
+COBJS-$(CONFIG_DRIVER_VBG400)      += spansion_vbg400.o
+else
 COBJS-$(CONFIG_SPI_FLASH_SPANSION)	+= spansion.o
+endif
 COBJS-$(CONFIG_SPI_FLASH_SST)	+= sst.o
 COBJS-$(CONFIG_SPI_FLASH_STMICRO)	+= stmicro.o
 COBJS-$(CONFIG_SPI_FLASH_WINBOND)	+= winbond.o

@@ -12,6 +12,7 @@
 
 #include "spi_flash_internal.h"
 
+#ifndef CONFIG_DRIVER_VBG400
 int spi_flash_cmd(struct spi_slave *spi, u8 cmd, void *response, size_t len)
 {
 	unsigned long flags = SPI_XFER_BEGIN;
@@ -35,6 +36,7 @@ int spi_flash_cmd(struct spi_slave *spi, u8 cmd, void *response, size_t len)
 
 	return ret;
 }
+#endif
 
 int spi_flash_cmd_read(struct spi_slave *spi, const u8 *cmd,
 		size_t cmd_len, void *data, size_t data_len)
@@ -127,6 +129,9 @@ struct spi_flash *spi_flash_probe(unsigned int bus, unsigned int cs,
 	switch (idcode[0]) {
 #ifdef CONFIG_SPI_FLASH_SPANSION
 	case 0x01:
+#ifdef CONFIG_DRIVER_VBG400
+	case 0xc2:
+#endif
 		flash = spi_flash_probe_spansion(spi, idcode);
 		break;
 #endif
@@ -168,8 +173,10 @@ struct spi_flash *spi_flash_probe(unsigned int bus, unsigned int cs,
 		break;
 	}
 
-	if (!flash)
+	if (!flash) {
+		printf("SF: !flash, goto err_manufacturer_probe\n");
 		goto err_manufacturer_probe;
+    }
 
 	spi_release_bus(spi);
 
