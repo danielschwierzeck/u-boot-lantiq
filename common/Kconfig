@@ -218,6 +218,14 @@ config CMD_KGDB
 config CMD_LCD
      bool "lcd"
 
+config CMD_WDT
+     bool "wdt"
+
+config LANTIQ_WATCHDOG
+     bool
+	 depends on CMD_WDT
+	 default y
+
 config YAFFS2
      bool "YAFFS2"
 	 
