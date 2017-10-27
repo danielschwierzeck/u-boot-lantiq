@@ -348,7 +348,7 @@ static int bootm_load_os(image_info_t os, ulong *load_end, int boot_progress)
 		*load_end = load + image_len;
 		puts("OK\n");
 		break;
-#ifdef CONFIG_GZIP
+#ifdef CONFIG_OS_GZIP
 	case IH_COMP_GZIP:
 		printf ("   Uncompressing %s ... ", type_name);
 		if (gunzip ((void *)load, unc_len,
@@ -363,7 +363,7 @@ static int bootm_load_os(image_info_t os, ulong *load_end, int boot_progress)
 		*load_end = load + image_len;
 		break;
 #endif /* CONFIG_GZIP */
-#ifdef CONFIG_BZIP2
+#ifdef CONFIG_OS_BZIP2
 	case IH_COMP_BZIP2:
 		printf ("   Uncompressing %s ... ", type_name);
 		/*
@@ -385,7 +385,7 @@ static int bootm_load_os(image_info_t os, ulong *load_end, int boot_progress)
 		*load_end = load + unc_len;
 		break;
 #endif /* CONFIG_BZIP2 */
-#ifdef CONFIG_LZMA
+#ifdef CONFIG_OS_LZMA
 	case IH_COMP_LZMA:
 		printf ("   Uncompressing %s ... ", type_name);
 
@@ -401,7 +401,7 @@ static int bootm_load_os(image_info_t os, ulong *load_end, int boot_progress)
 		*load_end = load + unc_len;
 		break;
 #endif /* CONFIG_LZMA */
-#ifdef CONFIG_LZO
+#ifdef CONFIG_OS_LZO
 	case IH_COMP_LZO:
 		printf ("   Uncompressing %s ... ", type_name);
 
@@ -419,7 +419,7 @@ static int bootm_load_os(image_info_t os, ulong *load_end, int boot_progress)
 		*load_end = load + unc_len;
 		break;
 #endif /* CONFIG_LZO */
-	default:
+     default:
 		printf ("Unimplemented compression type %d\n", comp);
 		return BOOTM_ERR_UNIMPLEMENTED;
 	}
@@ -682,8 +682,10 @@ int do_bootm (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 	show_boot_progress (8);
 
 #ifdef CONFIG_SILENT_CONSOLE
+#ifdef CONFIG_SUPPRESS_KERNEL_OUTPUT
 	if (images.os.os == IH_OS_LINUX)
 		fixup_silent_linux();
+#endif
 #endif
 
 	boot_fn = boot_os[images.os.os];
