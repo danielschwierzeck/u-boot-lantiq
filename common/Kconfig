@@ -1,5 +1,10 @@
 menu "Supported commands"
 
+config CMD_AUTH
+     bool "auth & auth_img & auth_initrd"
+     default n
+     depends on DRIVER_GRX500
+
 config CMD_BDI
      bool "bdinfo"
 	 

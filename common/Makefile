@@ -167,6 +167,7 @@ COBJS-$(CONFIG_UPDATE_TFTP) += update.o
 COBJS-$(CONFIG_USB_KEYBOARD) += usb_kbd.o
 COBJS-$(CONFIG_CMD_UPGRADE) += upgrade.o cmd_upgrade.o
 COBJS-$(CONFIG_CMD_WDT) += cmd_wdt.o
+COBJS-$(CONFIG_CMD_AUTH) += cmd_auth.o
 
 COBJS	:= $(sort $(COBJS-y))
 SRCS	:= $(AOBJS:.o=.S) $(COBJS:.o=.c)
