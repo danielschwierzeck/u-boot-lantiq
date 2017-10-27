@@ -1,0 +1,14 @@
+#!/bin/sh
+#for 16bit Verilog Memory Model
+usage() {
+echo "$0 file_name start_address"
+}
+
+START_ADDRESS=$2
+SOURCE_FILE=$1
+
+scripts_platform/ikos_ram_ddr_file_gen ${SOURCE_FILE} ${START_ADDRESS} $3
+
+cp -f ${SOURCE_FILE}.txt.00 grx500_ddr2_h.asc
+cp -f ${SOURCE_FILE}.txt.01 grx500_ddr2_l.asc
+cp -f ${SOURCE_FILE}.txt.02 grx500_ddr3.asc

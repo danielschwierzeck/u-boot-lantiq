@@ -1,0 +1,52 @@
+# shell script for making u-boot image for big nand flash
+# Written by Wu Qi Ming Qi-Ming.Wu@infineon.com
+
+#!/bin/sh
+
+
+FILESIZE=0
+PADSIZE=0
+TARGET_FILE=u-boot.nand
+MINIBOOTROM=scripts_platform/minibootrom.img
+#modify this for different page size
+NAND_PAGE_SIZE=2048
+
+
+scripts_platform/sgct scripts_platform/minibootrom/dummy scripts_platform/minibootrom/bootrom.rec ${MINIBOOTROM}
+
+cat ${MINIBOOTROM} >${TARGET_FILE}
+
+FILESIZE=`ls -l ${TARGET_FILE} | awk '{print $5}'`  
+
+
+PADSIZE=`expr ${NAND_PAGE_SIZE} - ${FILESIZE}`
+
+
+dd if=/dev/zero of=zero bs=${PADSIZE} count=1
+
+cat zero >>${TARGET_FILE}
+
+sed -e '/^[[:space:]]*$/d' -e '/^#/d' -e's/0x//g' $2 | awk '{printf "%s %s\n", $1, $2}' >tmp
+
+scripts_platform/gen_ram.pl tmp ram_tmp
+
+cat ram_tmp >>${TARGET_FILE}
+
+FILESIZE=`ls -l ${TARGET_FILE} | awk '{print $5}'`
+
+
+PADSIZE=`expr ${NAND_PAGE_SIZE} + ${NAND_PAGE_SIZE} - ${FILESIZE}`
+
+
+dd if=/dev/zero of=zero bs=${PADSIZE} count=1
+
+cat zero >>${TARGET_FILE}
+
+cat $3 >>${TARGET_FILE}
+
+rm -rf tmp ram_tmp zero ${MINIBOOTROM} 
+
+
+
+
+
