@@ -687,7 +687,7 @@ static int part_parse(const char *const partdef, const char **ret, struct part_i
  * @param dev device to validate
  * @return 0 if device is valid, 1 otherwise
  */
-int mtd_device_validate(u8 type, u8 num, u32 *size)
+int mtd_device_validate(u8 type, u8 num, u64 *size)
 {
 	struct mtd_info *mtd;
 	char mtd_dev[16];
@@ -824,7 +824,7 @@ static int device_parse(const char *const mtd_dev, const char **ret, struct mtd_
 	LIST_HEAD(tmp_list);
 	struct list_head *entry, *n;
 	u16 num_parts;
-	u32 offset;
+	u64 offset;
 	int err = 1;
 
 	debug("===device_parse===\n");
@@ -1223,7 +1223,7 @@ static void list_partitions(void)
 		part_num = 0;
 		list_for_each(pentry, &dev->parts) {
 			part = list_entry(pentry, struct part_info, link);
-			printf("%2d: %-20s0x%08x\t0x%08x\t%d\n",
+			printf("%2d: %-20s0x%llx\t0x%llx\t%d\n",
 					part_num, part->name, part->size,
 					part->offset, part->mask_flags);
 
@@ -1237,7 +1237,7 @@ static void list_partitions(void)
 	if (current_mtd_dev) {
 		part = mtd_part_info(current_mtd_dev, current_mtd_partnum);
 		if (part) {
-			printf("\nactive partition: %s%d,%d - (%s) 0x%08x @ 0x%08x\n",
+			printf("\nactive partition: %s%d,%d - (%s) 0x%llx @ 0x%llx\n",
 					MTD_DEV_TYPE(current_mtd_dev->id->type),
 					current_mtd_dev->id->num, current_mtd_partnum,
 					part->name, part->size, part->offset);
@@ -1428,7 +1428,7 @@ static int parse_mtdids(const char *const ids)
 	struct list_head *entry, *n;
 	struct mtdids *id_tmp;
 	u8 type, num;
-	u32 size;
+	u64 size;
 	int ret = 1;
 
 	debug("\n---parse_mtdids---\nmtdids = %s\n\n", ids);
@@ -1502,7 +1502,7 @@ static int parse_mtdids(const char *const ids)
 		id->mtd_id[mtd_id_len - 1] = '\0';
 		INIT_LIST_HEAD(&id->link);
 
-		debug("+ id %s%d\t%16d bytes\t%s\n",
+		debug("+ id %s%d\t0x%llx bytes\t%s\n",
 				MTD_DEV_TYPE(id->type), id->num,
 				id->size, id->mtd_id);
 

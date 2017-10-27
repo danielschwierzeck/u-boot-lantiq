@@ -44,8 +44,8 @@ struct mtd_part {
  * to the _real_ device.
  */
 
-static int part_read(struct mtd_info *mtd, loff_t from, size_t len,
-		size_t *retlen, u_char *buf)
+static int part_read(struct mtd_info *mtd, loff_t from, u64 len,
+		u64 *retlen, u_char *buf)
 {
 	struct mtd_part *part = PART(mtd);
 	struct mtd_ecc_stats stats;
@@ -119,8 +119,8 @@ static int part_get_fact_prot_info(struct mtd_info *mtd, struct otp_info *buf,
 	return part->master->get_fact_prot_info(part->master, buf, len);
 }
 
-static int part_write(struct mtd_info *mtd, loff_t to, size_t len,
-		size_t *retlen, const u_char *buf)
+static int part_write(struct mtd_info *mtd, loff_t to, u64 len,
+		u64 *retlen, const u_char *buf)
 {
 	struct mtd_part *part = PART(mtd);
 	if (!(mtd->flags & MTD_WRITEABLE))
