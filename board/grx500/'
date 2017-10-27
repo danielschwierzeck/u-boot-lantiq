@@ -1,0 +1,82 @@
+#!/usr/bin/perl -w
+#perl script to generate lantiq header 
+#Revision history
+#19/11/2014 Author Wu Qi Ming
+
+use strict;
+use Getopt::Long;
+
+my $TAG_DEBUG=0x11000000;
+my $TAG_REGCFG=0x22000000;
+my $TAG_IDWNLD=0x33000000;
+my $TAG_CDWNLD=0x44000000;
+my $TAG_DWNLD=0x55000000;
+my $TAG_IFCFG=0x66000000;
+my $TAG_START=0x77000000;
+my $TAG_SOCMODE=0x88000000;
+my $TAG_CHKSUM=0x99000000;
+my $TAG_LQHDR=0xAA000000;
+
+my $FLAG_RST=0x00800000;
+my $FLAG_CFG=0x00700000;
+my $FLAG_CFG2=0x00400000;
+my $FLAG_CFG1=0x00200000;
+my $FLAG_CFG0=0x00100000;
+my $FLAG_SDBG=0x00080000;
+my $FLAG_DBG=0x00040000;
+my $FLAG_DEC=0x00020000;
+my $FLAG_START=0x00010000;
+
+
+
+sub usage
+{
+   print "mk_ltq_header.pl --options\n";
+   print "      --bch strength         enable bch, strength 8/16/40\n";
+   print "      --col col              nand column address cycle\n";
+   print "      --row row              nand row address cycle\n";
+   print "      --pagesize pagesize    nand page size \n";
+   print "      --blocksize blocksize  nand block size \n";
+   print "      --backup  backup       copies of backup images\n";
+   print "      --ddr ddrconfig        ddr configuration file\n";
+   print "      --out output           output file name\n";
+   print "      --help                 show this menu\n"
+}
+
+# setup my defaults
+my $bch      = 0;
+my $help     = 0;
+my $col      = 0;
+my $row      = 0;
+my $pagesize = 0;
+my $blocksize = 0;
+my $backup    = 1;
+my $ddr = "";
+my $output = "";
+
+GetOptions(
+    'bch=i' => \$bch,
+    'col=i' => \$col,
+    'row=i' => \$row,
+    'pagesize=i' => \$pagesize,
+    'blocksize=i' => \$blocksize,
+    'backup=i' => \$backup,
+    'ddr=s'    => \$ddr,
+    'out=s'    => \$output,
+    'help!'     => \$help,
+) or usage();
+
+if( $help ) {
+    usage();
+} 
+
+
+#my $lnmw=0;
+
+#$byte=(($bch>0)?1:0)<<4;
+#$byte=$byte|(($col-1)<<2)|($row-1);
+
+#print "byte=$byte\n";
+
+
+

@@ -1,0 +1,7 @@
+uart download instructions:
+1. Prepare images:
+   ./gct_500.pl uartddr.conf u-boot.srec u-boot.asc 0
+
+2. download uart.txt to the board
+3. download u-boot.asc to the board after uart.txt
+
