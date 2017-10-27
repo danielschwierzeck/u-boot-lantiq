@@ -1,0 +1,44 @@
+#
+# For a description of the syntax of this configuration file,
+# see Linux Documentation
+#
+#
+
+config DRIVER_DANUBE
+      bool
+      default y
+
+choice
+    prompt 'RAM BRAND'
+	    default DANUBE_ETRON_RAM
+
+    config DANUBE_QIMONDA_RAM
+	    bool "QIMONDA"
+
+	config DANUBE_ETRON_RAM
+	    bool "ETRON"
+
+	config DANUBE_PROMOS_RAM
+	    bool "PROMOS"
+
+	config DANUBE_PSC_RAM	
+	    bool "PSC"
+
+    config DANUBE_SAMSUNG_RAM
+	    bool "SAMSUNG"
+
+endchoice
+					
+
+
+config TUNE_DDR
+    bool "DDR tuning support"
+	default y
+
+config DDR_TUNING_TEXT_BASE
+    hex 
+        default "0x9e1a0000"
+    depends on TUNE_DDR
+
+
+
