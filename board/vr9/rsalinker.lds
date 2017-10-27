@@ -29,8 +29,8 @@ OUTPUT_ARCH(mips)
 ENTRY(_start)
 SECTIONS
 {
-   . = 0xa0600050;
-   /*. = 0xbe220050;*/ 
+   /*. = 0xa0600050;*/
+   . = 0xbe220050; 
    . = ALIGN(4);
    .text       :
    {

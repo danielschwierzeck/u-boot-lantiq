@@ -12,6 +12,9 @@ endif
 
 ALL += bootstrap.bin u-boot.lzimg u-boot.ltq $(ENV_BLOCK)
 
+ifdef CONFIG_LTQ_SECURE_BOOT
+ALL +=stage3.bin stage2.bin
+endif
 
 LDSCRIPT_BOOTSTRAP := $(TOPDIR)/board/$(BOARD)/bootstrap.lds
 ifdef CONFIG_BOOT_FROM_NOR
@@ -140,3 +143,42 @@ $(ENV_BLOCK): $(obj)u-boot $(obj)u-boot.bin
 		$(NM) -Ss u-boot >u-boot.sym
 		scripts_platform/mk_envimg.sh $@
 
+stage3.bin: $(CONFIG_DSA_PRIVKEY) u-boot.ltq
+		@scripts_platform/pad2align.sh -n 32 u-boot.ltq
+ifdef CONFIG_ENCRYPT_STAGE3
+		@scripts_platform/build_stage3.sh -i u-boot.ltq -o stage3.bin \
+		                                  -d $(CONFIG_BOOTSTRAP_TEXT_BASE)\
+		                                  -j $(CONFIG_BOOTSTRAP_TEXT_BASE)\
+		                                  -p $(CONFIG_DSA_PRIVKEY)     \
+                                          -k $(CONFIG_STAGE3_AES_KEY)
+else
+		@scripts_platform/build_stage3.sh -i u-boot.ltq -o stage3.bin \
+                                          -d $(CONFIG_BOOTSTRAP_TEXT_BASE)\
+		                                  -j $(CONFIG_BOOTSTRAP_TEXT_BASE)\
+		                                  -p $(CONFIG_DSA_PRIVKEY)
+endif
+
+$(CONFIG_DSA_PRIVKEY):
+ifdef CONFIG_DSA_KEY_AUTO
+		@openssl dsaparam -out dsaparam.pem 1024
+		@openssl gendsa -out $(CONFIG_DSA_PRIVKEY) dsaparam.pem
+		@openssl dsa -in $(CONFIG_DSA_PRIVKEY) -out $(CONFIG_DSA_PUBKEY) -pubout
+endif
+		@echo "private key:"$(CONFIG_DSA_PRIVKEY)
+		@echo "public key: "$(CONFIG_DSA_PUBKEY)
+
+
+stage2.bin: $(CONFIG_DSA_PRIVKEY)
+		@ln -sf $(TOPDIR)/.config $(TOPDIR)/stage2/.config
+		@ln -sf $(TOPDIR)/include/configs/autoconf.h $(TOPDIR)/stage2/include/autoconf.h
+		@scripts_platform/key2header.sh $(CONFIG_DSA_PRIVKEY) stage2/bn_val.h
+		@scripts_platform/hex2array.pl aes_key $(CONFIG_STAGE3_AES_KEY) >>stage2/bn_val.h
+		@scripts_platform/mk_key_img.pl $(CONFIG_STAGE2_AES_KEY) stage2_key.bin |sed -e '/mask/!d' -e 's/mask=//g' >mask.bin
+		@cat mask.bin |xargs scripts_platform/hex2array.pl mask >$(TOPDIR)/nand_spl/board/lantiq/mask.h
+		@$(MAKE) -C $(TOPDIR)/stage2 all
+		@cp $(TOPDIR)/stage2/stage2.bin stage2.bin
+		@$(TOPDIR)/scripts_platform/pad2align.sh -n $(CONFIG_STAGE2_SIZE) stage2.bin
+		@openssl enc -aes-256-cbc -in stage2.bin \
+		             -out stage2.enc -K $(CONFIG_STAGE2_AES_KEY) \
+					 -iv $(CONFIG_STAGE2_AES_IV) -nopad
+					
