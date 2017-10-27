@@ -28,32 +28,11 @@
 /*  Module      :  WDT register address and bits                       */
 /***********************************************************************/
 
-#define DANUBE_BIU_WDT                           (KSEG1+0x1F880000)
+#define BSP_BIU_WDT                           (0xBF880000)
 
 /***Watchdog Timer Control Register ***/
-#define DANUBE_BIU_WDT_CR                   ((volatile u32*)(DANUBE_BIU_WDT + 0x03F0))
-#define DANUBE_BIU_WDT_CR_GEN               (1 << 31)
-#define DANUBE_BIU_WDT_CR_DSEN              (1 << 30)
-#define DANUBE_BIU_WDT_CR_LPEN              (1 << 29)
-#define DANUBE_BIU_WDT_CR_PWL_GET(value)    (((value) >> 26) & ((1 << 2) - 1))
-#define DANUBE_BIU_WDT_CR_PWL_SET(value)    (((( 1 << 2) - 1) & (value)) << 26)
-#define DANUBE_BIU_WDT_CR_CLKDIV_GET(value) (((value) >> 24) & ((1 << 2) - 1))
-#define DANUBE_BIU_WDT_CR_CLKDIV_SET(value) (((( 1 << 2) - 1) & (value)) << 24)
-#define DANUBE_BIU_WDT_CR_PW_GET(value)     (((value) >> 16) & ((1 << 8) - 1))
-#define DANUBE_BIU_WDT_CR_PW_SET(value)     (((( 1 << 8) - 1) & (value)) << 16)
-#define DANUBE_BIU_WDT_CR_RELOAD_GET(value) (((value) >> 0) & ((1 << 16) - 1))
-#define DANUBE_BIU_WDT_CR_RELOAD_SET(value) (((( 1 << 16) - 1) & (value)) << 0)
-
+#define BSP_BIU_WDT_CR                   ((volatile u32*)(BSP_BIU_WDT + 0x03F0))
 /***Watchdog Timer Status Register***/
-#define DANUBE_BIU_WDT_SR                   ((volatile u32*)(DANUBE_BIU_WDT + 0x03F8))
-#define DANUBE_BIU_WDT_SR_EN                (1 << 31)
-#define DANUBE_BIU_WDT_SR_AE                (1 << 30)
-#define DANUBE_BIU_WDT_SR_PRW               (1 << 29)
-#define DANUBE_BIU_WDT_SR_EXP               (1 << 28)
-#define DANUBE_BIU_WDT_SR_PWD               (1 << 27)
-#define DANUBE_BIU_WDT_SR_DS                (1 << 26)
-#define DANUBE_BIU_WDT_SR_VALUE_GET(value)  (((value) >> 0) & ((1 << 16) - 1))
-#define DANUBE_BIU_WDT_SR_VALUE_SET(value)  (((( 1 << 16) - 1) & (value)) << 0)
 
 /***********************************************************************/
 /*  Module      :  PMU register address and bits                       */
