@@ -95,6 +95,10 @@
 #if defined(CONFIG_CMD_DNS)
 #include "dns.h"
 #endif
+#ifdef CONFIG_CMD_HTTPD
+#include "httpd.h"
+#endif
+
 
 DECLARE_GLOBAL_DATA_PTR;
 
@@ -436,6 +440,12 @@ restart:
 			DnsStart();
 			break;
 #endif
+#ifdef CONFIG_CMD_HTTPD
+         case HTTP:
+		    HttpdStart();
+		    break;
+#endif
+								 
 		default:
 			break;
 		}
@@ -1616,10 +1626,7 @@ NetReceive(volatile uchar * inpkt, int len)
 			default:
 				return;
 			}
-		} else if (ip->ip_p != IPPROTO_UDP) {	/* Only UDP packets */
-			return;
-		}
-
+		} else if (ip->ip_p == IPPROTO_UDP){
 #ifdef CONFIG_UDP_CHECKSUM
 		if (ip->udp_xsum != 0) {
 			ulong   xsum;
@@ -1676,7 +1683,16 @@ NetReceive(volatile uchar * inpkt, int len)
 						ntohs(ip->udp_src),
 						ntohs(ip->udp_len) - 8);
 		break;
-	}
+	}else if (ip->ip_p == IPPROTO_TCP){
+        /* save address for later use */
+        memcpy(NetServerEther, et->et_src, 6);
+        (*packetHandler)((uchar *)ip, /*pass the whole ip packet to upper layer*/
+                        ntohs(ip->udp_dst),/*don't care*/
+                        ntohs(ip->udp_src),/*don't care*/
+                        ntohs(ip->ip_len));
+          return;
+      }
+ }
 }
 
 
@@ -1733,7 +1749,11 @@ static int net_check_prereq (proto_t protocol)
 	case RARP:
 	case BOOTP:
 	case CDP:
-		if (memcmp (NetOurEther, "\0\0\0\0\0\0", 6) == 0) {
+#ifdef CONFIG_CMD_HTTPD	
+	case HTTP:
+#endif
+
+    if (memcmp (NetOurEther, "\0\0\0\0\0\0", 6) == 0) {
 #ifdef CONFIG_NET_MULTI
 			extern int eth_get_dev_index (void);
 			int num = eth_get_dev_index ();

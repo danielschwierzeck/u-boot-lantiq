@@ -35,6 +35,7 @@ COBJS-$(CONFIG_CMD_NFS)  += nfs.o
 COBJS-$(CONFIG_CMD_NET)  += rarp.o
 COBJS-$(CONFIG_CMD_SNTP) += sntp.o
 COBJS-$(CONFIG_CMD_NET)  += tftp.o
+COBJS-$(CONFIG_CMD_HTTPD)  += httpd.o tcp.o
 
 COBJS	:= $(COBJS-y)
 SRCS	:= $(COBJS:.o=.c)

@@ -54,6 +54,21 @@ U_BOOT_CMD(
 	"[loadAddress] [[hostIPaddr:]bootfilename]"
 );
 
+#ifdef CONFIG_CMD_HTTPD
+int do_httpd (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
+{
+    return netboot_common (HTTP, cmdtp, argc, argv);
+}
+
+U_BOOT_CMD(
+    httpd,   1,  1,  do_httpd,
+   "httpd- start http server\n",
+	    "using http default port\n"
+);
+#endif
+				
+
+
 int do_rarpb (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 {
 	return netboot_common (RARP, cmdtp, argc, argv);
