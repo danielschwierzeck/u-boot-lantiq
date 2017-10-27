@@ -1,0 +1,142 @@
+ifdef CONFIG_VR9_GPHY_FW_EMBEDDED
+    GPHY_FIRMWARE = $(TOPDIR)/board/$(BOARD)/gphy_firmware.img
+else
+    GPHY_FIRMWARE = $(TOPDIR)/dummy
+endif
+
+ENV_BLOCK=
+
+ifdef CONFIG_BUILD_ENV_BLOCK
+ENV_BLOCK=ubootenv.img 
+endif
+
+ALL += bootstrap.bin u-boot.lzimg u-boot.ltq $(ENV_BLOCK)
+
+
+LDSCRIPT_BOOTSTRAP := $(TOPDIR)/board/$(BOARD)/bootstrap.lds
+ifdef CONFIG_BOOT_FROM_NOR
+OBJS_BOOTSTRAP  = $(TOPDIR)/$(CPUDIR)/$(BOARD)/start_bootstrap.o
+OBJS_BOOTSTRAP  += $(TOPDIR)/board/$(BOARD)/lowlevel_init.o
+else 
+OBJS_BOOTSTRAP  = $(TOPDIR)/$(CPUDIR)/$(BOARD)/start_uncomp.o
+endif
+
+
+
+OBJS_BOOTSTRAP  += $(TOPDIR)/lib/string.o
+OBJS_BOOTSTRAP  += $(CPUDIR)/$(BOARD)/lib$(CPU).a
+LIBS_BOOTSTRAP  = $(TOPDIR)/lib_bootstrap/libbootstrap.a
+LIBS_BOOTSTRAP += $(TOPDIR)/lib/crc32.o
+LIBS_BOOTSTRAP += $(TOPDIR)/drivers/serial/lq_asc.o
+LIBS_BOOTSTRAP += $(TOPDIR)/$(CPUDIR)/$(BOARD)/clock.o
+#LIBS_BOOTSTRAP += $(TOPDIR)/$(CPUDIR)/$(BOARD)/asc.o
+LIBS_BOOTSTRAP += $(TOPDIR)/arch/mips/lib/time.o
+
+
+BOOTSTRAP_LDFLAGS = -Bstatic -T $(LDSCRIPT_BOOTSTRAP) -Ttext $(CONFIG_BOOTSTRAP_TEXT_BASE) 
+
+ifdef CONFIG_BOOT_FROM_NOR
+$(obj)u-boot.ltq: $(obj)System.map $(obj)bootstrap.bin $(obj)u-boot.lzimg
+		@touch dummy
+		@cat $(obj)bootstrap.bin > $(obj)u-boot.ltq
+		@cat $(obj)u-boot.lzimg >> $(obj)u-boot.ltq
+		@scripts_platform/pad2align.sh -n 65536 u-boot.ltq 
+		@cat $(GPHY_FIRMWARE) >>u-boot.ltq
+endif
+
+ifdef CONFIG_BOOT_FROM_NAND
+$(obj)u-boot.ltq: $(obj)System.map $(obj)bootstrap.bin $(obj)u-boot.lzimg
+		@touch dummy
+		@$(TOPDIR)/scripts_platform/pad2align.sh -n 10240 bootstrap.bin
+		@cat $(obj)bootstrap.bin > $(obj)u-boot.ltq
+		@cat $(obj)u-boot.lzimg >> $(obj)u-boot.ltq
+ifdef CONFIG_VR9_GPHY_FW_EMBEDDED
+		@$(TOPDIR)/scripts_platform/pad2align.sh -n 65536 u-boot.ltq
+		@cat $(GPHY_FIRMWARE) >>u-boot.ltq
+endif
+endif
+
+ifdef CONFIG_BOOT_FROM_SPI
+ifdef CONFIG_LTQ_SECURE_BOOT
+$(obj)u-boot.ltq: $(obj)System.map $(obj)bootstrap.bin $(obj)u-boot.lzimg sfddr.bin ds_crypt.bin stools
+		@./stools -i sfddr.bin -o sfddr.enc -d ds_crypt.bin -a 0xbe220000
+		@scripts_platform/mk_sf.pl board/vr9/xrx200_ddr2_197_CAS4_config.conf sfddr.enc 0xa0600000 u-boot.ltq
+		@scripts_platform/pad2align.sh -n 20480 u-boot.ltq
+		@cat u-boot.lzimg >>u-boot.ltq
+		@scripts_platform/pad2align.sh -n 65536 u-boot.ltq
+		@cat $(GPHY_FIRMWARE) >>u-boot.ltq
+else
+$(obj)u-boot.ltq: $(obj)System.map $(obj)bootstrap.bin $(obj)u-boot.lzimg sfddr.bin 
+		@touch dummy
+		@scripts_platform/mk_sf.pl dummy sfddr.bin 0xbe220000 u-boot.ltq
+		@scripts_platform/pad2align.sh -n 20480 u-boot.ltq
+		@cat u-boot.lzimg >> u-boot.ltq
+ifdef CONFIG_VR9_GPHY_FW_EMBEDDED		
+		@scripts_platform/pad2align.sh -n 65536 u-boot.ltq
+		@cat $(GPHY_FIRMWARE) >>u-boot.ltq
+endif		
+endif
+endif
+						
+LDFLAGS_SFDDR = -Bstatic -T $(TOPDIR)/board/$(BOARD)/bootstrap.lds -Ttext 0xbe220000 $(PLATFORM_LDFLAGS)
+OBJS_SFDDR = $(TOPDIR)/board/$(BOARD)/start_sfddr.o 
+OBJS_SFDDR +=$(TOPDIR)/board/$(BOARD)/sfddr_board.o 
+OBJS_SFDDR +=$(TOPDIR)/board/$(BOARD)/tune_ddr.o 
+OBJS_SFDDR +=$(TOPDIR)/board/$(BOARD)/lowlevel_init.o
+LIBS_SFDDR = $(TOPDIR)/lib/string.o
+LIBS_SFDDR += $(TOPDIR)/lib/crc32.o
+LIBS_SFDDR += $(TOPDIR)/$(CPUDIR)/$(BOARD)/clock.o
+LIBS_SFDDR += $(TOPDIR)/drivers/serial/lq_asc.o
+LIBS_SFDDR += $(TOPDIR)/arch/mips/lib/time.o
+LIBS_SFDDR += $(TOPDIR)/lib_bootstrap/LzmaDecode.o
+LIBS_SFDDR += $(TOPDIR)/lib_bootstrap/LzmaWrapper.o
+
+
+sfddr.bin:    $(obj)sfddr
+		$(OBJCOPY) ${OBJCFLAGS} -O binary $< $@
+
+sfddr:  depend $(SUBDIRS) $(OBJS_SFDDR) $(LIBS_SFDDR) bootstrap
+		$(LD) $(LDFLAGS_SFDDR) $(OBJS_SFDDR) $(LIBS_SFDDR) \
+	     -Map sfddr.map -o sfddr
+
+$(OBJS_SFDDR):
+		rm -f $(OBJS_SFDDR)
+		$(MAKE) -C `dirname $@` sfddr
+				
+
+u-boot.lzimg: $(obj)u-boot.bin System.map
+		lzma e $(obj)u-boot.bin $(obj)u-boot.lzma
+		scripts_platform/pad2align.sh -n 16 u-boot.lzma
+		$(TOPDIR)/tools/mkimage -A mips -T firmware -C lzma \
+		-a 0x$(shell grep "T _start" $(TOPDIR)/System.map | awk '{ printf "%s", $$1 }') \
+		-e 0x$(shell grep "T _start" $(TOPDIR)/System.map | awk '{ printf "%s", $$1 }') \
+		-n 'u-boot image' -d $(obj)u-boot.lzma $@
+
+bootstrap.bin:    $(obj)bootstrap
+		$(OBJCOPY) ${OBJCFLAGS} -O binary $< $@
+
+bootstrap: $(OBJS_BOOTSTRAP) $(LIBS_BOOTSTRAP)  $(LDSCRIPT_BOOTSTRAP)
+		$(LD) $(BOOTSTRAP_LDFLAGS) $$UNDEF_SYM $(OBJS_BOOTSTRAP) $(LIBS_BOOTSTRAP) \
+		       -Map bootstrap.map -o bootstrap
+
+ds_crypt.bin: ds_crypt
+		$(OBJCOPY) --gap-fill=0xff -O binary $< $@
+
+ds_crypt: rsa_crypt.o		
+		$(LD) -G 0 -static -T $(TOPDIR)/board/$(BOARD)/rsalinker.lds --start-group rsa_crypt.o --end-group -o ds_crypt
+
+rsa_crypt.o: $(TOPDIR)/board/$(BOARD)/rsa_crypt.c
+		$(CC) -g -ggdb -G0 -fno-common -fno-strict-aliasing -fno-builtin -pipe -eb -Wall -c -o $@ $<	
+
+stools: $(TOPDIR)/board/$(BOARD)/stools.c
+		$(HOSTCC) -o $@ $<	
+
+
+$(LIBS_BOOTSTRAP):
+		$(MAKE) -C `dirname $@` all
+
+
+$(ENV_BLOCK): $(obj)u-boot $(obj)u-boot.bin
+		$(NM) -Ss u-boot >u-boot.sym
+		scripts_platform/mk_envimg.sh $@
+
