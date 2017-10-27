@@ -1,0 +1,59 @@
+#
+# For a description of the syntax of this configuration file,
+# see Linux Documentation
+#
+#
+
+config DRIVER_AMAZON_SE
+      bool
+	  default y
+
+
+choice 
+        prompt 'CPU CLOCK'
+	    default ASE_CPU_266M
+	  
+config ASE_CPU_133M
+		bool "133M"
+
+config ASE_CPU_266M
+		bool "266M"
+		
+endchoice
+
+choice
+        prompt 'ETHERNET TYPE'
+	    default ETHERNET_TYPE_EPHY
+
+config ETHERNET_TYPE_EPHY
+       bool "EPHY"
+
+config ETHERNET_TYPE_RMII
+       bool "RMII"
+		
+endchoice
+
+choice
+       prompt "CLOCK SOURCE"
+	   default EPHY_INTERNAL_CLOCK
+	   depends on ETHERNET_TYPE_EPHY
+
+config EPHY_INTERNAL_CLOCK
+       bool "INTERNAL"
+
+config EPHY_EXTERNAL_CLOCK
+       bool "EXTERNAL"
+
+endchoice
+								   
+
+config EPHY_WITH_TANTOS_SWITCH
+       bool "EPHY WITH TANTOS SWITCH"
+       depends on ETHERNET_TYPE_EPHY
+
+config OLD_ASE_BOOTROM_VERSION
+       bool "BOOTROM VERSION<=1.1.0"
+	   default n
+	   depends on BOOT_FROM_SPI
+
+	

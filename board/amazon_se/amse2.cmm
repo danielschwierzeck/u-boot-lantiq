@@ -1,0 +1,91 @@
+
+;********************************************************************
+;Trace 32 script amazonSE SDRAM
+;
+;Infineon Technology Asia Pacific
+;********************************************************************
+
+
+; Setup Lauterbach debugger for AmazonSE
+SYStem.down
+;SYStem.Multicore IRPRE 5
+;SYStem.Multicore DRPRE 1
+SYStem.JTAGCLOCK 20000000.
+;SYSTEM.OPTION ENDIANESS BIG
+SYStem.UP
+
+
+;reference board
+SYStem.down
+SYStem.UP
+wait 1s
+
+;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;Initialize memory controller register
+;Pls refer to the documentation to change the necessary parameter to
+;
+;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+;General MC register (no change required)
+;set FPI controller, SRAM controller, SDRAM controller enable
+data.set 0xbf800060 %long 0x7
+
+data.set 0xbf800010 %long 0x0
+data.set 0xbf800020 %long 0x0
+;last 3 bits suppose to be valid for 1-15 for latency delay
+data.set 0xbf800200 %long 0x02
+;  clear the bit 0 to for modify SDRAM configuration registers
+data.set 0xbf800210 %long 0x0
+;  clear the bit 0 to for modify SDRAM configuration registers
+
+;SDRAM Register
+;
+ ; for 16bit access only supported this mode
+ data.set 0xbf800230 %long 0x0002 
+ ;set to 0x0002
+ ;set the CAS latency either should set to 00100000b (or x0020) for CAS 2 or 00110000b (or x0030) for CAS 3 
+ data.set 0xbf800220 %long 0x30
+
+;   current set is memory selected (bit 15-12), 4banks(bit 11-8), 13 rows (bit 7-4), 8 col (bit 3-0) for CS0 
+;set to row 12 and col 9 for the reference board to 0x14c9
+  data.set 0xbf800240 %long 0x14c9
+
+; current set is memory selected (bit 15-12), 4banks(bit 11-8), 13 rows (bit 7-4), 8 col (bit 3-0)   for CS1 
+;data.set  0xbf800250 %long 0x14c9
+
+
+;  SDRAM latency precharge. precharge =3, row access time 6, row to col command time 3,data
+;to precharge 2 and data to address =5  
+ data.set 0xbf800280 %long 0x36325
+;  refresh cycle time 
+data.set  0xbf800290 %long 0x81d
+;not use in Venus. default should set to only bit 0 to 0 for normal operational mode.
+ data.set 0xbf8002A0 %long 0x0  
+;  set the bit to prevent SDRAM registers from modification
+data.set 0xbf800210 %long 1
+
+;make flash readable
+data.set 0xbe105360 %long 0x1d7ff
+
+
+;data.set 0xbe190400 %long 0
+;wait 1s
+
+;data.load /home/yclee/bootrom/amse2/bootrom
+map.bonchip 0xbe184000++0x4000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

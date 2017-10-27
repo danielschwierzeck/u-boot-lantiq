@@ -1,0 +1,87 @@
+ENV_BLOCK=
+
+ifdef CONFIG_BUILD_ENV_BLOCK
+ENV_BLOCK=ubootenv.img
+endif
+
+
+ALL +=bootstrap.bin u-boot.lzimg u-boot.ltq $(ENV_BLOCK)
+
+
+LDSCRIPT_BOOTSTRAP := $(TOPDIR)/board/$(BOARD)/bootstrap.lds
+OBJS_BOOTSTRAP  = $(TOPDIR)/$(CPUDIR)/$(BOARD)/start_bootstrap.o
+OBJS_BOOTSTRAP  += $(TOPDIR)/board/$(BOARD)/lowlevel_init.o
+
+
+
+OBJS_BOOTSTRAP  += $(TOPDIR)/lib/string.o
+OBJS_BOOTSTRAP  += $(CPUDIR)/$(BOARD)/lib$(CPU).a
+LIBS_BOOTSTRAP  = $(TOPDIR)/lib_bootstrap/libbootstrap.a
+LIBS_BOOTSTRAP += $(TOPDIR)/lib/crc32.o
+LIBS_BOOTSTRAP += $(TOPDIR)/drivers/serial/lq_asc.o
+LIBS_BOOTSTRAP += $(TOPDIR)/$(CPUDIR)/$(BOARD)/clock.o
+#LIBS_BOOTSTRAP += $(TOPDIR)/$(CPUDIR)/$(BOARD)/asc.o
+LIBS_BOOTSTRAP += $(TOPDIR)/arch/mips/lib/time.o
+
+
+BOOTSTRAP_LDFLAGS = -Bstatic -T $(LDSCRIPT_BOOTSTRAP) -Ttext $(CONFIG_BOOTSTRAP_TEXT_BASE) 
+
+ifdef CONFIG_BOOT_FROM_NOR
+$(obj)u-boot.ltq: $(obj)System.map $(obj)bootstrap.bin $(obj)u-boot.lzimg
+		@cat $(obj)bootstrap.bin > $(obj)u-boot.ltq
+		@cat $(obj)u-boot.lzimg >> $(obj)u-boot.ltq
+endif
+
+ifdef CONFIG_BOOT_FROM_NAND
+$(obj)u-boot.ltq: $(obj)System.map $(obj)bootstrap.bin $(obj)u-boot.lzimg
+		@$(TOPDIR)/scripts_platform/pad2align.sh -n 10240 bootstrap.bin
+		@cat $(obj)bootstrap.bin > $(obj)u-boot.ltq
+		@cat $(obj)u-boot.lzimg >> $(obj)u-boot.ltq
+endif
+
+ifdef CONFIG_BOOT_FROM_SPI
+ifdef CONFIG_OLD_ASE_BOOTROM_VERSION
+$(obj)u-boot.ltq: $(obj)System.map $(obj)bootstrap.bin $(obj)u-boot.lzimg ram.conf
+		@cat $(obj)bootstrap.bin > $(obj)u-boot.sflash
+		@cat $(obj)u-boot.lzimg >> $(obj)u-boot.sflash
+		@$(TOPDIR)/scripts_platform/mk_eeprom.pl ram.conf u-boot.sflash 0xa0100000 u-boot.ltq
+else
+$(obj)u-boot.ltq: $(obj)System.map $(obj)bootstrap.bin $(obj)u-boot.lzimg ram.conf
+		@cat $(obj)bootstrap.bin > $(obj)u-boot.sflash
+		@cat $(obj)u-boot.lzimg >> $(obj)u-boot.sflash
+		@$(TOPDIR)/scripts_platform/mk_sf.pl ram.conf u-boot.sflash 0xa0100000 u-boot.ltq
+endif
+endif
+						
+
+sfddr.bin:
+		@rm -f $@
+		@make -C $(TOPDIR)/board/$(BOARD) sfddr
+		@ln -s $(TOPDIR)/board/$(BOARD)/sfddr sfddr
+		@$(OBJCOPY) ${OBJCFLAGS} -O binary sfddr $@
+
+u-boot.lzimg: $(obj)u-boot.bin System.map
+		lzma e $(obj)u-boot.bin $(obj)u-boot.lzma
+		scripts_platform/pad2align.sh -n 16 u-boot.lzma
+		$(TOPDIR)/tools/mkimage -A mips -T firmware -C lzma \
+		-a 0x$(shell grep "T _start" $(TOPDIR)/System.map | awk '{ printf "%s", $$1 }') \
+		-e 0x$(shell grep "T _start" $(TOPDIR)/System.map | awk '{ printf "%s", $$1 }') \
+		-n 'u-boot image' -d $(obj)u-boot.lzma $@
+															
+ram.conf:
+		@ln -s $(TOPDIR)/board/$(BOARD)/ram.conf ram.conf
+
+bootstrap.bin:    $(obj)bootstrap
+		$(OBJCOPY) ${OBJCFLAGS} -O binary $< $@
+		
+bootstrap: $(OBJS_BOOTSTRAP) $(LIBS_BOOTSTRAP)  $(LDSCRIPT_BOOTSTRAP)
+		$(LD) $(BOOTSTRAP_LDFLAGS) $$UNDEF_SYM $(OBJS_BOOTSTRAP) $(LIBS_BOOTSTRAP) \
+		-Map bootstrap.map -o bootstrap
+		
+$(LIBS_BOOTSTRAP):
+		$(MAKE) -C `dirname $@` all
+	
+$(ENV_BLOCK): $(obj)u-boot $(obj)u-boot.bin
+		$(NM) -Ss u-boot >u-boot.sym
+		scripts_platform/mk_envimg.sh $@
+
