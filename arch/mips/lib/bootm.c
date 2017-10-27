@@ -28,6 +28,13 @@
 #include <asm/byteorder.h>
 #include <asm/addrspace.h>
 
+#if defined(CONFIG_OF_LIBFDT)
+#include <fdt.h>
+#include <libfdt.h>
+#include <fdt_support.h>
+#endif
+
+
 DECLARE_GLOBAL_DATA_PTR;
 
 #define	LINUX_MAX_ENVS		256
@@ -100,8 +107,15 @@ int do_bootm_linux(int flag, int argc, char *argv[], bootm_headers_t *images)
 	/* we assume that the kernel is in place */
 	printf ("\nStarting kernel ...\n\n");
 
+#if defined(CONFIG_OF_LIBFDT)
+        if (images->ft_addr) { 
+          printf("booting from OF flat tree...\n");  
+          theKernel(FDT_MAGIC, images->ft_addr, NULL, 0);
+        }
+#else
 	theKernel (linux_argc, linux_argv, linux_env, 0);
 	/* does not return */
+#endif
 	return 1;
 }
 
