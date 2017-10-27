@@ -55,10 +55,9 @@ static void nand_init_chip(struct mtd_info *mtd, struct nand_chip *nand,
 			if (!mtd->name)
 				mtd->name = (char *)default_nand_name;
 #ifndef CONFIG_RELOC_FIXUP_WORKS
-			else
+			else if(!nand->onfi_version)
 				mtd->name += gd->reloc_off;
 #endif
-
 #ifdef CONFIG_MTD_DEVICE
 			/*
 			 * Add MTD device so that we can reference it later

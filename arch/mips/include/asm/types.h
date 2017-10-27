@@ -27,6 +27,13 @@ typedef unsigned short __u16;
 typedef __signed__ int __s32;
 typedef unsigned int __u32;
 
+
+#ifdef BUILD_FROM_LTQ_APPS
+typedef unsigned long long u64;
+typedef unsigned char u8;
+#endif
+
+
 #if (_MIPS_SZLONG == 64)
 
 typedef __signed__ long __s64;
@@ -60,6 +67,8 @@ typedef unsigned short u16;
 
 typedef __signed int s32;
 typedef unsigned int u32;
+
+
 
 #if (_MIPS_SZLONG == 64)
 

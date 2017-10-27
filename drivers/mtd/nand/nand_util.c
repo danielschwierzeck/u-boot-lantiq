@@ -69,7 +69,7 @@ int nand_erase_opts(nand_info_t *meminfo, const nand_erase_options_t *opts)
 {
 	struct jffs2_unknown_node cleanmarker;
 	erase_info_t erase;
-	ulong erase_length;
+	uint64_t erase_length;
 	int bbtest = 1;
 	int result;
 	int percent_complete = -1;
@@ -109,7 +109,7 @@ int nand_erase_opts(nand_info_t *meminfo, const nand_erase_options_t *opts)
 	}
 
 	if (erase_length < meminfo->erasesize) {
-		printf("Warning: Erase size 0x%08lx smaller than one "	\
+		printf("Warning: Erase size 0x%llx smaller than one "	\
 		       "erase block 0x%08x\n",erase_length, meminfo->erasesize);
 		printf("         Erasing 0x%08x instead\n", meminfo->erasesize);
 		erase_length = meminfo->erasesize;
@@ -118,7 +118,6 @@ int nand_erase_opts(nand_info_t *meminfo, const nand_erase_options_t *opts)
 	for (;
 	     erase.addr < opts->offset + erase_length;
 	     erase.addr += meminfo->erasesize) {
-
 		WATCHDOG_RESET ();
 
 		if (!opts->scrub && bbtest) {
@@ -165,12 +164,13 @@ int nand_erase_opts(nand_info_t *meminfo, const nand_erase_options_t *opts)
 		}
 
 		if (!opts->quiet) {
-			unsigned long long n =(unsigned long long)
-				(erase.addr + meminfo->erasesize - opts->offset)
-				* 100;
+		    unsigned long long n =(unsigned long long)
+				(erase.addr + meminfo->erasesize - opts->offset) / 0x4000 * 100;
 			int percent;
-
-			do_div(n, erase_length);
+		    unsigned long long shrinked_erase_length = erase_length / 0x4000;	
+			
+			do_div(n, shrinked_erase_length);
+			
 			percent = (int)n;
 
 			/* output progress message only at whole percent
@@ -433,7 +433,7 @@ int nand_unlock(struct mtd_info *mtd, ulong start, ulong length)
  * @return image length including bad blocks
  */
 static size_t get_len_incl_bad (nand_info_t *nand, loff_t offset,
-				const size_t length)
+				const u64 length)
 {
 	size_t len_incl_bad = 0;
 	size_t len_excl_bad = 0;
@@ -469,12 +469,12 @@ static size_t get_len_incl_bad (nand_info_t *nand, loff_t offset,
  * @param buf           buffer to read from
  * @return		0 in case of success
  */
-int nand_write_skip_bad(nand_info_t *nand, loff_t offset, size_t *length,
+int nand_write_skip_bad(nand_info_t *nand, loff_t offset, u64 *length,
 			u_char *buffer)
 {
 	int rval;
-	size_t left_to_write = *length;
-	size_t len_incl_bad;
+	u64 left_to_write = *length;
+	u64 len_incl_bad;
 	u_char *p_buffer = buffer;
 
 	/* Reject writes, which are not page aligned */
@@ -502,7 +502,7 @@ int nand_write_skip_bad(nand_info_t *nand, loff_t offset, size_t *length,
 
 	while (left_to_write > 0) {
 		size_t block_offset = offset & (nand->erasesize - 1);
-		size_t write_size;
+		u64 write_size;
 
 		WATCHDOG_RESET ();
 
@@ -548,12 +548,12 @@ int nand_write_skip_bad(nand_info_t *nand, loff_t offset, size_t *length,
  * @param buffer buffer to write to
  * @return 0 in case of success
  */
-int nand_read_skip_bad(nand_info_t *nand, loff_t offset, size_t *length,
+int nand_read_skip_bad(nand_info_t *nand, loff_t offset, u64 *length,
 		       u_char *buffer)
 {
 	int rval;
-	size_t left_to_read = *length;
-	size_t len_incl_bad;
+	u64 left_to_read = *length;
+	u64 len_incl_bad;
 	u_char *p_buffer = buffer;
 
 	len_incl_bad = get_len_incl_bad (nand, offset, *length);
@@ -574,7 +574,7 @@ int nand_read_skip_bad(nand_info_t *nand, loff_t offset, size_t *length,
 
 	while (left_to_read > 0) {
 		size_t block_offset = offset & (nand->erasesize - 1);
-		size_t read_length;
+		u64 read_length;
 
 		WATCHDOG_RESET ();
 

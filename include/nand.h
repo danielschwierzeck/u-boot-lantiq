@@ -37,15 +37,21 @@ typedef struct mtd_info nand_info_t;
 extern int nand_curr_device;
 extern nand_info_t nand_info[];
 
-static inline int nand_read(nand_info_t *info, loff_t ofs, size_t *len, u_char *buf)
+static inline int nand_read(nand_info_t *info, loff_t ofs, u64 *len, u_char *buf)
 {
-	return info->read(info, ofs, *len, (size_t *)len, buf);
+	return info->read(info, ofs, *len, (u64 *)len, buf);
 }
 
-static inline int nand_write(nand_info_t *info, loff_t ofs, size_t *len, u_char *buf)
+static inline int nand_write(nand_info_t *info, loff_t ofs, u64 *len, u_char *buf)
 {
-	return info->write(info, ofs, *len, (size_t *)len, buf);
+	return info->write(info, ofs, *len, (u64 *)len, buf);
 }
+
+static inline int nand_write_partial(nand_info_t *info, ulong ofs, u64 *len, u_char *buf)
+{
+    return info->write_partial(info, ofs, *len, (u64 *)len, buf);
+}
+	
 
 static inline int nand_block_isbad(nand_info_t *info, loff_t ofs)
 {
@@ -98,8 +104,8 @@ struct nand_read_options {
 typedef struct nand_read_options nand_read_options_t;
 
 struct nand_erase_options {
-	ulong length;		/* number of bytes to erase */
-	ulong offset;		/* first address in NAND to erase */
+	uint64_t length;		/* number of bytes to erase */
+	uint64_t offset;		/* first address in NAND to erase */
 	int quiet;		/* don't display progress messages */
 	int jffs2;		/* if true: format for jffs2 usage
 				 * (write appropriate cleanmarker blocks) */
@@ -109,9 +115,9 @@ struct nand_erase_options {
 
 typedef struct nand_erase_options nand_erase_options_t;
 
-int nand_read_skip_bad(nand_info_t *nand, loff_t offset, size_t *length,
+int nand_read_skip_bad(nand_info_t *nand, loff_t offset, u64 *length,
 		       u_char *buffer);
-int nand_write_skip_bad(nand_info_t *nand, loff_t offset, size_t *length,
+int nand_write_skip_bad(nand_info_t *nand, loff_t offset, u64 *length,
 			u_char *buffer);
 int nand_erase_opts(nand_info_t *meminfo, const nand_erase_options_t *opts);
 

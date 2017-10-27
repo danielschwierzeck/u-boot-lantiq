@@ -163,9 +163,9 @@ struct mtd_info {
 	void (*unpoint) (struct mtd_info *mtd, loff_t from, size_t len);
 
 
-	int (*read) (struct mtd_info *mtd, loff_t from, size_t len, size_t *retlen, u_char *buf);
-	int (*write) (struct mtd_info *mtd, loff_t to, size_t len, size_t *retlen, const u_char *buf);
-
+	int (*read) (struct mtd_info *mtd, loff_t from, u64 len, u64 *retlen, u_char *buf);
+	int (*write) (struct mtd_info *mtd, loff_t to, u64 len, u64 *retlen, const u_char *buf);
+  int (*write_partial) (struct mtd_info *mtd, loff_t to, u64 len, u64 *retlen, const u_char *buf);
 	/* In blackbox flight recorder like scenarios we want to make successful
 	   writes in interrupt context. panic_write() is only intended to be
 	   called when its known the kernel is about to panic and we need the

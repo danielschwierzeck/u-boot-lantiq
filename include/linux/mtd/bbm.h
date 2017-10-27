@@ -88,6 +88,13 @@ struct nand_bbt_descr {
 #define NAND_BBT_SAVECONTENT	0x00002000
 /* Search good / bad pattern on the first and the second page */
 #define NAND_BBT_SCAN2NDPAGE	0x00004000
+#define NAND_BBT_SCANLASTPAGE   0x00008000
+/* Chip stores bad block marker on BOTH 1st and 6th bytes of OOB */
+#define NAND_BBT_SCANBYTE1AND6 0x00100000
+/* The nand_bbt_descr was created dynamicaly and must be freed */
+#define NAND_BBT_DYNAMICSTRUCT 0x00200000
+/* The bad block table does not OOB for marker */
+#define NAND_BBT_NO_OOB         0x00400000
 
 /* The maximum number of blocks to scan for a bbt */
 #define NAND_BBT_SCAN_MAXBLOCKS	4

@@ -6,6 +6,9 @@ config ADDR_MAP
 config BZIP2
    bool "bzip2"
 
+config BCH
+   bool "BCH"
+
 config USB_TTY
    bool "usb tty"
 
