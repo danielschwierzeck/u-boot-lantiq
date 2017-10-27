@@ -234,7 +234,7 @@
 #define AR10_PMU_PWDSR1                  ((volatile u32*)(AR10_PMU_BASE_ADDR + 0x0028))
 
 
-#define AR10_PMU_CLKGSR1                ((volatile u32*)(AR10_PMU_BASE_ADDR + 0x001C))
+#define AR10_PMU_CLKGSR1                ((volatile u32*)(AR10_PMU_BASE_ADDR + 0x0020))
 #define AR10_PMU_CLKGCR1_A              ((volatile u32*)(AR10_PMU_BASE_ADDR + 0x0024))
 #define AR10_PMU_CLKGCR1_B			        ((volatile u32*)(AR10_PMU_BASE_ADDR + 0x0028))
 #define AR10_PMU_CLKGSR2                ((volatile u32*)(AR10_PMU_BASE_ADDR + 0x0030))
@@ -1016,9 +1016,19 @@
 #define AR10_CSS                          (0xBF400000)
 /***********************************************************************/
 
-
 /***CSS Control***/
 #define AR10_CSS_AL_CONTROL                      ((volatile u32*)(AR10_CSS + 0x0430))
+
+
+/***********************************************************************/
+/*  Module      :  Cross Bar register address and bits                       */
+/***********************************************************************/
+
+#define AR10_ICU_BASE                     (0xBF880200)
+/***********************************************************************/
+
+#define AR10_ICU_IM3_ISR                  ((volatile u32*)(AR10_ICU_BASE + 0x0078))
+
 
 
 #define AR10_REG32(addr)                 *((volatile u32 *)(addr))

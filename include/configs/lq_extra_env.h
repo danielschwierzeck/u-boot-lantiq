@@ -69,7 +69,8 @@
 #endif
 #ifndef CONFIG_ENV_IS_NOWHERE 
   "reset_uboot_config="CONFIG_RESET_UBOOT_CONFIG"\0" 
-  "reset_ddr_config="CONFIG_RESET_DDR_CONFIG"\0" 
+  "reset_ddr_config="CONFIG_RESET_DDR_CONFIG"\0"
+  "reset_sysconfig="CONFIG_RESET_SYSCONFIG"\0"
   "mtdparts="CONFIG_MTDPARTS"\0"                     
   IFX_CFG_FLASH_PARTITIONS_INFO   
   "flash_end=" MK_STR(IFX_CFG_FLASH_END_ADDR) "\0"   
