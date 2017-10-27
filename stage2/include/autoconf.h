@@ -1,0 +1,1 @@
+/home/wlnsw/repo/work/wuq/uboot/uboot/include/configs/autoconf.h
