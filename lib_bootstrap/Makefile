@@ -28,11 +28,15 @@ LIB	= libbootstrap.a
 ifdef CONFIG_LANTIQ_UBOOT_amazon_se
   OBJS  = bootstrap_board.o
 else
+ifdef CONFIG_LANTIQ_UBOOT_vbg400
+  OBJS  = bootstrap_board.o efuse_handling.o
+else
   ifdef CONFIG_BOOT_FROM_NOR
   OBJS	= bootstrap_board.o  
   else
   OBJS    = nand_spl_board.o 
   endif
+endif
 endif
 
 OBJS +=LzmaDecode.o LzmaWrapper.o
