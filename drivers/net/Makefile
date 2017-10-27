@@ -30,6 +30,7 @@ COBJS-$(CONFIG_PPC4xx_EMAC) += 4xx_enet.o
 COBJS-$(CONFIG_ALTERA_TSE) += altera_tse.o
 COBJS-$(CONFIG_DRIVER_AT91EMAC) += at91_emac.o
 COBJS-$(CONFIG_DRIVER_AX88180) += ax88180.o
+COBJS-$(CONFIG_DRIVER_AR9) += ar9_sw.o
 COBJS-$(CONFIG_BCM570x) += bcm570x.o bcm570x_autoneg.o 5701rls.o
 COBJS-$(CONFIG_BFIN_MAC) += bfin_mac.o
 COBJS-$(CONFIG_CS8900) += cs8900.o
