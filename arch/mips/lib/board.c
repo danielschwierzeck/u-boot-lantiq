@@ -55,6 +55,8 @@ ulong monitor_flash_len;
 const char version_string[] =
 	U_BOOT_VERSION" (" U_BOOT_DATE " - " U_BOOT_TIME ")";
 
+char ver[] = U_BOOT_VERSION;
+
 static char *failed = "*** failed ***\n";
 
 /*
@@ -394,6 +396,8 @@ void board_init_r (gd_t *id, ulong dest_addr)
 		copy_filename (BootFile, s, sizeof (BootFile));
 	}
 #endif
+   ver[6]=ver[1];
+   setenv ("ver", ver);
 
 #ifdef CONFIG_CMD_SPI
 	puts ("SPI:   ");
