@@ -19,4 +19,11 @@ config TI_EDMA3
 	  This driver support data transfer between memory
 	  regions.
 
+config DMA_LANTIQ
+	bool "Lantiq DMA driver"
+	depends on ARCH_LANTIQ
+	default n
+	help
+	  Enable support for DMA controller found on Lantiq/Intel SoC devices.
+
 endmenu # menu "DMA Support"
