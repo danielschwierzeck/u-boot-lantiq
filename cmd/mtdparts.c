@@ -419,7 +419,10 @@ static int part_validate(struct mtdids *id, struct part_info *part)
 	 * Now we need to check if the partition starts and ends on
 	 * sector (eraseblock) regions
 	 */
-	return part_validate_eraseblock(id, part);
+	if (part->mask_flags & MTD_WRITEABLE)
+		return part_validate_eraseblock(id, part);
+	else
+		return 0;
 }
 
 /**
