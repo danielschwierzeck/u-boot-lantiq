@@ -802,6 +802,9 @@ append = cat $(filter-out $< $(PHONY), $^) >> $@
 quiet_cmd_pad_cat = CAT     $@
 cmd_pad_cat = $(cmd_objcopy) && $(append) || rm -f $@
 
+quiet_cmd_lzop = LZOP    $@
+cmd_lzop = cat $< | lzop -9 -f - > $@
+
 all:		$(ALL-y)
 ifeq ($(CONFIG_DM_I2C_COMPAT),y)
 	@echo "===================== WARNING ======================"
@@ -830,6 +833,9 @@ else
 u-boot.bin: u-boot-nodtb.bin FORCE
 	$(call if_changed,copy)
 endif
+
+u-boot.bin.lzo: u-boot.bin FORCE
+	$(call if_changed,lzop)
 
 %.imx: %.bin
 	$(Q)$(MAKE) $(build)=arch/arm/imx-common $@
@@ -902,6 +908,10 @@ MKIMAGEFLAGS_u-boot.img = -A $(ARCH) -T firmware -C none -O u-boot \
 	-n "U-Boot $(UBOOTRELEASE) for $(BOARD) board"
 endif
 
+MKIMAGEFLAGS_u-boot-lzo.img = -A $(ARCH) -T firmware -C lzo -O u-boot \
+	-a $(CONFIG_SYS_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
+	-n "u-boot\#$(UBOOTRELEASE) for $(BOARD) board"
+
 MKIMAGEFLAGS_u-boot-dtb.img = $(MKIMAGEFLAGS_u-boot.img)
 
 MKIMAGEFLAGS_u-boot.kwb = -n $(srctree)/$(CONFIG_SYS_KWD_CONFIG:"%"=%) \
@@ -915,6 +925,9 @@ MKIMAGEFLAGS_u-boot.pbl = -n $(srctree)/$(CONFIG_SYS_FSL_PBL_RCW:"%"=%) \
 
 u-boot-dtb.img u-boot.img u-boot.kwb u-boot.pbl: \
 		$(if $(CONFIG_SPL_LOAD_FIT),u-boot-nodtb.bin dts/dt.dtb,u-boot.bin) FORCE
+	$(call if_changed,mkimage)
+
+u-boot-lzo.img: u-boot.bin.lzo FORCE
 	$(call if_changed,mkimage)
 
 u-boot-spl.kwb: u-boot.img spl/u-boot-spl.bin FORCE
