@@ -2,7 +2,7 @@
 # SPDX-License-Identifier:	GPL-2.0+
 #
 
-head-y := arch/mips/cpu/start.o
+head-y := $(CONFIG_MIPS_START_S_PATH:"%"=%)/start.o
 
 ifeq ($(CONFIG_SPL_BUILD),y)
 ifneq ($(CONFIG_SPL_START_S_PATH),)

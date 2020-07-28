@@ -303,6 +303,13 @@ config MIPS_L1_CACHE_SHIFT
 config DYNAMIC_IO_PORT_BASE
 	bool
 
+config MIPS_START_S_PATH
+	string 
+	default "arch/mips/cpu"
+	help
+	  The path to the used start.S. Overriding this can be useful on 
+	  machines which need to provide their own start code.
+
 endif
 
 endmenu
