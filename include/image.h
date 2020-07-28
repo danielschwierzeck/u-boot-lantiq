@@ -1135,12 +1135,12 @@ static inline int fit_image_check_target_arch(const void *fdt, int node)
 #ifdef CONFIG_FIT_VERBOSE
 #define fit_unsupported(msg)	printf("! %s:%d " \
 				"FIT images not supported for '%s'\n", \
-				__FILE__, __LINE__, (msg))
+				KBUILD_BASENAME, __LINE__, (msg))
 
 #define fit_unsupported_reset(msg)	printf("! %s:%d " \
 				"FIT images not supported for '%s' " \
 				"- must reset board to recover!\n", \
-				__FILE__, __LINE__, (msg))
+				KBUILD_BASENAME, __LINE__, (msg))
 #else
 #define fit_unsupported(msg)
 #define fit_unsupported_reset(msg)

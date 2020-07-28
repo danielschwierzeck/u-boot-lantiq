@@ -102,14 +102,14 @@ static inline void kmem_cache_destroy(struct kmem_cache *cachep)
 
 #ifndef BUG
 #define BUG() do { \
-	printf("U-Boot BUG at %s:%d!\n", __FILE__, __LINE__); \
+	printf("U-Boot BUG at %s:%d!\n", KBUILD_BASENAME, __LINE__); \
 } while (0)
 
 #define BUG_ON(condition) do { if (condition) BUG(); } while(0)
 #endif /* BUG */
 
 #define WARN_ON(x) if (x) {printf("WARNING in %s line %d\n" \
-				  , __FILE__, __LINE__); }
+				  , KBUILD_BASENAME, __LINE__); }
 
 #define PAGE_SIZE	4096
 

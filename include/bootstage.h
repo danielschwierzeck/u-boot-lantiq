@@ -394,6 +394,6 @@ static inline int bootstage_unstash(void *base, int size)
 
 /* Helper macro for adding a bootstage to a line of code */
 #define BOOTSTAGE_MARKER()	\
-		bootstage_mark_code(__FILE__, __func__, __LINE__)
+		bootstage_mark_code(KBUILD_BASENAME, __func__, __LINE__)
 
 #endif
