@@ -10,7 +10,6 @@ ifndef CONFIG_SPL_BUILD
 obj-$(CONFIG_EFI) += efi/
 obj-$(CONFIG_EFI_LOADER) += efi_loader/
 obj-$(CONFIG_LZMA) += lzma/
-obj-$(CONFIG_LZO) += lzo/
 obj-$(CONFIG_ZLIB) += zlib/
 obj-$(CONFIG_BZIP2) += bzip2/
 obj-$(CONFIG_TIZEN) += tizen/
@@ -43,6 +42,7 @@ obj-$(CONFIG_BITREVERSE) += bitrev.o
 obj-y += list_sort.o
 endif
 
+obj-$(CONFIG_$(SPL_)LZO) += lzo/
 obj-$(CONFIG_$(SPL_)RSA) += rsa/
 obj-$(CONFIG_$(SPL_)SHA1) += sha1.o
 obj-$(CONFIG_$(SPL_)SHA256) += sha256.o
