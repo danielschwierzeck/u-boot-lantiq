@@ -73,6 +73,9 @@ config MACH_PIC32
 	select OF_CONTROL
 	select DM
 
+config ARCH_LANTIQ
+	bool "Support Intel/Lantiq Platforms"
+
 endchoice
 
 source "board/dbau1x00/Kconfig"
@@ -82,6 +85,7 @@ source "board/pb1x00/Kconfig"
 source "board/qemu-mips/Kconfig"
 source "arch/mips/mach-ath79/Kconfig"
 source "arch/mips/mach-pic32/Kconfig"
+source "arch/mips/mach-lantiq/Kconfig"
 
 if MIPS
 

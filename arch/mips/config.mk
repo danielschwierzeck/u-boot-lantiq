@@ -58,8 +58,14 @@ PLATFORM_CPPFLAGS += -D__MIPS__
 # to RAM. $28 is always used as gp.
 #
 ifdef CONFIG_SPL_BUILD
+ifneq ($(CONFIG_ARCH_LANTIQ),y)
 PF_ABICALLS			:= -mno-abicalls
 PF_PIC				:= -fno-pic
+else
+PF_ABICALLS			:= -mabicalls
+PF_PIC				:= -fpic
+endif
+
 PF_PIE				:=
 else
 PF_ABICALLS			:= -mabicalls
@@ -74,5 +80,8 @@ PLATFORM_CPPFLAGS		+= -msoft-float
 PLATFORM_LDFLAGS		+= -G 0 -static -n -nostdlib
 PLATFORM_RELFLAGS		+= -ffunction-sections -fdata-sections
 LDFLAGS_FINAL			+= --gc-sections $(PF_PIE)
+
+ifneq ($(CONFIG_ARCH_LANTIQ),y)
 OBJCOPYFLAGS			+= -j .text -j .rodata -j .data -j .u_boot_list
 OBJCOPYFLAGS			+= $(PF_OBJCOPY)
+endif

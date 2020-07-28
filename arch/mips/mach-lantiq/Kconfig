@@ -1,0 +1,24 @@
+
+menu "Intel/Lantiq Platform"
+	depends on ARCH_LANTIQ
+
+choice
+	prompt "Select Target Platform"
+
+config LANTIQ_SOC_XRX500
+	bool "xRX500/xRX550 Platforms"
+	select SUPPORTS_BIG_ENDIAN
+	select SUPPORTS_CPU_MIPS32_R1
+	select SUPPORTS_CPU_MIPS32_R2
+	select SUPPORT_SPL
+
+endchoice
+
+choice
+	prompt "Board select"
+
+endchoice
+
+source "arch/mips/mach-lantiq/grx500/Kconfig"
+
+endmenu

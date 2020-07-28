@@ -768,6 +768,13 @@ ALL-y += u-boot-tegra.bin u-boot-nodtb-tegra.bin
 ALL-$(CONFIG_OF_SEPARATE) += u-boot-dtb-tegra.bin
 endif
 
+ifneq ($(CONFIG_ARCH_LANTIQ),)
+ALL-$(CONFIG_UART_BOOT) += u-boot.ltq.uart
+ALL-$(CONFIG_UART_BOOT) += unlock_ejtag.uart
+ALL-$(CONFIG_NAND_BOOT) += u-boot.ltq.nandspl
+ALL-$(CONFIG_NAND_BOOT) += u-boot.ltq.lzo.nandspl
+endif
+
 # Add optional build target if defined in board/cpu/soc headers
 ifneq ($(CONFIG_BUILD_TARGET),)
 ALL-y += $(CONFIG_BUILD_TARGET:"%"=%)
@@ -1109,6 +1116,47 @@ u-boot-tegra.bin: spl/u-boot-spl u-boot.bin FORCE
 
 u-boot-dtb-tegra.bin: u-boot-tegra.bin FORCE
 	$(call if_changed,copy)
+endif
+
+ifneq ($(CONFIG_ARCH_LANTIQ),)
+quiet_cmd_unlock_ejtag = LD      $@
+      cmd_unlock_ejtag = $(LD) $(LDFLAGS) $(LDFLAGS_unlock_ejtag) -o $@ \
+	-T u-boot.lds arch/mips/mach-lantiq/grx500/unlock_ejtag.o       \
+	-Map unlock_ejtag.map
+
+LDFLAGS_unlock_ejtag += $(LDFLAGS_FINAL)
+LDFLAGS_unlock_ejtag += -Ttext $(CONFIG_SYS_EJTAG_TEXT_BASE)
+unlock_ejtag: arch/mips/mach-lantiq/grx500/unlock_ejtag.o u-boot.lds FORCE
+	$(call if_changed,unlock_ejtag)
+
+OBJCOPYFLAGS_unlock_ejtag.bin := -O binary
+unlock_ejtag.bin: unlock_ejtag FORCE
+	$(call if_changed,objcopy)
+
+arch/mips/mach-lantiq/grx500/unlock_ejtag.o: $(u-boot-dirs) ;
+
+# Lantiq UART images
+ltquart_deps += $(srctree)/tools/lantiq/build_grx500_asc.pl
+ltquart_deps += $(srctree)/arch/mips/mach-lantiq/grx500/uartddr.conf
+quiet_cmd_ltquart = LTQUART $@
+cmd_ltquart = $(ltquart_deps) $< $(CONFIG_SYS_TEXT_BASE) $@ 0
+
+u-boot.ltq.uart: u-boot.bin $(ltquart_deps) FORCE
+	$(call if_changed,ltquart)
+
+unlock_ejtag.uart: unlock_ejtag.bin $(ltquart_deps) FORCE
+	$(call if_changed,ltquart)
+
+spl/u-boot-spl.ltq.bin: spl/u-boot-spl
+	@:
+
+OBJCOPYFLAGS_u-boot.ltq.nandspl = -I binary -O binary --pad-to=$(CONFIG_SPL_U_BOOT_OFFS)
+u-boot.ltq.nandspl: spl/u-boot-spl.ltq.bin u-boot.img FORCE
+	$(call if_changed,pad_cat)
+
+OBJCOPYFLAGS_u-boot.ltq.lzo.nandspl = -I binary -O binary --pad-to=$(CONFIG_SPL_U_BOOT_OFFS)
+u-boot.ltq.lzo.nandspl: spl/u-boot-spl.ltq.bin u-boot-lzo.img FORCE
+	$(call if_changed,pad_cat)
 endif
 
 OBJCOPYFLAGS_u-boot-app.efi := $(OBJCOPYFLAGS_EFI)

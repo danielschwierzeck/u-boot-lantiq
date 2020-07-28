@@ -161,6 +161,100 @@ endif
 ALL-$(CONFIG_ARCH_ZYNQ)		+= $(obj)/boot.bin
 ALL-$(CONFIG_ARCH_ZYNQMP)	+= $(obj)/boot.bin
 
+ifdef CONFIG_ARCH_LANTIQ
+script_ltq_init_ddr = tools/lantiq/init_ddr
+quiet_cmd_ltq_init_ddr = LTQDDR  $@
+cmd_ltq_init_ddr = $(script_ltq_init_ddr) -type 3 -endian 1 \
+	-grade $(CONFIG_LANTIQ_DDR_GRADE) \
+	-density $(CONFIG_LANTIQ_DDR_DENSITY) \
+	-rank $(CONFIG_LANTIQ_DDR_RANKS) \
+	-bl $(CONFIG_LANTIQ_DDR_BURSTLENGTH) \
+	-al $(CONFIG_LANTIQ_DDR_ADDITIVE_LATENCY) \
+	-sr0 $(CONFIG_LANTIQ_DDR_RANK0_PRESEED_1) $(CONFIG_LANTIQ_DDR_RANK0_PRESEED_2) \
+	-sr1 $(CONFIG_LANTIQ_DDR_RANK1_PRESEED_1) $(CONFIG_LANTIQ_DDR_RANK1_PRESEED_2) \
+	-fcps $(CONFIG_LANTIQ_CPS_CLK) \
+	-fcbm $(CONFIG_LANTIQ_CBM_CLK) \
+	-fdctl $(CONFIG_LANTIQ_DDR_CTRL_CLK) \
+	-fsl 8 -fngi 6 -fcps2 1 -fgsw 5 -fgswr 6 -o $@ > /dev/null
+
+script_pad2align = $(srctree)/tools/lantiq/pad2align.sh
+quiet_cmd_pad2align = PADALGN $@
+cmd_pad2align = cp -f $< $@ && $(script_pad2align) \
+		$(PAD2ALIGN_FLAGS_$(@F)) $@ > /dev/null 2>&1
+
+script_ltqhead = $(srctree)/tools/lantiq/mk_ltq_header.pl
+quiet_cmd_ltqhead = LTQHEAD $@
+cmd_ltqhead = $(script_ltqhead) \
+		--ddr $< --out $@ --col 2 --row 3 \
+		--bch $(CONFIG_LANTIQ_BOOTROM_BCH_STRENGTH) \
+		--blocksize $(CONFIG_SYS_NAND_BLOCK_SIZE) \
+		--pagesize $(CONFIG_SYS_NAND_PAGE_SIZE) \
+		--offset $(CONFIG_SYS_NAND_PAGE_SIZE)
+
+script_ltqbch = tools/lantiq/bch_enc
+quiet_cmd_ltqbch = LTQBCH  $@
+cmd_ltqbch = $(script_ltqbch) $< $@ 8
+
+script_ltqimg = $(srctree)/tools/lantiq/mk_sf_image.pl
+quiet_cmd_ltqimg = LTQIMG  $@
+cmd_ltqimg = $(script_ltqimg) -i $< -o $@ -j $(CONFIG_SPL_TEXT_BASE) -m 0
+
+# create config file for init of DDR DRAM controller and system clocks
+$(obj)/ltq_ddr.conf: $(script_ltq_init_ddr) FORCE
+	$(call if_changed,ltq_init_ddr)
+
+# create the BootROM NAND header from DDR DRAM config
+$(obj)/ltq_head.bin: $(obj)/ltq_ddr.conf $(script_ltqhead) FORCE
+	$(call if_changed,ltqhead)
+
+# pad the NAND BootROM header
+# - header is segmented as 4 * 512 bytes blocks
+# - each block contains 440 bytes data, 13 bytes ECC and 59 bytes padding
+# - padding size of 1760 = 2048 - 4 * (13 + 59)
+PAD2ALIGN_FLAGS_ltq_head.pad = -n 1760
+$(obj)/ltq_head.pad: $(obj)/ltq_head.bin $(script_pad2align) FORCE
+	$(call if_changed,pad2align)
+
+# apply BCH encoding to NAND boot header
+# - splits the input binary in 440 byte segments and adds 13 bytes ECC
+#   and 59 bytes padding
+# size of output image is 2048
+$(obj)/ltq_head.bch: $(obj)/ltq_head.pad $(script_ltqbch) FORCE
+	$(call if_changed,ltqbch)
+
+# pad the BCH encoded NAND BootROM header
+# - padding size is NAND page size
+PAD2ALIGN_FLAGS_ltq_head.bchpad = -n $(CONFIG_SYS_NAND_PAGE_SIZE)
+$(obj)/ltq_head.bchpad: $(obj)/ltq_head.bch $(script_pad2align) FORCE
+	$(call if_changed,pad2align)
+
+# prepend SPL binary with BootROM header
+$(obj)/ltq_spl.bin: $(obj)/u-boot-spl.bin $(script_ltqimg) FORCE
+	$(call if_changed,ltqimg)
+
+# pad and align the SPL binary to 440 bytes so that the BCH encoding per 512 byte
+# block can be applied
+PAD2ALIGN_FLAGS_ltq_spl.pad = -n 440
+$(obj)/ltq_spl.pad: $(obj)/ltq_spl.bin $(script_pad2align) FORCE
+	$(call if_changed,pad2align)
+
+# apply BCH encoding to SPL binary
+$(obj)/ltq_spl.bch: $(obj)/ltq_spl.pad $(script_ltqbch) FORCE
+	$(call if_changed,ltqbch)
+
+# build final SPL image with NAND headers and BCH encoding
+ifeq ($(CONFIG_LANTIQ_BOOTROM_BCH_STRENGTH),0)
+ltq_spl_bin := ltq_spl.pad
+else
+ltq_spl_bin := ltq_spl.bch
+endif
+
+$(obj)/u-boot-spl.ltq.bin: $(obj)/ltq_head.bchpad $(obj)/$(ltq_spl_bin) FORCE
+	$(call if_changed,cat)
+
+ALL-y += $(obj)/u-boot-spl.ltq.bin
+endif # CONFIG_ARCH_LANTIQ
+
 all:	$(ALL-y)
 
 quiet_cmd_cat = CAT     $@

@@ -48,7 +48,12 @@
 /*
  * Returns the physical address of a CKSEGx / XKPHYS address
  */
+#ifdef CONFIG_ARCH_LANTIQ
+#define PHYS_ADDR(a) (unsigned long)a<0xb0000000?((((unsigned long)a) & 0x1fffffff) | 0x20000000):(((unsigned long)a) & 0x1fffffff)
+#define CPHYSADDR(a) ((u32)(PHYS_ADDR(a)))
+#else
 #define CPHYSADDR(a)		((_ACAST32_(a)) & 0x1fffffff)
+#endif
 #define XPHYSADDR(a)		((_ACAST64_(a)) &			\
 				 _CONST64_(0x0000ffffffffffff))
 

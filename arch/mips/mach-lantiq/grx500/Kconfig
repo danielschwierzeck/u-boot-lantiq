@@ -1,0 +1,378 @@
+if LANTIQ_SOC_XRX500
+
+config SYS_SOC
+	string
+	default "grx500"
+
+config SYS_TEXT_BASE
+	hex
+	default 0xa0400000 if UART_BOOT
+	default 0x80400000
+
+config MIPS_START_S_PATH
+	string
+	default "arch/mips/mach-lantiq/grx500"
+
+menu "DDR DRAM configuration"
+
+choice
+	prompt "Speed grade"
+	default LANTIQ_DDR_GRADE_400_6
+	help
+	  Select the best speed grade the DDR DRAM chip supports.
+
+config LANTIQ_DDR_GRADE_400_6
+	bool "400 MHz @ CL6"
+
+config LANTIQ_DDR_GRADE_533_6
+	bool "533 MHz @ CL6"
+
+config LANTIQ_DDR_GRADE_533_7
+	bool "533 MHz @ CL7"
+
+config LANTIQ_DDR_GRADE_533_8
+	bool "533 MHz @ CL8"
+
+config LANTIQ_DDR_GRADE_666_8
+	bool "666 MHz @ CL8"
+
+config LANTIQ_DDR_GRADE_666_9
+	bool "666 MHz @ CL9"
+
+config LANTIQ_DDR_GRADE_666_10
+	bool "666 MHz @ CL10"
+
+config LANTIQ_DDR_GRADE_800_9
+	bool "800 MHz @ CL9"
+
+config LANTIQ_DDR_GRADE_800_10
+	bool "800 MHz @ CL10"
+
+config LANTIQ_DDR_GRADE_800_11
+	bool "800 MHz @ CL11"
+
+endchoice
+
+config LANTIQ_DDR_GRADE
+	int
+	default 1 if LANTIQ_DDR_GRADE_400_6
+	default 2 if LANTIQ_DDR_GRADE_533_6
+	default 3 if LANTIQ_DDR_GRADE_533_7
+	default 4 if LANTIQ_DDR_GRADE_533_8
+	default 5 if LANTIQ_DDR_GRADE_666_8
+	default 6 if LANTIQ_DDR_GRADE_666_9
+	default 7 if LANTIQ_DDR_GRADE_666_10
+	default 8 if LANTIQ_DDR_GRADE_800_9
+	default 9 if LANTIQ_DDR_GRADE_800_10
+	default 10 if LANTIQ_DDR_GRADE_800_11
+
+config LANTIQ_DDR_CAS_LATENCY
+	int
+	default 6 if LANTIQ_DDR_GRADE_400_6
+	default 6 if LANTIQ_DDR_GRADE_533_6
+	default 7 if LANTIQ_DDR_GRADE_533_7
+	default 8 if LANTIQ_DDR_GRADE_533_8
+	default 8 if LANTIQ_DDR_GRADE_666_8
+	default 9 if LANTIQ_DDR_GRADE_666_9
+	default 10 if LANTIQ_DDR_GRADE_666_10
+	default 9 if LANTIQ_DDR_GRADE_800_9
+	default 10 if LANTIQ_DDR_GRADE_800_10
+	default 11 if LANTIQ_DDR_GRADE_800_11
+
+choice
+	prompt "Chip Density"
+	default LANTIQ_DDR_DENSITY_32_16
+	help
+	  Select the size and bus width of the DDR DRAM chip.
+
+config LANTIQ_DDR_DENSITY_32_16
+	bool "32M x 16"
+
+config LANTIQ_DDR_DENSITY_64_8
+	bool "64M x 8"
+
+config LANTIQ_DDR_DENSITY_64_16
+	bool "64M x 16"
+
+config LANTIQ_DDR_DENSITY_128_8
+	bool "128M x 8"
+
+config LANTIQ_DDR_DENSITY_128_16
+	bool "128M x 16"
+
+config LANTIQ_DDR_DENSITY_256_8
+	bool "256M x 8"
+
+config LANTIQ_DDR_DENSITY_256_16
+	bool "256M x 16"
+
+config LANTIQ_DDR_DENSITY_512_8
+	bool "512M x 8"
+
+config LANTIQ_DDR_DENSITY_512_16
+	bool "512M x 16"
+
+endchoice
+
+config LANTIQ_DDR_DENSITY
+	int
+	default 2 if LANTIQ_DDR_DENSITY_32_16
+	default 3 if LANTIQ_DDR_DENSITY_64_8
+	default 4 if LANTIQ_DDR_DENSITY_64_16
+	default 5 if LANTIQ_DDR_DENSITY_128_8
+	default 6 if LANTIQ_DDR_DENSITY_128_16
+	default 7 if LANTIQ_DDR_DENSITY_256_8
+	default 8 if LANTIQ_DDR_DENSITY_256_16
+	default 9 if LANTIQ_DDR_DENSITY_512_8
+	default 10 if LANTIQ_DDR_DENSITY_512_16
+
+config LANTIQ_DDR_DENSITY_SIZE
+	int
+	default 64 if LANTIQ_DDR_DENSITY_32_16
+	default 64 if LANTIQ_DDR_DENSITY_64_8
+	default 128 if LANTIQ_DDR_DENSITY_64_16
+	default 128 if LANTIQ_DDR_DENSITY_128_8
+	default 256 if LANTIQ_DDR_DENSITY_128_16
+	default 256 if LANTIQ_DDR_DENSITY_256_8
+	default 512 if LANTIQ_DDR_DENSITY_256_16
+	default 512 if LANTIQ_DDR_DENSITY_512_8
+	default 1024 if LANTIQ_DDR_DENSITY_512_16
+
+config LANTIQ_DDR_BUS_SIZE
+	int
+	default 8 if LANTIQ_DDR_DENSITY_64_8
+	default 8 if LANTIQ_DDR_DENSITY_128_8
+	default 8 if LANTIQ_DDR_DENSITY_256_8
+	default 8 if LANTIQ_DDR_DENSITY_512_8
+	default 16
+
+choice
+	prompt "Rank count"
+	default LANTIQ_DDR_RANKS_1
+	help
+	  Select one or two DDR ranks (chip selects). For one rank at least one
+	  16bit or two 8bit chips have to be used. For two ranks at least two
+	  16bit chips have to be used.
+
+config LANTIQ_DDR_RANKS_1
+	bool "1"
+
+config LANTIQ_DDR_RANKS_2
+	bool "2"
+
+endchoice
+
+config LANTIQ_DDR_RANKS
+	int
+	default 1 if LANTIQ_DDR_RANKS_1
+	default 2 if LANTIQ_DDR_RANKS_2
+
+choice
+	prompt "Burst Length"
+	default LANTIQ_DDR_BURSTLENGTH_8
+	help
+	  DDR burst length. DDR3 only supports a burst length of 8.
+
+config LANTIQ_DDR_BURSTLENGTH_4
+	bool "4"
+
+config LANTIQ_DDR_BURSTLENGTH_8
+	bool "8"
+
+endchoice
+
+config LANTIQ_DDR_BURSTLENGTH
+	int
+	default 4 if LANTIQ_DDR_BURSTLENGTH_4
+	default 8 if LANTIQ_DDR_BURSTLENGTH_8
+
+choice
+	prompt "Additive latency"
+	default LANTIQ_DDR_AL_NONE
+	help
+	  DDR additive latency.
+
+config LANTIQ_DDR_AL_NONE
+	bool "None"
+
+config LANTIQ_DDR_AL_CL1
+	bool "CL-1"
+
+config LANTIQ_DDR_AL_CL2
+	bool "CL-2"
+
+endchoice
+
+config LANTIQ_DDR_ADDITIVE_LATENCY
+	int
+	default 0 if LANTIQ_DDR_AL_NONE
+	default 1 if LANTIQ_DDR_AL_CL1
+	default 2 if LANTIQ_DDR_AL_CL2
+
+config LANTIQ_DDR_RANK0_PRESEED_1
+	int "DDR DRAM Rank 0 1st pre-seed value"
+	default "24"
+	help
+	  This value is used to pre-seed the Bit Delay Line (BDL) of the write
+	  path to improve write bit de-skew and write data eye training.
+
+config LANTIQ_DDR_RANK0_PRESEED_2
+	int "DDR DRAM Rank 0 2nd pre-seed value"
+	default "24"
+	help
+	  This value is used to pre-seed the Bit Delay Line (BDL) of the write
+	  path to improve write bit de-skew and write data eye training.
+
+config LANTIQ_DDR_RANK1_PRESEED_1
+	int "DDR DRAM Rank 1 1st pre-seed value"
+	default "24"
+	help
+	  This value is used to pre-seed the Bit Delay Line (BDL) of the write
+	  path to improve write bit de-skew and write data eye training.
+
+config LANTIQ_DDR_RANK1_PRESEED_2
+	int "DDR DRAM Rank 1 2nd pre-seed value"
+	default "24"
+	help
+	  This value is used to pre-seed the Bit Delay Line (BDL) of the write
+	  path to improve write bit de-skew and write data eye training.
+
+endmenu
+
+choice
+	prompt "DDR controller clock"
+	default LANTIQ_DDR_CTRL_CLK_200
+	help
+	  DDR memory controller clock.
+
+config LANTIQ_DDR_CTRL_CLK_200
+	bool "200 MHz"
+
+config LANTIQ_DDR_CTRL_CLK_333
+	bool "333 MHz"
+
+config LANTIQ_DDR_CTRL_CLK_400
+	bool "400 MHz"
+
+endchoice
+
+config LANTIQ_DDR_CTRL_CLK
+	int
+	default 7 if LANTIQ_DDR_CTRL_CLK_200
+	default 5 if LANTIQ_DDR_CTRL_CLK_333
+	default 4 if LANTIQ_DDR_CTRL_CLK_400
+
+choice
+	prompt "MIPS InterAptiv Cluster clock"
+	default LANTIQ_CPS_CLK_600
+	help
+	  MIPS InterAptiv Cluster clock.
+
+config LANTIQ_CPS_CLK_600
+	bool "600 MHz"
+
+config LANTIQ_CPS_CLK_800
+	bool "800 MHz"
+
+config LANTIQ_CPS_CLK_1000
+	bool "1000 MHz"
+
+config LANTIQ_CPS_CLK_1200
+	bool "1200 MHz"
+
+endchoice
+
+config LANTIQ_CPS_CLK
+	int
+	default 3 if LANTIQ_CPS_CLK_600
+	default 2 if LANTIQ_CPS_CLK_800
+	default 16 if LANTIQ_CPS_CLK_1000
+	default 1 if LANTIQ_CPS_CLK_1200
+
+config LANTIQ_CPU_CLK
+	int
+	default 600 if LANTIQ_CPS_CLK_600
+	default 800 if LANTIQ_CPS_CLK_800
+	default 1000 if LANTIQ_CPS_CLK_1000
+	default 1200 if LANTIQ_CPS_CLK_1200
+
+choice
+	prompt "CBM clock"
+	default LANTIQ_CBM_CLK_200
+	help
+	  MIPS InterAptiv Cluster clock.
+
+config LANTIQ_CBM_CLK_200
+	bool "200 MHz"
+
+config LANTIQ_CBM_CLK_300
+	bool "300 MHz"
+
+config LANTIQ_CBM_CLK_400
+	bool "400 MHz"
+
+config LANTIQ_CBM_CLK_480
+	bool "480 MHz"
+
+config LANTIQ_CBM_CLK_600
+	bool "600 MHz"
+
+config LANTIQ_CBM_CLK_800
+	bool "800 MHz"
+
+config LANTIQ_CBM_CLK_1200
+	bool "1200 MHz"
+
+config LANTIQ_CBM_CLK_2400
+	bool "2400 MHz"
+
+endchoice
+
+config LANTIQ_CBM_CLK
+	int
+	default 8 if LANTIQ_CBM_CLK_200
+	default 6 if LANTIQ_CBM_CLK_300
+	default 5 if LANTIQ_CBM_CLK_400
+	default 4 if LANTIQ_CBM_CLK_480
+	default 3 if LANTIQ_CBM_CLK_600
+	default 2 if LANTIQ_CBM_CLK_800
+	default 1 if LANTIQ_CBM_CLK_1200
+	default 0 if LANTIQ_CBM_CLK_2400
+
+config LANTIQ_MEMSIZE_BOOTCORE
+	int "Reserved memory for boot core in MiB"
+	default 16
+	help
+	  This amount of memory will be reserved at the end of DDR DRAM memory
+	  and remapped to the boot core memory range starting at 0x80000000.
+
+choice
+	prompt "BootROM NAND BCH ECC strength"
+	default LANTIQ_BOOTROM_BCH_STRENGTH_NONE
+	help
+	  This determines the strength of NAND BCH ECC protection for BootROM
+	  headers and SPL binaries. Choose 0 for on-die ECC chips and 8 for
+	  8-bit ECC chips.
+
+config LANTIQ_BOOTROM_BCH_STRENGTH_NONE
+	bool "None"
+
+config LANTIQ_BOOTROM_BCH_STRENGTH_8
+	bool "8 Bits"
+
+config LANTIQ_BOOTROM_BCH_STRENGTH_16
+	bool "16 Bits"
+
+config LANTIQ_BOOTROM_BCH_STRENGTH_40
+	bool "40 Bits"
+
+endchoice
+
+config LANTIQ_BOOTROM_BCH_STRENGTH
+	int
+	default 0 if LANTIQ_BOOTROM_BCH_STRENGTH_NONE
+	default 8 if LANTIQ_BOOTROM_BCH_STRENGTH_8
+	default 16 if LANTIQ_BOOTROM_BCH_STRENGTH_16
+	default 40 if LANTIQ_BOOTROM_BCH_STRENGTH_40
+
+endif

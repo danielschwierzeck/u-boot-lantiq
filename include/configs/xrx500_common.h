@@ -1,0 +1,77 @@
+/* SPDX-License-Identifier: GPL-2.0+ */
+/*
+ * Copyright (C) 2020 Sphairon GmbH (a ZyXEL company)
+ */
+#ifndef _CONFIG_XRX500_H_
+#define _CONFIG_XRX500_H_
+
+/* UART */
+#define CONFIG_BAUDRATE			115200
+#define CONFIG_SYS_BAUDRATE_TABLE	{ 9600, 19200, 38400, 57600, 115200 }
+
+/* enviroment */
+#if !defined(CONFIG_ENV_SIZE)
+#define CONFIG_ENV_SIZE			8 * 1024
+#endif
+
+#define CONFIG_DISPLAY_BOARDINFO
+#define CONFIG_MISC_INIT_R
+
+/* command line */
+#define CONFIG_CMDLINE_EDITING
+#define CONFIG_AUTO_COMPLETE
+#define	CONFIG_SYS_LONGHELP
+#define CONFIG_SYS_CBSIZE		1024
+#define CONFIG_SYS_PBSIZE		(CONFIG_SYS_CBSIZE + \
+					sizeof(CONFIG_SYS_PROMPT) + 16)
+
+/* RAM */
+#define	CONFIG_SYS_MAXARGS		32
+#define CONFIG_SYS_BOOTPARAMS_LEN	256 * 1024
+#define CONFIG_SYS_MALLOC_LEN		32 * 1024 * 1024
+#define CONFIG_SYS_SDRAM_BASE		0x80000000
+#if defined(CONFIG_UART_BOOT)
+#define CONFIG_SYS_LOAD_ADDR		0xa2000000
+#else
+#define CONFIG_SYS_LOAD_ADDR		0x82000000
+#endif
+#define CONFIG_SYS_BOOTM_LEN		16 * 1024 * 1024
+
+/* no NOR flash interface */
+#define CONFIG_SYS_NO_FLASH
+
+/* NAND flash */
+#define CONFIG_BCH
+#define CONFIG_NAND_ECC_BCH
+
+/* boot */
+#define CONFIG_SYS_MONITOR_BASE		CONFIG_SYS_TEXT_BASE
+#define CONFIG_SYS_EJTAG_TEXT_BASE	0xA0000000
+
+/* SPL */
+#define CONFIG_SPL_TEXT_BASE		0xa0001000
+#define CONFIG_SPL_LOAD_ADDR		0xa1000000
+#define CONFIG_SPL_START_S_PATH		"arch/mips/mach-lantiq/grx500/nand_spl"
+#define CONFIG_SPL_LDSCRIPT		"arch/mips/mach-lantiq/grx500/u-boot-spl.lds"
+#define CONFIG_SPL_LIBCOMMON_SUPPORT
+#define CONFIG_SPL_LIBGENERIC_SUPPORT
+#define CONFIG_SPL_GPIO_SUPPORT
+#define CONFIG_SPL_SERIAL_SUPPORT
+#define CONFIG_SPL_NAND_SUPPORT
+#define CONFIG_SPL_NAND_DRIVERS
+#define CONFIG_SPL_NAND_BASE
+#define CONFIG_SPL_LZO
+#define CONFIG_LZO
+#define CONFIG_SYS_UBOOT_START		CONFIG_SYS_TEXT_BASE
+
+#define CONFIG_ENV_CONSOLEDEV					\
+	"consoledev=ttyLTQ0\0"
+
+#define CONFIG_ENV_XRX500_ARGS					\
+	"xrx500_args=clk_ignore_unused pci=pcie_bus_perf\0"
+
+#define CONFIG_ENV_XRX500					\
+	CONFIG_ENV_CONSOLEDEV					\
+	CONFIG_ENV_XRX500_ARGS
+
+#endif /* _CONFIG_XRX500_H_ */

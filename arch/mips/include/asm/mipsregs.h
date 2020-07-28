@@ -485,6 +485,7 @@
 #define MIPS_CONF1_TLBS         (_ULCAST_(63) << MIPS_CONF1_TLBS_SHIFT)
 
 #define MIPS_CONF2_SA		(_ULCAST_(15) << 0)
+#define MIPS_CONF2_SL_SHF	4
 #define MIPS_CONF2_SL		(_ULCAST_(15) << 4)
 #define MIPS_CONF2_SS		(_ULCAST_(15) << 8)
 #define MIPS_CONF2_SU		(_ULCAST_(15) << 12)

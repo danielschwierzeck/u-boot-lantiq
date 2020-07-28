@@ -267,6 +267,28 @@ int arch_fixup_fdt(void *blob)
 
 static int boot_setup_fdt(bootm_headers_t *images)
 {
+	/*
+	 * FIXME: until U-Boot establishes proper EVA mapping:
+	 *
+	 * Remap DTB and initramfs addresses dependent on configured
+	 * Lantiq EVA mode. This is guessed by kernel entry point. If
+	 * kernel EP is at 0x2xxxxxxx, physical and virtual external
+	 * memory is mapped to 0x20000000-0xa0000000. If kernel EP is
+	 * at 0x6xxxxxxx, physical external memory is mapped to
+	 * 0x20000000-0x60000000 and virtual memory is mapped to
+	 * 0x60000000-0xa0000000. Anyway CPHYSADDR always maps to
+	 * 0x2xxxxxxx. The initramfs addresses must be passed to Linux
+	 * as physical addresses. The DTB is expected as virtual address.
+	 */
+	ulong initrd_start = CPHYSADDR(images->initrd_start);
+	ulong initrd_end = CPHYSADDR(images->initrd_end);
+
+	printf("   Remapping initramfs from %08lx to %08lx\n",
+		images->initrd_start, initrd_start);
+
+	images->initrd_start = initrd_start;
+	images->initrd_end = initrd_end;
+
 	return image_setup_libfdt(images, images->ft_addr, images->ft_len,
 		&images->lmb);
 }
@@ -298,6 +320,7 @@ static void boot_jump_linux(bootm_headers_t *images)
 	typedef void __noreturn (*kernel_entry_t)(int, ulong, ulong, ulong);
 	kernel_entry_t kernel = (kernel_entry_t) images->ep;
 	ulong linux_extra = 0;
+	ulong ft_addr;
 
 	debug("## Transferring control to Linux (at address %p) ...\n", kernel);
 
@@ -313,11 +336,21 @@ static void boot_jump_linux(bootm_headers_t *images)
 	bootstage_report();
 #endif
 
-	if (images->ft_len)
-		kernel(-2, (ulong)images->ft_addr, 0, 0);
-	else
+	if (images->ft_len) {
+		ft_addr = CPHYSADDR((ulong)images->ft_addr);
+		if (images->ep >= 0x20000000 && images->ep < 0x60000000)
+			ft_addr |= 0x20000000;
+		else if (images->ep >= 0x60000000 && images->ep < 0xa0000000)
+			ft_addr |= 0x60000000;
+
+		printf("   Remapping DTB from %p to %08lx\n",
+			images->ft_addr, ft_addr);
+
+		kernel(-2, ft_addr, 0, 0);
+	} else {
 		kernel(linux_argc, (ulong)linux_argv, (ulong)linux_env,
 			linux_extra);
+	}
 }
 
 int do_bootm_linux(int flag, int argc, char * const argv[],
