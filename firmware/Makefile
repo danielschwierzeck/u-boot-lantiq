@@ -2,7 +2,7 @@
 # SPDX-License-Identifier:	GPL-2.0+
 #
 
-#fw-shipped-$(CONFIG_XXX) += xxx/xxx.bin
+fw-shipped-$(CONFIG_FW_INTEL_XRX500_PHY11G) := intel/xrx550/phy11g_a21.bin
 
 fw-shipped-all := $(fw-shipped-y) $(fw-shipped-m) $(fw-shipped-)
 

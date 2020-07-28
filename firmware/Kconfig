@@ -3,4 +3,10 @@ menuconfig FIRMWARE_LOADER
 
 if FIRMWARE_LOADER
 
+config FW_INTEL_XRX500_PHY11G
+	bool "Lantiq/Intel xRX500 PHY11G"
+	depends on ARCH_LANTIQ
+	help
+	  "Support for PHY11G cores on Lantiq/Intel xRX500 platform"
+
 endif
