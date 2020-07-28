@@ -261,6 +261,23 @@ out_err:
 	return err;
 }
 
+int ubi_truncate_vol(char *volume)
+{
+	int err;
+	struct ubi_volume *vol;
+
+	vol = ubi_find_volume(volume);
+	if (vol == NULL)
+		return ENODEV;
+
+	err = ubi_start_update(ubi, vol, 0);
+	if (err < 0) {
+		printf("Cannot truncate volume\n");
+		return -err;
+	}
+	return 0;
+}
+
 static int ubi_volume_continue_write(char *volume, void *buf, size_t size)
 {
 	int err = 1;
@@ -617,6 +634,12 @@ static int do_ubi(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 			return ubi_remove_vol(argv[2]);
 	}
 
+	if (strncmp(argv[1], "truncate", 8) == 0) {
+		/* E.g., truncate volume */
+		if (argc == 3)
+			return ubi_truncate_vol(argv[2]);
+	}
+
 	if (strncmp(argv[1], "write", 5) == 0) {
 		int ret;
 
@@ -699,6 +722,8 @@ U_BOOT_CMD(
 		" - Read volume to address with size\n"
 	"ubi remove[vol] volume"
 		" - Remove volume\n"
+	"ubi truncate[vol] volume"
+		" - Truncate volume\n"
 	"[Legends]\n"
 	" volume: character name\n"
 	" size: specified in bytes\n"
