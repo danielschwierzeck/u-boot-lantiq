@@ -625,6 +625,7 @@ libs-y += net/
 libs-y += disk/
 libs-y += drivers/
 libs-y += drivers/dma/
+libs-$(CONFIG_FIRMWARE_LOADER) += drivers/firmware/
 libs-y += drivers/gpio/
 libs-y += drivers/i2c/
 libs-y += drivers/mmc/
@@ -665,6 +666,7 @@ libs-$(CONFIG_HAS_POST) += post/
 libs-y += test/
 libs-y += test/dm/
 libs-$(CONFIG_UT_ENV) += test/env/
+libs-$(CONFIG_FIRMWARE_LOADER) += firmware/
 
 libs-y += $(if $(BOARDDIR),board/$(BOARDDIR)/)
 

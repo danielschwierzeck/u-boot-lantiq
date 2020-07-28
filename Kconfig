@@ -331,6 +331,8 @@ source "net/Kconfig"
 
 source "drivers/Kconfig"
 
+source "firmware/Kconfig"
+
 source "fs/Kconfig"
 
 source "lib/Kconfig"

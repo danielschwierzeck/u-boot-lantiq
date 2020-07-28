@@ -1,0 +1,6 @@
+menuconfig FIRMWARE_LOADER
+	bool "Firmware loader"
+
+if FIRMWARE_LOADER
+
+endif
