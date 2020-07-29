@@ -195,6 +195,13 @@ config DEBUG_UART_UNIPHIER
 	  driver will be available until the real driver-model serial is
 	  running.
 
+config DEBUG_UART_LANTIQ
+	bool "Lantiq/Intel UART"
+	depends on ARCH_LANTIQ
+	help
+	  Select this to enable a debug UART using the Lantiq/Intel UART.
+	  You will need to provide DEBUG_UART_BASE to make this work.
+
 endchoice
 
 config DEBUG_UART_BASE
