@@ -1,0 +1,8 @@
+GX5502-D0/GX3502-D0 BOARD
+M:	Daniel Schwierzeck <daniel.schwierzeck@zyxel.eu>
+S:	Maintained
+F:	board/zyxel/gx5502/
+F:	include/configs/gx5502.h
+F:	include/configs/gx3502.h
+F:	configs/gx5502_*
+F:	configs/gx3502_*

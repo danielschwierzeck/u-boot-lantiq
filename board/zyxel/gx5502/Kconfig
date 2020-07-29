@@ -1,0 +1,25 @@
+if TARGET_ZYXEL_GX5502
+
+config SYS_BOARD
+	default "gx5502"
+
+config SYS_VENDOR
+	default "zyxel"
+
+config SYS_CONFIG_NAME
+	default "gx5502"
+
+endif
+
+if TARGET_ZYXEL_GX3502
+
+config SYS_BOARD
+	default "gx5502"
+
+config SYS_VENDOR
+	default "zyxel"
+
+config SYS_CONFIG_NAME
+	default "gx3502"
+
+endif

@@ -22,9 +22,18 @@ config TARGET_LANTIQ_EASY550
 	bool "Lantiq EASY550 reference boards"
 	select LANTIQ_SOC_XRX500
 
+config TARGET_ZYXEL_GX5502
+	bool "Zyxel GX5502-D0"
+	select LANTIQ_SOC_XRX500
+
+config TARGET_ZYXEL_GX3502
+	bool "Zyxel GX3502-D0"
+	select LANTIQ_SOC_XRX500
+
 endchoice
 
 source "arch/mips/mach-lantiq/grx500/Kconfig"
 source "board/lantiq/easy550/Kconfig"
+source "board/zyxel/gx5502/Kconfig"
 
 endmenu
