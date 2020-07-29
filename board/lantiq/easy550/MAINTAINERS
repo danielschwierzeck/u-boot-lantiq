@@ -1,0 +1,6 @@
+EASY550 REFERENCE BOARDS
+M:	Daniel Schwierzeck <daniel.schwierzeck@zyxel.eu>
+S:	Maintained
+F:	board/lantiq/easy550/
+F:	include/configs/easy550.h
+F:	configs/easy550_*

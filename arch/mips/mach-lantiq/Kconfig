@@ -17,8 +17,14 @@ endchoice
 choice
 	prompt "Board select"
 
+
+config TARGET_LANTIQ_EASY550
+	bool "Lantiq EASY550 reference boards"
+	select LANTIQ_SOC_XRX500
+
 endchoice
 
 source "arch/mips/mach-lantiq/grx500/Kconfig"
+source "board/lantiq/easy550/Kconfig"
 
 endmenu

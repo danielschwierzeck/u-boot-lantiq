@@ -1,0 +1,12 @@
+if TARGET_LANTIQ_EASY550
+
+config SYS_BOARD
+	default "easy550"
+
+config SYS_VENDOR
+	default "lantiq"
+
+config SYS_CONFIG_NAME
+	default "easy550"
+
+endif
