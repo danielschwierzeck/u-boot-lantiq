@@ -156,6 +156,14 @@ config SPI_BOOT
 	  booted via SPI flash. This is not a must, some SoCs need this,
 	  somes not.
 
+config UART_BOOT
+	bool "Support for booting from UART"
+	default n
+	help
+	  Enabling this will make a U-Boot binary that is capable of being
+	  booted via an UART connection. This is not a must, some SoCs need this,
+	  somes not.
+
 endmenu
 
 config BOOTDELAY
