@@ -183,4 +183,9 @@ config PIC32_ETH
 	  This driver implements 10/100 Mbps Ethernet and MAC layer for
 	  Microchip PIC32 microcontrollers.
 
+config XRX500_ETH
+	bool "Lantiq/Intel xRX500 ethernet support"
+	depends on ARCH_LANTIQ
+	select FIRMWARE_LOADER
+
 endif # NETDEVICES
