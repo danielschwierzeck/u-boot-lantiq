@@ -78,6 +78,89 @@ config NAND_ARASAN
 	  controller. This uses the hardware ECC for read and
 	  write operations.
 
+config NAND_LANTIQ
+	bool "Support for Lantiq HSNAND controller"
+	depends on ARCH_LANTIQ
+	default n
+	select SYS_NAND_SELF_INIT
+	select DMA_LANTIQ
+	help
+	  This enables support for the Lantiq HSNAND controller.
+
+config NAND_LANTIQ_CS0
+	bool "Lantiq HSNAND chip-select 0"
+	depends on NAND_LANTIQ
+	default n
+
+config NAND_LANTIQ_CS0_GPIO
+	bool "Lantiq HSNAND chip-select 0 driven by GPIO"
+	depends on NAND_LANTIQ_CS0
+	default n
+
+config NAND_LANTIQ_CS0_GPIO_NUM
+	int "Lantiq HSNAND GPIO number for chip-select 0"
+	depends on NAND_LANTIQ_CS0_GPIO
+	default 0
+
+config NAND_LANTIQ_CS1
+	bool "Lantiq HSNAND chip select 1"
+	depends on NAND_LANTIQ
+	default y
+
+config NAND_LANTIQ_CS1_GPIO
+	bool "Lantiq HSNAND chip-select 1 driven by GPIO"
+	depends on NAND_LANTIQ_CS1
+	default n
+
+config NAND_LANTIQ_CS1_GPIO_NUM
+	int "Lantiq HSNAND GPIO number for chip-select 1"
+	depends on NAND_LANTIQ_CS1_GPIO
+	default 0
+
+choice
+	prompt "Lantiq HSNAND ECC mode for chip select 0"
+	depends on NAND_LANTIQ_CS0
+	default NAND_LANTIQ_CS0_ECC_BCH
+
+config NAND_LANTIQ_CS0_ECC_RS_3
+	bool "HW Reed Solomon with 3 bytes"
+
+config NAND_LANTIQ_CS0_ECC_RS_4
+	bool "HW Reed Solomon with 4 bytes"
+
+config NAND_LANTIQ_CS0_ECC_BCH
+	bool "SW BCH"
+
+config NAND_LANTIQ_CS0_ECC_SOFT
+	bool "SW Hamming"
+
+config NAND_LANTIQ_CS0_ECC_NONE
+	bool "None"
+
+endchoice
+
+choice
+	prompt "Lantiq HSNAND ECC mode for chip select 1"
+	depends on NAND_LANTIQ_CS1
+	default NAND_LANTIQ_CS1_ECC_BCH
+
+config NAND_LANTIQ_CS1_ECC_RS_3
+	bool "HW Reed Solomon with 3 bytes"
+
+config NAND_LANTIQ_CS1_ECC_RS_4
+	bool "HW Reed Solomon with 4 bytes"
+
+config NAND_LANTIQ_CS1_ECC_BCH
+	bool "SW BCH"
+
+config NAND_LANTIQ_CS1_ECC_SOFT
+	bool "SW Hamming"
+
+config NAND_LANTIQ_CS1_ECC_NONE
+	bool "None"
+
+endchoice
+
 comment "Generic NAND options"
 
 # Enhance depends when converting drivers to Kconfig which use this config
