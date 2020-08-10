@@ -87,6 +87,8 @@ static struct nand_ecclayout nand_oob_128 = {
 		 .length = 78} }
 };
 
+static struct nand_ecclayout nand_noecc;
+
 static int nand_get_device(struct mtd_info *mtd, int new_state);
 
 static int nand_do_write_oob(struct mtd_info *mtd, loff_t to,
@@ -747,6 +749,7 @@ void nand_command_lp(struct mtd_info *mtd, unsigned int command,
 	case NAND_CMD_SEQIN:
 	case NAND_CMD_RNDIN:
 	case NAND_CMD_STATUS:
+	case NAND_CMD_ECC_STATUS:
 		return;
 
 	case NAND_CMD_RESET:
@@ -1421,6 +1424,35 @@ static int nand_read_page_syndrome(struct mtd_info *mtd, struct nand_chip *chip,
 	i = mtd->oobsize - (oob - chip->oob_poi);
 	if (i)
 		chip->read_buf(mtd, oob, i);
+
+	return max_bitflips;
+}
+
+/**
+ * nand_read_page_noecc - [INTERN] On-chip ECC based page read function
+ * @mtd: mtd info structure
+ * @chip: nand chip info structure
+ * @buf: buffer to store read data
+ * @oob_required: caller requires OOB data read to chip->oob_poi
+ * @page: page number to read
+ */
+static int nand_read_page_noecc(struct mtd_info *mtd, struct nand_chip *chip,
+				uint8_t *buf, int oob_required, int page)
+{
+	int stat, err;
+	unsigned int max_bitflips = 0;
+
+	err = chip->ecc.read_page_raw(mtd, chip, buf, oob_required, page);
+	if (err < 0)
+		return err;
+
+	stat = chip->ecc_status(mtd, chip);
+	if (stat < 0) {
+		mtd->ecc_stats.failed++;
+	} else {
+		mtd->ecc_stats.corrected += stat;
+		max_bitflips = stat;
+	}
 
 	return max_bitflips;
 }
@@ -2919,6 +2951,75 @@ static int nand_onfi_get_features(struct mtd_info *mtd, struct nand_chip *chip,
 	return 0;
 }
 
+/**
+ * nand_ecc_status_toshiba - [INTERN] read ECC status from Toshiba devices
+ * @mtd: mtd info structure
+ * @chip: nand chip info structure
+ */
+static int nand_ecc_status_toshiba(struct mtd_info *mtd, struct nand_chip *chip)
+{
+	unsigned int status, i;
+	int max_bitflips = 0;
+
+	/* Check status register for uncorrectable errors */
+	chip->cmdfunc(mtd, NAND_CMD_STATUS, -1, -1);
+	status = chip->read_byte(mtd);
+	if (status & NAND_STATUS_FAIL) {
+		pr_warn("uncorrectable error (SR %02x)\n", status);
+		return -EBADMSG;
+	}
+
+	/*
+	 * Check ECC status register for possible corrected bits. We can read
+	 * the corrected bits for each available ECC block.
+	 */
+	chip->cmdfunc(mtd, NAND_CMD_ECC_STATUS, -1, -1);
+	for (i = 0; i < chip->ecc.steps; i++) {
+		status = chip->read_byte(mtd) & 0xf;
+		max_bitflips = max_t(unsigned int, max_bitflips, status);
+	}
+
+	if (max_bitflips)
+		pr_warn("%d bits corrected\n", max_bitflips);
+
+	return max_bitflips;
+}
+
+/**
+ * nand_ecc_status_macronix - [INTERN] read ECC status from Macronix devices
+ * @mtd: mtd info structure
+ * @chip: nand chip info structure
+ */
+static int nand_ecc_status_macronix(struct mtd_info *mtd, struct nand_chip *chip)
+{
+	unsigned int status;
+	int max_bitflips = 0;
+
+	/* Check status register for uncorrectable errors */
+	chip->cmdfunc(mtd, NAND_CMD_STATUS, -1, -1);
+	status = chip->read_byte(mtd);
+	if (status & NAND_STATUS_FAIL) {
+		pr_warn("uncorrectable error (SR %02x)\n", status);
+		return -EBADMSG;
+	}
+
+	/*
+	 * Corrected bits are coded in status register as follows:
+	 *
+	 * SR[4] SR[3] corrected bits
+	 *    0     0     0 or 1
+	 *    1     0     2
+	 *    0     1     3
+	 *    1     1     4
+	 */
+	max_bitflips = ((status & 0x10) >> 4) | ((status & 0x8) >> 2);
+	if (max_bitflips) {
+		max_bitflips++;
+		pr_warn("%d bits corrected\n", max_bitflips);
+	}
+
+	return max_bitflips;
+}
 /* Set default functions */
 static void nand_set_defaults(struct nand_chip *chip, int busw)
 {
@@ -3559,6 +3660,24 @@ static void nand_decode_bbm_options(struct mtd_info *mtd,
 		chip->bbt_options |= NAND_BBT_SCAN2NDPAGE;
 }
 
+static void nand_decode_ondie_ecc(struct mtd_info *mtd,
+				  struct nand_chip *chip, u8 id_data[8])
+{
+	u8 maf_id = id_data[0];
+
+	if (nand_is_slc(chip) && maf_id == NAND_MFR_TOSHIBA &&
+		id_data[4] & 0x80) {
+		chip->options |= NAND_ONDIE_ECC;
+		chip->ecc_status = nand_ecc_status_toshiba;
+	}
+
+	if (nand_is_slc(chip) && maf_id == NAND_MFR_MACRONIX &&
+		id_data[4] & 0x80) {
+		chip->options |= NAND_ONDIE_ECC;
+		chip->ecc_status = nand_ecc_status_macronix;
+	}
+}
+
 static inline bool is_full_id_nand(struct nand_flash_dev *type)
 {
 	return type->id_len;
@@ -3710,6 +3829,7 @@ ident_done:
 	}
 
 	nand_decode_bbm_options(mtd, chip, id_data);
+	nand_decode_ondie_ecc(mtd, chip, id_data);
 
 	/* Calculate the address shift from the page size */
 	chip->page_shift = ffs(mtd->writesize) - 1;
@@ -3760,6 +3880,10 @@ ident_done:
 	pr_info("%d MiB, %s, erase size: %d KiB, page size: %d, OOB size: %d\n",
 		(int)(chip->chipsize >> 20), nand_is_slc(chip) ? "SLC" : "MLC",
 		mtd->erasesize >> 10, mtd->writesize, mtd->oobsize);
+
+	if (NAND_HAS_ONDIE_ECC(chip))
+		pr_info("device has on-die ECC engine\n");
+
 	return type;
 }
 
@@ -3913,6 +4037,12 @@ int nand_scan_tail(struct mtd_info *mtd)
 		}
 	}
 
+	/* No OOB is useable on chips with on-die ECC engine */
+	if (ecc->mode == NAND_ECC_NONE && NAND_HAS_ONDIE_ECC(chip)) {
+		ecc->layout = &nand_noecc;
+		chip->bbt_options |= NAND_BBT_NO_OOB | NAND_BBT_NO_OOB_BBM;
+	}
+
 	if (!chip->write_page)
 		chip->write_page = nand_write_page;
 
@@ -4034,16 +4164,33 @@ int nand_scan_tail(struct mtd_info *mtd)
 		break;
 
 	case NAND_ECC_NONE:
-		pr_warn("NAND_ECC_NONE selected by board driver. This is not recommended!\n");
-		ecc->read_page = nand_read_page_raw;
-		ecc->write_page = nand_write_page_raw;
+		if (NAND_HAS_ONDIE_ECC(chip)) {
+			if (!ecc->read_page)
+				ecc->read_page = nand_read_page_noecc;
+
+			ecc->size = chip->ecc_step_ds;
+			ecc->strength = chip->ecc_strength_ds;
+		} else {
+			pr_warn("NAND_ECC_NONE selected by board driver. "
+				   "This is not recommended!\n");
+
+			if (!ecc->read_page)
+				ecc->read_page = nand_read_page_raw;
+
+			ecc->size = mtd->writesize;
+			ecc->strength = 0;
+		}
+
+		if (!ecc->read_page_raw)
+			ecc->read_page_raw = nand_read_page_raw;
+		if (!ecc->write_page_raw)
+			ecc->write_page_raw = nand_write_page_raw;
+
+		ecc->write_page = ecc->write_page_raw;
 		ecc->read_oob = nand_read_oob_std;
-		ecc->read_page_raw = nand_read_page_raw;
-		ecc->write_page_raw = nand_write_page_raw;
 		ecc->write_oob = nand_write_oob_std;
-		ecc->size = mtd->writesize;
+
 		ecc->bytes = 0;
-		ecc->strength = 0;
 		break;
 
 	default:
