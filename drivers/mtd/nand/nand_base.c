@@ -592,8 +592,8 @@ static void nand_wait_status_ready(struct mtd_info *mtd, unsigned long timeo)
  * Send command to NAND device. This function is used for small page devices
  * (512 Bytes per page).
  */
-static void nand_command(struct mtd_info *mtd, unsigned int command,
-			 int column, int page_addr)
+void nand_command(struct mtd_info *mtd, unsigned int command,
+		  int column, int page_addr)
 {
 	register struct nand_chip *chip = mtd_to_nand(mtd);
 	int ctrl = NAND_CTRL_CLE | NAND_CTRL_CHANGE;
@@ -695,8 +695,8 @@ static void nand_command(struct mtd_info *mtd, unsigned int command,
  * devices. We don't have the separate regions as we have in the small page
  * devices. We must emulate NAND_CMD_READOOB to keep the code compatible.
  */
-static void nand_command_lp(struct mtd_info *mtd, unsigned int command,
-			    int column, int page_addr)
+void nand_command_lp(struct mtd_info *mtd, unsigned int command,
+		     int column, int page_addr)
 {
 	register struct nand_chip *chip = mtd_to_nand(mtd);
 

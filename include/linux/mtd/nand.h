@@ -43,6 +43,12 @@ extern void nand_release(struct mtd_info *mtd);
 /* Internal helper for board drivers which need to override command function */
 extern void nand_wait_ready(struct mtd_info *mtd);
 
+extern void nand_command(struct mtd_info *mtd, unsigned int command,
+			 int column, int page_addr);
+
+extern void nand_command_lp(struct mtd_info *mtd, unsigned int command,
+			    int column, int page_addr);
+
 /*
  * This constant declares the max. oobsize / page, which
  * is supported now. If you add a chip with bigger oobsize/page
