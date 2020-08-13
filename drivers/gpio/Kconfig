@@ -214,4 +214,20 @@ config MPC85XX_GPIO
 
 	  The driver has been tested on MPC85XX, but it is likely that other
 	  PowerQUICC III devices will work as well.
+
+config LANTIQ_GPIO
+	bool "Lantiq/Intel GPIO controller"
+	depends on ARCH_LANTIQ
+	default y
+	help
+	  This driver supports the GPIO controller on Lantiq/Intel SoC devices.
+
+config LANTIQ_SSO_SHR_COUNT
+	int "Lantiq/Intel SSO shift register count"
+	depends on LANTIQ_GPIO
+	default 0
+	help
+	  Defines the number of shift registers connected to the Lantiq/Intel
+	  SSO controller. A value of 0 disables the SSO support.
+
 endmenu
