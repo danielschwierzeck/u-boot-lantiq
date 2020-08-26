@@ -61,6 +61,9 @@
 #endif
 #include <dm/root.h>
 #include <linux/compiler.h>
+#ifdef CONFIG_LIB_SPHAIRON
+#include <sas/init.h>
+#endif
 
 /*
  * Pointer to initial global data area
@@ -948,6 +951,10 @@ static init_fnc_t init_sequence_f[] = {
 	init_post,
 #endif
 	INIT_FUNC_WATCHDOG_RESET
+
+#ifdef CONFIG_LIB_SPHAIRON
+	sas_init_f,
+#endif
 	/*
 	 * Now that we have DRAM mapped and working, we can
 	 * relocate the code and continue running from DRAM.

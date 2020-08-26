@@ -66,6 +66,9 @@
 #include <asm/arch/mmu.h>
 #endif
 #include <efi_loader.h>
+#ifdef CONFIG_LIB_SPHAIRON
+#include <sas/init.h>
+#endif
 
 DECLARE_GLOBAL_DATA_PTR;
 
@@ -865,6 +868,9 @@ init_fnc_t init_sequence_r[] = {
 #ifdef CONFIG_HAS_DATAFLASH
 	initr_dataflash,
 #endif
+#ifdef CONFIG_LIB_SPHAIRON
+	sas_early_init_r,
+#endif
 	initr_env,
 #ifdef CONFIG_SYS_BOOTPARAMS_LEN
 	initr_malloc_bootparams,
@@ -968,6 +974,9 @@ init_fnc_t init_sequence_r[] = {
 #endif
 #if defined(CONFIG_SPARC)
 	prom_init,
+#endif
+#ifdef CONFIG_LIB_SPHAIRON
+	sas_late_init_r,
 #endif
 	run_main_loop,
 };
