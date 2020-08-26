@@ -151,5 +151,6 @@ config SPL_OF_LIBFDT
 
 source lib/efi/Kconfig
 source lib/efi_loader/Kconfig
+source lib/sphairon/Kconfig
 
 endmenu

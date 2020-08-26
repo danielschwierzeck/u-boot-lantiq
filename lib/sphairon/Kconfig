@@ -1,0 +1,39 @@
+config LIB_SPHAIRON
+	bool "Enable the Sphairon library"
+	default n
+
+if LIB_SPHAIRON
+
+config SPHAIRON_FLASHLAYOUT
+	string "Default Sphairon flash layout"
+	default "psmd"
+
+config SPHAIRON_SCAN_STEP_SIZE
+	hex "Sphairon flash layout image scan step"
+	default 0x2000
+
+config SPHAIRON_ETL_NAND
+	bool "Enable Sphairon library support for ETL in NAND flash"
+	default n
+
+config SPHAIRON_UBI_SUPPORT
+	bool "Enable Sphairon library support for UBI"
+	default n
+
+config SPHAIRON_ETL_WRITE_DISABLE
+	bool "Disable write support for Sphairon ETL"
+	default n
+
+config SPHAIRON_ZYCLIP
+	bool "Enable Sphairon library support for Zyclip"
+	default n
+
+config SPHAIRON_UGW_CALIBRATION
+	bool "Enable Sphairon library support for UGW calibration MTD partition"
+	default n
+
+config SPHAIRON_DEBUG
+	bool "Enable Sphairon library debugging"
+	default n
+
+endif
