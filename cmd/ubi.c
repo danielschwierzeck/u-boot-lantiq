@@ -481,6 +481,11 @@ int ubi_part(char *part_name, const char *vid_header_offset)
 	struct part_info *part;
 	u8 pnum;
 
+	/* Don't reattach if part_name did not change */
+	if (ubi_dev.selected &&
+	    !strcmp(ubi_dev.part_name, part_name))
+		return 0;
+
 	ubi_detach();
 	/*
 	 * Search the mtd device number where this partition
