@@ -340,7 +340,7 @@ static void boot_jump_linux(bootm_headers_t *images)
 		ft_addr = CPHYSADDR((ulong)images->ft_addr);
 		if (images->ep >= 0x20000000 && images->ep < 0x60000000)
 			ft_addr |= 0x20000000;
-		else if (images->ep >= 0x60000000 && images->ep < 0xa0000000)
+		else if (images->ep >= 0x60000000)
 			ft_addr |= 0x60000000;
 
 		printf("   Remapping DTB from %p to %08lx\n",
