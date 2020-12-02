@@ -9,6 +9,7 @@
 /* Network */
 #define CONFIG_TFTP_BLOCKSIZE	1400
 #define CONFIG_NET_RETRY_COUNT	10
+#define CONFIG_BOOTP_SEND_HOSTNAME
 
 /* MTD */
 #define CONFIG_MTD_DEVICE
@@ -77,4 +78,3 @@
 	CONFIG_ENV_LOAD_UBOOT_RAM
 
 #endif /* _GEMINI_ENV_H_ */
-

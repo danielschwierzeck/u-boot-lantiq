@@ -25,6 +25,8 @@
 
 #define CONFIG_BOARD_EARLY_INIT_F
 
+#define CONFIG_PHY_LANTIQ
+
 #define MTDIDS_DEFAULT			"nand0=nand-cs1,nand1=nand-cs0"
 #define MTDPARTS_DEFAULT		\
 	"mtdparts=nand-cs1:1792k(uboot_fix),1024k(calibration),-(ubi);nand-cs0:-(storage)"
