@@ -35,6 +35,8 @@
 #include <mach/grx500.h>
 #include <mach/lq_dma.h>
 #include <mach/api.h>
+#include <watchdog.h>
+#include <console.h>
 
 #include "lq_microcode.h"
 
@@ -52,8 +54,8 @@
 #define DMA_TX_BASE DMA2_TX_MODULE_BASE
 #define DMA_RX_BASE DMA2_RX_MODULE_BASE
 
-#define MDIO_WRITE_CMD ((0 << 11) | (1 << 10))
-#define MDIO_READ_CMD ((1 << 11) | (0 << 10))
+#define MDIO_WRITE_CMD		BIT(10)
+#define MDIO_READ_CMD		BIT(11)
 
 #define NETPHYADDR(a) (CPHYSADDR(a) | 0x20000000)
 
@@ -83,6 +85,8 @@
 
 #define GPHY_ALIGN 16 * 1024
 
+#define NUM_GSWL_PHY 4
+
 static struct dma_rx_desc *rx_desc_base;
 static struct dma_tx_desc *tx_desc_base;
 static const size_t rx_desc_size = ALIGN(NUM_RX_DESC * sizeof(struct dma_rx_desc), ARCH_DMA_MINALIGN);
@@ -90,49 +94,52 @@ static const size_t tx_desc_size = ALIGN(NUM_TX_DESC * sizeof(struct dma_tx_desc
 static int tx_num, rx_num;
 static pce_table_prog_t tbl_entry;
 
-typedef struct {
-	int on;
-	int miimode;
-	int miirate;
-} grx500_sw_port;
+struct ltq_eth_priv {
+	struct mii_dev *bus;
+	struct eth_device *dev;
+	struct phy_device *phymap[NUM_GSWL_PHY];
+	int rx_num;
+	int tx_num;
+};
 
-static int xway_mii_read(const char *devname, unsigned char addr, unsigned char reg,
-		  unsigned short *value)
+static inline bool ltq_mdio_is_busy(void)
 {
-	u16 i = 0;
-	while (REG32(GSWIP_TOP_L_MDIO_CTRL) & 0x1000)
-		;
-	REG32(GSWIP_TOP_L_MDIO_CTRL) =
-		MDIO_READ_CMD | (((u32)addr) << 5) | ((u32)reg) | 0x1000;
-	while (REG32(GSWIP_TOP_L_MDIO_CTRL) & 0x1000) {
-		i++;
-		if (i > 0x7fff) {
-			printf("MDIO access time out!\n");
-			break;
-		}
-	}
-	sync();
-
-	*value = (u16)(REG32(GSWIP_TOP_L_MDIO_READ));
-	return 0;
+	return REG32(GSWIP_TOP_L_MDIO_CTRL) & BIT(12);
 }
 
-static int xway_mii_write(const char *devname, unsigned char addr, unsigned char reg,
-		   unsigned short value)
+static inline void ltq_mdio_poll(void)
 {
-	u16 i = 0;
-	REG32(GSWIP_TOP_L_MDIO_WRITE) = value;
-	while (REG32(GSWIP_TOP_L_MDIO_CTRL) & 0x1000)
-		;
-	REG32(GSWIP_TOP_L_MDIO_CTRL) =
-		MDIO_WRITE_CMD | (((u32)addr) << 5) | ((u32)reg) | 0x1000;
-	while (REG32(GSWIP_TOP_L_MDIO_CTRL) & 0x1000) {
-		i++;
-		if (i > 0x7fff) {
-			printf("MDIO access time out!\n");
-			break;
-		}
-	}
+	while (ltq_mdio_is_busy())
+		cpu_relax();
+}
+
+static int ltq_mdio_read(struct mii_dev *bus, int phyad, int devad,
+				 int regad)
+{
+	int retval;
+
+	ltq_mdio_poll();
+	REG32(GSWIP_TOP_L_MDIO_CTRL) = MDIO_READ_CMD | (phyad << 5) | regad;
+	mdelay(10);
+	retval = REG32(GSWIP_TOP_L_MDIO_READ);
+
+	debug("%s: phyad %x, regad %x, val %x\n",
+		__func__, phyad, regad, retval);
+
+	return retval;
+}
+
+static int ltq_mdio_write(struct mii_dev *bus, int phyad, int devad,
+					int regad, u16 val)
+{
+	debug("%s: phyad %x, regad %x, val %x\n",
+		__func__, phyad, regad, val);
+
+	ltq_mdio_poll();
+	REG32(GSWIP_TOP_L_MDIO_WRITE) = val;
+	REG32(GSWIP_TOP_L_MDIO_CTRL) = MDIO_WRITE_CMD | phyad << 5 | regad;
+	ltq_mdio_poll();
+
 	return 0;
 }
 
@@ -453,12 +460,50 @@ static void ltq_dma_tx_dma_init(void)
 	REG32(DMA_TX_BASE + DMA_PCTRL) = 0x1f28;
 }
 
+static int ltq_grx500_phy_startup(struct eth_device *dev)
+{
+	struct ltq_eth_priv *priv = dev->priv;
+	struct phy_device *phydev;
+	int i, j;
+
+	printf("Waiting for PHY link\n");
+	for (j = 0; j < 2000; j++) {
+		for (i = 0; i < NUM_GSWL_PHY; i++) {
+			WATCHDOG_RESET();
+
+			phydev = priv->phymap[i];
+			if (!phydev)
+				continue;
+
+			phy_startup(phydev);
+			if (phydev->link) {
+				printf("Using PHY at addr %d, speed %d, duplex %d\n",
+					phydev->addr, phydev->speed,
+					phydev->duplex);
+				return 0;
+			}
+		}
+
+		if (ctrlc())
+			return -1;
+
+		udelay(100);
+	}
+	return -1;
+}
+
 static int ltq_grx500_switch_init(struct eth_device *dev, bd_t *bis)
 {
-	int i;
+	int i, err;
 
 	tx_num = 0;
 	rx_num = 0;
+
+	err = ltq_grx500_phy_startup(dev);
+	if (err) {
+		puts("No PHY link found\n");
+		return -1;
+	}
 
 	for (i = 0; i < NUM_RX_DESC; i++) {
 		struct dma_rx_desc *rx_desc = &rx_desc_base[i];
@@ -489,8 +534,21 @@ static int ltq_grx500_switch_init(struct eth_device *dev, bd_t *bis)
 
 static void ltq_grx500_switch_halt(struct eth_device *dev)
 {
+	struct ltq_eth_priv *priv = dev->priv;
+	struct phy_device *phydev;
+	int i;
+
 	ltq_dma_rx_chan_reset();
 	ltq_dma_tx_chan_reset();
+
+	for (i = 0; i < NUM_GSWL_PHY; i++) {
+		phydev = priv->phymap[i];
+		if (!phydev)
+			continue;
+
+		phy_shutdown(phydev);
+		phydev->link = 0;
+	}
 }
 
 static int ltq_grx500_switch_send(struct eth_device *dev, void *packet,
@@ -597,7 +655,6 @@ static void mdio_init(void)
 static void ltq_grx500_sw_chip_init(void)
 {
 	u8 i = 0;
-	unsigned short mdio_value;
 	u32 fw_phy_addr;
 	u32 fw_base_l, fw_base_h;
 	u32 reset_req = GPHY_RESET_REQ;
@@ -651,7 +708,7 @@ static void ltq_grx500_sw_chip_init(void)
 	REG32(GSWIP_TOP_L_GPHY2_CFG(4)) = 0x3;
 	REG32(GSWIP_TOP_L_GPHY_MBADR(4)) = fw_base_h;
 	REG32(GSWIP_TOP_L_GPHY_LBADR(4)) = fw_base_l;
-	xway_mii_write(NULL, 0x5, 0x9, 0x1300);
+	ltq_mdio_write(NULL, 0x5, MDIO_DEVAD_NONE, 0x9, 0x1300);
 
 	/* Init GPHY4 */
 	REG32(GSWIP_TOP_L_GPHY_BFDEV(3)) = 0x51EC;
@@ -679,11 +736,6 @@ static void ltq_grx500_sw_chip_init(void)
 		;
 
 	mdelay(100);
-
-#ifdef CONFIG_CMD_MII
-	miiphy_register("GRX500 SWITCH", xway_mii_read, xway_mii_write);
-#endif // CONFIG_CMD_MII
-
 	/* End of GPHY FW Initialization */
 
 	REG32(GSW_BASE_ADDR) = 0x1;
@@ -718,29 +770,65 @@ static void ltq_grx500_sw_chip_init(void)
 	ltq_dma_rx_chan_init();
 	ltq_dma_tx_dma_init();
 	ltq_dma_tx_chan_init();
+}
 
-	xway_mii_read(NULL, 0x4, 0x1e, &mdio_value);
-	debug("Internal phy firmware version: 0x%04x\n", mdio_value);
+static void ltq_grx500_port_init(struct ltq_eth_priv *priv, int i)
+{
+	struct phy_device *phydev;
+
+	phydev = phy_connect(priv->bus, i + 2, priv->dev, PHY_INTERFACE_MODE_GMII);
+	if (phydev)
+		phy_config(phydev);
+
+	priv->phymap[i] = phydev;
 }
 
 int grx500_eth_initialize(bd_t *bis)
 {
 	struct eth_device *dev;
+	struct mii_dev *bus;
+	struct ltq_eth_priv *priv;
+	int ret, i;
 
-	dev = (struct eth_device *)malloc(sizeof(struct eth_device));
-	if (!dev) {
-		printf("Failed to allocate initialized switch mem\n");
-		return 0;
-	}
-
-	memset(dev, 0, sizeof(*dev));
 	ltq_grx500_sw_chip_init();
 
-	sprintf(dev->name, "GRX500-Switch");
+	dev = calloc(1, sizeof(struct eth_device));
+	if (!dev)
+		return -1;
+
+	priv = calloc(1, sizeof(struct ltq_eth_priv));
+	if (!priv)
+		return -1;
+
+	bus = mdio_alloc();
+	if (!bus)
+		return -1;
+
+	sprintf(dev->name, "grx550-eth");
+	dev->priv = priv;
 	dev->init = ltq_grx500_switch_init;
 	dev->halt = ltq_grx500_switch_halt;
 	dev->send = ltq_grx500_switch_send;
 	dev->recv = ltq_grx500_switch_recv;
 
-	return eth_register(dev);
+	sprintf(bus->name, "grx550-mdio");
+	bus->read = ltq_mdio_read;
+	bus->write = ltq_mdio_write;
+	bus->priv = priv;
+
+	priv->bus = bus;
+	priv->dev = dev;
+
+	ret = mdio_register(bus);
+	if (ret)
+		return -1;
+
+	ret = eth_register(dev);
+	if (ret)
+		return -1;
+
+	for (i = 0; i < 4; i++)
+		ltq_grx500_port_init(priv, i);
+
+	return 0;
 }

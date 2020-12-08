@@ -187,5 +187,7 @@ config XRX500_ETH
 	bool "Lantiq/Intel xRX500 ethernet support"
 	depends on ARCH_LANTIQ
 	select FIRMWARE_LOADER
+	select PHYLIB
+	select MII
 
 endif # NETDEVICES
