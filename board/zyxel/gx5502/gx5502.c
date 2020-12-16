@@ -107,26 +107,26 @@ int board_early_init_f(void)
 
 int sas_cf_check_board(void)
 {
-	/* check if reset button is pressed */
-	return 0 == gpio_get_value(0);
+	/* check if WLAN button is pressed */
+	return 0 == gpio_get_value(42);
 }
 
 void sas_cf_led_action(enum sas_cf_state state)
 {
 	switch (state) {
 	case CF_STARTED:
-		/* LED Power green on */
-		gpio_set_value(79, 1);
+		/* LED Service/Info green on */
+		gpio_set_value(77, 1);
 		break;
 	case CF_FINISHED:
-		/* LED Power green off */
-		gpio_set_value(79, 0);
+		/* LED Service/Info green off */
+		gpio_set_value(77, 0);
 		break;
 	case CF_FAILED:
-		/* LED Info red on */
+		/* LED Service/Info red on */
 		gpio_set_value(73, 1);
-		/* LED Power green off */
-		gpio_set_value(79, 0);
+		/* LED Service/Info green off */
+		gpio_set_value(77, 0);
 		break;
 	}
 }
