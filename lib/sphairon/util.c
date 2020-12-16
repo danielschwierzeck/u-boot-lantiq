@@ -109,6 +109,21 @@ size_t sas_run_tftpboot(ulong loadaddr, const char *file)
 	return filesize;
 }
 
+size_t sas_run_dhcp(ulong loadaddr, const char *file)
+{
+	size_t filesize;
+	int ret;
+
+	setenv("filesize", "0");
+	ret = sas_run_command("dhcp %08lx %s", loadaddr, file);
+	if (ret)
+		return 0;
+
+	filesize = getenv_ulong("filesize", 16, 0);
+
+	return filesize;
+}
+
 int sas_confirm(const char *message)
 {
 	char c;

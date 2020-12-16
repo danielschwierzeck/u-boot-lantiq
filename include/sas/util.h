@@ -18,6 +18,7 @@ int sas_run_command(const char* fmt, ...)
 		__attribute__((format(printf, 1, 2)));
 
 size_t sas_run_tftpboot(ulong loadaddr, const char *file);
+size_t sas_run_dhcp(ulong loadaddr, const char *file);
 
 int sas_confirm(const char *message);
 
