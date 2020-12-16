@@ -96,9 +96,11 @@ size_t sas_run_tftpboot(ulong loadaddr, const char *file)
 {
 	size_t filesize;
 	int ret;
+	const char *rootpath = getenv("rootpath");
 
 	setenv("filesize", "0");
-	ret = sas_run_command("tftpboot %08lx %s", loadaddr, file);
+	ret = sas_run_command("tftpboot %08lx %s%s", loadaddr,
+			      rootpath ? rootpath : "", file);
 	if (ret)
 		return 0;
 
