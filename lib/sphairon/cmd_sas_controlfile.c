@@ -18,7 +18,7 @@ static int do_sas_controlfile(cmd_tbl_t * cmdtp, int flag, int argc, char *const
 {
 	size_t size = 0;
 	unsigned long loadaddr;
-	int ret;
+	int ret, cf_result = 0;
 	char *cmd;
 
 	setenv("tftptimeout", "2000");
@@ -78,8 +78,14 @@ static int do_sas_controlfile(cmd_tbl_t * cmdtp, int flag, int argc, char *const
 	ret = parse_string_outer(cmd, FLAG_PARSE_SEMICOLON);
 	free(cmd);
 
+	/*
+	 * Exit codes from applets like exit are not properly returned from
+	 * parse_string_outer(). Thus check extra result variable.
+	 */
+	cf_result = getenv_ulong("cf_result", 10, 0);
+
 done:
-	sas_cf_status_board(ret ? CF_FAILED : CF_FINISHED);
+	sas_cf_status_board(ret || cf_result ? CF_FAILED : CF_FINISHED);
 
 	return ret;
 }
