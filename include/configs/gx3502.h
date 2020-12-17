@@ -7,7 +7,7 @@
 #define _CONFIG_ZYXEL_GX3502_H_
 
 #define CONFIG_IDENT_STRING		" gx3502"
-#define CONFIG_BOARD_NAME		"Zyxel gx5502 series [620, 621]"
+#define CONFIG_BOARD_NAME 		"Zyxel GX3502-D0 series [621]"
 
 #define CONFIG_SYS_MAX_NAND_DEVICE	1
 #define CONFIG_SYS_NAND_ONFI_DETECTION
