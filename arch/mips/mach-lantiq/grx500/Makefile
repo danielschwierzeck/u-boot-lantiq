@@ -8,6 +8,7 @@ else
 extra-y	+= start.o
 extra-y	+= unlock_ejtag.o
 head-y = start.o
+obj-y += datapath_clear.o
 endif
 
 obj-y += clock.o
