@@ -107,8 +107,8 @@ int board_early_init_f(void)
 
 int sas_cf_check_board(void)
 {
-	/* check if WLAN button is pressed */
-	return 0 == gpio_get_value(42);
+	/* check if RESET button is pressed */
+	return 0 == gpio_get_value(0);
 }
 
 void sas_cf_led_action(enum sas_cf_state state)
