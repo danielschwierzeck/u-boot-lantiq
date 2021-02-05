@@ -115,18 +115,18 @@ void sas_cf_led_action(enum sas_cf_state state)
 {
 	switch (state) {
 	case CF_STARTED:
-		/* LED Service/Info green on */
-		gpio_set_value(77, 1);
+		/* LED Power green on */
+		gpio_set_value(79, 1);
 		break;
 	case CF_FINISHED:
-		/* LED Service/Info green off */
-		gpio_set_value(77, 0);
+		/* LED Power green off */
+		gpio_set_value(79, 0);
 		break;
 	case CF_FAILED:
+		/* LED Power green on */
+		gpio_set_value(79, 1);
 		/* LED Service/Info red on */
 		gpio_set_value(73, 1);
-		/* LED Service/Info green off */
-		gpio_set_value(77, 0);
 		break;
 	}
 }
