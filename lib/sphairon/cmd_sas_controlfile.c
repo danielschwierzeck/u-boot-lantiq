@@ -24,43 +24,8 @@ static int do_sas_controlfile(cmd_tbl_t * cmdtp, int flag, int argc, char *const
 	setenv("tftptimeout", "2000");
 	setenv("tftptimeoutcountmax", "5");
 
-	if (IS_ENABLED(CONFIG_CMD_DHCP)) {
-		const char *ident_no = sas_etl_get_string(SAS_ETL_IDENT_NO);
-		const char *serial_no = sas_etl_get_string(SAS_ETL_SERIAL);
-
-		/* Sent ETL ident number as DHCP Vendor Class Identifier */
-		if (ident_no)
-			setenv("bootp_vci", ident_no);
-
-		/* Sent ETL serial number as DHCP client hostname */
-		if (serial_no)
-			setenv("hostname", serial_no);
-
-		/* Try DHCP/BOOTP requests for max. 5 seconds */
-		setenv("bootpretryperiod", "2000");
-
-		/* Reset rootpath */
-		setenv("rootpath", NULL);
-	}
-
 	loadaddr = getenv_ulong("loadaddr", 16, 0);
-
-	if (IS_ENABLED(CONFIG_CMD_DHCP)) {
-		/*
-		 * SAS_CF_FILENAME is used as fallback, the script can be
-		 * overwritten by DHCP option "Boot file name"
-		 */
-		size = sas_run_dhcp(loadaddr, SAS_CF_FILENAME);
-
-		if (size == 0) {
-			/* Restore ipaddr from default env (unset after failed dhcp) */
-			sas_run_command("env default ipaddr");
-		}
-	}
-
-	if (size == 0)
-		size = sas_run_tftpboot(loadaddr, SAS_CF_FILENAME);
-
+	size = sas_run_tftpboot(loadaddr, SAS_CF_FILENAME);
 	if (!size) {
 		ret = -1;
 		goto done;
