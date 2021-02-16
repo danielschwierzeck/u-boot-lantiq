@@ -309,10 +309,10 @@ static void hsnand_clk_init(void)
 	setbits_32(cgu_base + CGU_CLKGCR1_A, CGU_CLKGCR1_A_EBU);
 }
 
-static int hsnand_wait_ready(void)
+static void hsnand_wait_ready(void)
 {
-	return wait_for_bit_le32(&nand_regs->wait, NAND_WAIT_WR_C, true,
-		200, false);
+	while ((readl(&nand_regs->wait) & NAND_WAIT_WR_C) == 0)
+		;
 }
 
 static int hsnand_dev_ready(struct mtd_info *mtd)
@@ -816,6 +816,7 @@ static uint8_t hsnand_read_byte(struct mtd_info *mtd)
 {
 	struct nand_chip *chip = mtd_to_nand(mtd);
 	uint8_t val = readb(chip->IO_ADDR_R);
+	hsnand_wait_ready();
 
 #if 0
 	debug("%s: addr %p val %x\n", __func__, chip->IO_ADDR_R, val);
@@ -831,6 +832,7 @@ static void hsnand_read_buf(struct mtd_info *mtd, uint8_t *buf, int len)
 
 	for (i = 0; i < len; i++) {
 		buf[i] = readb(chip->IO_ADDR_R);
+		hsnand_wait_ready();
 #if 0
 		debug("%s: addr %p val %x\n", __func__, chip->IO_ADDR_R, buf[i]);
 #endif
@@ -858,6 +860,7 @@ static void hsnand_write_buf(struct mtd_info *mtd, const uint8_t *buf, int len)
 		debug("%s: addr %p val %x\n", __func__, chip->IO_ADDR_W, buf[i]);
 #endif
 		writeb(buf[i], chip->IO_ADDR_W);
+		hsnand_wait_ready();
 	}
 }
 
