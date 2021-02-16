@@ -1221,6 +1221,8 @@ void nand_init(void)
 	mtd->writesize = CONFIG_SYS_NAND_PAGE_SIZE;
 	mtd->erasesize = CONFIG_SYS_NAND_BLOCK_SIZE;
 	chip->page_shift = ffs(mtd->writesize) - 1;
+	chip->chipsize = CONFIG_SYS_NAND_FLASH_SIZE;
+	mtd->size = CONFIG_SYS_NAND_FLASH_SIZE;
 
 	nand_set_controller_data(chip, drv);
 	hsnand_drv_setup(chip);
