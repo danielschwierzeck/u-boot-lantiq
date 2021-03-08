@@ -102,6 +102,22 @@ struct ltq_eth_priv {
 	int tx_num;
 };
 
+static struct dma_rx_desc *get_rx_desc(unsigned int num)
+{
+	if (num < NUM_RX_DESC)
+		return (struct dma_rx_desc *)KSEG1ADDR(&rx_desc_base[num]);
+
+	return NULL;
+}
+
+static struct dma_tx_desc *get_tx_desc(unsigned int num)
+{
+	if (num < NUM_TX_DESC)
+		return (struct dma_tx_desc *)KSEG1ADDR(&tx_desc_base[num]);
+
+	return NULL;
+}
+
 static inline bool ltq_mdio_is_busy(void)
 {
 	return REG32(GSWIP_TOP_L_MDIO_CTRL) & BIT(12);
@@ -506,7 +522,7 @@ static int ltq_grx500_switch_init(struct eth_device *dev, bd_t *bis)
 	}
 
 	for (i = 0; i < NUM_RX_DESC; i++) {
-		struct dma_rx_desc *rx_desc = &rx_desc_base[i];
+		struct dma_rx_desc *rx_desc = get_rx_desc(i);
 		void *packet = net_rx_packets[i];
 		const u32 dma_addr = CPHYSADDR(packet);
 		const u32 offset = dma_addr % 16;
@@ -514,16 +530,14 @@ static int ltq_grx500_switch_init(struct eth_device *dev, bd_t *bis)
 		debug("%s: i %d, rx_desc %p, packet %p, length %u, dma_addr %08x, offset %u\n",
 			__func__, i, rx_desc, packet, PKTSIZE_ALIGN, dma_addr, offset);
 
-		invalidate_dcache_range((ulong)packet, (ulong)packet + PKTSIZE_ALIGN);
-
+		rx_desc->DW0.all = 0;
+		rx_desc->DW1.all = 0;
 		rx_desc->DW2.field.address = dma_addr - offset;
 		rx_desc->DW3.all = 0;
 		rx_desc->DW3.field.byteoffset = offset;
 		rx_desc->DW3.field.datalen = PKTSIZE_ALIGN;
 		wmb();
 		rx_desc->DW3.field.own = 1;
-
-		flush_dcache_range((ulong)rx_desc, (ulong)rx_desc + sizeof(*rx_desc));
 	}
 
 	ltq_dma_rx_chan_enable();
@@ -556,16 +570,17 @@ static int ltq_grx500_switch_send(struct eth_device *dev, void *packet,
 {
 	const u32 dma_addr = CPHYSADDR(packet);
 	const u32 offset = dma_addr % 16;
-	struct dma_tx_desc *tx_desc = &tx_desc_base[tx_num];
+	struct dma_tx_desc *tx_desc = get_tx_desc(tx_num);
+	int i = 0;
 
-	debug("%s: tx_num %d, tx_desc %p, packet %p, length %u, dma_addr %08x, offset %u\n",
+	debug_cond(DEBUG_DEV_PKT, "%s: tx_num %d, tx_desc %p, packet %p, length %u, dma_addr %08x, offset %u\n",
 		__func__, tx_num, tx_desc, packet, length, dma_addr, offset);
 
-	invalidate_dcache_range((ulong)tx_desc, (ulong)tx_desc + sizeof(*tx_desc));
-
-	if (tx_desc->DW3.field.own == 1) {
-		printf("%s: no free TX DMA descriptor\n", __func__);
-		return -1;
+	while (tx_desc->DW3.field.own == 1) {
+		if (i++ > 100) {
+			puts("No free TX descriptor\n");
+			return -EBUSY;
+		}
 	}
 
 	if (length < 60)
@@ -573,6 +588,8 @@ static int ltq_grx500_switch_send(struct eth_device *dev, void *packet,
 
 	flush_dcache_range((ulong)packet, (ulong)packet + length);
 
+	tx_desc->DW0.all = 0;
+	tx_desc->DW1.all = 0;
 	tx_desc->DW2.field.address = dma_addr - offset;
 	tx_desc->DW3.all = 0;
 	tx_desc->DW3.field.sop = 1;
@@ -582,39 +599,50 @@ static int ltq_grx500_switch_send(struct eth_device *dev, void *packet,
 	wmb();
 	tx_desc->DW3.field.own = 1;
 
-	flush_dcache_range((ulong)tx_desc, (ulong)tx_desc + sizeof(*tx_desc));
-
 	tx_num = (tx_num + 1) % NUM_TX_DESC;
 
 	return 0;
 }
 
-static int ltq_grx500_switch_recv(struct eth_device *dev)
+static int ltq_grx500_switch_recv_packet(struct eth_device *dev, void *packet)
 {
-	struct dma_rx_desc *rx_desc = &rx_desc_base[rx_num];
-	void *packet = net_rx_packets[rx_num];
-	const u32 dma_addr = CPHYSADDR(packet);
-	const u32 offset = dma_addr % 16;
-	int length;
+	struct dma_rx_desc *rx_desc = get_rx_desc(rx_num);
+	unsigned int length;
 
-	invalidate_dcache_range((ulong)rx_desc, (ulong)rx_desc + sizeof(*rx_desc));
-
+	/* descriptor owned by HW, retry later */
 	if (rx_desc->DW3.field.own == 1)
-		return 0;
+		return -EAGAIN;
 
+	/* transfer not yet completed by HW, retry later */
 	if (rx_desc->DW3.field.c == 0)
-		return 0;
+		return -EAGAIN;
 
+	rmb();
 	length = rx_desc->DW3.field.datalen;
 
-	debug("%s: rx_num %d, rx_desc %p, packet %p, length %u\n",
+	debug_cond(DEBUG_DEV_PKT, "%s: rx_num %d, rx_desc %p, packet %p, length %u\n",
 		__func__, rx_num, rx_desc, packet, length);
 
-	if (length)
-		net_process_received_packet(packet, length);
+	/* zero length transfer, don't process packet but release descriptor */
+	if (!length)
+		return 0;
 
 	invalidate_dcache_range((ulong)packet, (ulong)packet + PKTSIZE_ALIGN);
 
+	return length;
+}
+
+static void ltq_grx500_switch_free_packet(struct eth_device *dev, void *packet)
+{
+	struct dma_rx_desc *rx_desc = get_rx_desc(rx_num);
+	const u32 dma_addr = CPHYSADDR(packet);
+	const u32 offset = dma_addr % 16;
+
+	debug_cond(DEBUG_DEV_PKT, "%s: rx_num %d, rx_desc %p, packet %p\n",
+		__func__, rx_num, rx_desc, packet);
+
+	rx_desc->DW0.all = 0;
+	rx_desc->DW1.all = 0;
 	rx_desc->DW2.field.address = dma_addr - offset;
 	rx_desc->DW3.all = 0;
 	rx_desc->DW3.field.byteoffset = offset;
@@ -622,11 +650,31 @@ static int ltq_grx500_switch_recv(struct eth_device *dev)
 	wmb();
 	rx_desc->DW3.field.own = 1;
 
-	flush_dcache_range((ulong)rx_desc, (ulong)rx_desc + sizeof(*rx_desc));
-
 	rx_num = (rx_num + 1) % NUM_RX_DESC;
+}
 
-	return 0;
+static int ltq_grx500_switch_recv(struct eth_device *dev)
+{
+	int ret, i;
+
+	for (i = 0; i < 32; i++) {
+		void *packet = net_rx_packets[rx_num];
+
+		ret = ltq_grx500_switch_recv_packet(dev, packet);
+		if (ret > 0)
+			net_process_received_packet(packet, ret);
+
+		if (ret >= 0)
+			ltq_grx500_switch_free_packet(dev, packet);
+
+		if (ret <= 0)
+			break;
+	}
+
+	if (ret == -EAGAIN)
+		ret = 0;
+
+	return ret;
 }
 
 static void GSW_RMON_Enable(u32 base_addr)
