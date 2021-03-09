@@ -8,6 +8,7 @@
 
 #define CONFIG_IDENT_STRING		" gx5502"
 #define CONFIG_BOARD_NAME		"Zyxel GX5502-D0 series [620]"
+#define CONFIG_UBOOT_UPDATE_IMAGE	"gx5502-u-boot.ltq.lzo.nandspl"
 
 #define CONFIG_SYS_MAX_NAND_DEVICE	2
 #define CONFIG_SYS_NAND_ONFI_DETECTION
