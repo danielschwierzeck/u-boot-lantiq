@@ -14,7 +14,11 @@
 #include <sas/boot.h>
 #include <sas/etl.h>
 
-#define SAS_UBOOT_USED		SAS_UBOOT_LZO_NANDSPL
+#if defined(CONFIG_UBOOT_UPDATE_IMAGE)
+#define SAS_UBOOT_USED	CONFIG_UBOOT_UPDATE_IMAGE
+#else
+#define SAS_UBOOT_USED	SAS_UBOOT_LZO_NANDSPL
+#endif
 
 static int sas_upgrade_images_load(const char *name1, ulong *addr1,
 					size_t *size1, const char *name2,
@@ -140,13 +144,7 @@ static int do_sas_upgrade_uboot(cmd_tbl_t * cmdtp, int flag,
 	ret = sas_upgrade_image_load(cmdtp, argc, argv, SAS_UBOOT_USED,
 					&loadaddr, &size);
 	if (ret) {
-#if defined(CONFIG_UART_BOOT)
-		printf("Please link the correct image (%s or %s or %s) to %s!\n",
-			   SAS_UBOOT_LZO_NANDSPL,
-			   SAS_UBOOT_LZO_NANDHWSPL,
-			   SAS_UBOOT_LZO_SFSPL,
-			   SAS_UBOOT_USED);
-#endif
+		printf("Could not load U-Boot image: %s!\n", SAS_UBOOT_USED);
 		return ret;
 	}
 
