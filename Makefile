@@ -1150,12 +1150,20 @@ unlock_ejtag.uart: unlock_ejtag.bin $(ltquart_deps) FORCE
 spl/u-boot-spl.ltq.bin: spl/u-boot-spl
 	@:
 
+OBJCOPYFLAGS_u-boot.img.pad = -I binary -O binary --pad-to=$(CONFIG_SPL_U_BOOT_SIZE)
+u-boot.img.pad: u-boot.img FORCE
+	$(call if_changed,objcopy)
+
+OBJCOPYFLAGS_u-boot-lzo.img.pad = -I binary -O binary --pad-to=$(CONFIG_SPL_U_BOOT_SIZE)
+u-boot-lzo.img.pad: u-boot-lzo.img FORCE
+	$(call if_changed,objcopy)
+
 OBJCOPYFLAGS_u-boot.ltq.nandspl = -I binary -O binary --pad-to=$(CONFIG_SPL_U_BOOT_OFFS)
-u-boot.ltq.nandspl: spl/u-boot-spl.ltq.bin u-boot.img FORCE
+u-boot.ltq.nandspl: spl/u-boot-spl.ltq.bin u-boot.img.pad u-boot.img FORCE
 	$(call if_changed,pad_cat)
 
 OBJCOPYFLAGS_u-boot.ltq.lzo.nandspl = -I binary -O binary --pad-to=$(CONFIG_SPL_U_BOOT_OFFS)
-u-boot.ltq.lzo.nandspl: spl/u-boot-spl.ltq.bin u-boot-lzo.img FORCE
+u-boot.ltq.lzo.nandspl: spl/u-boot-spl.ltq.bin u-boot-lzo.img.pad u-boot-lzo.img FORCE
 	$(call if_changed,pad_cat)
 endif
 
