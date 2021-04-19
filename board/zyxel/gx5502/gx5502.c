@@ -5,6 +5,7 @@
 
 #include <common.h>
 #include <mach/gpio.h>
+#include <mach/gsw140.h>
 #include <sas/controlfile.h>
 
 static void gx5502_gpio_init(void)
@@ -75,9 +76,9 @@ static void gx5502_gpio_init(void)
 	gpio_direction_output(15, 1);
 
 	/* PAE MDC (low-active) */
-	gpio_direction_output(33, 1);
+	ltq_gpio_mux(33, LTQ_PORTMUX_MDIO, LTQ_GPIO_OUTPUT);
 	/* PAE MDIO (low-active) */
-	gpio_direction_output(32, 1);
+	ltq_gpio_mux(32, LTQ_PORTMUX_MDIO, LTQ_GPIO_OUTPUT);
 
 	/* I2C SDA (high-active) */
 	gpio_direction_output(21, 0);
@@ -102,6 +103,10 @@ static void gx5502_gpio_init(void)
 int board_early_init_f(void)
 {
 	gx5502_gpio_init();
+
+	if (!IS_ENABLED(CONFIG_SPL_BUILD))
+		gsw140_gpio_init();
+
 	return 0;
 }
 
