@@ -16,5 +16,6 @@ extern void ltq_gpio_mux(unsigned gpio, unsigned int func, unsigned int dir);
 #define LTQ_PORTMUX_GPIO	0
 #define LTQ_PORTMUX_EBU		1
 #define LTQ_PORTMUX_SSO		1
+#define LTQ_PORTMUX_MDIO	1
 
 #endif /* __LANTIQ_GPIO_H__ */

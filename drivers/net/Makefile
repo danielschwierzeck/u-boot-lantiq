@@ -34,6 +34,7 @@ obj-$(CONFIG_FTMAC110) += ftmac110.o
 obj-$(CONFIG_FTMAC100) += ftmac100.o
 obj-$(CONFIG_XRX500_ETH) += grx500_sw.o
 obj-$(CONFIG_GRETH) += greth.o
+obj-$(CONFIG_XRX500_ETH) += gsw140.o
 obj-$(CONFIG_DRIVER_TI_KEYSTONE_NET) += keystone_net.o
 obj-$(CONFIG_KS8851_MLL) += ks8851_mll.o
 obj-$(CONFIG_LAN91C96) += lan91c96.o
