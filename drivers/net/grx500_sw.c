@@ -690,14 +690,11 @@ static void GSW_RMON_Enable(u32 base_addr)
 static void mdio_init(void)
 {
 	REG32(GSW_L_MDC_CFG_0) = 0x0;
-	REG32(GSWIP_TOP_R_MDC_CFG_0_R) = 0x0;
 	REG32(GSW_L_MDC_CFG_1) = 0x800f;
-	REG32(GSWIP_TOP_R_MDC_CFG_1_R) = 0x800f;
 
 	udelay(100);
 
 	REG32(GSW_L_MDC_CFG_1) = 0x0;
-	REG32(GSWIP_TOP_R_MDC_CFG_1_R) = 0x0;
 }
 
 static void ltq_grx500_sw_chip_init(void)
