@@ -1,0 +1,131 @@
+#!/usr/bin/perl
+#perl script to generate spi bootable u-boot
+#Revision history
+#03/27/08 Author Wu Qi Ming
+
+my $TAG_DEBUG=0x11000000;
+my $TAG_REGCFG=0x22000000;
+my $TAG_IDWNLD=0x33000000;
+my $TAG_CDWNLD=0x44000000;
+my $TAG_DWNLD=0x55000000;
+my $TAG_IFCFG=0x66000000;
+my $TAG_START=0x77000000;
+
+my $FLAG_RST=0x00800000;
+my $FLAG_CFG=0x00700000;
+my $FLAG_CFG2=0x00400000;
+my $FLAG_CFG1=0x00200000;
+my $FLAG_CFG0=0x00100000;
+my $FLAG_SDBG=0x00080000;
+my $FLAG_DBG=0x00040000;
+my $FLAG_DEC=0x00020000;
+my $FLAG_START=0x00010000;
+
+
+
+if(@ARGV < 2){
+	print "not enough arguments\n";
+	print "Syntax: ./sgct input output\n";
+	print "example: ./sgct ddr_setting.conf u-boot.srec u-boot.sflash\n";
+	exit;
+}
+print "converting now, please wait...\n";
+
+open(INFILE1, "<$ARGV[0]") || die("\ninput open fail\n");
+open(INFILE2, "<$ARGV[1]") || die("\ninput open fail\n");
+open(OUTFILE, ">$ARGV[2]") || die("\nOutput file open fail\n");
+
+#form a REGCFG head
+$head=$TAG_REGCFG|$FLAG_SDBG|$FLAG_DBG;
+$head=$head|(0xffff-($head>>16));
+
+$string="";
+$count=0;
+while ($line = <INFILE1>){
+            if($line=~/\w/){
+	     if($line!~/[;#\*]/){
+		  chomp($line);
+		  $line=~s/\t//;
+		  @array=split(/ +/,$line);
+                  $j=0;
+		  while(@array[$j]!~/\w/)
+		  {
+                    $j=$j+1;
+		  }
+		  $addr=@array[$j];
+	          $regval=@array[$j+1];
+                  $addr=~s/0x//;
+                  $regval=~s/0x//;
+		  $string=$string.sprintf("%08x%08x",hex($addr),hex($regval));
+                  $count=$count+1;
+               }
+             }
+}
+
+$head=sprintf("%08x",$head).sprintf("%08x",$count*8);
+printf OUTFILE pack("H*",$head.$string);
+
+#form a TAG_DWNLD head
+$head=$TAG_DWNLD|$FLAG_SDBG|$FLAG_START;
+$head=$head|(0xffff-($head>>16));
+
+$firsttime=1;
+$count=0;
+while($aline=<INFILE2>){
+	$aline=uc($aline);
+	chomp($aline);
+	next if($aline=~/^S0/);
+        ($lineid, $length, $address, @bytes) = unpack"A2A2A8"."A2"x300, $aline;
+        $length = hex($length);
+        $address = hex($address);
+	$i=0;
+        if($lineid eq "S3")
+        { 
+         if($firsttime==1)
+          {
+             $addstr = sprintf("%x", $address); 
+             $count=$count+4;
+             
+             $string=$addstr;
+             $loadaddr=$address;
+             $firsttime=0;
+          }
+          $length=$length-4;
+          while($length>1){
+           $bytes[$i]=~tr/ABCDEF/abcdef/;
+	   #printf ("length=%d,i=%d,byte=%02x\n",$length,$i,hex(@bytes[$i]));
+           $string=$string.@bytes[$i];
+           #printf ("string=%s\n",$string);
+	   $length=$length-1;
+           $i=$i+1;
+           $count++;
+          }
+        }
+        elsif($lineid eq "S7")
+        {
+           $exehead=$TAG_START|$FLAG_SDBG;
+           $exehead=$exehead|(0xffff-($exehead>>16));
+           $exehead=sprintf("%08x",$exehead).sprintf("%08x%08x",0x4,$address);
+	   #print $exehead
+        }
+}
+
+
+$head=sprintf("%08x",$head).sprintf("%08x",$count);
+@bytes=unpack"A2"x8,$head;
+for ($i=0;$i<8;$i++){
+    printf OUTFILE pack("H2",$bytes[$i]);  
+}
+@bytes=unpack"A2"x$count,$string;
+for ($i=0;$i<$count;$i++){
+    printf OUTFILE pack("H2",$bytes[$i]);  
+}
+@bytes=unpack"A2"x12,$exehead;
+for ($i=0;$i<12;$i++){
+    printf OUTFILE pack("H2",$bytes[$i]);  
+}
+
+
+
+
+
