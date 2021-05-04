@@ -85,6 +85,10 @@ reset:
         mtc0    zero, CP0_WATCHHI
         mtc0    zero, CP0_CAUSE
 	
+	/* unlock EJTAG access */
+	li	t1, 0xb6080000
+	sw	zero, 0x124(t1)
+
         /* Initialize GOT pointer.
         */
         bal     1f
