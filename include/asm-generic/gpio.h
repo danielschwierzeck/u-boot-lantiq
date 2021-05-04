@@ -622,4 +622,14 @@ int dm_gpio_set_dir_flags(struct gpio_desc *desc, ulong flags);
  */
 int gpio_get_number(const struct gpio_desc *desc);
 
+/**
+ * gpio_set_mux() - Set the alternate function of the GPIO pin if available
+ *
+ * @ gpio:	The corresponding GPIO pin to set
+ * @ mux_value:	The mux value passed to configure the pin's alt. function
+ *
+ * @ return 0: If OK
+ */ 
+int gpio_set_mux(unsigned int gpio, int mux_value);
+
 #endif	/* _ASM_GENERIC_GPIO_H_ */

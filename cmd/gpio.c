@@ -17,6 +17,11 @@ __weak int name_to_gpio(const char *name)
 	return simple_strtoul(name, NULL, 10);
 }
 
+__weak int gpio_set_mux(unsigned int pin, int value)
+{
+	return 0;
+}
+
 enum gpio_cmd {
 	GPIO_INPUT,
 	GPIO_SET,
@@ -121,6 +126,7 @@ static int do_gpio(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 	enum gpio_cmd sub_cmd;
 	int value;
 	const char *str_cmd, *str_gpio = NULL;
+	const char *str_value = NULL;
 	int ret;
 #ifdef CONFIG_DM_GPIO
 	bool all = false;
@@ -141,6 +147,11 @@ static int do_gpio(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 #endif
 	if (argc > 0)
 		str_gpio = *argv;
+
+	argv += 1;
+
+	if (argc > 1)
+		str_value = *argv;
 	if (!strncmp(str_cmd, "status", 2)) {
 		/* Support deprecated gpio_status() */
 #ifdef gpio_status
@@ -151,6 +162,20 @@ static int do_gpio(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 #else
 		goto show_usage;
 #endif
+	}
+
+	if (strcmp(str_cmd, "set-mux") == 0) {
+		if ((str_value == NULL) || (str_gpio == NULL))
+			goto show_usage;
+		gpio = simple_strtoul(str_gpio, NULL, 10);
+		if (gpio < 0)
+			goto show_usage;
+		value = simple_strtoul(str_value, NULL, 10);
+		if (value < 0)
+			goto show_usage;
+
+		ret = gpio_set_mux(gpio, value);
+		return ret;
 	}
 
 	if (!str_gpio)
@@ -237,4 +262,7 @@ U_BOOT_CMD(gpio, 4, 0, do_gpio,
 	   "query and control gpio pins",
 	   "<input|set|clear|toggle> <pin>\n"
 	   "    - input/set/clear/toggle the specified pin\n"
-	   "gpio status [-a] [<bank> | <pin>]  - show [all/claimed] GPIOs");
+	   "gpio status [-a] [<bank> | <pin>]  - show [all/claimed] GPIOs\n"
+	   "set-mux <pin> <value>\n"
+	   "\tset the alternate value mux of the pin"
+);
