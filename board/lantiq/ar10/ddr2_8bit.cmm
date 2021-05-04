@@ -1,0 +1,147 @@
+;********************************************************************
+;Trace 32 script to load DDR tuning software for ARX
+;
+;********************************************************************
+;This script is to be use with arx_ddr_tune.bin for XWAY chipset
+;For Detail on how to use this script pls refer to
+;DDR tuning documentation which come with this script
+;Please keep a default copy of this script with default value before
+;modified the MC_DC parameter to suit the DDR device you use
+;You also need the board console connected to activate the test
+;and display the result
+;********************************************************************
+; Target : 
+;********************************************************************	
+
+; Setup Lauterbach debugger for AR10	
+;SYStem.mode down	
+SYStem.cpu MIPS34k	
+SYStem.JTAGCLOCK 10000000.	
+SYSTEM.OPTION ENDIANESS BIG	
+;SYStem.mode NoDebug	
+;SYStem.mode Attach	
+wait 1s	
+;break	
+
+; Setup AR10 CGU for 500/250	
+data.set 0xBF10300C %long 0x081	 ; program the CPU/DDR speed
+data.set 0xBF103010 %long 0x10020000	 ; Program PPE frequency
+
+; CGU update		
+data.set 0xBF103020 %long 0x01		
+
+;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
+;Initialize memory controller register		
+;Pls refer to the documentation to change the necessary parameter to		
+;Suit the DDR device you are using		
+;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
+;
+data.set 0xBF106c98 %long	0x94	; interdcdc 1v8		
+data.set 0xBF801000 %long	0x0	; Put DDR controller inactive
+;		
+;Initialize the AR10 DDR2 memory controller registers
+	
+data.set 0xBF801000  %long	0x00000400
+data.set 0xBF801010 %long	0x00000000
+data.set 0xBF801020 %long	0x0200c351  
+data.set 0xBF801030 %long	0x02020308
+data.set 0xBF801040 %long	0x030c1103
+data.set 0xBF801050 %long	0x04020306 
+data.set 0xBF801060 %long	0x0303445d
+data.set 0xBF801070 %long	0x01010000
+data.set 0xBF801080 %long	0x00090504
+data.set 0xBF801090 %long	0x020000c8
+data.set 0xBF8010A0 %long	0x0200650a
+data.set 0xBF8010B0 %long	0x01000000
+data.set 0xBF8010C0 %long	0x0798001b
+data.set 0xBF8010D0 %long	0x00020000
+data.set 0xBF8010E0 %long	0x001d00c8
+data.set 0xBF8010F0 %long	0x01000000
+data.set 0xBF801100 %long	0x00000000
+data.set 0xBF801110 %long	0x00000000
+data.set 0xBF801120 %long	0x00000000
+data.set 0xBF801130 %long	0x00000100
+data.set 0xBF801140 %long	0x00000000 ;write mode register
+data.set 0xBF801150 %long	0x00064200
+data.set 0xBF801160 %long	0x00000040
+data.set 0xBF801170 %long	0x00000000
+data.set 0xBF801180 %long	0x00000032
+data.set 0xBF801190 %long	0x00000000
+data.set 0xBF8011A0 %long	0x00320000
+data.set 0xBF8011B0 %long	0x00000000
+data.set 0xBF8011C0 %long	0x00000000
+data.set 0xBF8011D0 %long	0x00000032
+data.set 0xBF8011E0 %long	0x00000000
+data.set 0xBF8011F0 %long	0x01000000
+data.set 0xBF801200 %long	0x0f0f0a02
+data.set 0xBF801210 %long	0x01010101
+data.set 0xBF801220 %long	0x00010101
+data.set 0xBF801230 %long	0x00000101; cs0 active  
+data.set 0xBF801240 %long	0x00010000
+data.set 0xBF801250 %long	0x00000000
+data.set 0xBF801260 %long	0x00000000
+data.set 0xBF801270 %long	0x00000000
+data.set 0xBF801280 %long	0x00000000
+data.set 0xBF801290 %long	0x00000100
+data.set 0xBF8012A0 %long	0x08080404
+data.set 0xBF8012B0 %long	0x00000000
+data.set 0xBF8012C0 %long	0x01000201
+data.set 0xBF8012D0 %long	0x00000200
+data.set 0xBF8012E0 %long	0x00000000
+data.set 0xBF8012F0 %long	0x00000000
+data.set 0xBF801300 %long	0x00000700
+data.set 0xBF801310 %long	0x00000000
+data.set 0xBF801320 %long	0x02000200 
+data.set 0xBF801330 %long	0x02000200
+data.set 0xBF801340 %long	0x00000000
+data.set 0xBF801350 %long	0x02000200
+data.set 0xBF801360 %long	0x00020304
+data.set 0xBF801370 %long	0x00000101
+data.set 0xBF801400 %long	0x000f1100;
+data.set 0xBF801410 %long	0xf4013827;
+data.set 0xBF801420 %long	0x26c002c0;
+data.set 0xBF801430 %long	0xf4013827;
+data.set 0xBF801440 %long	0x26c002c0;
+data.set 0xBF801450 %long	0x00000005;
+data.set 0xBF801460 %long	0x20092B05;
+data.set 0xBF801470 %long	0x00092510;
+data.set 0xBF801480 %long	0x20092505;
+data.set 0xBF801490 %long	0x00092510;
+
+;Enable memory controller 	
+data.set 0xBF801000 %long	0x401
+
+wait 1s	
+
+;Makesure that PPE and MPS are power up in PMU
+
+;data.set 0xbf10201c %l 0x211829b
+;data.set 0xbf400430 %l 0x4  
+
+;load the tuning program
+
+;data.load.binary ar10_ddr_tune.bin 0xbe1a0000 ;change for Ar10
+;data.load.elf w:\home\ngai\ddr_tune\ar10_ddr_tune\
+wait 1s
+
+;set the program counter to PPE share buffer
+;r.s pc 0xbe1A0000  ;change for Ar10 
+
+;wait 1s
+
+;Start running the tuning program
+;Prepare to press a key at console to start
+;This may take a few minutes to complete
+;go
+
+; DDR test sequence for 1 MB
+;d.test 0xa0400000--0xa040ffff
+
+
+
+
+
+
+
+
+

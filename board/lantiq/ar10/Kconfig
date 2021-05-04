@@ -1,0 +1,583 @@
+config SYS_BOARD
+    default "ar10"
+
+config SYS_VENDOR
+    default "lantiq"
+
+config SYS_CONFIG_NAME
+    default "ar10"
+
+config DRIVER_AR10
+	bool
+	default y
+
+config DRIVER_GRX390
+	bool
+	default n
+
+menu "CPU/DDR FREQUENCY"
+
+choice 
+    prompt "DDR TYPE SELECTION"
+    default AR10_DDR2
+
+config AR10_DDR1
+    bool "DDR1"
+
+config AR10_DDR2
+    bool "DDR2"
+
+endchoice
+
+choice
+    prompt "CRYSTAL CLOCK FREQUENCY"
+    default AR10_CRYSTAL_36M
+
+config AR10_CRYSTAL_25M
+    bool "25M"
+
+config AR10_CRYSTAL_36M
+    bool "36M"
+
+endchoice
+
+config MIPS_CLK_FUSED_CHIP
+	bool "Chip is fused to 600Mhz"
+	depends on DRIVER_GRX390
+	default n
+	help
+
+config GRX390_CPUFREQ_AUTO_DETECT
+	bool "Allow Chip to auto detect CPU/DDR Frequency"
+	depends on DRIVER_GRX390
+	default n
+
+
+choice
+    prompt "CPU AND RAM CONFIGURATION"
+    default AR10_SYS_CLOCK_500M
+    depends on !GRX390_CPUFREQ_AUTO_DETECT
+
+config AR10_CPU_125M_RAM_125M
+    bool "125M/125M"
+    select AR10_SYS_CLOCK_500M
+    depends on !DRIVER_GRX390
+
+config AR10_CPU_250M_RAM_125M
+    bool "250M/125M" 
+    select AR10_SYS_CLOCK_500M
+    depends on !DRIVER_GRX390
+
+config AR10_CPU_250M_RAM_250M
+    bool "250M/250M"
+    select AR10_SYS_CLOCK_500M
+	depends on !DRIVER_GRX390
+   
+config AR10_CPU_500M_RAM_250M
+    bool "500M/250M"
+    select AR10_SYS_CLOCK_500M
+	depends on !DRIVER_GRX390
+
+config AR10_CPU_150M_RAM_150M
+    bool "150M/150M"
+    select AR10_SYS_CLOCK_600M
+
+config AR10_CPU_300M_RAM_150M
+    bool "300M/150M"
+	select AR10_SYS_CLOCK_600M
+
+config AR10_CPU_300M_RAM_300M
+    bool "300M/300M"
+	select AR10_SYS_CLOCK_600M
+	
+config AR10_CPU_600M_RAM_300M
+    bool "600M/300M"
+	select AR10_SYS_CLOCK_600M
+
+config GRX390_CPU_666M_RAM_333M
+    bool "666M/333M"
+	depends on !MIPS_CLK_FUSED_CHIP && DRIVER_GRX390
+	select GRX390_SYS_CLOCK_666M
+
+config GRX390_CPU_180M_RAM_180M
+    bool "180M/180M"
+	depends on !MIPS_CLK_FUSED_CHIP && DRIVER_GRX390
+	select GRX390_SYS_CLOCK_720M
+
+config GRX390_CPU_360M_RAM_180M
+    bool "360M/180M"
+	depends on !MIPS_CLK_FUSED_CHIP && DRIVER_GRX390
+	select GRX390_SYS_CLOCK_720M
+
+config GRX390_CPU_360M_RAM_360M
+    bool "360M/360M"
+	depends on !MIPS_CLK_FUSED_CHIP && DRIVER_GRX390
+	select GRX390_SYS_CLOCK_720M
+
+config GRX390_CPU_720M_RAM_360M
+    bool "720M/360M"
+    depends on !MIPS_CLK_FUSED_CHIP && DRIVER_GRX390
+    select GRX390_SYS_CLOCK_720M
+
+endchoice
+
+config AR10_SYS_CLOCK_500M
+    bool
+
+config AR10_SYS_CLOCK_600M
+    bool
+
+config GRX390_SYS_CLOCK_666M
+	bool
+
+config GRX390_SYS_CLOCK_720M
+    bool
+
+
+choice
+    prompt "PPE FREQUENCY"
+    default AR10_PPE_FREQ_250M
+    depends on !GRX390_CPUFREQ_AUTO_DETECT
+
+config AR10_PPE_FREQ_250M
+    bool "250M"
+
+config AR10_PPE_FREQ_400M
+    bool "400M"
+
+config AR10_PPE_FREQ_432M
+    bool "432M"
+    depends on (GRX390_CPU_666M_RAM_333M || AR10_CPU_600M_RAM_300M) && !GRX390_CPU_720M_RAM_360M
+
+config AR10_PPE_FREQ_468M
+	bool "468M"
+	depends on DRIVER_GRX390 && GRX390_CPU_666M_RAM_333M
+
+endchoice
+
+config AR10_DDR_8BIT
+    bool "8Bit DDR RAM"
+	default n
+
+endmenu
+
+	
+menu "SWITCH OPTIONS"
+
+config AR10_SW_PORT_0
+    bool "USE PORT 0"
+
+choice
+   prompt "INTERFACE"
+   depends on AR10_SW_PORT_0
+   default AR10_SW_PORT0_RGMII_MAC
+
+config AR10_SW_PORT0_MII_PHY
+   bool "MII PHY"
+
+config AR10_SW_PORT0_MII_MAC
+   bool "MII MAC"
+
+config AR10_SW_PORT0_RMII_PHY
+   bool "RMII PHY"
+
+config AR10_SW_PORT0_RMII_MAC
+   bool "RMII MAC"
+
+config AR10_SW_PORT0_RGMII_MAC
+   bool "RGMII MAC"
+
+endchoice  
+
+config AR10_SW_PORT0_MIIMODE
+   int
+   depends on AR10_SW_PORT_0
+   default 0 if AR10_SW_PORT0_MII_PHY
+   default 1 if AR10_SW_PORT0_MII_MAC
+   default 2 if AR10_SW_PORT0_RMII_PHY
+   default 3 if AR10_SW_PORT0_RMII_MAC
+   default 4 if AR10_SW_PORT0_RGMII_MAC
+
+   
+choice
+   prompt "xMII CLOCK RATE"
+   depends on AR10_SW_PORT_0
+   default AR10_SW_PORT0_MIIRATE_AUTO
+	
+config AR10_SW_PORT0_MIIRATE_M2P5
+	 bool "2.5MHz"
+	 depends on !AR10_SW_PORT0_RMII_MAC && !AR10_SW_PORT0_RMII_PHY
+	
+config AR10_SW_PORT0_MIIRATE_M25
+    bool "25MHz"
+    depends on !AR10_SW_PORT0_RMII_MAC && !AR10_SW_PORT0_RMII_PHY
+
+config AR10_SW_PORT0_MIIRATE_M125
+    bool "125MHz"
+    depends on !AR10_SW_PORT0_RMII_MAC && !AR10_SW_PORT0_RMII_PHY
+
+config AR10_SW_PORT0_MIIRATE_M50	
+	  bool "50MHz"
+	  
+config AR10_SW_PORT0_MIIRATE_AUTO
+    bool "AUTO"
+    depends on !AR10_SW_PORT0_RMII_MAC && !AR10_SW_PORT0_RMII_PHY
+		
+endchoice
+
+config AR10_SW_PORT0_MIIRATE
+    int 
+	depends on AR10_SW_PORT_0
+	default 0 if AR10_SW_PORT0_MIIRATE_M2P5
+	default 1 if AR10_SW_PORT0_MIIRATE_M25
+	default 2 if AR10_SW_PORT0_MIIRATE_M125
+	default 3 if AR10_SW_PORT0_MIIRATE_M50
+	default 4 if AR10_SW_PORT0_MIIRATE_AUTO
+
+choice 
+    prompt "RMII REF CLOCK DIRECTIOM"
+	  default AR10_SW_PORT0_RMII_CLK_IN
+	  depends on AR10_SW_PORT0_RMII_PHY || AR10_SW_PORT0_RMII_MAC
+
+config AR10_SW_PORT0_RMII_CLK_IN
+    bool "IN"
+
+config AR10_SW_PORT0_RMII_CLK_OUT
+    bool "OUT"
+	
+endchoice
+
+
+config AR10_SW_PORT_1
+    bool "USE PORT 1"
+    
+choice
+   prompt "INTERFACE"
+   depends on AR10_SW_PORT_1
+   default AR10_SW_PORT1_RGMII_MAC
+
+config AR10_SW_PORT1_MII_PHY
+   bool "MII PHY"
+
+config AR10_SW_PORT1_MII_MAC
+   bool "MII MAC"
+
+config AR10_SW_PORT1_RMII_PHY
+   bool "RMII PHY"
+
+config AR10_SW_PORT1_RMII_MAC
+   bool "RMII MAC"
+
+config AR10_SW_PORT1_RGMII_MAC
+   bool "RGMII MAC"
+endchoice  
+
+config AR10_SW_PORT1_MIIMODE
+   int
+   depends on AR10_SW_PORT_1
+   default 0 if AR10_SW_PORT1_MII_PHY
+   default 1 if AR10_SW_PORT1_MII_MAC
+   default 2 if AR10_SW_PORT1_RMII_PHY
+   default 3 if AR10_SW_PORT1_RMII_MAC
+   default 4 if AR10_SW_PORT1_RGMII_MAC
+								   
+   
+choice
+   prompt "xMII CLOCK RATE"
+   depends on AR10_SW_PORT_1
+   default AR10_SW_PORT1_MIIRATE_AUTO
+	
+config AR10_SW_PORT1_MIIRATE_M2P5
+	bool "2.5MHz"
+	depends on !AR10_SW_PORT1_RMII_MAC && !AR10_SW_PORT1_RMII_PHY
+	
+config AR10_SW_PORT1_MIIRATE_M25
+    bool "25MHz"
+    depends on !AR10_SW_PORT1_RMII_MAC && !AR10_SW_PORT1_RMII_PHY
+
+config AR10_SW_PORT1_MIIRATE_M125
+    bool "125MHz"
+    depends on !AR10_SW_PORT1_RMII_MAC && !AR10_SW_PORT1_RMII_PHY
+
+config AR10_SW_PORT1_MIIRATE_M50	
+	  bool "50MHz"
+
+config AR10_SW_PORT1_MIIRATE_AUTO
+    bool "AUTO"
+		depends on !AR10_SW_PORT1_RMII_MAC && !AR10_SW_PORT1_RMII_PHY
+		
+endchoice
+
+config AR10_SW_PORT1_MIIRATE
+    int 
+	depends on AR10_SW_PORT_1
+	default 0 if AR10_SW_PORT1_MIIRATE_M2P5
+	default 1 if AR10_SW_PORT1_MIIRATE_M25
+	default 2 if AR10_SW_PORT1_MIIRATE_M125
+	default 3 if AR10_SW_PORT1_MIIRATE_M50
+	default 4 if AR10_SW_PORT1_MIIRATE_AUTO
+
+choice 
+    prompt "RMII REF CLOCK DIRECTIOM"
+	  default AR10_SW_PORT1_RMII_CLK_IN
+	  depends on AR10_SW_PORT1_RMII_MAC || AR10_SW_PORT1_RMII_PHY
+
+config AR10_SW_PORT1_RMII_CLK_IN
+    bool "IN"
+
+config AR10_SW_PORT1_RMII_CLK_OUT
+    bool "OUT"
+	
+endchoice
+
+config AR10_SW_PORT_2
+    bool "USE PORT 2"
+    default y
+
+choice
+   prompt "INTERFACE FOR PORT 2 AND PORT4"
+   depends on AR10_SW_PORT_2
+   default AR10_SW_PORT2_GMII
+
+config AR10_SW_PORT2_GMII
+   bool "GMII"
+
+config AR10_SW_PORT2_MII
+   bool "MII"
+
+endchoice  
+
+config  AR10_SW_PORT2_MIIRATE
+   int
+   depends on AR10_SW_PORT_2
+   default 4 
+					 
+config AR10_SW_PORT2_MIIMODE
+    int
+	depends on AR10_SW_PORT_2
+	default 1 
+								
+
+config AR10_SW_PORT_3
+    bool "USE PORT 3"
+	default y
+    depends on AR10_SW_PORT2_MII && !DRIVER_GRX390
+    
+choice
+   prompt "INTERFACE"
+   depends on AR10_SW_PORT_3
+   default AR10_SW_PORT3_MII
+
+config AR10_SW_PORT3_MII
+   bool "MII"
+
+endchoice    
+    
+config AR10_SW_PORT3_MIIRATE
+   int
+   depends on AR10_SW_PORT_3
+   default 4 
+					 
+config AR10_SW_PORT3_MIIMODE
+    int
+	depends on AR10_SW_PORT_3
+    default 1 if AR10_SW_PORT3_MII
+
+# Configuration for GRX390 addition PHY
+config GRX390_SW_PORT_3a
+    bool "USE PORT 3a"
+	default y
+	depends on AR10_SW_PORT2_MII && DRIVER_GRX390
+
+choice
+   	prompt "INTERFACE"
+   	depends on GRX390_SW_PORT_3a
+    default GRX390_SW_PORT3a_MII
+
+config GRX390_SW_PORT3a_MII
+	bool "MII"
+
+endchoice
+
+config GRX390_SW_PORT3a_MIIRATE
+   	int
+   	depends on GRX390_SW_PORT_3a
+   	default 4
+
+config GRX390_SW_PORT3a_MIIMODE
+   	int
+   	depends on GRX390_SW_PORT_3a
+   	default 0 if GRX390_SW_PORT3a_MII
+
+config GRX390_SW_PORT_3b
+    bool "USE PORT 3b"
+    default y
+    depends on !GRX390_SW_PORT_3a && DRIVER_GRX390
+
+choice
+   	prompt "INTERFACE"
+   	depends on GRX390_SW_PORT_3b
+   	default GRX390_SW_PORT3b_GMII
+
+	config GRX390_SW_PORT3b_GMII
+	bool "GMII"
+
+endchoice
+
+config GRX390_SW_PORT3b_MIIRATE
+   int
+	depends on GRX390_SW_PORT_3b
+	default 4
+
+config GRX390_SW_PORT3b_MIIMODE
+   int
+	depends on GRX390_SW_PORT_3b
+	default 1 if GRX390_SW_PORT3b_GMII
+
+#end configuration for new PHY on GRX390
+
+config AR10_SW_PORT_4
+    bool "USE PORT 4"
+	default y
+	depends on AR10_SW_PORT_2
+
+config AR10_SW_PORT4_GMII
+   bool  
+   default y
+   depends on AR10_SW_PORT2_GMII
+
+config AR10_SW_PORT4_MII
+   bool
+   default y
+   depends on AR10_SW_PORT2_MII
+
+
+config AR10_SW_PORT4_MIIRATE
+   int
+   depends on AR10_SW_PORT_4
+   default 4
+					 
+config AR10_SW_PORT4_MIIMODE
+    int
+	depends on AR10_SW_PORT_4
+	default 1 
+	
+
+config AR10_SW_PORT_5a
+    bool "USE PORT 5a"
+	default y
+    depends on !AR10_SW_PORT_5b
+
+choice
+   prompt "INTERFACE"
+   depends on AR10_SW_PORT_5a
+   default AR10_SW_PORT5a_RGMII
+
+config AR10_SW_PORT5a_RGMII
+   bool "RGMII"
+endchoice
+
+config AR10_SW_PORT5a_MIIMODE
+   int
+   depends on AR10_SW_PORT_5a
+   default 4
+
+config AR10_SW_PORT5a_MIIRATE
+    int
+	depends on AR10_SW_PORT_5a
+	default 4 if AR10_SW_PORT5a_RGMII
+			
+
+config AR10_SW_PORT_5b
+    bool "USE PORT 5b"
+	default y
+    depends on AR10_SW_PORT2_MII
+    
+choice
+   prompt "INTERFACE"
+   depends on AR10_SW_PORT_5b
+   default AR10_SW_PORT5b_MII
+
+config AR10_SW_PORT5b_MII
+   bool "MII"
+
+endchoice       
+
+config AR10_SW_PORT5b_MIIMODE
+   int
+   depends on AR10_SW_PORT_5b
+   default 1 
+
+config AR10_SW_PORT5b_MIIRATE
+    int
+	depends on AR10_SW_PORT_5b
+	default 4
+
+choice 
+    prompt "INTERNAL GPHY CLOCK SOURCE"
+    default AR10_GPHY_CLK_25M
+
+config AR10_GPHY_CLK_36M
+    bool "36Mhz"
+
+config AR10_GPHY_CLK_25M
+    bool "25Mhz"
+
+endchoice
+
+config AR10_EXTERNAL_GPHY_INTERNAL
+   bool "Use internal 25Mhz clock for external phy" 
+   default y
+
+
+config AR10_GPHY_FW_EMBEDDED
+    bool "gphy firmware embedded"
+	default y
+		
+
+config AR10_GPHY_FW_ADDR
+    hex  
+	default "0xb0010000" if ( LTQ_BOOT_FROM_NOR )
+	default "0xa0110000" if ( LTQ_BOOT_FROM_SPI )
+	default "0xa0120000" if ( LTQ_BOOT_FROM_NAND )
+	depends on AR10_SW_PORT_1 || AR10_SW_PORT_2 || AR10_SW_PORT_3 || AR10_SW_PORT_4 || AR10_SW_PORT_5b
+    depends on AR10_GPHY_FW_EMBEDDED
+
+config AR10_EXTERN_GPHY_FW_ADDR
+    hex "gphy firmware address"
+	default "0xb0010000"
+	depends on !AR10_GPHY_FW_EMBEDDED
+			
+config AR10_GPHY_DEBUG
+    bool "DEBUG GPHY"
+	default y
+    depends on !NAND_FLASH
+	
+endmenu
+
+config AR10_LIF_DETECTION
+    bool "LIF DETECTION"
+	default n
+
+config AR10_PROGRAM_AFE_FUSE
+    bool "PROGRAM AFE WITH FUSED VALUE"
+    default y
+	depends on !DRIVER_GRX390
+
+config AR10_DCDC_2V5_PWM0
+    bool "Set DCDC 2V5 PWM0 VALUE to 0x8f"
+	default n
+
+config DISABLE_SINGLE_ENDED_CLK_GPHY2
+       bool "Disable single ended clock for GPHY2"
+       depends on DRIVER_GRX390
+       default y
+
+config TUNE_DDR
+    bool "DDR tuning support"
+    default y
+
+config DDR_TUNING_TEXT_BASE
+    hex
+    default "0xbe1a0000"
+    depends on TUNE_DDR

@@ -1,0 +1,112 @@
+
+; Setup Lauterbach debugger for AR10
+;SYStem.mode down
+SYStem.cpu MIPS34k
+SYStem.JTAGCLOCK 10000000.
+SYSTEM.OPTION ENDIANESS BIG
+;SYStem.mode NoDebug
+;SYStem.mode Attach
+wait 1s
+;break
+
+; Setup AR10 CGU for 500/250
+;data.set 0xBF10300C %long 0x081  ; program the CPU/DDR speed
+data.set 0xBF10300C %long 0x192
+data.set 0xBF103010 %long 0x10020000     ; Program PPE frequency
+
+; CGU update
+data.set 0xBF103020 %long 0x01
+
+;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;Initialize memory controller register
+;Pls refer to the documentation to change the necessary parameter to
+;Suit the DDR device you are using
+;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;
+data.set 0xBF106c98 %long   0x94    ; interdcdc 1v8
+
+data.set 0xBF801000 %long	0x00000000 ; DDR1
+data.set 0xBF801010 %long	0x00000000
+data.set 0xBF801020 %long	0x0200c350  
+data.set 0xBF801030 %long	0x01010106
+data.set 0xBF801040 %long	0x020a0e03
+data.set 0xBF801050 %long	0x03030004 
+data.set 0xBF801060 %long	0x0000445c 
+data.set 0xBF801070 %long	0x01010001 
+data.set 0xBF801080 %long	0x00080404
+data.set 0xBF801090 %long	0x020000c8 
+data.set 0xBF8010A0 %long	0x0400000e 
+data.set 0xBF8010B0 %long	0x01000000 
+data.set 0xBF8010C0 %long	0x07990012 
+data.set 0xBF8010D0 %long	0x00010000 
+data.set 0xBF8010E0 %long	0x001300c8 
+data.set 0xBF8010F0 %long	0x01000000
+;
+data.set 0xBF801100 %long	0x00000000 ;Reg16
+data.set 0xBF801110 %long	0x00000000
+data.set 0xBF801120 %long	0x00000000
+data.set 0xBF801130 %long	0x00000100
+data.set 0xBF801140 %long	0x00000000 ;write mode register
+data.set 0xBF801150 %long	0x00003200 
+data.set 0xBF801160 %long	0x00000000 
+data.set 0xBF801170 %long	0x00000000
+data.set 0xBF801180 %long	0x00000032
+data.set 0xBF801190 %long	0x00000000
+data.set 0xBF8011A0 %long	0x00320000
+data.set 0xBF8011B0 %long	0x00000000
+data.set 0xBF8011C0 %long	0x00000000
+data.set 0xBF8011D0 %long	0x00000032
+data.set 0xBF8011E0 %long	0x00000000
+data.set 0xBF8011F0 %long	0x02000000 ; row=13
+;
+data.set 0xBF801200 %long	0xffff0a03 ;Reg32, col=9(x16),AP=10
+;data.set 0xBF801200 %long	0xffff0a02 ;Reg32, col=10(x8),AP=10
+
+data.set 0xBF801210 %long	0x01010101
+data.set 0xBF801220 %long	0x00010101
+
+data.set 0xBF801230 %long	0x00000001; cs0 active, 16-bit DDR
+;data.set 0xBF801230 %long	0x00000101; cs0 active, 8-bit DDR  
+
+data.set 0xBF801240 %long	0x00010000
+data.set 0xBF801250 %long	0x00000000
+data.set 0xBF801260 %long	0x00000000
+data.set 0xBF801270 %long	0x00000000
+data.set 0xBF801280 %long	0x00000000
+data.set 0xBF801290 %long	0x02020101
+data.set 0xBF8012A0 %long	0x08080404
+data.set 0xBF8012B0 %long	0x01000000
+data.set 0xBF8012C0 %long	0x01000201
+data.set 0xBF8012D0 %long	0x00000200
+data.set 0xBF8012E0 %long	0x00000000
+data.set 0xBF8012F0 %long	0x00000000 ;reg47, PHY_WRLAT=0
+;
+data.set 0xBF801300 %long	0x00000600 ; Reg 48 TDFI_PHY_RDLAT=6
+data.set 0xBF801310 %long	0x00079900
+data.set 0xBF801320 %long	0x02000200 
+data.set 0xBF801330 %long	0x02000200
+data.set 0xBF801340 %long	0x00000799
+data.set 0xBF801350 %long	0x000025fd
+data.set 0xBF801360 %long	0x00020103  ;WRLAT_ADJ=1, RDLAT_ADJ=3
+;data.set 0xBF801360 %long	0x00020000
+
+data.set 0xBF801370 %long	0x00000101
+;
+data.set 0xBF801400 %long	0x000f1000; DDR_PHY0;SSTL_2
+;
+data.set 0xBF801410 %long	0xf3014a37; slice0
+data.set 0xBF801420 %long	0x26c002c0; slice0
+data.set 0xBF801430 %long	0xf3014a37; slice1
+data.set 0xBF801440 %long	0x26c002c0; slice1
+
+;data.set 0xBF801450 %long	0x00000005;DFI_RD_V_E_DLY
+data.set 0xBF801450 %long	0x00000004;
+
+data.set 0xBF801460 %long	0x20092405;
+data.set 0xBF801470 %long	0x00092410;
+data.set 0xBF801480 %long	0x20092405;
+data.set 0xBF801490 %long	0x00092410;
+
+
+;Enable memory controller 	
+data.set 0xBF801000 %long	0x001
