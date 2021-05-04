@@ -1,0 +1,157 @@
+;SYStem.CPU MIPSINTERAPTIV 
+SYStem.CPU MIPS4kec 
+
+SYStem.JTAGCLOCK 4mhz
+SYSTEM.CPUACCESS Enable
+SYSTEM.MEMACCESS CPU
+SYStem.Option TURBO OFF
+SYStem.MODE NODEBUG
+SYStem.Down
+SYStem.CONFIG.IRPOST  25.
+SYStem.CONFIG.DRPOST  5.
+SYStem.CONFIG.IRPRE   0.
+SYStem.CONFIG.DRPRE   0.
+Core.Number 1.
+SYStem.MODE NODEBUG
+SYStem.MODE ATTACH
+SYStem.Option TURBO OFF
+break
+
+Data.Set 0xb2200004 %Long 0x100c0020
+Data.Set 0xb2200124 %Long 0x0f2c420a
+Data.Set 0xb2200120 %Long 0x000000d8
+
+Data.Set 0xb49001d0 %Long 0xf0002000
+Data.Set 0xb49001d8 %Long 0xfe00a000
+
+Data.Set 0xb21000c0 %Long 0x000000c8
+Data.Set 0xb21000c4 %Long 0x000000c8
+Data.Set 0xb21000cc %Long 0x00000014
+Data.Set 0xb21000c8 %Long 0x00000000
+Data.Set 0xb2100134 %Long 0x00000000
+Data.Set 0xb2100080 %Long 0x00040000
+Data.Set 0xb210007c %Long 0x00000200
+Data.Set 0xb2000044 %Long 0x0000040a
+Data.Set 0xb2000054 %Long 0x00000b62
+Data.Set 0xb2000058 %Long 0x00000002
+Data.Set 0xb200005c %Long 0x00000000
+Data.Set 0xb2000060 %Long 0x00000000
+Data.Set 0xb2000048 %Long 0x61126633
+Data.Set 0xb200004c %Long 0x22815252
+Data.Set 0xb2000050 %Long 0x100188c8
+Data.Set 0xb200008c %Long 0x00f06db0
+Data.Set 0xb200001c %Long 0x1900c810
+Data.Set 0xb2000020 %Long 0x4e200258
+Data.Set 0xb2000024 %Long 0x00083def
+Data.In  0xb2000004 /Long                ;=0x00000000
+Data.Set 0xb2000004 %Long 0x60000000
+Data.In  0xb2000010 /Long                ;=0xb000000f
+Data.Set 0xb20001e8 %Long 0x00006e6e
+Data.Set 0xb2000228 %Long 0x00006e6e
+Data.Set 0xb2000004 %Long 0x00040001
+Data.In  0xb2000010 /Long                ;=0xb000001f
+Data.In  0xb21002c0 /Long                ;=0x00000001
+Data.Set 0xb2100044 %Long 0x00000001
+Data.In  0xb2100048 /Long                ;=0x00000001
+Data.Set 0xb21000c0 %Long 0x000000c8
+Data.Set 0xb21000c4 %Long 0x000000c8
+Data.Set 0xb21000cc %Long 0x00000014
+Data.Set 0xb21000d0 %Long 0x8001009c
+Data.Set 0xb21000d4 %Long 0x00000002
+Data.Set 0xb21000d8 %Long 0x0000002a
+Data.Set 0xb21000dc %Long 0x00000006
+Data.Set 0xb21000e4 %Long 0x00000000
+Data.Set 0xb21000e8 %Long 0x00000006
+Data.Set 0xb21000ec %Long 0x00000005
+Data.Set 0xb21000f0 %Long 0x00000012
+Data.Set 0xb21000f4 %Long 0x00000018
+Data.Set 0xb21000f8 %Long 0x00000006
+Data.Set 0xb21000fc %Long 0x00000004
+Data.Set 0xb2100100 %Long 0x00000003
+Data.Set 0xb21000e0 %Long 0x00000002
+Data.Set 0xb2100104 %Long 0x00000006
+Data.Set 0xb2100108 %Long 0x00000003
+Data.Set 0xb210010c %Long 0x000000c8
+Data.Set 0xb2100110 %Long 0x00000002
+Data.Set 0xb2100120 %Long 0x00000001
+Data.Set 0xb2100124 %Long 0x00000000
+Data.Set 0xb2100128 %Long 0x00000000
+Data.Set 0xb2100130 %Long 0x00000000
+Data.Set 0xb210012c %Long 0x00000003
+Data.Set 0xb21000c8 %Long 0x00000000
+Data.Set 0xb2100134 %Long 0x00000000
+Data.Set 0xb2100118 %Long 0x00000000
+Data.Set 0xb2100138 %Long 0x00000000
+Data.Set 0xb2100114 %Long 0x0000000a
+Data.Set 0xb210011c %Long 0x00000000
+Data.Set 0xb2100140 %Long 0x00000000
+Data.Set 0xb2100144 %Long 0x00000000
+Data.Set 0xb2100148 %Long 0x00000000
+Data.Set 0xb2100000 %Long 0x00004780
+Data.Set 0xb2100254 %Long 0x00000001
+Data.Set 0xb2100260 %Long 0x00000004
+Data.Set 0xb2100250 %Long 0x00000001
+Data.Set 0xb2100258 %Long 0x00000003
+Data.Set 0xb2100264 %Long 0x0000000f
+Data.Set 0xb21002d4 %Long 0x00000002
+Data.Set 0xb21002d0 %Long 0x00000002
+Data.Set 0xb2100240 %Long 0x00000002
+Data.Set 0xb2100284 %Long 0x00000040
+Data.Set 0xb2100290 %Long 0x00000007
+Data.Set 0xb2100040 %Long 0x86f00000
+Data.In  0xb2100040 /Long                ;=0x06f00000
+Data.Set 0xb2100040 %Long 0x80f00001
+Data.In  0xb2100040 /Long                ;=0x00f00001
+Data.Set 0xb2100040 %Long 0x80f40003
+Data.In  0xb2100040 /Long                ;=0x00f40003
+Data.Set 0xb2100040 %Long 0x80f60003
+Data.In  0xb2100040 /Long                ;=0x00f60003
+Data.Set 0xb2100040 %Long 0x80f20023
+Data.In  0xb2100040 /Long                ;=0x00f20023
+Data.Set 0xb2100040 %Long 0x80f0b623
+Data.In  0xb2100040 /Long                ;=0x00f0b623
+Data.Set 0xb2100040 %Long 0x80f00001
+Data.In  0xb2100040 /Long                ;=0x00f00001
+Data.Set 0xb2100040 %Long 0x80f00002
+Data.In  0xb2100040 /Long                ;=0x00f00002
+Data.Set 0xb2100040 %Long 0x80f00002
+Data.In  0xb2100040 /Long                ;=0x00f00002
+Data.Set 0xb2100040 %Long 0x80f0a623
+Data.In  0xb2100040 /Long                ;=0x00f0a623
+Data.Set 0xb2100040 %Long 0x80f20023
+Data.In  0xb2100040 /Long                ;=0x00f20023
+Data.Set 0xb2100040 %Long 0x80f00005
+Data.In  0xb2100040 /Long                ;=0x00f00005
+Data.Set 0xb2100040 %Long 0x80f0000a
+Data.In  0xb2100040 /Long                ;=0x00f0000a
+Data.Set 0xb2100004 %Long 0x00000001
+Data.In  0xb2100008 /Long                ;=0x00000001
+Data.Set 0xb2100084 %Long 0x00000000
+Data.Set 0xb21002c4 %Long 0x00000007
+Data.Set 0xb21002c8 %Long 0x00000003
+Data.Set 0xb21002d8 %Long 0x00000000
+Data.Set 0xb21002f0 %Long 0x00070101
+Data.Set 0xb2100180 %Long 0x00000000
+Data.Set 0xb2100290 %Long 0x00000003
+Data.Set 0xb2100050 %Long 0x00000001
+Data.In  0xb210004c /Long                ;=0x00000001
+Data.Set 0xb2000004 %Long 0x00000200
+Data.In  0xb2000010 /Long                ;=0xb000003f
+Data.Set 0xb2000004 %Long 0x00000400
+Data.In  0xb2000010 /Long                ;=0xb000007f
+Data.Set 0xb2000004 %Long 0x00000800
+Data.In  0xb2000010 /Long                ;=0xb00000ff
+Data.Set 0xb2000004 %Long 0x00001000
+Data.In  0xb2000010 /Long                ;=0xb00001ff
+Data.Set 0xb2000004 %Long 0x00002000
+Data.In  0xb2000010 /Long                ;=0xb00003ff
+Data.Set 0xb2000004 %Long 0x00004000
+Data.In  0xb2000010 /Long                ;=0xb00007ff
+Data.Set 0xb2000004 %Long 0x00008000
+Data.In  0xb2000010 /Long                ;=0xb0000fff
+Data.Set 0xb2100004 %Long 0x00000002
+Data.In  0xb2100008 /Long                ;=0x00000003
+
+go
+;SYStem.Down
+

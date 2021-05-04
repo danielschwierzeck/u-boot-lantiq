@@ -1,0 +1,216 @@
+# Read in config
+-include include/config/auto.conf
+
+################################################################################
+# changable switch and config
+################################################################################
+
+# i use this to know which signing to do, for FSB or UBOOT
+UBOOTLTQ := u-boot.ltq
+UBOOTFSB := $(obj)/u-boot-spl.bin
+
+# 0xA0001000
+DEFAULT_SIGNTOOL_ENTRY_ADDR_FSB :=$(CONFIG_NAND_SPL_TEXT_BASE)
+DEFAULT_SIGNTOOL_TARGET_ADDR_FSB :=$(CONFIG_NAND_SPL_TEXT_BASE)
+
+# 0x80200000
+DEFAULT_SIGNTOOL_ENTRY_ADDR_UBOOT :=$(CONFIG_BOOTSTRAP_TEXT_BASE)
+DEFAULT_SIGNTOOL_TARGET_ADDR_UBOOT :=$(CONFIG_BOOTSTRAP_TEXT_BASE)
+
+ifeq ($(CONFIG_LTQ_BOOT_FROM_SPI)$(CONFIG_LTQ_BOOT_FROM_QSPI),y)
+DEFAULT_SIGNTOOL_ENTRY_ADDR_FSB :=$(CONFIG_SFDDR_TEXT_BASE)
+DEFAULT_SIGNTOOL_TARGET_ADDR_FSB :=$(CONFIG_SFDDR_TEXT_BASE)
+
+# 0x80200000 , fixed somehow
+DEFAULT_SIGNTOOL_ENTRY_ADDR_UBOOT :=0x80200000
+DEFAULT_SIGNTOOL_TARGET_ADDR_UBOOT :=0x80200000
+endif
+
+# static in makefile for now
+# maybe extended to Kconfig if needed
+DEFAULT_SIGNTOOL_ROLLBACKID := $(CONFIG_SB_ROLLBACKID_VALUE)
+
+define secboot-attrib-load-common
+  -attribute 0x80000000=$(if $(filter $(UBOOTLTQ),$(strip $(1))),$(DEFAULT_SIGNTOOL_ENTRY_ADDR_UBOOT),$(DEFAULT_SIGNTOOL_ENTRY_ADDR_FSB)) \
+  -attribute 0x80000002=$(if $(filter $(UBOOTLTQ),$(strip $(1))),$(DEFAULT_SIGNTOOL_TARGET_ADDR_UBOOT),$(DEFAULT_SIGNTOOL_TARGET_ADDR_FSB))
+endef
+
+################################################################################
+# logic to determine if secure boot or manuboot or normal [MODE]
+#    - NORMAL
+#    - SECBOOT
+#    - MANUBOOT
+################################################################################
+MODE := NORMAL
+
+ifeq ($(CONFIG_LTQ_SECURE_BOOT),y)
+    ifeq ($(CONFIG_MANUBOOT),y)
+        MODE = MANUBOOT
+    else
+        MODE = SECBOOT
+    endif
+endif
+
+################################################################################
+# [SPL/FSB] mk_sf_image.pl and mk_ltq_header.pl param when secure boot
+################################################################################
+
+# MODE = NORMAL
+# already defined in Makefile.nand
+# LTQ_HEADER_OFFSET_EXTRA :=
+# SF_IMAGE_SOCMODE := 0
+# SF_IMAGE_JUMP := $(CONFIG_NAND_SPL_TEXT_BASE)
+
+ifeq ($(MODE),SECBOOT)
+  LTQ_HEADER_OFFSET_EXTRA =
+  SF_IMAGE_SOCMODE = 2
+  SF_IMAGE_JUMP = 0xa0100000
+endif
+
+ifeq ($(MODE),MANUBOOT)
+  LTQ_HEADER_OFFSET_EXTRA := ,0x4000,0x6000,0x8000
+  SF_IMAGE_SOCMODE = 1
+  SF_IMAGE_JUMP = 0xA0900000
+endif
+
+################################################################################
+# [FSB] signtool param
+################################################################################
+SIGN_IMAGE_OPT_FSB :=
+
+ifeq ($(CONFIG_LTQ_SECURE_BOOT)$(CONFIG_LANTIQ_UBOOT_prx300),yy)
+    ifdef CONFIG_CERTIFICATION_SUPPORT
+        SIGN_IMAGE_OPT_FSB += -cert $(CONFIG_CERTIFICATION)
+    endif
+
+    ifeq ($(CONFIG_MANUBOOT)$(CONFIG_MANUBOOT_CREDENTIAL_SUPPORT),yy)
+        SIGN_IMAGE_OPT_FSB += -cred $(CONFIG_MANUBOOT_CREDENTIAL)
+    endif
+
+    # TODO : the rule to add otp.o 
+    # ifeq ($(CONFIG_MANUBOOT)$(CONFIG_MANUBOOT_OTP_SUPPORT)$(CONFIG_GRX500_BOOT_4KEC_ONLY),yy)
+    #    COBJS   += otp.o
+    #    CFLAGS += -DOTP_IN_FSB
+    # endif
+endif
+
+################################################################################
+# [UBOOT] signtool param
+################################################################################
+SIGN_IMAGE_OPT_UBOOT :=
+
+ifdef CONFIG_LTQ_SECURE_BOOT
+    # extra command line option to signtool
+    ifdef CONFIG_CERTIFICATION_SUPPORT
+        SIGN_IMAGE_OPT_UBOOT += -cert $(CONFIG_CERTIFICATION)
+    endif
+
+    # let fsb handle the jump to u-boot part
+    SIGN_IMAGE_OPT_UBOOT += -attribute 0x80000006=0x00000000
+
+endif
+
+################################################################################
+# signtool
+################################################################################
+
+# base or common
+SIGNTOOL_CMD := $(CONFIG_SIGNTOOL) sign -type BLw \
+		    -prikey $(CONFIG_PRIVATE_KEY) \
+		    -wrapkey $(CONFIG_PROD_UNIQUE_KEY) \
+		    -encattr \
+		    -attribute rollback=$(DEFAULT_SIGNTOOL_ROLLBACKID) \
+		    -attribute 0x80000001=0x00000001
+
+# aes266 kdk in otp
+SIGNTOOL_PARAM_AES256 := -kdk \
+						 -pubkeytype otp \
+						 -algo aes256
+
+#
+SIGNTOOL_PARAM_MANUBOOT := -manuboot
+
+################################################################################
+# signing user defined function depending on MODE
+################################################################################
+
+ifeq ($(MODE),NORMAL)
+define secboot-sign-fsb-if-required
+	$(Q)echo NORMAL not required
+endef
+
+define secboot-sign-ltq-if-required
+	$(Q)echo NORMAL not required
+endef
+define secboot-sign-for-asc-if-required
+	$(Q)echo NORMAL not required
+endef
+endif
+
+ifdef CONFIG_CERTIFICATION_SUPPORT
+ CERT := -cert $(CONFIG_CERTIFICATION)
+endif
+ifdef CONFIG_MANUBOOT_CREDENTIAL_SUPPORT
+ CRED := -cred $(CONFIG_MANUBOOT_CREDENTIAL)
+endif
+
+ifeq ($(MODE),SECBOOT)
+define secboot-sign-fsb-if-required
+	$(Q)echo SECBOOT
+	$(SIGNTOOL_CMD) $(SIGNTOOL_PARAM_AES256) \
+	$(call secboot-attrib-load-common, $(1)) \
+	$(SIGN_IMAGE_OPT_FSB) \
+	-infile $(1) \
+	-outfile $(1).signed
+	cp -vf $(1).signed $(1)
+endef
+
+define secboot-sign-ltq-if-required
+	$(Q)echo SECBOOT
+	$(SIGNTOOL_CMD) $(SIGNTOOL_PARAM_AES256) \
+	$(call secboot-attrib-load-common, $(1)) \
+	$(SIGN_IMAGE_OPT_UBOOT) \
+	-infile $(1) \
+	-outfile $(1).signed
+	cp -vf $(1).signed $(1)
+endef
+
+define secboot-sign-for-asc-if-required
+	$(Q)echo SECBOOT
+	$(SIGNTOOL_CMD) $(SIGNTOOL_PARAM_AES256) \
+	-attribute 0x80000000=$(CONFIG_RAM_TEXT_BASE) \
+	-attribute 0x80000002=$(CONFIG_RAM_TEXT_BASE) \
+	$(CERT) \
+	-infile $(1) \
+	-outfile $(1).signed
+	cp -vf $(1).signed $(1)
+endef
+endif
+
+ifeq ($(MODE),MANUBOOT)
+define secboot-sign-fsb-if-required
+	$(Q)echo MANUBOOT
+	$(SIGNTOOL_CMD) $(SIGNTOOL_PARAM_MANUBOOT) \
+	$(call secboot-attrib-load-common, $(1)) \
+	$(SIGN_IMAGE_OPT_FSB) \
+	-infile $(1) \
+	-outfile $(1).signed
+	cp -vf $(1).signed $(1)
+endef
+
+# u-boot.ltq in ROT mode is clear
+define secboot-sign-ltq-if-required
+	$(Q)echo MANUBOOT not required
+endef
+
+define secboot-sign-for-asc-if-required
+	$(Q)echo MANUBOOT
+	$(SIGNTOOL_CMD) $(SIGNTOOL_PARAM_MANUBOOT) \
+	-attribute 0x80000000=$(CONFIG_RAM_TEXT_BASE) \
+	-attribute 0x80000002=$(CONFIG_RAM_TEXT_BASE) \
+	$(CERT) $(CRED) \
+	-infile $(1) \
+	-outfile $(1).signed
+	cp -vf $(1).signed $(1)
+endef
+endif

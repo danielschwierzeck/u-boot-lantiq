@@ -1,0 +1,247 @@
+config SYS_BOARD
+    default "prx300"
+
+config SYS_VENDOR
+    default "lantiq"
+
+config SYS_CONFIG_NAME
+    default "prx300"
+
+config DRIVER_PRX300
+      bool
+      default y
+
+config SPI_SPL_SIZE
+	hex
+	default "0xA000" if ( MANUBOOT )
+	default "0x9000" if ( !MANUBOOT && LTQ_BOOT_FROM_QSPI )
+	default "0x6000" if	( !MANUBOOT && LTQ_BOOT_FROM_SPI )
+	depends on ( LTQ_BOOT_FROM_SPI || LTQ_BOOT_FROM_QSPI )
+
+config PRX300_ROM_HEADER_BCH_CAP
+       int
+       default 8  if ( PRX300_A21 )
+
+config PRX300_BOOT_4KEC_ONLY
+	bool "boot 4kec only"
+	default n
+
+config PRX300_WDT
+	bool "Enable WDT before Linux boot"
+	select HW_WATCHDOG
+	default n
+
+config WDT_TIMEOUT_VALUE
+	hex "WDT Timeout Value"
+	depends on PRX300_WDT
+	default "0xffffffff"
+
+config XO_SETTINGS
+	bool "Enable XO settings configuration in bootloader"
+	default n
+	help
+	  XO settings configuration is needed in the EVM board
+	  to be able to use the 10G interface. Enabling this
+	  may actually cause the U-boot to be unstable after a
+	  boot. If not needed in SFU boards, do not enable this.
+
+menu "Memory configuration for Trusted OS"
+choice
+    prompt "Memory reserved for TOS"
+    default PRX300_TOS_128M
+
+config PRX300_TOS_16M
+	bool "16M for tos"
+
+config PRX300_TOS_32M
+	bool "32M for tos"
+
+config PRX300_TOS_64M
+	bool "64M for tos"
+
+config PRX300_TOS_128M
+	bool "128M for tos"
+endchoice
+
+choice
+    prompt "DDR present in system"
+    default PRX300_DDR_512M
+
+config PRX300_DDR_256M
+    bool "256M DDR"
+
+config PRX300_DDR_512M
+	bool "512M DDR"
+
+config PRX300_DDR_1G
+    bool "1G DDR"
+endchoice
+
+config PRX300_FMT1_REG
+	hex
+	default "0xFF002F00" if ( PRX300_DDR_256M  &&  PRX300_TOS_16M )
+	default "0xFE002E00" if ( PRX300_DDR_256M  &&  PRX300_TOS_32M )
+	default "0xFC002C00" if ( PRX300_DDR_256M  &&  PRX300_TOS_64M )
+	default "0xF8002800" if ( PRX300_DDR_256M  &&  PRX300_TOS_128M )
+	default "0xFF003F00" if ( PRX300_DDR_512M  &&  PRX300_TOS_16M )
+	default "0xFE003E00" if ( PRX300_DDR_512M  &&  PRX300_TOS_32M )
+	default "0xFC003C00" if ( PRX300_DDR_512M  &&  PRX300_TOS_64M )
+	default "0xF8003800" if ( PRX300_DDR_512M  &&  PRX300_TOS_128M )
+	default "0xFF005F00" if ( PRX300_DDR_1G  &&  PRX300_TOS_16M )
+	default "0xFE005E00" if ( PRX300_DDR_1G  &&  PRX300_TOS_32M )
+	default "0xFC005C00" if ( PRX300_DDR_1G  &&  PRX300_TOS_64M )
+	default "0xF8005800" if ( PRX300_DDR_1G  &&  PRX300_TOS_128M )
+endmenu
+
+menu "CPU and DDR Settings"
+
+config A1_PRX300
+	bool "A1 PRX300"
+	default y
+	help
+	  Choose this option for A1 PRX300 builds. This
+	  builds the U-boot with the software fixes in A1 chips.
+
+config PRE_CONFIG_DDR
+	bool "Use Pre-defined DDR configuration file"
+	help
+	  Use self-generated DDR/CPU settings.
+
+if ( PRE_CONFIG_DDR )
+config PRX300_DDR_CONFIG_FILE
+	string "ddr config file path"
+	default "board/lantiq/prx300/ddr.conf"
+endif
+
+if ( !PRE_CONFIG_DDR )
+choice
+	prompt "Choose CPU/DDR Modes --> "
+
+config NORMAL_MODE
+	bool "Normal power mode"
+	depends on LTQ_BOOT_FROM_NAND || !A1_PRX300 
+	select A1_FIX if ( A1_PRX300 )
+	help
+	  Choose this for SFP+ module configuration. CPU will be running at
+	  800Mhz and DDR running at 533 Mhz (DDR4), 400Mhz (LPDDR3)
+
+config SFP_MODE
+	bool "Low power SFP mode"
+	depends on LTQ_BOOT_FROM_NAND || !A1_PRX300
+	select A1_FIX if ( A1_PRX300 )
+	help
+	  Choose this for SFP+ module configuration. VCO is reduced to support
+	  CPU running at 480Mhz and DDR running at 466Mhz (DDR4) or 400Mhz (LPDDR3).
+
+endchoice
+
+if ( SFP_MODE || NORMAL_MODE )
+choice
+	prompt "DDR Type"
+
+config DDR4
+	bool "DDR4"
+
+config DDR3
+	bool "DDR3"
+
+config LPDDR3
+	bool "LPDDR3"
+
+endchoice
+endif
+
+config DDR_DIR
+	string
+	default "ddr4" if DDR4
+	default "ddr3" if DDR3
+	default "lpddr3" if LPDDR3
+endif
+
+config A1_FIX
+	bool "A1 boot work-around"
+	depends on ( LTQ_BOOT_FROM_NAND ) 
+	default y
+	help
+	  Set this for A1 chip builds on NAND flash
+
+config FIX_OFFSET_IN_FLASH
+	hex "Woarkaround binary location in flash"
+	depends on A1_FIX
+	default 0x2800
+	help 
+	  Where in flash the location of the work-around binary for A1 chips
+	  is located
+
+endmenu
+
+menu "PRX300 Switch Configurations"
+
+choice
+	prompt "Connected PHY"
+
+config PRX300_EXTERNAL_PHY
+	bool "PRX300 connected to EXTERNAL PHY"
+
+config PRX300_GSWIP_CORE
+	bool "PRX300 connected to Internal GSWIP"
+
+endchoice
+
+if PRX300_GSWIP_CORE
+config PRX300_GPHY_FW_EMBEDDED
+    bool "gphy firmware embedded"
+    default y
+
+config PRX300_GPHY_FW_ADDR
+    hex "GPHY FW pad size + BOOTSTRAP_TEXT_BASE"
+    default "0xa0220000" if ( LTQ_BOOT_FROM_SPI || LTQ_BOOT_FROM_QSPI )
+    default "0xa022A000" if ( LTQ_BOOT_FROM_NAND )
+    depends on PRX300_GPHY_FW_EMBEDDED
+
+config PRX300_EXTERN_GPHY_FW_ADDR
+    hex "gphy firmware address"
+    default "0x180000"
+    depends on !PRX300_GPHY_FW_EMBEDDED
+
+endif
+
+if PRX300_EXTERNAL_PHY
+	config SERDES_PRE0
+	hex "serdes0 tx pre value"
+	default "0x14"
+
+	config SERDES_POST0
+	hex "serdes0 tx post value"
+	default "0x14"
+
+	config SERDES_MAIN0
+	hex "serdes0 tx main value"
+	default "0x1E"
+
+	config SERDES_PRE1
+	hex "serdes1 tx pre value"
+	default "0x0"
+
+	config SERDES_POST1
+	hex "serdes1 tx post value"
+	default "0x0"
+
+	config SERDES_MAIN1
+	hex "serdes1 tx main value"
+	default "0x28"
+
+	config SERDES_PRE2
+	hex "serdes2 tx pre value"
+	default "0x0"
+
+	config SERDES_POST2
+	hex "serdes2 tx post value"
+	default "0x0"
+
+	config SERDES_MAIN2
+	hex "serdes2 tx main value"
+	default "0x28"
+endif
+
+endmenu

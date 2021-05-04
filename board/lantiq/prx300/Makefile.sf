@@ -1,0 +1,109 @@
+include $(srctree)/config.mk
+include $(srctree)/arch/$(ARCH)/Makefile
+
+BOARDDIR := $(VENDOR)/$(BOARD)
+TOPDIR := $(srctree)
+
+BCH_ENCODER := $(TOPDIR)/board/$(BOARDDIR)/bch_enc.c
+ROM_HEADER_BCH_CAP := 8
+UART_FOR_DDR := $(srctree)/board/$(BOARDDIR)/ddr_for_uart.conf
+
+ifdef CONFIG_PRX300_GPHY_FW_EMBEDDED
+ GPHY_FIRMWARE = $(TOPDIR)/board/$(BOARDDIR)/gphy_firmware.img
+ GPHYFW_PAD = $(shell echo "$$(( $(CONFIG_PRX300_GPHY_FW_ADDR) & 0xFFFFFF ))" )
+ ifdef CONFIG_SB_ENV_PROTECTION
+  GPHYFW_PAD := $(shell echo "$$(($(GPHYFW_PAD) + $(CONFIG_ENV_SIZE)))")
+ endif
+else
+ GPHY_FIRMWARE = $(TOPDIR)/dummy
+endif
+
+ifdef CONFIG_BUILD_ENV_BLOCK
+ENV_BLOCK=ubootenv.img
+endif
+
+ALL-y += u-boot.asc u-boot.ltq $(ENV_BLOCK)
+
+ifdef CONFIG_LTQ_BOOT_FROM_SPI
+SFDDR_START_ADDR := $(CONFIG_SFDDR_TEXT_BASE)
+GPHYFIRMWARE := $(TOPDIR)/board/$(BOARDDIR)/gphy_firmware.img
+endif
+
+ifdef CONFIG_LTQ_BOOT_FROM_QSPI
+SFDDR_START_ADDR := $(CONFIG_SFDDR_TEXT_BASE)
+GPHYFIRMWARE := $(TOPDIR)/board/$(BOARDDIR)/gphy_firmware.img
+endif
+
+################################################################################
+# secboot mod
+################################################################################
+LTQ_HEADER_OFFSET_EXTRA :=
+SF_IMAGE_SOCMODE := 0
+SF_IMAGE_JUMP := $(CONFIG_NAND_SPL_TEXT_BASE)
+
+ifdef CONFIG_LTQ_SECURE_BOOT
+ ifdef CONFIG_MANUBOOT
+  ASC_TEXT_BASE = 0xA0900000
+  ASC_MODE = 1
+ else
+  ASC_TEXT_BASE = 0xA0800000
+  ASC_MODE = 2
+ endif
+else
+ASC_TEXT_BASE = $(CONFIG_SYS_TEXT_BASE)
+ASC_MODE = 0
+endif
+
+ifdef CONFIG_LTQ_BOOT_FROM_SPI
+SF_IMAGE_JUMP := $(SFDDR_START_ADDR)
+endif
+
+ifdef CONFIG_LTQ_BOOT_FROM_QSPI
+SF_IMAGE_JUMP := $(SFDDR_START_ADDR)
+endif
+
+include $(srctree)/board/$(BOARDDIR)/Makefile.secboot
+################################################################################
+
+u-boot.ltq: sfddr.bin ddr.conf $(obj)/u-boot-spl.bin FORCE
+	$(call secboot-sign-fsb-if-required, sfddr.bin)
+	@$(TOPDIR)/scripts_platform/mk_ltq_header.pl --ddr $(TOPDIR)/board/$(BOARDDIR)/dummy --offset 0x800 --out  $(TOPDIR)/board/$(BOARDDIR)/header.ltq
+	@$(TOPDIR)/scripts_platform/pad2align.sh -n 1760  $(TOPDIR)/board/$(BOARDDIR)/header.ltq
+	@$(HOSTCC) -o $(TOPDIR)/board/$(BOARDDIR)/bch_enc.o $(BCH_ENCODER)
+	@$(TOPDIR)/board/$(BOARDDIR)/bch_enc.o  $(TOPDIR)/board/$(BOARDDIR)/header.ltq  $(TOPDIR)/board/$(BOARDDIR)/header.bch $(ROM_HEADER_BCH_CAP)
+	@$(TOPDIR)/scripts_platform/mk_sf_image.pl -i sfddr.bin -o tail.bin -j $(SF_IMAGE_JUMP) -m $(SF_IMAGE_SOCMODE) -d $(TOPDIR)/board/$(BOARDDIR)/ddr.conf
+	@cp  $(TOPDIR)/board/$(BOARDDIR)/header.bch $(obj)/u-boot-spl-ltq.bin
+	@cat tail.bin >> $(obj)/u-boot-spl-ltq.bin
+	@$(TOPDIR)/scripts_platform/pad2align.sh -n $(CONFIG_SPI_SPL_SIZE) $(obj)/u-boot-spl-ltq.bin
+	@cat $(obj)/u-boot.lzimg > u-boot.ltq
+ifdef CONFIG_PRX300_GPHY_FW_EMBEDDED
+	@cp u-boot.bin u-boot-gphy.bin
+	@$(TOPDIR)/scripts_platform/pad2align.sh -n 0x40000 u-boot-gphy.bin
+	@$(TOPDIR)/scripts_platform/pad2align.sh -n $(GPHYFW_PAD) u-boot.ltq
+	@cat $(GPHYFIRMWARE) >> u-boot.ltq
+endif
+	$(call secboot-sign-ltq-if-required, $@)
+	@mv $@ $@.tmp
+	@cp -f $(obj)/u-boot-spl-ltq.bin $@
+	@cat $@.tmp >> $@
+	@rm -f $@.tmp
+
+u-boot.asc: $(obj)/u-boot-spl.bin
+	cp $(srctree)/u-boot.bin $(srctree)/u-boot.bin.tmp
+	$(call secboot-sign-for-asc-if-required, $(srctree)/u-boot.bin.tmp)
+	$(srctree)/board/$(BOARDDIR)/build_prx300_asc.pl $(UART_FOR_DDR) $(srctree)/u-boot.bin.tmp \
+		$(ASC_TEXT_BASE) $(srctree)/u-boot.asc $(ASC_MODE)
+	rm -f $(srctree)/u-boot.bin.tmp
+
+ddr.conf:
+	@rm -rf $(TOPDIR)/board/$(BOARDDIR)/ddr.conf
+	@cp $(srctree)/$(CONFIG_PRX300_DDR_CONFIG_FILE) $(TOPDIR)/board/$(BOARDDIR)/ddr.conf
+	@awk -F'\n' '$$1 == "0x80000000 0xFFFF" {sub("0x80000000 0xFFFF", prev)} {prev=$$1;} 1'\
+		$(srctree)/board/$(BOARDDIR)/ddr.conf > $(UART_FOR_DDR)
+
+sfddr.bin: $(obj)/u-boot-spl
+	@$(OBJCOPY) ${OBJCFLAGS} -O binary $< $@
+
+$(ENV_BLOCK): sfddr.bin
+	$(NM) -Ss u-boot > u-boot.sym
+	$(TOPDIR)/scripts_platform/mk_envimg.sh $(TOPDIR)/$@

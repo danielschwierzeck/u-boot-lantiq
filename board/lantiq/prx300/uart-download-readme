@@ -1,0 +1,10 @@
+uart download instructions:
+1. Prepare images:
+	./board/lantiq/prx300/build_prx300_asc.pl <uart ddr configuration file> u-boot.bin 0xa0400000 u-boot.asc 0
+
+2. download u-boot.asc to the board after uart.txt
+
+
+** For A1 silicon, you may need load 'uart_rom_uart_only.txt' before the u-boot.asc file. This is needed for non-DDR4
+   configurations and DDR4 configurations that are not running at 2400Mhz.
+
