@@ -248,8 +248,11 @@ struct lmb;
 #define IH_TYPE_ZYNQIMAGE	26	/* Xilinx Zynq Boot Image */
 #define IH_TYPE_ZYNQMPIMAGE	27	/* Xilinx ZynqMP Boot Image */
 #define IH_TYPE_FPGA		28	/* FPGA Image */
+#define IH_TYPE_UBOOT		29	/* u-boot name */
+#define IH_TYPE_UBOOTENV    30  /* Lantiq uboot environment image */ 
+#define IH_TYPE_SYSTEMSW    31  /* Lantiq ubinized image */
 
-#define IH_TYPE_COUNT		29	/* Number of image types */
+#define IH_TYPE_COUNT		32	/* Number of image types */
 
 /*
  * Compression Types
@@ -284,6 +287,14 @@ typedef struct image_header {
 	uint8_t		ih_type;	/* Image Type			*/
 	uint8_t		ih_comp;	/* Compression Type		*/
 	uint8_t		ih_name[IH_NMLEN];	/* Image Name		*/
+#ifdef CONFIG_LTQ_IMAGE_EXTRA_CHECKS
+    uint8_t     ih_vendor[IH_NMLEN]; /* 32 char Vendor Name String */
+    uint8_t     ih_board[IH_NMLEN]; /* 32 char Board Name String */
+    uint8_t     ih_boardVer[VERSIONLEN]; /* Board Version 16 char str */
+    uint8_t     ih_chip[IH_NMLEN]; /* 32 char Chip Name String */
+    uint8_t     ih_chipVer[VERSIONLEN]; /* Chip Version16 char string */
+    uint8_t     ih_swVer[VERSIONLEN]; /* Software Version-16 char string*/
+#endif // IFX_IMAGE_EXTRA_CHECKS
 } image_header_t;
 
 typedef struct image_info {
