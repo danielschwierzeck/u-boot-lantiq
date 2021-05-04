@@ -77,6 +77,8 @@
 #define	CONFIG_SYS_CBSIZE		1024		/* Console I/O Buffer Size   */
 #define	CONFIG_SYS_PBSIZE (CONFIG_SYS_CBSIZE+sizeof(CONFIG_SYS_PROMPT)+16)  /* Print Buffer Size */
 #define	CONFIG_SYS_MAXARGS		32		/* max number of command args*/
+#define CONFIG_CMDLINE_EDITING
+#define CONFIG_AUTO_COMPLETE
 
 #if defined(CONFIG_LTQ_BOOT_FROM_NAND) || defined(CONFIG_SPI_WITH_NAND)
 #define CONFIG_SYS_NAND_ONFI_DETECTION
