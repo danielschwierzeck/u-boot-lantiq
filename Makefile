@@ -731,7 +731,7 @@ endif
 # Always append ALL so that arch config.mk's can add custom ones
 ALL-y += u-boot.srec u-boot.bin u-boot.sym System.map u-boot.cfg binary_size_check
 
-ALL-$(CONFIG_LANTIQ) += spl/u-boot.lzimg
+ALL-$(CONFIG_LANTIQ) += spl/u-boot.lzimg u-boot.uart
 ALL-$(CONFIG_ONENAND_U_BOOT) += u-boot-onenand.bin
 ifeq ($(CONFIG_SPL_FSL_PBL),y)
 ALL-$(CONFIG_RAMBOOT_PBL) += u-boot-with-spl-pbl.bin
@@ -941,6 +941,11 @@ spl/u-boot.lzimg: u-boot.bin System.map FORCE
 		-a 0x$(shell grep "T _start" System.map | awk '{ printf "%s", $$1 }') \
 		-e 0x$(shell grep "T _start" System.map | awk '{ printf "%s", $$1 }') \
 		-n 'u-boot image' -d u-boot.lzma $@
+
+u-boot.uart: u-boot.bin FORCE
+	$(srctree)/board/lantiq/grx500/build_asc_gphy.pl \
+		$(srctree)/board/lantiq/grx500/uartddr.conf $< $(CONFIG_SYS_TEXT_BASE) \
+		$(srctree)/board/lantiq/grx500/gphy_firmware_a21.img 0xa0229000 $@
 
 OBJCOPYFLAGS_u-boot-with-spl.bin = -I binary -O binary \
 				   --pad-to=$(CONFIG_SPL_PAD_TO)
