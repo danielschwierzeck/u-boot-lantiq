@@ -197,3 +197,13 @@ config CONSOLE_RECORD_IN_SIZE
 	  tstc() and getc() will use this in preference to real device input.
 	  The buffer is allocated immediately after the malloc() region is
 	  ready.
+
+config VERSION_VARIABLE
+	bool "add U-Boot environment variable vers"
+	default n
+	help
+	  If this variable is defined, an environment variable
+	  named "ver" is created by U-Boot showing the U-Boot
+	  version as printed by the "version" command.
+	  Any change to this variable will be reverted at the
+	  next reset.

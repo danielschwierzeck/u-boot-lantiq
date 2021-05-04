@@ -731,6 +731,7 @@ endif
 # Always append ALL so that arch config.mk's can add custom ones
 ALL-y += u-boot.srec u-boot.bin u-boot.sym System.map u-boot.cfg binary_size_check
 
+ALL-$(CONFIG_LANTIQ) += spl/u-boot.lzimg
 ALL-$(CONFIG_ONENAND_U_BOOT) += u-boot-onenand.bin
 ifeq ($(CONFIG_SPL_FSL_PBL),y)
 ALL-$(CONFIG_RAMBOOT_PBL) += u-boot-with-spl-pbl.bin
@@ -932,6 +933,14 @@ SPL_PAYLOAD := tpl/u-boot-with-tpl.bin
 else
 SPL_PAYLOAD := u-boot.bin
 endif
+
+spl/u-boot.lzimg: u-boot.bin System.map FORCE
+	lzma e u-boot.bin u-boot.lzma
+	$(srctree)/scripts_platform/pad2align.sh -n 16 u-boot.lzma
+	tools/mkimage -A mips -T firmware -C lzma \
+		-a 0x$(shell grep "T _start" System.map | awk '{ printf "%s", $$1 }') \
+		-e 0x$(shell grep "T _start" System.map | awk '{ printf "%s", $$1 }') \
+		-n 'u-boot image' -d u-boot.lzma $@
 
 OBJCOPYFLAGS_u-boot-with-spl.bin = -I binary -O binary \
 				   --pad-to=$(CONFIG_SPL_PAD_TO)
@@ -1265,6 +1274,12 @@ prepare0: archprepare FORCE
 # All the preparing..
 prepare: prepare0
 
+ifdef CONFIG_DEP_UBOOT_BIN
+DEP_UBOOT_BIN = u-boot.bin
+else
+DEP_UBOOT_BIN =
+endif
+
 # Generate some files
 # ---------------------------------------------------------------------------
 
@@ -1318,7 +1333,7 @@ u-boot.lds: $(LDSCRIPT) prepare FORCE
 
 spl/u-boot-spl.bin: spl/u-boot-spl
 	@:
-spl/u-boot-spl: tools prepare $(if $(CONFIG_OF_SEPARATE),dts/dt.dtb)
+spl/u-boot-spl: tools prepare $(if $(CONFIG_OF_SEPARATE),dts/dt.dtb) $(DEP_UBOOT_BIN)
 	$(Q)$(MAKE) obj=spl -f $(srctree)/scripts/Makefile.spl all
 
 spl/sunxi-spl.bin: spl/u-boot-spl
@@ -1409,7 +1424,7 @@ CLEAN_DIRS  += $(MODVERDIR) \
 			$(filter-out include, $(shell ls -1 $d 2>/dev/null))))
 
 CLEAN_FILES += include/bmp_logo.h include/bmp_logo_data.h include/license.h \
-	       boot* u-boot* MLO* SPL System.map
+	       boot* u-boot* MLO* SPL System.map ubootenv.img sfddr.bin tail.bin
 
 # Directories & files removed with 'make mrproper'
 MRPROPER_DIRS  += include/config include/generated spl tpl \
@@ -1441,6 +1456,7 @@ clean: $(clean-dirs)
 		-o -name '*.symtypes' -o -name 'modules.order' \
 		-o -name modules.builtin -o -name '.tmp_*.o.*' \
 		-o -name 'dsdt.aml' -o -name 'dsdt.asl.tmp' -o -name 'dsdt.c' \
+		-o -name '*.bch' -o -name '*.ltq' -o -name 'output.bin' \
 		-o -name '*.gcno' \) -type f -print | xargs rm -f
 
 # mrproper - Delete all generated files, including .config

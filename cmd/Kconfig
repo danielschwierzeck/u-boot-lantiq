@@ -23,6 +23,19 @@ config HUSH_PARSER
 	  If disabled, you get the old, much simpler behaviour with a somewhat
 	  smaller memory footprint.
 
+config CMDLINE_EDITING
+	bool "Enable command line editing"
+	depends on CMDLINE
+	help
+	  Enable editing and History functions for interactive command line
+	  input operations
+
+config AUTO_COMPLETE
+	bool "Enable auto complete using TAB"
+	depends on CMDLINE
+	help
+	  Enable auto completion of commands using TAB.
+
 config SYS_PROMPT
 	string "Shell prompt"
 	default "=> "
@@ -215,6 +228,11 @@ config CMD_XIMG
 	help
 	  Extract a part of a multi-image.
 
+config CMD_BOOT_TOS
+	bool "Boot Trusted OS"
+	default n
+	depends on ( DRIVER_GRX500 || DRIVER_PRX300 )
+
 config CMD_POWEROFF
 	bool
 
@@ -297,6 +315,15 @@ config CMD_MEMTEST
 	bool "memtest"
 	help
 	  Simple RAM read/write test.
+
+if CMD_MEMTEST
+
+config SYS_ALT_MEMTEST
+	bool "Alternative test"
+	help
+	  Use a more complete alternative memory test.
+
+endif
 
 config CMD_MX_CYCLIC
 	bool "mdc, mwc"
@@ -420,6 +447,16 @@ config CMD_GPIO
 	bool "gpio"
 	help
 	  GPIO support.
+
+config CMD_SSO
+	bool "serial shift output"
+	help
+	  Support serial shift output command
+
+config CMD_AQC
+	bool "Aquantia Firmware download"
+	help
+	  Support Aquantia 10G PHY MDIO boot
 
 endmenu
 
@@ -568,6 +605,12 @@ config CMD_MISC
 	help
 	  Delay execution for some time
 
+config CMD_DDR_STATUS
+	bool "ddr status"
+	default n
+	help
+	  Get the ddr debug status output
+
 config CMD_TIMER
 	bool "timer"
 	help
@@ -600,6 +643,12 @@ config CMD_QFW
 	  This provides access to the QEMU firmware interface.  The main
 	  feature is to allow easy loading of files passed to qemu-system
 	  via -kernel / -initrd
+
+config CMD_WATCHDOG
+	bool "watchdog timer application"
+	help
+	  User application to control the watchdog timer
+
 endmenu
 
 config CMD_BOOTSTAGE
@@ -665,6 +714,15 @@ config CMD_TPM_TEST
 	  tests pass correctly on Infineon TPMs but may need to be adjusted
 	  for other devices.
 
+config CMD_ROT
+     bool "rot"
+	 depends on ( DRIVER_GRX500 || DRIVER_PRX300 ) && MANUBOOT_OTP_SUPPORT
+
+config CMD_AUTH
+	bool "auth & auth_img & auth_initrd"
+	default n
+	depends on ( DRIVER_GRX500 || DRIVER_PRX300 )
+
 endmenu
 
 menu "Filesystem commands"
@@ -694,6 +752,12 @@ config CMD_FS_GENERIC
 	help
 	  Enables filesystem commands (e.g. load, ls) that work for multiple
 	  fs types.
+
+config CMD_UBI
+	bool "UBI related commands"
+	select MTD_UBI
+	help
+	  Enables ubi commands in u-boot
 endmenu
 
 endmenu

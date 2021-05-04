@@ -149,6 +149,10 @@ config SPL_OF_LIBFDT
 	  particular compatible nodes. The library operates on a flattened
 	  version of the device tree.
 
+config BCH
+	default n
+	bool "Enable BCH library"
+
 source lib/efi/Kconfig
 source lib/efi_loader/Kconfig
 

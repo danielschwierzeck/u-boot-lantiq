@@ -65,6 +65,7 @@ obj-$(CONFIG_CMD_FS_GENERIC) += fs.o
 obj-$(CONFIG_CMD_FUSE) += fuse.o
 obj-$(CONFIG_CMD_GETTIME) += gettime.o
 obj-$(CONFIG_CMD_GPIO) += gpio.o
+obj-$(CONFIG_CMD_AQC) += aqc.o
 obj-$(CONFIG_CMD_I2C) += i2c.o
 obj-$(CONFIG_CMD_IOTRACE) += iotrace.o
 obj-$(CONFIG_CMD_HASH) += hash.o
@@ -83,6 +84,7 @@ obj-$(CONFIG_LOGBUFFER) += log.o
 obj-$(CONFIG_ID_EEPROM) += mac.o
 obj-$(CONFIG_CMD_MD5SUM) += md5sum.o
 obj-$(CONFIG_CMD_MEMORY) += mem.o
+obj-$(CONFIG_CMD_DDR_STATUS) += ddr_status.o
 obj-$(CONFIG_CMD_IO) += io.o
 obj-$(CONFIG_CMD_MFSL) += mfsl.o
 obj-$(CONFIG_CMD_MII) += mii.o
@@ -112,6 +114,7 @@ obj-$(CONFIG_CMD_REISER) += reiser.o
 obj-$(CONFIG_CMD_REMOTEPROC) += remoteproc.o
 obj-$(CONFIG_SANDBOX) += host.o
 obj-$(CONFIG_CMD_SATA) += sata.o
+obj-$(CONFIG_CMD_SSO) += serial_sft_cmd.o
 obj-$(CONFIG_CMD_SF) += sf.o
 obj-$(CONFIG_SCSI) += scsi.o
 obj-$(CONFIG_CMD_SHA1SUM) += sha1sum.o
@@ -141,6 +144,7 @@ obj-$(CONFIG_CMD_FS_UUID) += fs_uuid.o
 
 obj-$(CONFIG_CMD_USB_MASS_STORAGE) += usb_mass_storage.o
 obj-$(CONFIG_CMD_THOR_DOWNLOAD) += thordown.o
+obj-$(CONFIG_CMD_WATCHDOG) += wdt.o
 obj-$(CONFIG_CMD_XIMG) += ximg.o
 obj-$(CONFIG_YAFFS2) += yaffs2.o
 obj-$(CONFIG_CMD_SPL) += spl.o
@@ -154,10 +158,65 @@ obj-$(CONFIG_CMD_ETHSW) += ethsw.o
 # Power
 obj-$(CONFIG_CMD_PMIC) += pmic.o
 obj-$(CONFIG_CMD_REGULATOR) += regulator.o
+obj-$(CONFIG_LANTIQ) += upgrade.o
+obj-$(CONFIG_CMD_BOOT_TOS) += cmd_secboot.o
+obj-$(CONFIG_CMD_ROT) += cmd_rot.o
+obj-$(CONFIG_CMD_AUTH) += cmd_auth.o
 endif # !CONFIG_SPL_BUILD
 
 obj-$(CONFIG_CMD_BLOB) += blob.o
+obj-$(CONFIG_MANUBOOT_OTP_SUPPORT) += otp_grx500.o
 
 # core command
 obj-y += nvedit.o
 obj-y += disk.o
+
+# forward a define to otp_grx500.c
+ifdef CONFIG_SPL_BUILD
+CFLAGS_otp_grx500.o := -DOTP_IN_FSB
+endif # CONFIG_SPL_BUILD
+
+ifdef CONFIG_MANUBOOT_OTP_SUPPORT
+
+###
+# filechk_otp_bin.h is implementation of kbuild filechk feature, to output to
+# stdout the content of generated otp_bin.h. the piped stdin is ignored since
+# it uses otp.bin in CONFIG_MANUBOOT_OTP
+#
+# Usage:
+# otp_bin.h : <unused input file>
+#	$(call filechk,otp_bin.h)
+# The rule defined shall write to stdout the content of the new file.
+# The existing file will be compared with the new one.
+# - If no file exist it is created
+# - If the content differ the new file is used
+# - If they are equal no change, and no timestamp update
+# - stdin is piped in from the first prerequisite ($<) so one has
+#   to specify a valid file as first prerequisite (often the kbuild file)
+define filechk_otp_bin.h
+	($(srctree)/scripts_platform/bin2array.pl $(CONFIG_MANUBOOT_OTP) $(srctree)/include/otp_bin.h.temporary oem_keys ; \
+	if [ -r  $(srctree)/include/otp_bin.h.temporary ]; then \
+		echo "/* generated from uboot */"; \
+		cat "$(srctree)/include/otp_bin.h.temporary" ; \
+	fi; \
+	rm -f $(srctree)/include/otp_bin.h.temporary)
+endef
+
+# somehow i have to state otp_bin.h as prereq for otp_grx500.c manually.
+# Also seem like it is enough to specify uboot only, it's still evaluated in spl
+# build. This is sort of a way to tell it to regenerate it by force (else I
+# can try to delete this otp_bin.h when the build start ?? )
+$(srctree)/cmd/otp_grx500.c : $(srctree)/include/otp_bin.h FORCE
+
+# SPL prereq
+#ifdef CONFIG_SPL_BUILD
+# $(srctree)/spl/cmd/otp_grx500.c : $(srctree)/include/otp_bin.h FORCE
+#
+#endif # CONFIG_SPL_BUILD
+
+$(srctree)/include/otp_bin.h : $(srctree)/Makefile FORCE
+	@echo "Generate OTP content"
+	$(call filechk,otp_bin.h)
+
+endif #CONFIG_MANUBOOT_OTP_SUPPORT
+

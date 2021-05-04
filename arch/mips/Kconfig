@@ -5,6 +5,7 @@ config SYS_ARCH
 	default "mips"
 
 config SYS_CPU
+	default "mipsIAP" if CPU_MIPS_IAP
 	default "mips32" if CPU_MIPS32
 	default "mips64" if CPU_MIPS64
 
@@ -73,6 +74,12 @@ config MACH_PIC32
 	select OF_CONTROL
 	select DM
 
+config LANTIQ
+	bool "Support Intel/Lantiq Platforms"
+	select SUPPORTS_BIG_ENDIAN
+	select SUPPORT_SPL
+	select CREATE_ARCH_SYMLINK
+
 endchoice
 
 source "board/dbau1x00/Kconfig"
@@ -82,6 +89,7 @@ source "board/pb1x00/Kconfig"
 source "board/qemu-mips/Kconfig"
 source "arch/mips/mach-ath79/Kconfig"
 source "arch/mips/mach-pic32/Kconfig"
+source "arch/mips/mach-lantiq/Kconfig"
 
 if MIPS
 
@@ -155,6 +163,11 @@ config CPU_MIPS64_R6
 	  Choose this option to build a kernel for release 6 or later of the
 	  MIPS64 architecture.
 
+config CPU_MIPS_IAP
+	bool "MIPS InterAptiv"
+	depends on SUPPORTS_CPU_IAP
+	select 32BIT
+
 endchoice
 
 menu "OS boot interface"
@@ -209,6 +222,9 @@ config SUPPORTS_CPU_MIPS64_R2
 	bool
 
 config SUPPORTS_CPU_MIPS64_R6
+	bool
+
+config SUPPORTS_CPU_IAP
 	bool
 
 config CPU_MIPS32

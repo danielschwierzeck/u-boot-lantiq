@@ -58,8 +58,10 @@ PLATFORM_CPPFLAGS += -D__MIPS__
 # to RAM. $28 is always used as gp.
 #
 ifdef CONFIG_SPL_BUILD
-PF_ABICALLS			:= -mno-abicalls
-PF_PIC				:= -fno-pic
+#PF_ABICALLS			:= -mno-abicalls
+#PF_PIC				:= -fno-pic
+PF_ABICALLS			:= -mabicalls
+PF_PIC				:= -fpic
 PF_PIE				:=
 else
 PF_ABICALLS			:= -mabicalls
@@ -76,3 +78,9 @@ PLATFORM_RELFLAGS		+= -ffunction-sections -fdata-sections
 LDFLAGS_FINAL			+= --gc-sections $(PF_PIE)
 OBJCOPYFLAGS			+= -j .text -j .rodata -j .data -j .u_boot_list
 OBJCOPYFLAGS			+= $(PF_OBJCOPY)
+
+ifdef CONFIG_LANTIQ
+OBJCOPYFLAGS            := --gap-fill=0xff
+# need this, otherwise u64 division in partial write will fail
+PLATFORM_LIBS			:= -L $(shell dirname `$(CC) $(CFLAGS) -print-libgcc-file-name`) -lgcc 
+endif

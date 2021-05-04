@@ -1,0 +1,86 @@
+
+menu "Intel/Lantiq Platform"
+	depends on LANTIQ
+
+choice 
+	prompt "Select Target Platform"
+
+config LANTIQ_UBOOT_prx300
+	bool "PRX300"
+	select DRIVER_PRX300
+	select SUPPORTS_CPU_IAP
+
+config LANTIQ_UBOOT_grx500
+	bool "xRX500/xRX550 Platforms"
+	select DRIVER_GRX500
+	select SUPPORTS_CPU_IAP
+
+config LANTIQ_UBOOT_grx390
+	bool "xRX330/xRX390 Platforms"
+	select SUPPORTS_CPU_MIPS32_R2
+	select MIPS_TUNE_4KC
+	select DRIVER_GRX390
+	select DRIVER_AR10
+
+config LANTIQ_UBOOT_ar10
+	bool "AR10/xRX300 Platforms"
+	select SUPPORTS_CPU_MIPS32_R2
+	select MIPS_TUNE_4KC
+	select DRIVER_AR10
+
+config LANTIQ_UBOOT_vr9
+	bool "VR9/xRX200 Platforms"
+	select SUPPORTS_CPU_MIPS32_R2
+	select MIPS_TUNE_4KC
+	select DRIVER_VR9
+
+endchoice
+
+config SYS_SOC
+	default "prx300" if ( LANTIQ_UBOOT_prx300 )
+    default "grx500" if ( LANTIQ_UBOOT_grx500 )
+    default "ar10" if ( LANTIQ_UBOOT_ar10 || LANTIQ_UBOOT_grx390 )
+    default "vr9" if ( LANTIQ_UBOOT_vr9 )
+
+config IFX_UBOOT_OPTIMIZED
+	bool
+	default y
+
+config CONFIG_REMOVE_GZIP
+	bool
+    default y
+
+config CONFIG_IFX_MIPS
+      bool
+      default y
+
+config CROSS_COMPILE_UCLIBC
+      bool
+      default y
+
+config LANTIQ_UART
+	  bool
+	  default y
+
+
+source board/lantiq/Kconfig
+
+menu "Network Settings"
+config IP_ADDRESS
+    string "IP address"
+    default 192.168.1.1
+
+config SERVER_IP_ADDRESS
+    string "Server IP address"
+    default 192.168.1.2
+
+config ETHERNET_ADDRESS
+    string "Ethernet Address"
+    default "00:E0:92:00:01:40"
+
+config ETHERNET_DEVICE
+    string "Ethernet Interface"
+    default "eth0"
+
+endmenu
+endmenu

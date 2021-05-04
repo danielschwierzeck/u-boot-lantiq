@@ -132,6 +132,13 @@ config SPL
 	help
 	  If you want to build SPL as well as the normal image, say Y.
 
+config EXT_SPL_PATH
+	string "PATH of SPL start.S located in a different directory"
+	depends on SPL
+	help
+	  The path where your SPL start.S may reside in for platforms
+	  with a different start.S from u-boot start.S
+
 config SPL_SYS_MALLOC_SIMPLE
 	bool
 	depends on SPL
@@ -336,3 +343,5 @@ source "fs/Kconfig"
 source "lib/Kconfig"
 
 source "test/Kconfig"
+
+source "disk/Kconfig"

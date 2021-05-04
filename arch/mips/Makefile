@@ -2,8 +2,6 @@
 # SPDX-License-Identifier:	GPL-2.0+
 #
 
-head-y := arch/mips/cpu/start.o
-
 ifeq ($(CONFIG_SPL_BUILD),y)
 ifneq ($(CONFIG_SPL_START_S_PATH),)
 head-y := $(CONFIG_SPL_START_S_PATH:"%"=%)/start.o
@@ -16,9 +14,19 @@ libs-y += arch/mips/lib/
 machine-$(CONFIG_SOC_AU1X00) += au1x00
 machine-$(CONFIG_ARCH_ATH79) += ath79
 machine-$(CONFIG_MACH_PIC32) += pic32
+machine-$(CONFIG_LANTIQ) += lantiq
 
 machdirs := $(patsubst %,arch/mips/mach-%/,$(machine-y))
 libs-y += $(machdirs)
+
+ifdef CONFIG_LANTIQ
+ifndef CONFIG_SPL_BUILD
+head-y := $(machdirs)$(SOC)/start_uboot.o
+endif
+else
+head-y := arch/mips/cpu/start.o
+endif
+
 
 PLATFORM_CPPFLAGS += $(patsubst %,-I$(srctree)/%include,$(machdirs))
 
@@ -29,6 +37,7 @@ arch-$(CONFIG_CPU_MIPS32_R6) += -march=mips32r6 -Wa,-mips32r6
 arch-$(CONFIG_CPU_MIPS64_R1) += -march=mips64 -Wa,-mips64
 arch-$(CONFIG_CPU_MIPS64_R2) += -march=mips64r2 -Wa,-mips64r2
 arch-$(CONFIG_CPU_MIPS64_R6) += -march=mips64r6 -Wa,-mips64r6
+arch-$(CONFIG_CPU_MIPS_IAP) += -march=r1004kc -mno-dsp -mno-mips3d
 
 # Allow extra optimization for specific CPUs/SoCs
 tune-$(CONFIG_MIPS_TUNE_4KC) += -mtune=4kc
