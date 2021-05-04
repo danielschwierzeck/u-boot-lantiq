@@ -66,4 +66,10 @@ config BOOTP_VCI_STRING
 config SPL_NET_VCI_STRING
 	string
 
+config TFTP_BLOCKSIZE
+	int "TFTP block size"
+	default 512
+	help
+	  Default TFTP block size.
+
 endif   # if NET
