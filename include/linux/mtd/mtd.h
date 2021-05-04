@@ -218,6 +218,8 @@ struct mtd_info {
 			  struct mtd_oob_ops *ops);
 	int (*_write_oob) (struct mtd_info *mtd, loff_t to,
 			   struct mtd_oob_ops *ops);
+	int (*write_partial) (struct mtd_info *mtd, loff_t to, u64 len, 
+					u64 *retlen, const u_char *buf);
 	int (*_get_fact_prot_info) (struct mtd_info *mtd, size_t len,
 				    size_t *retlen, struct otp_info *buf);
 	int (*_read_fact_prot_reg) (struct mtd_info *mtd, loff_t from,

@@ -162,10 +162,15 @@ bad:
 	return err;
 }
 
-static int ubi_create_vol(char *volume, int64_t size, int dynamic)
+int ubi_create_vol(char *volume, int64_t size, int dynamic)
 {
 	struct ubi_mkvol_req req;
 	int err;
+
+	if (!volume) {
+		printf("Error creating NULL name volume\n");
+		return -EINVAL;
+	}
 
 	if (dynamic)
 		req.vol_type = UBI_DYNAMIC_VOLUME;
@@ -175,6 +180,11 @@ static int ubi_create_vol(char *volume, int64_t size, int dynamic)
 	req.vol_id = UBI_VOL_NUM_AUTO;
 	req.alignment = 1;
 	req.bytes = size;
+
+	if (strlen(volume) > UBI_MAX_VOLUME_NAME) {
+		printf("Error creating vol, %s name too long\n", volume);
+		return -EINVAL;
+	}
 
 	strcpy(req.name, volume);
 	req.name_len = strlen(volume);
@@ -207,7 +217,7 @@ static struct ubi_volume *ubi_find_volume(char *volume)
 	return NULL;
 }
 
-static int ubi_remove_vol(char *volume)
+int ubi_remove_vol(char *volume)
 {
 	int err, reserved_pebs, i;
 	struct ubi_volume *vol;

@@ -57,6 +57,11 @@ static inline int nand_write(struct mtd_info *info, loff_t ofs, size_t *len,
 	return mtd_write(info, ofs, *len, (size_t *)len, buf);
 }
 
+static inline int nand_write_partial(struct mtd_info *info, ulong ofs, u64 *len, u_char *buf)
+{
+    return info->write_partial(info, ofs, *len, (u64 *)len, buf);
+}
+
 static inline int nand_block_isbad(struct mtd_info *info, loff_t ofs)
 {
 	return mtd_block_isbad(info, ofs);
