@@ -451,6 +451,15 @@ static int initr_onenand(void)
 }
 #endif
 
+/* save tuned ddr parameters */
+#ifdef CONFIG_TUNE_DDR
+static int save_ddr_parameters(void)
+{ 
+    save_ddr_param();
+	return 0;
+}
+#endif
+
 #ifdef CONFIG_GENERIC_MMC
 static int initr_mmc(void)
 {
@@ -866,6 +875,9 @@ init_fnc_t init_sequence_r[] = {
 	initr_dataflash,
 #endif
 	initr_env,
+#ifdef CONFIG_TUNE_DDR
+	save_ddr_parameters,
+#endif
 #ifdef CONFIG_SYS_BOOTPARAMS_LEN
 	initr_malloc_bootparams,
 #endif
