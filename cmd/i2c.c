@@ -617,21 +617,24 @@ static int do_i2c_md ( cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[]
  * on error.
  *
  * Syntax:
- *	i2c mw {i2c_chip} {addr}{.0, .1, .2} {data} [{count}]
+ *	i2c mw {i2c_chip} {addr}{.0, .1, .2} {data} [{count}] [-s]
  */
 static int do_i2c_mw ( cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 {
 	uint	chip;
 	ulong	addr;
 	int	alen;
-	uchar	byte;
+	int     len = 1;
+	int     i;
+	ulong   data;
+	uchar	byte[sizeof(ulong)];
 	int	count;
 	int ret;
 #ifdef CONFIG_DM_I2C
 	struct udevice *dev;
 #endif
 
-	if ((argc < 4) || (argc > 5))
+	if ((argc < 4) || (argc > 6))
 		return CMD_RET_USAGE;
 
 	/*
@@ -656,22 +659,32 @@ static int do_i2c_mw ( cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[]
 #endif
 	/*
 	 * Value to write is always specified.
+	 * Convert long data to array of bytes.
 	 */
-	byte = simple_strtoul(argv[3], NULL, 16);
+	data = simple_strtoul(argv[3], NULL, 16);
+	for (i = 0; i < sizeof(ulong); i++)
+		byte[i] = data >> (8 * i);
 
+	if (argc == 6 && !strcmp(argv[5], "-s")) {
+		/*
+		 * Write all bytes in a single I2C transaction.
+		 */
+		len = simple_strtoul(argv[4], NULL, 16);
+		count = 1;
 	/*
 	 * Optional count
 	 */
-	if (argc == 5)
+	} else if (argc == 5) {
 		count = simple_strtoul(argv[4], NULL, 16);
-	else
+	} else {
 		count = 1;
+	}
 
 	while (count-- > 0) {
 #ifdef CONFIG_DM_I2C
-		ret = dm_i2c_write(dev, addr++, &byte, 1);
+		ret = dm_i2c_write(dev, addr++, byte, len);
 #else
-		ret = i2c_write(chip, addr++, alen, &byte, 1);
+		ret = i2c_write(chip, addr++, alen, byte, len);
 #endif
 		if (ret)
 			return i2c_report_err(ret, I2C_ERR_WRITE);
@@ -2018,7 +2031,8 @@ static char i2c_help_text[] =
 	"i2c loop chip address[.0, .1, .2] [# of objects] - looping read of device\n"
 	"i2c md chip address[.0, .1, .2] [# of objects] - read from I2C device\n"
 	"i2c mm chip address[.0, .1, .2] - write to I2C device (auto-incrementing)\n"
-	"i2c mw chip address[.0, .1, .2] value [count] - write to I2C device (fill)\n"
+	"i2c mw chip address[.0, .1, .2] value [count] [-s] - write to I2C device (fill)\n"
+	"          the -s option selects bulk write in a single transaction\n"
 	"i2c nm chip address[.0, .1, .2] - write to I2C device (constant address)\n"
 	"i2c probe [address] - test for and show device(s) on the I2C bus\n"
 	"i2c read chip address[.0, .1, .2] length memaddress - read to memory\n"
