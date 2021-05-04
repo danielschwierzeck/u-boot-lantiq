@@ -89,6 +89,7 @@ struct inflate_state {
     unsigned wsize;             /* window size or zero if not using window */
     unsigned whave;             /* valid bytes in the window */
     unsigned write;             /* window write index */
+    unsigned wnext;             /* window write index */
     unsigned char FAR *window;  /* allocated sliding window, if needed */
         /* bit accumulator */
     unsigned long hold;         /* input bit accumulator */
@@ -112,4 +113,7 @@ struct inflate_state {
     unsigned short lens[320];   /* temporary storage for code lengths */
     unsigned short work[288];   /* work area for code table building */
     code codes[ENOUGH];         /* space for code tables */
+    int sane;                   /* if false, allow invalid distance too far */
+    int back;                   /* bits back of last unprocessed length/lit */
+    unsigned was;               /* initial length of match */
 };
