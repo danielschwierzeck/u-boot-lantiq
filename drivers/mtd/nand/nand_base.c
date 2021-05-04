@@ -43,6 +43,10 @@
 #include <asm/io.h>
 #include <asm/errno.h>
 
+#include <linux/math64.h>
+#include <linux/types.h>
+#include <spinand.h>
+
 /* Define default oob placement schemes for large and small page devices */
 static struct nand_ecclayout nand_oob_8 = {
 	.eccbytes = 3,
@@ -86,6 +90,250 @@ static struct nand_ecclayout nand_oob_128 = {
 		{.offset = 2,
 		 .length = 78} }
 };
+
+#ifdef CONFIG_NAND_ECC_HW_REED_SOLOMON
+static struct nand_ecclayout nand_oob_224 = {
+        .eccbytes = 96,
+		.eccpos = {
+                    128, 129, 130, 131, 132, 133, 134, 135,
+					136, 137, 138, 139, 140, 141, 142, 143,
+					144, 145, 146, 147, 148, 149, 150, 151,
+					152, 153, 154, 155, 156, 157, 158, 159,
+					160, 161, 162, 163, 164, 165, 166, 167,
+					168, 169, 170, 171, 172, 173, 174, 175,
+					176, 177, 178, 179, 180, 181, 182, 183,
+					184, 185, 186, 187, 188, 189, 190, 191,
+					192, 193, 194, 195, 196, 197, 198, 199,
+					200, 201, 202, 203, 204, 205, 206, 207,
+					208, 209, 210, 211, 212, 213, 214, 215,
+					216, 217, 218, 219, 220, 221, 222, 223,
+		           },
+	     .oobfree = {
+		         {.offset = 2,
+		          .length = 126}}
+};
+
+
+static struct nand_ecclayout nand_oob_436 = {
+	.eccbytes = 96,
+	.eccpos = {
+		    340, 341, 342, 343, 344, 345, 346, 347,
+        348, 349, 350, 351, 352, 353, 354, 355,
+        356, 357, 358, 359, 360, 361, 362, 363,
+        364, 365, 366, 367, 368, 369, 370, 371,
+        372, 373, 374, 375, 376, 377, 378, 379,
+        380, 381, 382, 383, 384, 385, 386, 387,
+        388, 389, 390, 391, 392, 393, 394, 395,
+        396, 397, 398, 399, 400, 401, 402, 403,
+        404, 405, 406, 407, 408, 409, 410, 411,
+        412, 413, 414, 415, 416, 417, 418, 419,
+        420, 421, 422, 423, 424, 425, 426, 427,
+        428, 429, 430, 431, 432, 433, 434, 435,},
+	.oobfree = {
+		{.offset = 2,
+		 .length = 338}}
+};
+
+static struct nand_ecclayout nand_oob_448 = {
+	.eccbytes = 96,
+	.eccpos = {
+		    352, 353, 354, 355, 356, 357, 358, 359,
+        360, 361, 362, 363, 364, 365, 366, 367,
+        368, 369, 370, 371, 372, 373, 374, 375,
+        376, 377, 378, 379, 380, 381, 382, 383,
+        384, 385, 386, 387, 388, 389, 390, 391,
+        392, 393, 394, 395, 396, 397, 398, 399,
+        400, 401, 402, 403, 404, 405, 406, 407,
+        408, 409, 410, 411, 412, 413, 414, 415,
+        416, 417, 418, 419, 420, 421, 422, 423,
+        424, 425, 426, 427, 428, 429, 430, 431,
+        432, 433, 434, 435, 436, 437, 438, 439,
+        440, 441, 442, 443, 444, 445, 446, 447,},
+	.oobfree = {
+		{.offset = 2,
+		 .length = 350}}
+};
+
+static struct nand_ecclayout nand_oob_744 = {
+	.eccbytes = 560,
+	.eccpos = {
+		212, 213, 214, 215, 216, 217, 218, 219,
+		219, 220, 221, 222, 223, 224, 225, 226,
+		226, 227, 228, 229, 230, 231, 232, 233,
+		233, 234, 235, 236, 237, 238, 239, 240,
+		240, 241, 242, 243, 244, 245, 246, 247,
+		247, 248, 249, 250, 251, 252, 253,
+		254, 255, 256, 257, 258, 259, 260, 261,
+		261, 262, 263, 264, 265, 266, 267, 268,
+		268, 269, 270, 271, 272, 273, 274, 275,
+		275, 276, 277, 278, 279, 280, 281, 282,
+		282, 283, 284, 285, 286, 287, 288, 289,
+		289, 290, 291, 292, 293, 294, 295, 296,
+		296, 297, 298, 299, 300, 301, 302, 303,
+		303, 304, 305, 306, 307, 308, 309, 310,
+		310, 311, 312, 313, 314, 315, 316, 317,
+		317, 318, 319, 320, 321, 322, 323, 324,
+		324, 325, 326, 327, 328, 329, 330, 331,
+		331, 332, 333, 334, 335, 336, 337, 338,
+		338, 339, 340, 341, 342, 343, 344, 345,
+		345, 346, 347, 348, 349, 350, 351, 352,
+		352, 353, 354, 355, 356, 357, 358, 359,
+		359, 360, 361, 362, 363, 364, 365, 366,
+		366, 367, 368, 369, 370, 371, 372, 373,
+		373, 374, 375, 376, 377, 378, 379, 380,
+		380, 381, 382, 383, 384, 385, 386, 387,
+		387, 388, 389, 390, 391, 392, 393, 394,
+		394, 395, 396, 397, 398, 399, 400, 401,
+		401, 402, 403, 404, 405, 406, 407, 408,
+		408, 409, 410, 411, 412, 413, 414, 415,
+		415, 416, 417, 418, 419, 420, 421, 422,
+		422, 423, 424, 425, 426, 427, 428, 429,
+		429, 430, 431, 432, 433, 434, 435, 436,
+		436, 437, 438, 439, 440, 441, 442, 443,
+		443, 444, 445, 446, 447, 448, 449, 450,
+		450, 451, 452, 453, 454, 455, 456, 457,
+		457, 458, 459, 460, 461, 462, 463, 464,
+		464, 465, 466, 467, 468, 469, 470, 471,
+		471, 472, 473, 474, 475, 476, 477, 478,
+		478, 479, 480, 481, 482, 483, 484, 485,
+		485, 486, 487, 488, 489, 490, 491, 492,
+		492, 493, 494, 495, 496, 497, 498, 499,
+		499, 500, 501, 502, 503, 504, 505, 506,
+		506, 507, 508, 509, 510, 511, 512, 513,
+		513, 514, 515, 516, 517,
+		518, 519, 520, 521, 522, 523, 524, 525,
+		525, 526, 527, 528, 529, 530, 531, 532,
+		532, 533, 534, 535, 536, 537, 538, 539,
+		539, 540, 541, 542, 543, 544, 545, 546,
+		546, 547, 548, 549, 550, 551, 552, 553,
+		553, 554, 555, 556, 557, 558, 559, 560,
+		560, 561, 562, 563, 564, 565, 566, 567,
+		567, 568, 569, 570, 571, 572, 573, 574,
+		574, 575, 576, 577, 578, 579, 580, 581,
+		581, 582, 583, 584, 585, 586, 587, 588,
+		588, 589, 590, 591, 592, 593, 594, 595,
+		595, 596, 597, 598, 599, 600, 601, 602,
+		602, 603, 604, 605, 606, 607, 608, 609,
+		609, 610, 611, 612, 613, 614, 615, 616,
+		616, 617, 618, 619, 620, 621, 622, 623,
+		623, 624, 625, 626, 627, 628, 629, 630,
+		630, 631, 632, 633, 634, 635, 636, 637,
+		637, 638, 639, 640, 641, 642, 643, 644,
+		644, 645, 646, 647, 648, 649, 650, 651,
+		651, 652, 653, 654, 655, 656, 657, 658,
+		658, 659, 660, 661, 662, 663, 664, 665,
+		665, 666, 667, 668, 669, 670, 671, 672,
+		672, 673, 674, 675, 676, 677, 678, 679,
+		679, 680, 681, 682, 683, 684, 685, 686,
+		686, 687, 688, 689, 690, 691, 692, 693,
+		693, 694, 695, 696, 697, 698, 699, 700,
+		700, 701, 702, 703, 704, 705, 706, 707,
+		707, 708, 709, 710, 711, 712, 713, 714,
+		714, 715, 716, 717, 718, 719, 720, 721,
+		721, 722, 723, 724, 725, 726, 727, 728,
+		728, 729, 730, 731, 732, 733, 734, 735,
+		735, 736, 737, 738, 739, 740, 741, 742,
+		742, 743, 744, 745, 746, 747, 748, 749,
+		749, 750, 751, 752, 753, 754, 755, 756,
+		756, 757, 758, 759, 760, 761, 762, 763,
+		763, 764, 765, 766, 767, 768, 769, 770,
+		770, 771, 772, 773},
+	.oobfree = {
+		{.offset = 2,
+		 .length = 212}}
+};
+
+static struct nand_ecclayout nand_oob_1280 = {
+    .eccbytes = 560,
+    .eccpos = {
+		720, 721, 722, 723, 724, 725, 726, 727,
+		727, 728, 729, 730, 731, 732, 733, 734,
+		734, 735, 736, 737, 738, 739, 740, 741,
+		741, 742, 743, 744, 745, 746, 747, 748,
+		748, 749, 750, 751, 752, 753, 754, 755,
+		755, 756, 757, 758, 759, 760, 761, 762,
+		762, 763, 764, 765, 766, 767, 768, 769,
+		769, 770, 771, 772, 773, 774, 775, 776,
+		776, 777, 778, 779, 780, 781, 782, 783,
+		783, 784, 785, 786, 787, 788, 789, 790,
+		790, 791, 792, 793, 794, 795, 796, 797,
+		797, 798, 799, 800, 801, 802, 803, 804,
+		804, 805, 806, 807, 808, 809, 810, 811,
+		811, 812, 813, 814, 815, 816, 817, 818,
+		818, 819, 820, 821, 822, 823, 824, 825,
+		825, 826, 827, 828, 829, 830, 831, 832,
+		832, 833, 834, 835, 836, 837, 838, 839,
+		839, 840, 841, 842, 843, 844, 845, 846,
+		846, 847, 848, 849, 850, 851, 852, 853,
+		853, 854, 855, 856, 857, 858, 859, 860,
+		860, 861, 862, 863, 864, 865, 866, 867,
+		867, 868, 869, 870, 871, 872, 873, 874,
+		874, 875, 876, 877, 878, 879, 880, 881,
+		881, 882, 883, 884, 885, 886, 887, 888,
+		888, 889, 890, 891, 892, 893, 894, 895,
+		895, 896, 897, 898, 899, 900, 901, 902,
+		902, 903, 904, 905, 906, 907, 908, 909,
+		909, 910, 911, 912, 913, 914, 915, 916,
+		916, 917, 918, 919, 920, 921, 922, 923,
+		923, 924, 925, 926, 927, 928, 929, 930,
+		930, 931, 932, 933, 934, 935, 936, 937,
+		937, 938, 939, 940, 941, 942, 943, 944,
+		944, 945, 946, 947, 948, 949, 950, 951,
+		951, 952, 953, 954, 955, 956, 957, 958,
+		958, 959, 960, 961, 962, 963, 964, 965,
+		965, 966, 967, 968, 969, 970, 971, 972,
+		972, 973, 974, 975, 976, 977, 978, 979,
+		979, 980, 981, 982, 983, 984, 985, 986,
+		986, 987, 988, 989, 990, 991, 992, 993,
+		993, 994, 995, 996, 997, 998, 999, 1000,
+		1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007,
+		1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014,
+		1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021,
+		1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028,
+		1028, 1029, 1030, 1031, 1032, 1033, 1034, 1035,
+		1035, 1036, 1037, 1038, 1039, 1040, 1041, 1042,
+		1042, 1043, 1044, 1045, 1046, 1047, 1048, 1049,
+		1049, 1050, 1051, 1052, 1053, 1054, 1055, 1056,
+		1056, 1057, 1058, 1059, 1060, 1061, 1062, 1063,
+		1063, 1064, 1065, 1066, 1067, 1068, 1069, 1070,
+		1070, 1071, 1072, 1073, 1074, 1075, 1076, 1077,
+		1077, 1078, 1079, 1080, 1081, 1082, 1083, 1084,
+		1084, 1085, 1086, 1087, 1088, 1089, 1090, 1091,
+		1091, 1092, 1093, 1094, 1095, 1096, 1097, 1098,
+		1098, 1099, 1100, 1101, 1102, 1103, 1104, 1105,
+		1105, 1106, 1107, 1108, 1109, 1110, 1111, 1112,
+		1112, 1113, 1114, 1115, 1116, 1117, 1118, 1119,
+		1119, 1120, 1121, 1122, 1123, 1124, 1125, 1126,
+		1126, 1127, 1128, 1129, 1130, 1131, 1132, 1133,
+		1133, 1134, 1135, 1136, 1137, 1138, 1139, 1140,
+		1140, 1141, 1142, 1143, 1144, 1145, 1146, 1147,
+		1147, 1148, 1149, 1150, 1151, 1152, 1153, 1154,
+		1154, 1155, 1156, 1157, 1158, 1159, 1160, 1161,
+		1161, 1162, 1163, 1164, 1165, 1166, 1167, 1168,
+		1168, 1169, 1170, 1171, 1172, 1173, 1174, 1175,
+		1175, 1176, 1177, 1178, 1179, 1180, 1181, 1182,
+		1182, 1183, 1184, 1185, 1186, 1187, 1188, 1189,
+		1189, 1190, 1191, 1192, 1193, 1194, 1195, 1196,
+		1196, 1197, 1198, 1199, 1200, 1201, 1202, 1203,
+		1203, 1204, 1205, 1206, 1207, 1208, 1209, 1210,
+		1210, 1211, 1212, 1213, 1214, 1215, 1216, 1217,
+		1217, 1218, 1219, 1220, 1221, 1222, 1223, 1224,
+		1224, 1225, 1226, 1227, 1228, 1229, 1230, 1231,
+		1231, 1232, 1233, 1234, 1235, 1236, 1237, 1238,
+		1238, 1239, 1240, 1241, 1242, 1243, 1244, 1245,
+		1245, 1246, 1247, 1248, 1249, 1250, 1251, 1252,
+		1252, 1253, 1254, 1255, 1256, 1257, 1258, 1259,
+		1259, 1260, 1261, 1262, 1263, 1264, 1265, 1266,
+		1266, 1267, 1268, 1269, 1270, 1271, 1272, 1273,
+		1273, 1274, 1275, 1276, 1277, 1278, 1279},
+    .oobfree = {
+        {
+		 .offset = 2,
+         .length = 718
+		}
+	}
+};
+#endif /* CONFIG_NAND_ECC_HW_REED_SOLOMON */
 
 static int nand_get_device(struct mtd_info *mtd, int new_state);
 
@@ -877,7 +1125,7 @@ static int nand_wait(struct mtd_info *mtd, struct nand_chip *chip)
 
  	u32 timer = (CONFIG_SYS_HZ * timeo) / 1000;
  	u32 time_start;
- 
+
  	time_start = get_timer(0);
  	while (get_timer(time_start) < timer) {
 		if (chip->dev_ready) {
@@ -2534,6 +2782,78 @@ static int nand_write(struct mtd_info *mtd, loff_t to, size_t len,
 	return ret;
 }
 
+#ifndef CONFIG_SPL_BUILD
+static int nand_write_partial (struct mtd_info *mtd, loff_t offset,
+			uint64_t len, uint64_t *retlen, const u_char * buf)
+{
+    unsigned long sect_addr;
+    unsigned long sector_size;
+    unsigned char *sect_buf = NULL;
+    int f_start_partial=0;
+    int f_end_partial=0;
+    int f_malloc=0;
+    int total_sect_num=0;
+    struct erase_info erase;
+    int i;
+	u32 rem;
+    sector_size = mtd->erasesize;
+
+    if( (offset % sector_size)!=0 ) f_start_partial = 1;
+    if( ( (offset + len ) % sector_size)!=0 ) f_end_partial = 1;
+
+    total_sect_num = (offset + len -1) / sector_size - offset / sector_size + 1;
+    sect_addr = offset / sector_size;
+
+    sect_buf = (unsigned char *) buf;
+    for(i=0; i<total_sect_num; i++){
+             if((f_start_partial && i==0) || (f_end_partial && total_sect_num ==1)) {
+				 sect_buf=(uchar *)memalign(32, sector_size);
+				 asm("sync");
+				 nand_read(mtd, (sect_addr + i) * sector_size,
+				 		(uint64_t)sector_size, (size_t *) retlen, sect_buf);
+				 asm("sync");
+				 memcpy(sect_buf + (offset % (u32)sector_size), buf, \
+                        min((uint64_t)(sector_size-(offset % sector_size)),len));
+                 f_malloc = 1;
+              }
+              else if(f_end_partial && i == total_sect_num -1 && i!=0){
+                 sect_buf=(uchar *)memalign(32, sector_size);;
+                 nand_read(mtd, (sect_addr + i) * sector_size,
+				 		(uint64_t)sector_size, (size_t *) retlen, sect_buf);
+				 memcpy(sect_buf,buf+i*sector_size-(offset % sector_size), (offset+len) % sector_size);
+                 f_malloc=1;
+              }
+
+
+             memset(&erase, 0, sizeof(erase));
+             erase.mtd  = mtd;
+             erase.addr = (sect_addr + i) * sector_size;
+             erase.len  = sector_size;
+             erase.state = 0;
+             if (nand_block_checkbad( mtd, erase.addr, 1)){
+                   pr_info("block bad, partial write failed..\n");
+				   *retlen = 0;
+				   return 0;
+			 }
+
+			 nand_erase_nand (mtd, &erase,0);
+
+             nand_write(mtd, (sect_addr + i) * sector_size,
+			 		(uint64_t)sector_size, (size_t *) retlen, sect_buf);
+             if(f_malloc) {
+                 free(sect_buf);
+				 f_malloc=0;
+               }
+
+			 div_u64_rem(offset, (u32) sector_size, &rem);
+             sect_buf = (unsigned char *) buf + (i+1)*sector_size - rem;
+        }
+      *retlen = (uint64_t)len;
+	  return 0;
+}
+
+#endif /* __UBOOT__ */
+
 /**
  * nand_do_write_oob - [MTD Interface] NAND write out-of-band
  * @mtd: MTD device structure
@@ -2725,7 +3045,7 @@ int nand_erase_nand(struct mtd_info *mtd, struct erase_info *instr,
 
 	/* Check, if it is write protected */
 	if (nand_check_wp(mtd)) {
-		pr_debug("%s: device is write protected!\n",
+		pr_warn("%s: device is write protected!\n",
 				__func__);
 		instr->state = MTD_ERASE_FAILED;
 		goto erase_exit;
@@ -2768,7 +3088,7 @@ int nand_erase_nand(struct mtd_info *mtd, struct erase_info *instr,
 
 		/* See if block erase succeeded */
 		if (status & NAND_STATUS_FAIL) {
-			pr_debug("%s: failed erase, page 0x%08x\n",
+			pr_warn("%s: failed erase, page 0x%08x\n",
 					__func__, page);
 			instr->state = MTD_ERASE_FAILED;
 			instr->fail_addr =
@@ -3193,6 +3513,11 @@ static int nand_flash_detect_onfi(struct mtd_info *mtd, struct nand_chip *chip,
 		pr_warn("Could not retrieve ONFI ECC requirements\n");
 	}
 
+	if (!chip->ecc_strength_ds) { /* zero ECC, ECC-free flash */
+		chip->options |= NAND_MXIC_ECC_FREE;
+		chip->ecc.mode = NAND_ECC_BENAND;
+	}
+
 	if (p->jedec_id == NAND_MFR_MICRON)
 		nand_onfi_detect_micron(chip, p);
 
@@ -3481,11 +3806,20 @@ static void nand_decode_ext_id(struct mtd_info *mtd, struct nand_chip *chip,
 		 */
 		if (id_len >= 6 && id_data[0] == NAND_MFR_TOSHIBA &&
 				nand_is_slc(chip) &&
-				(id_data[5] & 0x7) == 0x6 /* 24nm */ &&
-				!(id_data[4] & 0x80) /* !BENAND */) {
-			mtd->oobsize = 32 * mtd->writesize >> 9;
+				(id_data[5] & 0x7) == 0x6) { /* 24nm */
+
+			if ((id_data[4] & 0x80) /* BENAND */)
+				chip->ecc.mode = NAND_ECC_BENAND;
+			else
+				mtd->oobsize = 32 * mtd->writesize >> 9; /* !BENAND */
 		}
 
+		/* Check if MXIC ECC-Free NAND */
+		if((id_data[0] == NAND_MFR_MACRONIX) &&
+			((id_data[4] & 0x80) != 0)) {
+			chip->options |= NAND_MXIC_ECC_FREE;
+			chip->ecc.mode = NAND_ECC_BENAND;
+		}
 	}
 }
 
@@ -3590,6 +3924,102 @@ static bool find_full_id_nand(struct mtd_info *mtd, struct nand_chip *chip,
 	return false;
 }
 
+#ifdef CONFIG_SPINAND_LANTIQ
+
+/*
+ * Check if the NAND chip is SPI NAND flash, returns 1 if it is, 0 otherwise.
+ */
+static int spinand_flash_detect(struct mtd_info *mtd, struct nand_chip *chip,
+						int *busw)
+{
+	int retval = 0;
+	int i;
+	u8 id_data[8];
+	u8 mfr_id;
+	struct spinand_flash_dev *type = NULL;
+	struct spinand_info *info = (struct spinand_info *)chip->priv;
+
+	chip->cmdfunc(mtd, NAND_CMD_READID, 0x00, -1);
+	for (i = 0; i < 3; i++)
+		id_data[i] = chip->read_byte(mtd);
+
+	if (!type)
+		type = spinand_flash_ids;
+
+	for (; type->name != NULL; type++)
+		if ((id_data[0] == type->mf_id) &&
+			(id_data[1] == type->dev_id))
+			break;
+
+	if (!type->name)
+		goto probe_done;
+
+	mfr_id = id_data[0];
+	mtd->name = type->name;
+	mtd->erasesize = type->erasesize;
+	mtd->writesize = type->pagesize;
+	mtd->oobsize = type->oobsize;
+
+	chip->chipsize = (type->chipsize) << 20;
+	chip->ecc.size = 512;
+	chip->ecc.bytes = 8;
+
+	switch (mfr_id) {
+	case NAND_MFR_WINDBOND:
+		chip->bbt_options |= NAND_BBT_NO_OOB;
+		chip->ecc.strength = 1;
+		break;
+	case NAND_MFR_MICRON:
+		if (mtd->oobsize == 64)
+			chip->ecc.strength = 4;
+		else
+			chip->ecc.strength = 8;
+		break;
+	case NAND_MFR_MACRONIX:
+		chip->ecc.strength = 4;
+		break;
+	case NAND_MFR_TOSHIBA:
+	case NAND_MFR_GIGADEVICE:
+		chip->ecc.strength = 8;
+		break;
+	default:
+		chip->ecc.strength = 4;
+		pr_warn("Unkown SPINAND MFR, check spec for ecc capabilities\n");
+	}
+
+	chip->options |= NAND_BUSWIDTH_16;
+	*busw = NAND_BUSWIDTH_16;
+
+	/* some chips only supports x1 write and x4 read and vice-versa
+	 * hence we add some info here based on the chip capabilities
+	 */
+	if (info->options & SPI_NAND_QUAD_MODE) {
+		if (type->options & SPI_NAND_NO_QUAD_WR)
+			info->options |= SPI_NAND_NO_QUAD_WR;
+		if (type->options & SPI_NAND_NO_QUAD_RD)
+			info->options |= SPI_NAND_NO_QUAD_RD;
+	}
+
+	/* For certain flashes, we need to configure the flash config register
+	 * to enable certain feature which are supported. Since we cannot
+	 * populate certain flash features before knowing what flash is
+	 * on the baord, we do it here right after ID scan
+	 */
+	chip->cmdfunc(mtd, NAND_CMD_SET_CONFIG, -1, -1);
+
+	retval = 1;
+probe_done:
+	return retval;
+}
+#else
+static int spinand_flash_detect(struct mtd_info *mtd, struct nand_chip *chip,
+					int *busw)
+{
+	return 0;
+}
+
+#endif /* CONFIG_SPINAND_LANTIQ */
+
 /*
  * Get the flash and manufacturer id and lookup if the type is supported.
  */
@@ -3658,6 +4088,12 @@ static struct nand_flash_dev *nand_get_flash_type(struct mtd_info *mtd,
 		/* Check if the chip is JEDEC compliant */
 		if (nand_flash_detect_jedec(mtd, chip, &busw))
 			goto ident_done;
+
+		/* Check if the chip is SPI NAND */
+		if (spinand_flash_detect(mtd, chip, &busw)) {
+			type->name = mtd->name;
+			goto ident_done;
+		}
 	}
 
 	if (!type->name)
@@ -3666,6 +4102,7 @@ static struct nand_flash_dev *nand_get_flash_type(struct mtd_info *mtd,
 	if (!mtd->name)
 		mtd->name = type->name;
 
+	printf("Type name: %s\n", type->name);
 	chip->chipsize = (uint64_t)type->chipsize << 20;
 
 	if (!type->pagesize) {
@@ -3732,7 +4169,7 @@ ident_done:
 	if (mtd->writesize > 512 && chip->cmdfunc == nand_command)
 		chip->cmdfunc = nand_command_lp;
 
-	pr_info("device found, Manufacturer ID: 0x%02x, Chip ID: 0x%02x\n",
+	printf("device found, Manufacturer ID: 0x%02x, Chip ID: 0x%02x\n",
 		*maf_id, *dev_id);
 
 #ifdef CONFIG_SYS_NAND_ONFI_DETECTION
@@ -3753,7 +4190,7 @@ ident_done:
 		pr_info("%s %s\n", nand_manuf_ids[maf_idx].name,
 				type->name);
 
-	pr_info("%s %s\n", nand_manuf_ids[maf_idx].name,
+	printf("%s %s\n", nand_manuf_ids[maf_idx].name,
 		type->name);
 #endif
 
@@ -3778,7 +4215,7 @@ int nand_scan_ident(struct mtd_info *mtd, int maxchips,
 {
 	int i, nand_maf_id, nand_dev_id;
 	struct nand_chip *chip = mtd_to_nand(mtd);
-	struct nand_flash_dev *type;
+	struct nand_flash_dev *type = NULL;
 
 	/* Set the default functions */
 	nand_set_defaults(chip, chip->options & NAND_BUSWIDTH_16);
@@ -3906,6 +4343,23 @@ int nand_scan_tail(struct mtd_info *mtd)
 		case 128:
 			ecc->layout = &nand_oob_128;
 			break;
+#ifdef CONFIG_NAND_ECC_HW_REED_SOLOMON
+		case 224:
+		  chip->ecc.layout = &nand_oob_224;
+			break;
+		case 436:
+			chip->ecc.layout = &nand_oob_436;
+			break;
+		case 448:
+			chip->ecc.layout = &nand_oob_448;
+			break;
+		case 744:
+			chip->ecc.layout = &nand_oob_744;
+			break;
+		case 1280:
+			chip->ecc.layout = &nand_oob_1280;
+			break;
+#endif /* CONFIG_NAND_ECC_HW_REED_SOLOMON */
 		default:
 			pr_warn("No oob scheme defined for oobsize %d\n",
 				   mtd->oobsize);
@@ -4033,6 +4487,30 @@ int nand_scan_tail(struct mtd_info *mtd)
 		}
 		break;
 
+	case NAND_ECC_BENAND:
+		ecc->calculate = NULL;
+		ecc->correct = NULL;
+		if (!ecc->read_page)
+			ecc->read_page = nand_read_page_raw;
+		ecc->write_page = nand_write_page_raw;
+		ecc->read_page_raw = nand_read_page_raw;
+		ecc->write_page_raw = nand_write_page_raw;
+		ecc->read_oob = nand_read_oob_std;
+		ecc->write_oob = nand_write_oob_std;
+		ecc->size = mtd->writesize;
+		if (mtd->oobsize == 128) {
+			ecc->bytes = 9;        /* 9B * (4096B/512B) */
+			ecc->size = 512;   /* 4b * (4096B/512B) */
+		} else if (mtd->oobsize == 64) { /* 64B oob */
+			ecc->bytes = 9;
+			ecc->size = 512;
+		} else {
+			pr_err("%d unsupported oobsize in benand_init\n",
+					mtd->oobsize);
+			return -EINVAL;
+		}
+		break;
+
 	case NAND_ECC_NONE:
 		pr_warn("NAND_ECC_NONE selected by board driver. This is not recommended!\n");
 		ecc->read_page = nand_read_page_raw;
@@ -4133,6 +4611,7 @@ int nand_scan_tail(struct mtd_info *mtd)
 	mtd->_block_isbad = nand_block_isbad;
 	mtd->_block_markbad = nand_block_markbad;
 	mtd->writebufsize = mtd->writesize;
+	mtd->write_partial = nand_write_partial;
 
 	/* propagate ecc info to mtd_info */
 	mtd->ecclayout = ecc->layout;

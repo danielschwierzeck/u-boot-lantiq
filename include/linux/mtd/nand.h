@@ -120,9 +120,14 @@ extern void nand_wait_ready(struct mtd_info *mtd);
 /* Status bits */
 #define NAND_STATUS_FAIL	0x01
 #define NAND_STATUS_FAIL_N1	0x02
+/* Recommended to rewrite for BENAND */
+#define NAND_STATUS_RECOM_REWRT 0x08
 #define NAND_STATUS_TRUE_READY	0x20
 #define NAND_STATUS_READY	0x40
 #define NAND_STATUS_WP		0x80
+
+/* QSPI config settings */
+#define NAND_CMD_SET_CONFIG	0x1f
 
 /*
  * Constants for ECC_MODES
@@ -134,6 +139,7 @@ typedef enum {
 	NAND_ECC_HW_SYNDROME,
 	NAND_ECC_HW_OOB_FIRST,
 	NAND_ECC_SOFT_BCH,
+	NAND_ECC_BENAND,
 } nand_ecc_modes_t;
 
 /*
@@ -202,6 +208,9 @@ typedef enum {
 #define NAND_HAS_CACHEPROG(chip) ((chip->options & NAND_CACHEPRG))
 #define NAND_HAS_SUBPAGE_READ(chip) ((chip->options & NAND_SUBPAGE_READ))
 
+/* Mask to zero out the chip options, which come from the id table */
+#define NAND_CHIPOPTIONS_MSK    (0x0000ffff & ~NAND_NO_SUBPAGE_WRITE & ~NAND_OWN_BUFFERS)
+
 /* Non chip related options */
 /* This option skips the bbt scan during initialization. */
 #define NAND_SKIP_BBTSCAN	0x00010000
@@ -230,6 +239,9 @@ typedef enum {
 #define NAND_BBT_SCANNED	0x40000000
 /* Nand scan has allocated controller struct */
 #define NAND_CONTROLLER_ALLOC	0x80000000
+
+/* Support MXIC's ECC-Free NAND */
+#define NAND_MXIC_ECC_FREE  0x04000000
 
 /* Cell info constants */
 #define NAND_CI_CHIPNR_MSK	0x03
@@ -742,7 +754,7 @@ struct nand_chip {
 	struct nand_onfi_params	onfi_params;
 #endif
 	struct nand_jedec_params jedec_params;
- 
+
 	int read_retries;
 
 	flstate_t state;
@@ -762,6 +774,29 @@ struct nand_chip {
 	struct nand_bbt_descr *badblock_pattern;
 
 	void *priv;
+};
+
+/**
+ * struct spinand_flash_dev - NAND Flash Device ID Structure
+ * @name:       Identify the device type
+ * @id:         device ID code
+ * @pagesize:   Pagesize in bytes. Either 256 or 512 or 0
+ *              If the pagesize is 0, then the real pagesize
+ *              and the eraseize are determined from the
+ *              extended id bytes in the chip
+ * @erasesize:  Size of an erase block in the flash device.
+ * @chipsize:   Total chipsize in Mega Bytes
+ * @options:    Bitfield to store chip relevant options
+ */
+struct spinand_flash_dev {
+        char *name;
+        int mf_id;
+        int dev_id;
+        unsigned long pagesize;
+        unsigned long chipsize;
+        unsigned long erasesize;
+        unsigned long oobsize;
+        unsigned long options;
 };
 
 static inline struct nand_chip *mtd_to_nand(struct mtd_info *mtd)
@@ -801,6 +836,8 @@ static inline void nand_set_controller_data(struct nand_chip *chip, void *priv)
 #define NAND_MFR_SANDISK	0x45
 #define NAND_MFR_INTEL		0x89
 #define NAND_MFR_ATO		0x9b
+#define NAND_MFR_GIGADEVICE	0xc8
+#define NAND_MFR_WINDBOND	0xef
 
 /* The maximum expected count of bytes in the NAND ID sequence */
 #define NAND_MAX_ID_LEN 8
@@ -895,6 +932,7 @@ struct nand_manufacturers {
 };
 
 extern struct nand_flash_dev nand_flash_ids[];
+extern struct spinand_flash_dev spinand_flash_ids[];
 extern struct nand_manufacturers nand_manuf_ids[];
 
 extern int nand_default_bbt(struct mtd_info *mtd);

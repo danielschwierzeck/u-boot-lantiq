@@ -573,9 +573,9 @@ static int search_bbt(struct mtd_info *mtd, uint8_t *buf, struct nand_bbt_descr 
 	/* Check, if we found a bbt for each requested chip */
 	for (i = 0; i < chips; i++) {
 		if (td->pages[i] == -1)
-			pr_warn("Bad block table not found for chip %d\n", i);
+			printf("Bad block table not found for chip %d\n", i);
 		else
-			pr_info("Bad block table found at page %d, version 0x%02X\n",
+			printf("Bad block table found at page %d, version 0x%02X\n",
 				td->pages[i], td->version[i]);
 	}
 	return 0;
@@ -1070,7 +1070,7 @@ static void verify_bbt_descr(struct mtd_info *mtd, struct nand_bbt_descr *bd)
  * The bad block table memory is allocated here. It must be freed by calling
  * the nand_free_bbt function.
  */
-static int nand_scan_bbt(struct mtd_info *mtd, struct nand_bbt_descr *bd)
+int nand_scan_bbt(struct mtd_info *mtd, struct nand_bbt_descr *bd)
 {
 	struct nand_chip *this = mtd_to_nand(mtd);
 	int len, res;

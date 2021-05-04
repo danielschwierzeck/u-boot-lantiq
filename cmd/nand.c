@@ -620,6 +620,13 @@ static int do_nand(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 						maxsize, (u_char *)addr,
 						WITH_DROP_FFS | WITH_WR_VERIFY);
 #endif
+		} else if(s != NULL && !strcmp(s, ".partial")) {
+			/* write partial page to nand flash */
+			ret = nand_write_partial(mtd, off, (u64 *)&size, (u_char *)addr);
+			printf(" 0x%llx bytes %s: %s\n", size,
+				read ? "read" : "written", ret ? "ERROR" : "OK");
+			return ret == 0 ? 0 : 1;
+
 		} else if (!strcmp(s, ".oob")) {
 			/* out-of-band data */
 			mtd_oob_ops_t ops = {

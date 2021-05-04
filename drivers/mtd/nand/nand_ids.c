@@ -9,12 +9,45 @@
 #include <common.h>
 #include <linux/mtd/nand.h>
 #include <linux/sizes.h>
+#include <spinand.h>
 
 #define LP_OPTIONS NAND_SAMSUNG_LP_OPTIONS
 #define LP_OPTIONS16 (LP_OPTIONS | NAND_BUSWIDTH_16)
 
 #define SP_OPTIONS NAND_NEED_READRDY
 #define SP_OPTIONS16 (SP_OPTIONS | NAND_BUSWIDTH_16)
+
+
+/*
+*       Chip ID list
+*
+*       Name. ID code, pagesize, chipsize in MegaByte, eraseblock size,
+*       options
+*
+*       Pagesize; 0, 256, 512
+*       0       get this information from the extended chip ID
++       256     256 Byte page size
+*       512     512 Byte page size
+*/
+struct spinand_flash_dev spinand_flash_ids[] = {
+	{"SPI NAND 1Gbit 3,3v GD5F1GQ4U",		0xC8, 0xb1, 2048, 128, 0x20000, 64, 0},
+	{"SPI NAND 2Gbit 3,3v GD5F2GQ4U",		0xC8, 0xb2, 2048, 256, 0x20000, 64, 0},
+	{"SPI NAND 1Gbit TC58CYG0S3",			0x98, 0xb2, 2048, 128, 0x20000, 64, 0},
+	{"SPI NAND 1Gbit TC58CVG0S3",			0x98, 0xc2, 2048, 128, 0x20000, 64, SPI_NAND_NO_QUAD_WR},
+	{"SPI NAND 2Gbit TC58CVG1S3",			0x98, 0xcb, 2048, 256, 0x20000, 64, SPI_NAND_NO_QUAD_WR},
+	{"SPI NAND 4Gbit TC58CVG2S0",			0x98, 0xcd, 4096, 512, 0x40000, 128, SPI_NAND_NO_QUAD_WR},
+	{"SPI NAND 1Gbit MX35LFE4AB",			0xc2, 0x12, 2048, 128, 0x20000, 64, 0},
+	{"SPI NAND 2Gbit 3,3v MX35LF2GEAB",		0xc2, 0x22, 2048, 256, 0x20000, 64, SPINAND_NEED_PLANE_SELECT},
+	{"SPI NAND 1Gbit 3,3v MT29F1G01AAADD",	0x2c, 0x12, 2048, 128, 0x20000, 64, SPINAND_NEED_PLANE_SELECT},
+	{"SPI NAND 1Gbit 3,3v MT29F1G01ABA",	0x2c, 0x14, 2048, 128, 0x20000, 128, 0},
+	{"SPI NAND 1Gbit 1,8v MT29F1G01ABB",	0x2c, 0x15, 2048, 128, 0x20000, 128, 0},
+	{"SPI NAND 2Gbit 3,3v MT29F2G01", 	0x2c, 0x24, 2048, 256, 0x20000, 64, SPINAND_NEED_PLANE_SELECT},
+	{"SPI NAND 2Gbit 1,8v MT29F2G01ABBG", 	0x2c, 0x25, 2048, 128, 0x20000, 64, SPINAND_NEED_PLANE_SELECT},
+	{"SPI NAND 1Gbit 3,3v WN25N01GV", 	0xef, 0xAA, 2048, 128, 0x20000, 64, SPI_NAND_NO_QUAD_ENABLE},
+	{"SPI NAND 1Gbit 1,8v WN25N01GW", 	0xef, 0xBA, 2048, 128, 0x20000, 64, SPI_NAND_NO_QUAD_ENABLE},
+	{"SPI NAND 1Gbit 3,3v WN25M02GV", 	0xef, 0xAB, 2048, 256, 0x20000, 64, SPI_NAND_NO_QUAD_ENABLE},
+	{NULL}
+};
 
 /*
  * The chip ID list:
@@ -191,11 +224,14 @@ struct nand_manufacturers nand_manuf_ids[] = {
 	{NAND_MFR_SANDISK, "SanDisk"},
 	{NAND_MFR_INTEL, "Intel"},
 	{NAND_MFR_ATO, "ATO"},
+	{NAND_MFR_GIGADEVICE, "Gigadevice"},
+	{NAND_MFR_WINDBOND, "Windbond"},
 	{0x0, "Unknown"}
 };
 
 EXPORT_SYMBOL(nand_manuf_ids);
 EXPORT_SYMBOL(nand_flash_ids);
+EXPORT_SYMBOL(spinand_flash_ids);
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Thomas Gleixner <tglx@linutronix.de>");
