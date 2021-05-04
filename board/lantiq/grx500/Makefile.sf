@@ -1,0 +1,212 @@
+include $(srctree)/config.mk
+include $(srctree)/arch/$(ARCH)/Makefile
+
+BOARDDIR := $(VENDOR)/$(BOARD)
+TOPDIR := $(srctree)
+
+ifeq ($(CONFIG_GRX500_A21),y)
+BCH_ENCODER := $(TOPDIR)/board/$(BOARDDIR)/bch_enc_a21.c
+else
+BCH_ENCODER := $(TOPDIR)/board/$(BOARDDIR)/bch_enc_a11.c
+endif
+
+ifeq ($(CONFIG_GRX500_A21),y)
+GPHYFW_AXX := $(TOPDIR)/board/$(BOARDDIR)/gphy_firmware_a21.img
+else
+GPHYFW_AXX := $(TOPDIR)/board/$(BOARDDIR)/gphy_firmware_a11.img
+endif
+
+ifdef CONFIG_GRX500_DDR3
+DDR_TYPE := 3
+else
+DDR_TYPE := 2
+endif
+
+ifeq ($(CONFIG_GRX500_400M_CL6),y)
+DDR_GRADE := 1
+else ifeq ($(CONFIG_GRX500_533M_CL6),y)
+DDR_GRADE := 2
+else ifeq ($(CONFIG_GRX500_533M_CL7),y)
+DDR_GRADE := 3
+else ifeq ($(CONFIG_GRX500_533M_CL8),y)
+DDR_GRADE := 4
+else ifeq ($(CONFIG_GRX500_667M_CL8),y)
+DDR_GRADE := 5
+else ifeq ($(CONFIG_GRX500_667M_CL9),y)
+DDR_GRADE := 6
+else ifeq ($(CONFIG_GRX500_667M_CL10),y)
+DDR_GRADE := 7
+else ifeq ($(CONFIG_GRX500_800M_CL9),y)
+DDR_GRADE := 8
+else ifeq ($(CONFIG_GRX500_800M_CL10),y)
+DDR_GRADE := 9
+else ifeq ($(CONFIG_GRX500_800M_CL11),y)
+DDR_GRADE := 10
+else
+$(Unsupported DDR Grade, please recheck selected settings)
+endif
+
+ifeq ($(CONFIG_GRX500_32Mx16),y)
+DDR_DENSITY := 2
+else ifeq ($(CONFIG_GRX500_64Mx8),y)
+DDR_DENSITY := 3
+else ifeq ($(CONFIG_GRX500_64Mx16),y)
+DDR_DENSITY := 4
+else ifeq ($(CONFIG_GRX500_128Mx8),y)
+DDR_DENSITY := 5
+else ifeq ($(CONFIG_GRX500_128Mx16),y)
+DDR_DENSITY := 6
+else ifeq ($(CONFIG_GRX500_256Mx8),y)
+DDR_DENSITY := 7
+else ifeq ($(CONFIG_GRX500_256Mx16),y)
+DDR_DENSITY := 8
+else ifeq ($(CONFIG_GRX500_512Mx8),y)
+DDR_DENSITY := 9
+else ifeq ($(CONFIG_GRX500_512Mx16),y)
+DDR_DENSITY := 10
+else
+$(Unsupported DDR Density, please recheck selected settings)
+endif
+
+ifeq ($(CONFIG_GRX500_CPU_600M),y)
+CPU_SPEED := 3
+else ifeq ($(CONFIG_GRX500_CPU_800M),y)
+CPU_SPEED := 2
+else ifeq ($(CONFIG_GRX500_CPU_1000M),y)
+CPU_SPEED := 16
+else ifeq ($(CONFIG_GRX500_CPU_1200M),y)
+CPU_SPEED := 1
+else
+$(Unsupported CPU Speed, please recheck selected settings)
+endif
+
+ifeq ($(CONFIG_GRX500_DDR_CTRL_200M),y)
+DDR_CTRL_SPEED := 7
+else ifeq ($(CONFIG_GRX500_DDR_CTRL_333M),y)
+DDR_CTRL_SPEED := 5
+else ifeq ($(CONFIG_GRX500_DDR_CTRL_400M),y)
+DDR_CTRL_SPEED := 4
+else
+$(Unsupported DDR Controller settings, please recheck selected settings)
+endif
+
+ifdef CONFIG_GRX500_MIPS_ENDIAN_BE
+MIPS_ENDIAN := 1
+else
+MIPS_ENDIAN := 0
+endif
+
+ifeq ($(CONFIG_GRX500_CBM_FREQ_200M),y)
+CBM_FREQ := 8
+else ifeq ($(CONFIG_GRX500_CBM_FREQ_300M),y)
+CBM_FREQ := 6
+else ifeq ($(CONFIG_GRX500_CBM_FREQ_400M),y)
+CBM_FREQ := 5
+else ifeq ($(CONFIG_GRX500_CBM_FREQ_480M),y)
+CBM_FREQ := 4
+else ifeq ($(CONFIG_GRX500_CBM_FREQ_600M),y)
+CBM_FREQ := 3
+else ifeq ($(CONFIG_GRX500_CBM_FREQ_800M),y)
+CBM_FREQ := 2
+else ifeq ($(CONFIG_GRX500_CBM_FREQ_1200M),y)
+CBM_FREQ := 1
+else ifeq ($(CONFIG_GRX500_CBM_FREQ_2400M),y)
+CBM_FREQ := 0
+else
+$(Unsupported CBM freq settings, please recheck selected settings)
+endif
+
+ifeq ($(CONFIG_GRX500_BL8),y)
+BL := 8
+else ifeq ($(CONFIG_GRX500_BC4),y)
+BL := 4
+else
+BL := 8
+endif
+
+ifeq ($(CONFIG_GRX500_CS0_ONLY),y)
+CS := 1
+else
+CS := 2
+endif
+
+##### end grx500 ddr configurations
+
+ifdef CONFIG_GRX500_GPHY_FW_EMBEDDED
+GPHY_FIRMWARE = $(TOPDIR)/board/$(BOARDDIR)/gphy_firmware.img
+else
+GPHY_FIRMWARE = $(TOPDIR)/dummy
+endif
+
+ifdef CONFIG_BUILD_ENV_BLOCK
+ENV_BLOCK=ubootenv.img
+endif
+
+ALL-y += u-boot.ltq $(ENV_BLOCK)
+LDSCRIPT_BOOTSTRAP := $(TOPDIR)/board/$(BOARD)/bootstrap.lds
+
+ifdef CONFIG_LTQ_BOOT_FROM_SPI
+SFDDR_START_ADDR := $(CONFIG_SFDDR_TEXT_BASE)
+GPHYFIRMWARE := $(TOPDIR)/board/$(BOARDDIR)/gphy_firmware.img
+endif
+
+################################################################################
+# secboot mod
+################################################################################
+LTQ_HEADER_OFFSET_EXTRA :=
+SF_IMAGE_SOCMODE := 0
+SF_IMAGE_JUMP := $(CONFIG_NAND_SPL_TEXT_BASE)
+ifdef CONFIG_LTQ_BOOT_FROM_SPI
+SF_IMAGE_JUMP := $(SFDDR_START_ADDR)
+endif
+
+include $(srctree)/board/$(BOARDDIR)/Makefile.secboot
+################################################################################
+
+u-boot.ltq: $(obj)/u-boot-spl.bin ddr.conf sfddr.bin FORCE
+	$(call secboot-sign-fsb-if-required, sfddr.bin)
+	@@cp -f $(BCH_ENCODER) $(TOPDIR)/board/$(BOARDDIR)/bch_enc.c
+	@$(TOPDIR)/scripts_platform/mk_ltq_header.pl --ddr $(TOPDIR)/board/$(BOARDDIR)/ddr.conf --offset 0x800 --out  $(TOPDIR)/board/$(BOARDDIR)/header.ltq
+	@$(TOPDIR)/scripts_platform/pad2align.sh -n 1760  $(TOPDIR)/board/$(BOARDDIR)/header.ltq
+	@$(HOSTCC) -o $(TOPDIR)/board/$(BOARDDIR)/bch_enc.o $(BCH_ENCODER)
+	@$(TOPDIR)/board/$(BOARDDIR)/bch_enc.o  $(TOPDIR)/board/$(BOARDDIR)/header.ltq  $(TOPDIR)/board/$(BOARDDIR)/header.bch $(CONFIG_GRX500_ROM_HEADER_BCH_CAP)
+	@$(TOPDIR)/scripts_platform/mk_sf_image.pl -i sfddr.bin -o tail.bin -j $(SF_IMAGE_JUMP) -m $(SF_IMAGE_SOCMODE)
+	@cp $(TOPDIR)/board/$(BOARDDIR)/header.bch u-boot-spl.bin
+	@cat tail.bin >>u-boot-spl.bin
+	@$(TOPDIR)/scripts_platform/pad2align.sh -n $(CONFIG_SPI_SPL_SIZE) u-boot-spl.bin
+	@cat $(obj)/u-boot.lzimg > u-boot.ltq
+ifdef CONFIG_GRX500_GPHY_FW_EMBEDDED
+	@cp u-boot.bin u-boot-gphy.bin
+	@$(TOPDIR)/scripts_platform/pad2align.sh -n 0x40000 u-boot-gphy.bin
+	@$(TOPDIR)/scripts_platform/pad2align.sh -n 0x20000 u-boot.ltq
+	@cp $(GPHYFW_AXX) $(GPHY_FIRMWARE)
+	@cat $(GPHYFIRMWARE) >>u-boot.ltq
+endif
+	$(call secboot-sign-ltq-if-required, $@)
+	@mv $@ $@.tmp
+	@cp -f $(obj)/u-boot-spl.bin $@
+	@cat $@.tmp >> $@
+	@rm -f $@.tmp
+
+ddr.conf:
+	@rm -rf $(TOPDIR)/board/$(BOARD)/ddr.conf
+ifeq ($(CONFIG_GRX500_USE_DDR_PRECONFIG),y)
+	@cp $(srctree)/$(CONFIG_GRX500_DDR_CONFIG_FILE) $(TOPDIR)/board/$(BOARD)/ddr.conf
+else
+	@rm -f $(TOPDIR)/board/$(BOARDDIR)/init_ddr.o
+	@gcc -o $(TOPDIR)/board/$(BOARDDIR)/init_ddr.o $(TOPDIR)/board/$(BOARDDIR)/init_ddr.c
+	@$(TOPDIR)/board/$(BOARDDIR)/init_ddr.o -type $(DDR_TYPE) -grade $(DDR_GRADE) -density $(DDR_DENSITY) \
+		-rank $(CS) -bl $(BL) -al $(CONFIG_GRX500_ADDITIVE_LATENCY) -endian $(MIPS_ENDIAN) \
+		-sr0 $(CONFIG_GRX500_1ST_SR0_VALUE) $(CONFIG_GRX500_2ND_SR0_VALUE) \
+		-sr1 $(CONFIG_GRX500_1ST_SR1_VALUE) $(CONFIG_GRX500_2ND_SR1_VALUE) \
+		-fcps $(CPU_SPEED) -fsl 8 -fngi 6 -fcbm $(CBM_FREQ) -fcps2 1 -fdctl $(DDR_CTRL_SPEED) \
+		-fgsw 5 -fgswr 6 -o $(TOPDIR)/board/$(BOARDDIR)/ddr.conf
+endif
+
+sfddr.bin: $(obj)/u-boot-spl
+	@$(OBJCOPY) ${OBJCFLAGS} -O binary $< $@
+
+$(ENV_BLOCK): sfddr.bin
+	$(NM) -Ss u-boot >u-boot.sym
+	$(srctree)/scripts_platform/mk_envimg.sh $(TOPDIR)/$@
+
