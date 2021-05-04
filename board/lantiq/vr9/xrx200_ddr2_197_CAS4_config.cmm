@@ -1,0 +1,130 @@
+;********************************************************************	
+;Trace 32 script to load DDR tuning software for XRX200	
+;	
+;********************************************************************	
+;This script is to be use with xrx200_ddr_tune.bin for XWAY chipset	
+;For Detail on how to use this script pls refer to	
+;DDR tuning documentation which come with this script	
+;Please keep a default copy of this script with default value before	
+;modified the MC_DC parameter to suit the DDR device you use	
+;You also need the board console connected to activate the test	
+;and display the result	
+;********************************************************************	
+; Target : 	HYB25DC25616OCE
+;********************************************************************
+
+; Setup Lauterbach debugger for XRX200
+;SYStem.down
+;SYStem.cpu MIPS34k
+;SYStem.JTAGCLOCK 20000000.
+;SYSTEM.OPTION ENDIANESS BIG
+;SYStem.UP
+
+; Setup XRX200 CGU for 500/250
+;data.set 0xBF103010 %long 0x12 ; program the CPU/DDR speed
+;data.set 0xBF103014 %long 0x000200F8 ; Program Sram bus, FPI bus & AHB bus speed."
+
+;data.set 0xBF103028 %long 0x200000 ; set class II DDR drive Class II driver not supported
+;data.set 0xBF400410 %long 0x3F ; Set Class II pads driver in the DDR module ; TODO to clarify programming
+
+; CGU update		
+;data.set 0xBF103020 %long 0x01		
+
+;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
+;Initialize memory controller register		
+;Pls refer to the documentation to change the necessary parameter to		
+;Suit the DDR device you are using		
+;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
+;		
+data.set 0xBF401070 %long	0x0	; Put DDR controller inactive
+;		
+;DDR Register programming		
+data.set 0xBF401000 %long	0x10101	
+data.set 0xBF401010 %long	0x1000100	
+data.set 0xBF401020 %long	0x1010000	
+data.set 0xBF401030 %long	0x100	
+data.set 0xBF401040 %long	0x1000000	
+data.set 0xBF401050 %long	0x1000100	
+data.set 0xBF401060 %long	0x1000100	
+data.set 0xBF401070 %long	0x1010000	
+data.set 0xBF401080 %long	0x1000101	
+data.set 0xBF401090 %long	0x0	
+data.set 0xBF4010A0 %long	0x2000100	
+data.set 0xBF4010B0 %long	0x2000401	
+data.set 0xBF4010C0 %long	0x30000	
+data.set 0xBF4010D0 %long	0x202	
+data.set 0xBF4010E0 %long	0x7080A0F	
+data.set 0xBF4010F0 %long	0x2040F	
+data.set 0xBF401100 %long	0x40000	
+data.set 0xBF401110 %long	0x60102	; if txsnr = 75ns; value = 75/6 ~= 13 = 0xd
+data.set 0xBF401120 %long	0x3020002	
+data.set 0xBF401130 %long	0x30302	;use 0x200 to have 2 pin less than 15 for address for 256Mbit DDR
+data.set 0xBF401140 %long	0x5000700	;use 0xa03 as we are going to use column size of 10 address
+data.set 0xBF401150 %long	0x30C0208	";default read delay use for Danube Ref. Board with Qimonda DDR, tuning will be done"
+data.set 0xBF401160 %long	0x0	";default read delay use for Danube Ref. Board with Qimonda DDR, tuning will be done"
+data.set 0xBF401170 %long	0x9020000	;disable ECC
+data.set 0xBF401180 %long	0x4400F03	;Default DQS out shift.. tuning will be done to it.
+data.set 0xBF401190 %long	0x0	
+data.set 0xBF4011A0 %long	0x0	
+data.set 0xBF4011B0 %long	0x4420000	
+data.set 0xBF4011C0 %long	0x0	;this is periodic refresh cycle? 7.8us /6ns 0x514
+data.set 0xBF4011D0 %long	0x0	;calculate value ..
+data.set 0xBF4011E0 %long	0x5FB	;init delay spec stated 200us needed 0x8235
+data.set 0xBF4011F0 %long	0x0	 ;Extended mode register programming... not req
+data.set 0xBF401200 %long	0x0	
+data.set 0xBF401210 %long	0x4F0000	
+data.set 0xBF401220 %long	0x200C8	
+data.set 0xBF401230 %long	0x1135DF	
+data.set 0xBF401240 %long	0xC8
+data.set 0xBF401250 %long	0x99E9
+data.set 0xBF401260 %long	0x0
+data.set 0xBF401270 %long	0x1A1F04
+data.set 0xBF401280 %long	0x1A2304
+;data.set 0xBF401290 %long	0x1A1C04
+;data.set 0xBF4012A0 %long	0x1A1C04
+data.set 0xBF4012B0 %long	0x566404
+data.set 0xBF4012C0 %long	0x566404
+;data.set 0xBF4012D0 %long	0x565F04
+;data.set 0xBF4012E0 %long	0x565F04
+;data.set 0xBF4012F0 %long	0x0
+;data.set 0xBF401300 %long	0x0
+;data.set 0xBF401310 %long	0x0
+;data.set 0xBF401320 %long	0x0
+data.set 0xBF401330 %long	0x0
+data.set 0xBF401340 %long	0x133	
+data.set 0xBF401350 %long	0xF3014B27	
+data.set 0xBF401360 %long	0xF3014B27	
+;data.set 0xBF401370 %long	0xF3014B27	
+;data.set 0xBF401380 %long	0xF3014B27	
+data.set 0xBF401390 %long	0x7C00301	
+data.set 0xBF4013A0 %long	0x7C00301	
+;data.set 0xBF4013B0 %long	0x7C00301	
+;data.set 0xBF4013C0 %long	0x7C00301	
+data.set 0xBF4013D0 %long	0x4	
+
+;Enable memory controller and DDR		
+data.set 0xBF401070 %long	0x1010100	
+
+wait 1s		
+
+;Makesure that PPE and MPS are power up in PMU
+
+;data.set 0xbf10201c %l 0x211829b
+
+;load the tuning program
+;data.load.binary xr9_ddr_tune.bin 0xbe1a0000
+
+;wait 1s
+
+;set the program counter to PPE share buffer
+;r.s pc 0xbe1a0000
+
+;wait 1s
+
+;Start running the tuning program
+;Prepare to press a key at console to start
+;This may take a few minutes to complete
+;go
+
+
+

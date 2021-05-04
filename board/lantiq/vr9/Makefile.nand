@@ -1,0 +1,91 @@
+include $(srctree)/config.mk
+include $(srctree)/arch/$(ARCH)/Makefile
+
+BOARDDIR := $(VENDOR)/$(BOARD)
+TOPDIR := $(srctree)
+
+ifdef CONFIG_VR9_GPHY_FW_EMBEDDED
+GPHY_FIRMWARE = $(TOPDIR)/board/$(BOARDDIR)/gphy_firmware.img
+else
+GPHY_FIRMWARE = $(TOPDIR)/dummy
+endif
+
+ENV_BLOCK=
+
+ifdef CONFIG_BUILD_ENV_BLOCK
+ENV_BLOCK=ubootenv.img
+endif
+
+ALL-$(CONFIG_LTQ_BOOT_FROM_NAND) += u-boot.ltq $(ENV_BLOCK)
+ALL-$(CONFIG_LTQ_BOOT_FROM_NAND) += $(obj)/u-boot-spl-16k.bin
+ALL-$(CONFIG_LTQ_BOOT_FROM_NAND) += u-boot-nand.bin
+
+LDSCRIPT_BOOTSTRAP := $(TOPDIR)/board/$(BOARDDIR)/bootstrap.lds
+LIBS_BOOTSTRAP  = $(TOPDIR)/lib/bootstrap/libbootstrap.a
+BOOTSTRAP_LDFLAGS = -Bstatic -T $(LDSCRIPT_BOOTSTRAP) -Ttext $(CONFIG_BOOTSTRAP_TEXT_BASE)
+
+ifdef CONFIG_NAND_PRELOAD
+ALL-$(CONFIG_NAND_PRELOAD) += $(obj)/nandpreload.bin
+
+LDFLAGS_NANDPRELOAD = -Bstatic -T board/$(BOARDDIR)/nandpreload.lds -Ttext $(CONFIG_NAND_PRELOAD_TEXT_BASE)
+COBJS_NANDPRELOAD = $(TOPDIR)/board/$(BOARDDIR)/nand_preload.o
+SOBJS_NANDPRELOAD = $(TOPDIR)/board/$(BOARDDIR)/start_nandpreload.o
+
+$(obj)/nandpreload.bin: $(obj)/nandpreload
+	$(OBJCOPY) ${OBJCOPYFLAGS} -O binary $< $@
+
+$(obj)/nandpreload:  $(COBJS_NANDPRELOAD) $(SOBJS_NANDPRELOAD)
+	$(LD) $(LDFLAGS_NANDPRELOAD) $(COBJS_NANDPRELOAD) $(SOBJS_NANDPRELOAD) -Map $(obj)/nandpreload.map -o $(obj)/nandpreload
+	$(OBJDUMP) -S -d $(obj)/nandpreload > $(obj)/nandpreload.dis
+
+$(COBJS_NANDPRELOAD):
+	$(CC) $(PLATFORM_CPPFLAGS) $(CFLAGS) $(KBUILD_CPPFLAGS) $(KBUILD_CFLAGS) $(UBOOTINCLUDE) $(@:.o=.c) -c -o $@
+
+$(SOBJS_NANDPRELOAD):
+	$(CC) $(PLATFORM_CPPFLAGS) $(CFLAGS) $(KBUILD_AFLAGS) $(KBUILD_CFLAGS) $(UBOOTINCLUDE) $(@:.o=.S) -c -o $@
+
+$(obj)/u-boot-spl-16k.bin: $(obj)/nandpreload.bin
+	touch dummy
+	$(TOPDIR)/scripts_platform/mk_sf.pl dummy $(obj)/nandpreload.bin $(CONFIG_NAND_PRELOAD_TEXT_BASE) $(obj)/u-boot-spl-16k.bin
+	$(TOPDIR)/scripts_platform/pad2align.sh -n 512 $(obj)/u-boot-spl-16k.bin
+	cat $(obj)/u-boot-spl.bin >> $(obj)/u-boot-spl-16k.bin
+	$(TOPDIR)/scripts_platform/pad2align.sh -n $(CONFIG_NAND_SPL_BLOCK_SIZE) $(obj)/u-boot-spl-16k.bin
+else
+$(obj)/u-boot-spl-16k.bin: $(obj)/u-boot-spl.bin
+	touch dummy
+	$(TOPDIR)/scripts_platform/mk_sf.pl dummy $(obj)/u-boot-spl.bin $(CONFIG_NAND_PRELOAD_TEXT_BASE) $(obj)/u-boot-spl-16k.bin
+	$(TOPDIR)/scripts_platform/pad2align.sh -n $(CONFIG_NAND_SPL_BLOCK_SIZE) $(obj)/u-boot-spl-16k.bin
+
+endif # CONFIG_NAND_PRELOAD
+
+u-boot.ltq: $(obj)/bootstrap.bin
+	@touch dummy
+	@$(TOPDIR)/scripts_platform/pad2align.sh -n 10240 $(obj)/bootstrap.bin
+	@cat $(obj)/bootstrap.bin > u-boot.ltq
+	@cat $(obj)/u-boot.lzimg >> u-boot.ltq
+ifdef CONFIG_VR9_GPHY_FW_EMBEDDED
+	@$(TOPDIR)/scripts_platform/pad2align.sh -n 65536 u-boot.ltq
+	@cat $(GPHY_FIRMWARE) >>u-boot.ltq
+endif
+
+# create u-boot-nand.bin
+u-boot-nand.bin: u-boot.ltq $(obj)/u-boot-spl-16k.bin
+	cp $(obj)/u-boot-spl-16k.bin u-boot-nand.bin
+	cat u-boot.ltq >> u-boot-nand.bin
+
+# create bootstrap.bin
+$(obj)/bootstrap.bin: $(obj)/bootstrap
+		$(OBJCOPY) ${OBJCFLAGS} -O binary $< $@
+
+# create bootstrap map
+$(obj)/bootstrap: $(LIBS_BOOTSTRAP) $(OBJS_BOOTSTRAP) $(LDSCRIPT_BOOTSTRAP)
+	$(LD) $(BOOTSTRAP_LDFLAGS) $$UNDEF_SYM $(OBJS_BOOTSTRAP) $(LIBS_BOOTSTRAP) \
+	-Map bootstrap.map -o $(obj)/bootstrap
+
+$(LIBS_BOOTSTRAP):
+	$(Q)$(MAKE) -f $(srctree)/lib/bootstrap/Makefile all
+
+$(ENV_BLOCK): $(obj)/u-boot-spl-16k.bin
+	$(NM) -Ss u-boot >u-boot.sym
+	$(srctree)/scripts_platform/mk_envimg.sh $(TOPDIR)/$@
+

@@ -1,0 +1,47 @@
+include $(srctree)/config.mk
+include $(srctree)/arch/$(ARCH)/Makefile
+
+BOARDDIR := $(VENDOR)/$(BOARD)
+TOPDIR := $(srctree)
+
+ifdef CONFIG_VR9_GPHY_FW_EMBEDDED
+GPHY_FIRMWARE = $(TOPDIR)/board/$(BOARDDIR)/gphy_firmware.img
+else
+GPHY_FIRMWARE = $(TOPDIR)/dummy
+endif
+
+ENV_BLOCK=
+
+ifdef CONFIG_BUILD_ENV_BLOCK
+ENV_BLOCK=ubootenv.img 
+endif
+
+ALL-$(CONFIG_LTQ_BOOT_FROM_SPI) += $(obj)/u-boot.lzimg u-boot.ltq $(ENV_BLOCK)
+
+u-boot.ltq: System.map $(obj)/u-boot.lzimg $(obj)/sfddr.bin
+	@touch dummy
+	@$(srctree)/scripts_platform/mk_sf.pl dummy $(obj)/u-boot-spl.bin 0xbe220000 u-boot.ltq
+	@$(srctree)/scripts_platform/pad2align.sh -n 20480 u-boot.ltq
+	@cat $(obj)/u-boot.lzimg >> u-boot.ltq
+ifdef CONFIG_VR9_GPHY_FW_EMBEDDED
+	@$(srctree)/scripts_platform/pad2align.sh -n 65536 u-boot.ltq
+	@cat $(GPHY_FIRMWARE) >>u-boot.ltq
+endif # CONFIG_VR9_GPHY_FW_EMBEDDED
+
+# create sfddr.bin
+$(obj)/sfddr.bin: $(obj)/u-boot-spl
+	@$(OBJCOPY) ${OBJCFLAGS} -O binary $< $@
+
+# creae u-boot lzma
+$(obj)/u-boot.lzimg: u-boot.bin System.map
+		lzma e u-boot.bin u-boot.lzma
+		$(srctree)/scripts_platform/pad2align.sh -n 16 u-boot.lzma
+		$(srctree)/tools/mkimage -A mips -T firmware -C lzma \
+		-a 0x$(shell grep "T _start" $(TOPDIR)/System.map | awk '{ printf "%s", $$1 }') \
+		-e 0x$(shell grep "T _start" $(TOPDIR)/System.map | awk '{ printf "%s", $$1 }') \
+		-n 'u-boot image' -d u-boot.lzma $@
+
+$(ENV_BLOCK): u-boot u-boot.bin
+	$(NM) -Ss u-boot >u-boot.sym
+	$(srctree)/scripts_platform/mk_envimg.sh $(TOPDIR)/$@
+

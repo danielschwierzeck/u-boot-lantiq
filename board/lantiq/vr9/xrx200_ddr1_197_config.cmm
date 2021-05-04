@@ -1,0 +1,87 @@
+;********************************************************************
+;Trace 32 script to Config DDR Setting for XRX200
+;********************************************************************
+;Target DDR1, Clock Frequency 196Mhz
+;********************************************************************
+;********************************************************************
+; Target :
+;********************************************************************
+;
+;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;Initialize memory controller register		
+;Pls refer to the documentation to change the necessary parameter to		
+;Suit the DDR device you are using
+;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
+;		
+data.set 0xBF401070 %long	0x0	; Put DDR controller inactive
+;		
+;DDR Register programming		
+data.set 0xBF401000 %long	0x101	
+data.set 0xBF401010 %long	0x1000100	
+data.set 0xBF401020 %long	0x1010000	
+data.set 0xBF401030 %long	0x100	
+data.set 0xBF401040 %long	0x1000000	
+data.set 0xBF401050 %long	0x1000101	
+data.set 0xBF401060 %long	0x1000100	;Program base on DDR device use (Infineon type use 2.5 value 605)
+data.set 0xBF401070 %long	0x1010000	;Program for burst lenght and write recovry time
+data.set 0xBF401080 %long	0x1000001	
+data.set 0xBF401090 %long	0x0
+data.set 0xBF4010A0 %long	0x2000100	
+data.set 0xBF4010B0 %long	0x3000301	;Parameter needed from DDR spec.
+data.set 0xBF4010C0 %long	0x0	
+data.set 0xBF4010D0 %long	0x202	
+data.set 0xBF4010E0 %long	0x5060A0F	
+data.set 0xBF4010F0 %long	0x2000F	;Default Write DQS Out to 0x20
+data.set 0xBF401100 %long	0x30000	
+data.set 0xBF401110 %long	0x60102	; if txsnr = 75ns; value = 75/6 ~= 13 = 0xd
+data.set 0xBF401120 %long	0x3020002	
+data.set 0xBF401130 %long	0x10102	;use 0x200 to have 2 pin less than 15 for address for 256Mbit DDR
+data.set 0xBF401140 %long	0x5000000	;use 0xa03 as we are going to use column size of 10 address
+data.set 0xBF401150 %long	0x30C0200	;default read delay use for Danube Ref. Board with Qimonda DDR, tuning will be done"
+data.set 0xBF401160 %long	0x0	;default read delay use for Danube Ref. Board with Qimonda DDR, tuning will be done"
+data.set 0xBF401170 %long	0x9020000	;disable ECC
+data.set 0xBF401180 %long	0xF03	;Default DQS out shift.. tuning will be done to it.
+data.set 0xBF401190 %long	0x0	
+data.set 0xBF4011A0 %long	0x0	
+data.set 0xBF4011B0 %long	0x320000	
+data.set 0xBF4011C0 %long	0x0	;this is periodic refresh cycle? 7.8us /6ns 0x514
+data.set 0xBF4011D0 %long	0x0	;calculate value ..
+data.set 0xBF4011E0 %long	0x5F9	;init delay spec stated 200us needed 0x8235
+data.set 0xBF4011F0 %long	0x0	 ;Extended mode register programming... not req
+data.set 0xBF401200 %long	0x0	
+data.set 0xBF401210 %long	0x0	
+data.set 0xBF401220 %long	0x200C8	
+data.set 0xBF401230 %long	0x1135CA	
+data.set 0xBF401240 %long	0xC8
+data.set 0xBF401250 %long	0x99AD
+data.set 0xBF401260 %long	0x0
+data.set 0xBF401270 %long	0x211510
+data.set 0xBF401280 %long	0x211510
+;data.set 0xBF401290 %long	0x211F66
+;data.set 0xBF4012A0 %long	0x211F66
+data.set 0xBF4012B0 %long	0x66701B
+data.set 0xBF4012C0 %long	0x66701B
+;data.set 0xBF4012D0 %long	0x665F1B
+;data.set 0xBF4012E0 %long	0x665F1B
+;data.set 0xBF4012F0 %long	0x0
+;data.set 0xBF401300 %long	0x0
+;data.set 0xBF401310 %long	0x0
+;data.set 0xBF401320 %long	0x0
+data.set 0xBF401330 %long	0x0
+data.set 0xBF401340 %long	0xF1133	
+data.set 0xBF401350 %long	0xF3014B26	
+data.set 0xBF401360 %long	0xF3014B26	
+;data.set 0xBF401370 %long	0xF3014B26	
+;data.set 0xBF401380 %long	0xF3014B26	
+data.set 0xBF401390 %long	0x7C00301	
+data.set 0xBF4013A0 %long	0x7C00301	;optional can try 0x500 for 2.5 cycle cas
+;data.set 0xBF4013B0 %long	0x7C00301	
+;data.set 0xBF4013C0 %long	0x7C00301	
+data.set 0xBF4013D0 %long	0x4	
+
+;Enable memory controller and DDR		
+data.set 0xBF401070 %long	0x1010100	; put DDR controller into active
+
+
+
+

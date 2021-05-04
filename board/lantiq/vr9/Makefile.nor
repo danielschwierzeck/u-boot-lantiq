@@ -1,0 +1,31 @@
+include $(srctree)/config.mk
+include $(srctree)/arch/$(ARCH)/Makefile
+
+BOARDDIR := $(VENDOR)/$(BOARD)
+TOPDIR := $(srctree)
+
+ifdef CONFIG_VR9_GPHY_FW_EMBEDDED
+GPHY_FIRMWARE = $(TOPDIR)/board/$(BOARDDIR)/gphy_firmware.img
+else
+GPHY_FIRMWARE = $(TOPDIR)/dummy
+endif
+
+ENV_BLOCK=
+
+ifdef CONFIG_BUILD_ENV_BLOCK
+ENV_BLOCK=ubootenv.img
+endif
+
+ALL-$(CONFIG_LTQ_BOOT_FROM_NOR) += u-boot.ltq $(ENV_BLOCK)
+
+u-boot.ltq: $(obj)/u-boot-spl.bin FORCE
+	@touch dummy
+	@cat $(obj)/u-boot-spl.bin > u-boot.ltq
+	@cat $(obj)/u-boot.lzimg >> u-boot.ltq
+	@$(srctree)/scripts_platform/pad2align.sh -n 65536 u-boot.ltq
+	@cat $(GPHY_FIRMWARE) >> u-boot.ltq
+
+$(ENV_BLOCK): $(obj)/u-boot-spl.bin
+	$(NM) -Ss u-boot > u-boot.sym
+	$(srctree)/scripts_platform/mk_envimg.sh $(TOPDIR)/$@
+
