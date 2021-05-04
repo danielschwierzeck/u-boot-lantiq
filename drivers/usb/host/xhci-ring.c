@@ -280,8 +280,15 @@ void xhci_queue_command(struct xhci_ctrl *ctrl, u8 *ptr, u32 slot_id,
 	fields[0] = lower_32_bits(val_64);
 	fields[1] = upper_32_bits(val_64);
 	fields[2] = 0;
-	fields[3] = TRB_TYPE(cmd) | EP_ID_FOR_TRB(ep_index) |
-		    SLOT_ID_FOR_TRB(slot_id) | ctrl->cmd_ring->cycle_state;
+	fields[3] = TRB_TYPE(cmd) | SLOT_ID_FOR_TRB(slot_id) |
+				ctrl->cmd_ring->cycle_state;
+
+	/*
+	 * Only 'reset endpoint', 'stop endpoint' and 'set TR dequeue pointer'
+	 * commands need endpoint id encoded.
+	*/
+	if (cmd >= TRB_RESET_EP && cmd <= TRB_SET_DEQ)
+		fields[3] |= EP_ID_FOR_TRB(ep_index);
 
 	queue_trb(ctrl, ctrl->cmd_ring, false, fields);
 
@@ -390,7 +397,7 @@ void xhci_acknowledge_event(struct xhci_ctrl *ctrl)
 
 	/* Inform the hardware */
 	xhci_writeq(&ctrl->ir_set->erst_dequeue,
-		(uintptr_t)ctrl->event_ring->dequeue | ERST_EHB);
+		(uintptr_t)virt_to_phys(ctrl->event_ring->dequeue) | ERST_EHB);
 }
 
 /**
@@ -568,7 +575,7 @@ int xhci_bulk_tx(struct usb_device *udev, unsigned long pipe,
 	u64 addr;
 	int ret;
 	u32 trb_fields[4];
-	u64 val_64 = (uintptr_t)buffer;
+	u64 val_64 = (uintptr_t)virt_to_phys(buffer);
 
 	debug("dev=%p, pipe=%lx, buffer=%p, length=%d\n",
 		udev, pipe, buffer, length);
@@ -717,8 +724,8 @@ int xhci_bulk_tx(struct usb_device *udev, unsigned long pipe,
 
 	BUG_ON(TRB_TO_SLOT_ID(field) != slot_id);
 	BUG_ON(TRB_TO_EP_INDEX(field) != ep_index);
-	BUG_ON(*(void **)(uintptr_t)le64_to_cpu(event->trans_event.buffer) -
-		buffer > (size_t)length);
+	BUG_ON(le32_to_cpu(*(void **)(uintptr_t)le64_to_cpu(event->trans_event.buffer)) -
+		virt_to_phys(buffer) > (size_t)length);
 
 	record_transfer_result(udev, event, length);
 	xhci_acknowledge_event(ctrl);
@@ -867,7 +874,7 @@ int xhci_ctrl_tx(struct usb_device *udev, unsigned long pipe,
 	if (length > 0) {
 		if (req->requesttype & USB_DIR_IN)
 			field |= TRB_DIR_IN;
-		buf_64 = (uintptr_t)buffer;
+		buf_64 = (uintptr_t)virt_to_phys(buffer);
 
 		trb_fields[0] = lower_32_bits(buf_64);
 		trb_fields[1] = upper_32_bits(buf_64);

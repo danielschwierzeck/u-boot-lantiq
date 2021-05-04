@@ -24,6 +24,12 @@ config USB_XHCI_DWC3
 	  Say Y or if your system has a Dual Role SuperSpeed
 	  USB controller based on the DesignWare USB3 IP Core.
 
+config USB_XHCI_LTQ
+	bool "Support for Lantiq on-chip XHCI USB controller"
+	depends on USB_XHCI_DWC3
+	default y
+	help
+	  Enables support for the on-chip XHCI controller on Lantiq.
 endif
 
 config USB_OHCI_GENERIC
