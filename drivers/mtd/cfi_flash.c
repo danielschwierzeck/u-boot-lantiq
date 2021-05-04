@@ -76,6 +76,22 @@ flash_info_t flash_info[CFI_MAX_FLASH_BANKS];	/* FLASH chips info */
 #endif
 
 /*
+ * Check if address fixup macros are defined, define defaults otherwise
+ */
+#ifndef FLASH_FIXUP_ADDR_8
+#define FLASH_FIXUP_ADDR_8(addr)    (addr)
+#endif
+#ifndef FLASH_FIXUP_ADDR_16
+#define FLASH_FIXUP_ADDR_16(addr)   (addr)
+#endif
+#ifndef FLASH_FIXUP_ADDR_32
+#define FLASH_FIXUP_ADDR_32(addr)   (addr)
+#endif
+#ifndef FLASH_FIXUP_ADDR_64
+#define FLASH_FIXUP_ADDR_64(addr)   (addr)
+#endif
+
+/*
  * 0xffff is an undefined value for the configuration register. When
  * this value is returned, the configuration register shall not be
  * written at all (default mode).
@@ -292,9 +308,9 @@ static inline uchar flash_read_uchar (flash_info_t * info, uint offset)
 
 	cp = flash_map (info, 0, offset);
 #if defined(__LITTLE_ENDIAN) || defined(CONFIG_SYS_WRITE_SWAPPED_DATA)
-	retval = flash_read8(cp);
+	retval = flash_read8(FLASH_FIXUP_ADDR_8(cp));
 #else
-	retval = flash_read8(cp + info->portwidth - 1);
+	retval = flash_read8(FLASH_FIXUP_ADDR_8(cp) + info->portwidth - 1);
 #endif
 	flash_unmap (info, 0, offset, cp);
 	return retval;
@@ -308,7 +324,7 @@ static inline ushort flash_read_word (flash_info_t * info, uint offset)
 	ushort *addr, retval;
 
 	addr = flash_map (info, 0, offset);
-	retval = flash_read16 (addr);
+	retval = flash_read16 (FLASH_FIXUP_ADDR_16(addr));
 	flash_unmap (info, 0, offset, addr);
 	return retval;
 }
@@ -333,19 +349,20 @@ static ulong flash_read_long (flash_info_t * info, flash_sect_t sect,
 	debug ("long addr is at %p info->portwidth = %d\n", addr,
 	       info->portwidth);
 	for (x = 0; x < 4 * info->portwidth; x++) {
-		debug ("addr[%x] = 0x%x\n", x, flash_read8(addr + x));
+		debug ("addr[%x] = 0x%x\n", x, 
+				flash_read8(FLASH_FIXUP_ADDR_32(addr) + x));
 	}
 #endif
 #if defined(__LITTLE_ENDIAN) || defined(CONFIG_SYS_WRITE_SWAPPED_DATA)
-	retval = ((flash_read8(addr) << 16) |
-		  (flash_read8(addr + info->portwidth) << 24) |
-		  (flash_read8(addr + 2 * info->portwidth)) |
-		  (flash_read8(addr + 3 * info->portwidth) << 8));
+	retval = ((flash_read8(FLASH_FIXUP_ADDR_8(addr)) << 16) |
+		  (flash_read8(FLASH_FIXUP_ADDR_8(addr + info->portwidth) << 24)) |
+		  (flash_read8(FLASH_FIXUP_ADDR_8(addr + 2 * info->portwidth))) |
+		  (flash_read8(FLASH_FIXUP_ADDR_8(addr + 3 * info->portwidth) << 8)));
 #else
-	retval = ((flash_read8(addr + 2 * info->portwidth - 1) << 24) |
-		  (flash_read8(addr + info->portwidth - 1) << 16) |
-		  (flash_read8(addr + 4 * info->portwidth - 1) << 8) |
-		  (flash_read8(addr + 3 * info->portwidth - 1)));
+	retval = ((flash_read8(FLASH_FIXUP_ADDR_8(addr + 2 * info->portwidth - 1)) << 24) |
+		  (flash_read8(FLASH_FIXUP_ADDR_8(addr + info->portwidth - 1)) << 16) |
+		  (flash_read8(FLASH_FIXUP_ADDR_8(addr + 4 * info->portwidth - 1)) << 8) |
+		  (flash_read8(FLASH_FIXUP_ADDR_8(addr + 3 * info->portwidth - 1))));
 #endif
 	flash_unmap(info, sect, offset, addr);
 
@@ -366,21 +383,21 @@ void flash_write_cmd (flash_info_t * info, flash_sect_t sect,
 	flash_make_cmd (info, cmd, &cword);
 	switch (info->portwidth) {
 	case FLASH_CFI_8BIT:
-		debug ("fwc addr %p cmd %x %x 8bit x %d bit\n", addr, cmd,
+		debug ("fwc addr %p cmd %x %x 8bit x %d bit\n", FLASH_FIXUP_ADDR_8(addr), cmd,
 		       cword.w8, info->chipwidth << CFI_FLASH_SHIFT_WIDTH);
-		flash_write8(cword.w8, addr);
+		flash_write8(cword.w8, FLASH_FIXUP_ADDR_8(addr));
 		break;
 	case FLASH_CFI_16BIT:
-		debug ("fwc addr %p cmd %x %4.4x 16bit x %d bit\n", addr,
+		debug ("fwc addr %p cmd %x %4.4x 16bit x %d bit\n", FLASH_FIXUP_ADDR_16(addr),
 		       cmd, cword.w16,
 		       info->chipwidth << CFI_FLASH_SHIFT_WIDTH);
-		flash_write16(cword.w16, addr);
+		flash_write16(cword.w16, FLASH_FIXUP_ADDR_16(addr));
 		break;
 	case FLASH_CFI_32BIT:
-		debug ("fwc addr %p cmd %x %8.8x 32bit x %d bit\n", addr,
+		debug ("fwc addr %p cmd %x %8.8x 32bit x %d bit\n", FLASH_FIXUP_ADDR_32(addr),
 		       cmd, cword.w32,
 		       info->chipwidth << CFI_FLASH_SHIFT_WIDTH);
-		flash_write32(cword.w32, addr);
+		flash_write32(cword.w32, FLASH_FIXUP_ADDR_32(addr));
 		break;
 	case FLASH_CFI_64BIT:
 #ifdef DEBUG
@@ -390,11 +407,11 @@ void flash_write_cmd (flash_info_t * info, flash_sect_t sect,
 			print_longlong (str, cword.w64);
 
 			debug ("fwrite addr %p cmd %x %s 64 bit x %d bit\n",
-			       addr, cmd, str,
+			        FLASH_FIXUP_ADDR_64(addr), cmd, str,
 			       info->chipwidth << CFI_FLASH_SHIFT_WIDTH);
 		}
 #endif
-		flash_write64(cword.w64, addr);
+		flash_write64(cword.w64,  FLASH_FIXUP_ADDR_64(addr));
 		break;
 	}
 
@@ -425,16 +442,16 @@ static int flash_isequal (flash_info_t * info, flash_sect_t sect,
 	debug ("is= cmd %x(%c) addr %p ", cmd, cmd, addr);
 	switch (info->portwidth) {
 	case FLASH_CFI_8BIT:
-		debug ("is= %x %x\n", flash_read8(addr), cword.w8);
-		retval = (flash_read8(addr) == cword.w8);
+		debug ("is= %x %x\n", flash_read8(FLASH_FIXUP_ADDR_8(addr)), cword.w8);
+		retval = (flash_read8(FLASH_FIXUP_ADDR_8(addr)) == cword.w8);
 		break;
 	case FLASH_CFI_16BIT:
-		debug ("is= %4.4x %4.4x\n", flash_read16(addr), cword.w16);
-		retval = (flash_read16(addr) == cword.w16);
+		debug ("is= %4.4x %4.4x\n", flash_read16(FLASH_FIXUP_ADDR_16(addr)), cword.w16);
+		retval = (flash_read16(FLASH_FIXUP_ADDR_16(addr)) == cword.w16);
 		break;
 	case FLASH_CFI_32BIT:
-		debug ("is= %8.8x %8.8x\n", flash_read32(addr), cword.w32);
-		retval = (flash_read32(addr) == cword.w32);
+		debug ("is= %8.8x %8.8x\n", flash_read32(FLASH_FIXUP_ADDR_32(addr)), cword.w32);
+		retval = (flash_read32(FLASH_FIXUP_ADDR_32(addr)) == cword.w32);
 		break;
 	case FLASH_CFI_64BIT:
 #ifdef DEBUG
@@ -442,12 +459,12 @@ static int flash_isequal (flash_info_t * info, flash_sect_t sect,
 			char str1[20];
 			char str2[20];
 
-			print_longlong (str1, flash_read64(addr));
+			print_longlong (str1, flash_read64( FLASH_FIXUP_ADDR_64(addr)));
 			print_longlong (str2, cword.w64);
 			debug ("is= %s %s\n", str1, str2);
 		}
 #endif
-		retval = (flash_read64(addr) == cword.w64);
+		retval = (flash_read64( FLASH_FIXUP_ADDR_64(addr)) == cword.w64);
 		break;
 	default:
 		retval = 0;
@@ -471,16 +488,16 @@ static int flash_isset (flash_info_t * info, flash_sect_t sect,
 	flash_make_cmd (info, cmd, &cword);
 	switch (info->portwidth) {
 	case FLASH_CFI_8BIT:
-		retval = ((flash_read8(addr) & cword.w8) == cword.w8);
+		retval = ((flash_read8(FLASH_FIXUP_ADDR_8(addr)) & cword.w8) == cword.w8);
 		break;
 	case FLASH_CFI_16BIT:
-		retval = ((flash_read16(addr) & cword.w16) == cword.w16);
+		retval = ((flash_read16(FLASH_FIXUP_ADDR_16(addr)) & cword.w16) == cword.w16);
 		break;
 	case FLASH_CFI_32BIT:
-		retval = ((flash_read32(addr) & cword.w32) == cword.w32);
+		retval = ((flash_read32(FLASH_FIXUP_ADDR_32(addr)) & cword.w32) == cword.w32);
 		break;
 	case FLASH_CFI_64BIT:
-		retval = ((flash_read64(addr) & cword.w64) == cword.w64);
+		retval = ((flash_read64( FLASH_FIXUP_ADDR_64(addr)) & cword.w64) == cword.w64);
 		break;
 	default:
 		retval = 0;
@@ -504,17 +521,22 @@ static int flash_toggle (flash_info_t * info, flash_sect_t sect,
 	flash_make_cmd (info, cmd, &cword);
 	switch (info->portwidth) {
 	case FLASH_CFI_8BIT:
-		retval = flash_read8(addr) != flash_read8(addr);
+		retval = flash_read8(FLASH_FIXUP_ADDR_8(addr)) != 
+					flash_read8(FLASH_FIXUP_ADDR_8(addr));
 		break;
 	case FLASH_CFI_16BIT:
-		retval = flash_read16(addr) != flash_read16(addr);
+		retval = flash_read16(FLASH_FIXUP_ADDR_16(addr)) != 
+					flash_read16(FLASH_FIXUP_ADDR_16(addr));
 		break;
 	case FLASH_CFI_32BIT:
-		retval = flash_read32(addr) != flash_read32(addr);
+		retval = flash_read32(FLASH_FIXUP_ADDR_32(addr)) != 
+					flash_read32(FLASH_FIXUP_ADDR_32(addr));
 		break;
 	case FLASH_CFI_64BIT:
-		retval = ( (flash_read32( addr ) != flash_read32( addr )) ||
-			   (flash_read32(addr+4) != flash_read32(addr+4)) );
+		retval = ( (flash_read32( FLASH_FIXUP_ADDR_64(addr) ) != 
+					flash_read32( FLASH_FIXUP_ADDR_64(addr ))) ||
+			   (flash_read32(FLASH_FIXUP_ADDR_64(addr+4)) != 
+					flash_read32(FLASH_FIXUP_ADDR_64(addr+4))) );
 		break;
 	default:
 		retval = 0;
@@ -568,7 +590,7 @@ static int flash_status_check (flash_info_t * info, flash_sect_t sector,
 	if ((ulong)CONFIG_SYS_HZ > 100000)
 		tout *= (ulong)CONFIG_SYS_HZ / 1000;  /* for a big HZ, avoid overflow */
 	else
-		tout = DIV_ROUND_UP(tout * (ulong)CONFIG_SYS_HZ, 1000);
+		tout *= CONFIG_SYS_HZ / 1000;
 #endif
 
 	/* Wait for command completion */
@@ -672,13 +694,13 @@ static int flash_status_poll(flash_info_t *info, void *src, void *dst,
 	while (1) {
 		switch (info->portwidth) {
 		case FLASH_CFI_8BIT:
-			ready = flash_read8(dst) == flash_read8(src);
+			ready = flash_read8(FLASH_FIXUP_ADDR_8(dst)) == flash_read8(FLASH_FIXUP_ADDR_8(src));
 			break;
 		case FLASH_CFI_16BIT:
-			ready = flash_read16(dst) == flash_read16(src);
+			ready = flash_read16(FLASH_FIXUP_ADDR_16(dst)) == flash_read16(FLASH_FIXUP_ADDR_16(src));
 			break;
 		case FLASH_CFI_32BIT:
-			ready = flash_read32(dst) == flash_read32(src);
+			ready = flash_read32(FLASH_FIXUP_ADDR_32(dst)) == flash_read32(FLASH_FIXUP_ADDR_32(src));
 			break;
 		case FLASH_CFI_64BIT:
 			ready = flash_read64(dst) == flash_read64(src);
@@ -691,7 +713,7 @@ static int flash_status_poll(flash_info_t *info, void *src, void *dst,
 			break;
 		if (get_timer(start) > tout) {
 			printf("Flash %s timeout at address %lx data %lx\n",
-			       prompt, (ulong)dst, (ulong)flash_read8(dst));
+			       prompt, (ulong)dst, (ulong)flash_read8(FLASH_FIXUP_ADDR_8(dst)));
 			return ERR_TIMOUT;
 		}
 		udelay(1);		/* also triggers watchdog */
@@ -852,12 +874,7 @@ static int flash_write_cfiword (flash_info_t * info, ulong dest,
 	if (!sect_found)
 		sect = find_sector (info, dest);
 
-	if (use_flash_status_poll(info))
-		return flash_status_poll(info, &cword, dstaddr,
-					 info->write_tout, "write");
-	else
-		return flash_full_status_check(info, sect,
-					       info->write_tout, "write");
+	return flash_full_status_check(info, sect, info->write_tout, "write");
 }
 
 #ifdef CONFIG_SYS_FLASH_USE_BUFFER_WRITE
@@ -1019,15 +1036,9 @@ static int flash_write_cfibuffer (flash_info_t * info, ulong dest, uchar * cp,
 		}
 
 		flash_write_cmd (info, sector, 0, AMD_CMD_WRITE_BUFFER_CONFIRM);
-		if (use_flash_status_poll(info))
-			retcode = flash_status_poll(info, src - (1 << shift),
-						    dst - (1 << shift),
-						    info->buffer_write_tout,
-						    "buffer write");
-		else
-			retcode = flash_full_status_check(info, sector,
-							  info->buffer_write_tout,
-							  "buffer write");
+		retcode = flash_full_status_check(info, sector,
+						  info->buffer_write_tout,
+						  "buffer write");
 		break;
 
 	default:
@@ -1049,7 +1060,6 @@ int flash_erase (flash_info_t * info, int s_first, int s_last)
 	int rcode = 0;
 	int prot;
 	flash_sect_t sect;
-	int st;
 
 	if (info->flash_id != FLASH_MAN_CFI) {
 		puts ("Can't erase unknown flash type - aborted\n");
@@ -1144,19 +1154,9 @@ int flash_erase (flash_info_t * info, int s_first, int s_last)
 				break;
 			}
 
-			if (use_flash_status_poll(info)) {
-				cfiword_t cword;
-				void *dest;
-				cword.w64 = 0xffffffffffffffffULL;
-				dest = flash_map(info, sect, 0);
-				st = flash_status_poll(info, &cword, dest,
-						       info->erase_blk_tout, "erase");
-				flash_unmap(info, sect, 0, dest);
-			} else
-				st = flash_full_status_check(info, sect,
-							     info->erase_blk_tout,
-							     "erase");
-			if (st)
+			if (flash_full_status_check(info, sect,
+						     info->erase_blk_tout,
+						     "erase"))
 				rcode = 1;
 			else if (flash_verbose)
 				putc ('.');
@@ -2308,6 +2308,7 @@ void flash_protect_default(void)
 	} apl[] = CONFIG_SYS_FLASH_AUTOPROTECT_LIST;
 #endif
 
+#if 0
 	/* Monitor protection ON by default */
 #if (CONFIG_SYS_MONITOR_BASE >= CONFIG_SYS_FLASH_BASE) && \
 	(!defined(CONFIG_MONITOR_IS_IN_RAM))
@@ -2315,6 +2316,7 @@ void flash_protect_default(void)
 		       CONFIG_SYS_MONITOR_BASE,
 		       CONFIG_SYS_MONITOR_BASE + monitor_flash_len  - 1,
 		       flash_get_info(CONFIG_SYS_MONITOR_BASE));
+#endif
 #endif
 
 	/* Environment protection ON by default */

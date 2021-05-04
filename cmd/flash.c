@@ -192,7 +192,9 @@ addr_spec(char *arg1, char *arg2, ulong *addr_first, ulong *addr_last)
 static int
 flash_fill_sect_ranges (ulong addr_first, ulong addr_last,
 			int *s_first, int *s_last,
-			int *s_count )
+			int *bPartialStart,
+			int *bPartialEnd,
+			int *s_count)
 {
 	flash_info_t *info;
 	ulong bank;
@@ -233,8 +235,21 @@ flash_fill_sect_ranges (ulong addr_first, ulong addr_last,
 			if (addr_first == info->start[sect]) {
 				s_first[bank] = sect;
 			}
+
+			if (addr_first > info->start[sect]) {
+				s_first[bank] = sect;
+				if (bPartialStart)
+					*bPartialStart = 1;
+			}
+
 			if (addr_last  == end) {
 				s_last[bank]  = sect;
+			}
+
+			if (addr_last < end && s_last[bank] == -1) {
+				s_last[bank]  = sect;
+				if (bPartialEnd)
+					*bPartialStart = 1;
 			}
 		}
 		if (s_first[bank] >= 0) {
@@ -407,15 +422,36 @@ int flash_sect_erase (ulong addr_first, ulong addr_last)
 	int erased = 0;
 	int planned;
 	int rcode = 0;
+	int bPartialStart = 0;      // Start sector has to be erased partially
+	int bPartialEnd = 0;        // End sector has to be erased partially
+	uchar *pStartMem = NULL;
+	uchar *pEndMem = NULL;
+	int StartMemLen = 0;
+	int EndMemLen = 0;
 
 	rcode = flash_fill_sect_ranges (addr_first, addr_last,
-					s_first, s_last, &planned );
+					s_first, s_last, &bPartialStart,
+					&bPartialEnd, &planned);
 
 	if (planned && (rcode == 0)) {
 		for (bank=0,info = &flash_info[0];
 		     (bank < CONFIG_SYS_MAX_FLASH_BANKS) && (rcode == 0);
 		     ++bank, ++info) {
 			if (s_first[bank]>=0) {
+				if (bPartialStart) {
+					StartMemLen = addr_first - info->start[s_first[bank]];
+					pStartMem = (uchar *)calloc(StartMemLen, sizeof(char));
+					memcpy(pStartMem, info->start[s_first[bank]], StartMemLen);
+				}
+				if (bPartialEnd) {
+					if (info->start[s_last[bank] + 1] != 0)
+			   			EndMemLen =  info->start[s_last[bank] + 1] - 1 - addr_last;
+					else
+						EndMemLen =  info->start[0] + info->size - 1 - addr_last; /*last sector*/
+			
+					pEndMem = (uchar *)calloc(EndMemLen, sizeof(char));
+					memcpy(pEndMem, addr_last+1 , EndMemLen);
+				}
 				erased += s_last[bank] - s_first[bank] + 1;
 				debug ("Erase Flash from 0x%08lx to 0x%08lx "
 					"in Bank # %ld ",
@@ -425,6 +461,18 @@ int flash_sect_erase (ulong addr_first, ulong addr_last)
 						info->start[s_last[bank]+1] - 1,
 					bank+1);
 				rcode = flash_erase (info, s_first[bank], s_last[bank]);
+				if (bPartialStart) {
+					if (flash_write(pStartMem, (uchar *)info->start[s_first[bank]], StartMemLen))
+						printf("write error!\n");
+					else
+						free(pStartMem);
+				}
+				if (bPartialEnd) {
+					if (flash_write(pEndMem, addr_last+1, EndMemLen))
+						printf("write error!\n");
+					else
+						free(pEndMem);
+				}
 			}
 		}
 		if (rcode == 0)
@@ -625,7 +673,7 @@ int flash_sect_protect (int p, ulong addr_first, ulong addr_last)
 	int planned;
 	int rcode;
 
-	rcode = flash_fill_sect_ranges( addr_first, addr_last, s_first, s_last, &planned );
+	rcode = flash_fill_sect_ranges( addr_first, addr_last, s_first, s_last,  NULL, NULL, &planned );
 
 	protected = 0;
 
