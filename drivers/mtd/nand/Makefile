@@ -11,6 +11,7 @@ ifdef CONFIG_SPL_NAND_DRIVERS
 NORMAL_DRIVERS=y
 endif
 obj-$(CONFIG_NAND_LANTIQ) += lq_nand.o
+obj-$(CONFIG_SPINAND_LANTIQ) += lq_spinand.o
 obj-$(CONFIG_SPL_NAND_AM33XX_BCH) += am335x_spl_bch.o
 obj-$(CONFIG_SPL_NAND_DENALI) += denali_spl.o
 obj-$(CONFIG_SPL_NAND_SIMPLE) += nand_spl_simple.o
@@ -40,6 +41,7 @@ ifdef NORMAL_DRIVERS
 
 obj-$(CONFIG_NAND_ECC_BCH) += nand_bch.o
 
+obj-$(CONFIG_SPINAND_LANTIQ) += lq_spinand.o
 obj-$(CONFIG_NAND_LANTIQ) += lq_nand.o
 obj-$(CONFIG_NAND_ATMEL) += atmel_nand.o
 obj-$(CONFIG_NAND_ARASAN) += arasan_nfc.o
