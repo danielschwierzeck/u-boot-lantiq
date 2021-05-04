@@ -1264,6 +1264,12 @@ int board_nand_init(struct nand_chip *nand)
 	nand->ecc.mode=NAND_ECC_SOFT;
 #endif
 	nand->bbt_options |= NAND_BBT_USE_FLASH;
+
+#if defined(CONFIG_NAND_BENAND)
+	nand->bbt_options |= NAND_BBT_NO_OOB | NAND_BBT_NO_OOB_BBM;
+	nand->options |= NAND_NO_SUBPAGE_WRITE;
+#endif
+
 #ifdef CONFIG_SPL_BUILD
 	nand->ecc.hwctl = lq_enable_hwecc;
 #if defined (CONFIG_NAND_ECC_BCH) && defined(CONFIG_DRIVER_GRX500)
