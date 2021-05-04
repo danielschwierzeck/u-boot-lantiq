@@ -935,7 +935,7 @@ SPL_PAYLOAD := u-boot.bin
 endif
 
 spl/u-boot.lzimg: u-boot.bin System.map FORCE
-	lzma e u-boot.bin u-boot.lzma
+	$(srctree)/scripts_platform/lzma e u-boot.bin u-boot.lzma
 	$(srctree)/scripts_platform/pad2align.sh -n 16 u-boot.lzma
 	tools/mkimage -A mips -T firmware -C lzma \
 		-a 0x$(shell grep "T _start" System.map | awk '{ printf "%s", $$1 }') \
