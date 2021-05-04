@@ -5,8 +5,13 @@
 # SPDX-License-Identifier:	GPL-2.0+
 #
 
+ifneq ($(CONFIG_DRIVER_GRX500),$(CONFIG_DRIVER_PRX300),)
+obj-y	+= iap-cache.o
+obj-y	+= iap-cache_init.o
+else
 obj-y	+= cache.o
 obj-y	+= cache_init.o
+endif
 
 obj-$(CONFIG_CMD_BOOTM) += bootm.o
 
