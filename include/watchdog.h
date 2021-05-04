@@ -99,4 +99,15 @@ int init_func_watchdog_reset(void);
 #if defined(CONFIG_MPC85xx) && !defined(__ASSEMBLY__)
 	void init_85xx_watchdog(void);
 #endif
+
+#if defined(CONFIG_PRX300_WDT)
+void hw_watchdog_stop(void);
+void hw_watchdog_init(void);
+void hw_watchdog_start(void);
+extern void hw_watchdog_reset(void);
+#ifdef WATCHDOG_RESET
+#undef WATCHDOG_RESET
+#define WATCHDOG_RESET hw_watchdog_reset
+#endif
+#endif /* CONFIG_PRX300_WDT */
 #endif /* _WATCHDOG_H_ */

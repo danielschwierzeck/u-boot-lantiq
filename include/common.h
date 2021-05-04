@@ -740,7 +740,9 @@ void	enable_caches(void);
 void	flush_cache   (unsigned long, unsigned long);
 void	flush_dcache_all(void);
 void	flush_dcache_range(unsigned long start, unsigned long stop);
+void	flush_scache_range(unsigned long start, unsigned long stop);
 void	invalidate_dcache_range(unsigned long start, unsigned long stop);
+void	invalidate_scache_range(unsigned long start_addr, unsigned long stop);
 void	invalidate_dcache_all(void);
 void	invalidate_icache_all(void);
 

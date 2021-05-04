@@ -24,6 +24,7 @@
 #include <ioremap.h>
 #include <mangle-port.h>
 #include <spaces.h>
+#include <common.h>
 
 /*
  * Raw operations are never swapped in software.  OTOH values that raw

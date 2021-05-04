@@ -2,6 +2,7 @@
 #define _LINUX_MATH64_H
 
 #include <linux/types.h>
+#include <div64.h>
 
 #if BITS_PER_LONG == 64
 
