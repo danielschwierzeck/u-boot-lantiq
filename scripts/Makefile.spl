@@ -158,6 +158,34 @@ ifeq ($(CONFIG_SYS_SOC),"at91")
 ALL-y	+= boot.bin
 endif
 
+ifdef CONFIG_LANTIQ
+ALL-y += $(obj)/u-boot-spl.bin
+
+ALL-$(CONFIG_NAND_BOOT) += u-boot-nand.bin
+ALL-$(CONFIG_NAND_BOOT) += $(obj)/u-boot-spl-16k.bin
+ALL-$(CONFIG_SPI_BOOT) += u-boot.ltq
+ALL-$(CONFIG_QSPI_BOOT) += u-boot.ltq
+
+__dir := $(shell mkdir -p spl/$(CONFIG_SPL_START_S_PATH:"%"=%))
+
+ifdef CONFIG_NAND_BOOT
+include $(srctree)/board/$(BOARDDIR)/Makefile.nand
+endif
+
+ifdef CONFIG_SPI_BOOT
+include $(srctree)/board/$(BOARDDIR)/Makefile.sf
+endif
+
+ifdef CONFIG_QSPI_BOOT
+include $(srctree)/board/$(BOARDDIR)/Makefile.sf
+endif
+
+ifdef CONFIG_NOR_BOOT
+include $(srctree)/board/$(BOARDDIR)/Makefile.nor
+endif
+
+endif # CONFIG_LANTIQ
+
 ALL-$(CONFIG_ARCH_ZYNQ)		+= $(obj)/boot.bin
 ALL-$(CONFIG_ARCH_ZYNQMP)	+= $(obj)/boot.bin
 
