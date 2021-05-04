@@ -89,6 +89,7 @@ struct spi_flash {
 	int (*flash_lock)(struct spi_flash *flash, u32 ofs, size_t len);
 	int (*flash_unlock)(struct spi_flash *flash, u32 ofs, size_t len);
 	int (*flash_is_locked)(struct spi_flash *flash, u32 ofs, size_t len);
+
 #ifndef CONFIG_DM_SPI_FLASH
 	/*
 	 * These are not strictly needed for driver model, but keep them here
@@ -105,6 +106,8 @@ struct spi_flash {
 	int (*write)(struct spi_flash *flash, u32 offset, size_t len,
 			const void *buf);
 	int (*erase)(struct spi_flash *flash, u32 offset, size_t len);
+	int (*write_partial)(struct spi_flash *flash, u32 offset, 
+				size_t len, const void *buf);
 #endif
 };
 
@@ -218,6 +221,12 @@ static inline int spi_flash_write(struct spi_flash *flash, u32 offset,
 		size_t len, const void *buf)
 {
 	return flash->write(flash, offset, len, buf);
+}
+
+static inline int spi_flash_write_partial(struct spi_flash *flash, u32 offset,
+        size_t len, const void *buf)
+{
+	return flash->write_partial(flash, offset, len, buf);
 }
 
 static inline int spi_flash_erase(struct spi_flash *flash, u32 offset,

@@ -17,6 +17,8 @@
 #include <spi_flash.h>
 #include <linux/log2.h>
 #include <dma.h>
+#include <linux/math64.h>
+#include <linux/types.h>
 
 #include "sf_internal.h"
 
@@ -428,6 +430,63 @@ int spi_flash_cmd_write_ops(struct spi_flash *flash, u32 offset,
 		}
 
 		offset += chunk_len;
+	}
+
+	return ret;
+}
+
+static int spi_flash_write_partial_ops(struct spi_flash *flash, u32 offset, 
+				size_t len, const void *buf)
+{
+	int i, ret = 0;
+	int f_start_partial = 0;
+	int f_end_partial = 0;
+	int f_malloc = 0;
+	int total_sect_num = 0;    
+	unsigned long sect_addr;
+	unsigned long sector_size;
+	unsigned char *sect_buf = NULL;
+	
+	sector_size = flash->sector_size;
+
+	if ((offset % sector_size) !=0) 
+		f_start_partial = 1;
+	if (((offset + len ) % sector_size) != 0) 
+		f_end_partial = 1;
+
+	debug("f_start_partial=%d,f_end_partial=%d\n",f_start_partial,f_end_partial);
+	total_sect_num = (offset + len -1) / sector_size - offset / sector_size + 1;   
+	sect_addr = offset / sector_size;         
+	sect_buf = (unsigned char *)buf;
+
+	for(i = 0; i < total_sect_num; i++) {
+		if ((f_start_partial && i == 0) || (f_end_partial && total_sect_num == 1)) {
+			sect_buf=(uchar *)calloc(sector_size, sizeof(char));
+			if (!sect_buf) {
+				debug("cannot allocate memory!\n");
+			}
+			flash->read(flash, (sect_addr + i) * sector_size, sector_size, sect_buf);
+			memcpy(sect_buf + (offset % sector_size), buf, \
+				min((sector_size-(offset % sector_size)), (unsigned long) len));
+			f_malloc = 1;
+                 
+		} else if (f_end_partial && (i == total_sect_num - 1) && i != 0) {
+			sect_buf = (uchar *) calloc(sector_size, sizeof(char));
+			if (!sect_buf) {
+				debug("cannot allocate memory!\n");
+			}
+			flash->read(flash, (sect_addr + i) * sector_size, sector_size, sect_buf);
+			memcpy(sect_buf,buf+i*sector_size-(offset % sector_size), (offset+len) % sector_size);
+			f_malloc = 1;   
+		}
+
+		flash->erase(flash, (sect_addr + i) * sector_size, sector_size);  
+		ret = flash->write(flash, (sect_addr + i) * sector_size, sector_size, sect_buf);
+		if (f_malloc) {
+			free(sect_buf);
+			f_malloc = 0;
+		}
+		sect_buf = (unsigned char *) buf + (i+1)*sector_size - (offset % sector_size);
 	}
 
 	return ret;
@@ -1124,6 +1183,10 @@ int spi_flash_scan(struct spi_flash *flash)
 	flash->read = spi_flash_cmd_read_ops;
 #endif
 
+#ifdef CONFIG_LANTIQ
+	flash->write_partial = spi_flash_write_partial_ops;
+#endif
+
 	/* lock hooks are flash specific - assign them based on idcode0 */
 	switch (idcode[0]) {
 #if defined(CONFIG_SPI_FLASH_STMICRO) || defined(CONFIG_SPI_FLASH_SST)
@@ -1188,9 +1251,12 @@ int spi_flash_scan(struct spi_flash *flash)
 	}
 
 	/* Not require to look for fastest only two write cmds yet */
-	if (params->flags & WR_QPP && spi->mode & SPI_TX_QUAD)
-		flash->write_cmd = CMD_QUAD_PAGE_PROGRAM;
-	else
+	if (params->flags & WR_QPP && spi->mode & SPI_TX_QUAD) {
+		if (idcode[0] == SPI_FLASH_CFI_MFR_MACRONIX)
+			flash->write_cmd = CMD_QUAD_PAGE_PP_MXIC;
+		else
+			flash->write_cmd = CMD_QUAD_PAGE_PROGRAM;
+	} else
 		/* Go for default supported write cmd */
 		flash->write_cmd = CMD_PAGE_PROGRAM;
 

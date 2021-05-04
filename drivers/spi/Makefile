@@ -15,6 +15,7 @@ obj-y += spi.o
 obj-$(CONFIG_SOFT_SPI) += soft_spi_legacy.o
 endif
 
+obj-$(CONFIG_LANTIQ_SPI) += lq_spi.o
 obj-$(CONFIG_ALTERA_SPI) += altera_spi.o
 obj-$(CONFIG_ARMADA100_SPI) += armada100_spi.o
 obj-$(CONFIG_ATH79_SPI) += ath79_spi.o
@@ -23,6 +24,8 @@ obj-$(CONFIG_ATMEL_SPI) += atmel_spi.o
 obj-$(CONFIG_BFIN_SPI) += bfin_spi.o
 obj-$(CONFIG_BFIN_SPI6XX) += bfin_spi6xx.o
 obj-$(CONFIG_CADENCE_QSPI) += cadence_qspi.o cadence_qspi_apb.o
+obj-$(CONFIG_CADENCE_QSPI_NAND_NO_DM) += cadence_qspi_nand.o cadence_qspi_nand_apb.o
+obj-$(CONFIG_CADENCE_QSPI_NO_DM) += cadence_qspi.o cadence_qspi_apb.o
 obj-$(CONFIG_CF_SPI) += cf_spi.o
 obj-$(CONFIG_CF_QSPI) += cf_qspi.o
 obj-$(CONFIG_DAVINCI_SPI) += davinci_spi.o
