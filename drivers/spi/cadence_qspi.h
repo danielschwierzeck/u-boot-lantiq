@@ -8,7 +8,11 @@
 #ifndef __CADENCE_QSPI_H__
 #define __CADENCE_QSPI_H__
 
+#ifdef CONFIG_CADENCE_QSPI_NAND_NO_DM
+#define CQSPI_IS_ADDR(cmd_len)		(cmd_len > 8 ? 1 : 0)
+#else
 #define CQSPI_IS_ADDR(cmd_len)		(cmd_len > 1 ? 1 : 0)
+#endif /* CONFIG_CADENCE_QSPI_NAND_NO_DM */
 
 #define CQSPI_NO_DECODER_MAX_CS		4
 #define CQSPI_DECODER_MAX_CS		16
@@ -33,8 +37,13 @@ struct cadence_spi_priv {
 	void		*ahbbase;
 	size_t		cmd_len;
 	u8		cmd_buf[32];
+	u32		indac_addr;
+	int		indac_size;
+	unsigned int rx_len;
+	unsigned int tx_len;
 	size_t		data_len;
 
+	int		state;
 	int		qspi_is_init;
 	unsigned int	qspi_calibrated_hz;
 	unsigned int	qspi_calibrated_cs;

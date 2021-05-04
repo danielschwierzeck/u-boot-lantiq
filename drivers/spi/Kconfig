@@ -194,4 +194,18 @@ config TI_QSPI
 	  Enable the TI Quad-SPI (QSPI) driver for DRA7xx and AM43xx evms.
 	  This driver support spi flash single, quad and memory reads.
 
+config CADENCE_QSPI_NO_DM
+	bool "Cadence QSPI bus driver"
+	help
+	  Enable the Cadence Quad-SPI (QSPI) NOR driver without DM. This driver can be
+	  used to access the SPI NOR flash on platforms embedding this
+	  Cadence IP core.
+
+config CADENCE_QSPI_NAND_NO_DM
+	bool "Cadence QSPI NAND bus driver"
+	help
+	  Enable the Cadence Quad-SPI (QSPI) NAND driver without DM. This driver can be
+	  used to access the SPI NAND flash on platforms embedding this
+	  Cadence IP core.
+
 endmenu # menu "SPI Support"

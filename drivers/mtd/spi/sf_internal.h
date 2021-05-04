@@ -77,6 +77,7 @@ enum spi_nor_option_flags {
 #define CMD_WRITE_DISABLE		0x04
 #define CMD_WRITE_ENABLE		0x06
 #define CMD_QUAD_PAGE_PROGRAM		0x32
+#define CMD_QUAD_PAGE_PP_MXIC	0x38
 #define CMD_WRITE_EVCR			0x61
 
 /* Read commands */

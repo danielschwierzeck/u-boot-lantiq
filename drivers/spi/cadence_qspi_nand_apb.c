@@ -1,5 +1,7 @@
 /*
  * Copyright (C) 2012 Altera Corporation <www.altera.com>
+ * Copyright (C) 2017 Mohammad Firdaus B Alias Thani <m.aliasthani@intel.com>
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -47,12 +49,7 @@
 #define CQSPI_STIG_DATA_LEN_MAX			(8)
 #define CQSPI_INDIRECTTRIGGER_ADDR_MASK		(0xFFFFF)
 
-#ifdef CONFIG_SPI_FLASH_MACRONIX
-#define CQSPI_DUMMY_CLKS_PER_BYTE		(6)
-#else
 #define CQSPI_DUMMY_CLKS_PER_BYTE		(8)
-#endif /* CONFIG_SPI_FLASH_MACRONIX */
-
 #define CQSPI_DUMMY_BYTES_MAX			(4)
 
 
@@ -87,6 +84,8 @@
 #define	CQSPI_REG_RD_INSTR_DUMMY_MASK		0x1F
 
 #define	CQSPI_REG_WR_INSTR			0x08
+#define CQSPI_REG_WR_INSTR_TYPE_ADDR_LSB	12
+#define CQSPI_REG_WR_INSTR_TYPE_DATA_LSB    16
 #define	CQSPI_REG_WR_INSTR_OPCODE_LSB		0
 
 #define	CQSPI_REG_DELAY				0x0C
@@ -124,6 +123,7 @@
 #define	CQSPI_REG_SDRAMLEVEL_RD_MASK		0xFFFF
 #define	CQSPI_REG_SDRAMLEVEL_WR_MASK		0xFFFF
 
+#define CQSPI_REG_WRITE_COMPLETION_CTRL	0x38
 #define	CQSPI_REG_IRQSTATUS			0x40
 #define	CQSPI_REG_IRQMASK			0x44
 
@@ -136,6 +136,7 @@
 #define	CQSPI_REG_INDIRECTRDWATERMARK		0x64
 #define	CQSPI_REG_INDIRECTRDSTARTADDR		0x68
 #define	CQSPI_REG_INDIRECTRDBYTES		0x6C
+#define CQSPI_INDIRECT_TRIGGER_ADDR_RANGE_REG 0x80
 
 #define	CQSPI_REG_CMDCTRL			0x90
 #define	CQSPI_REG_CMDCTRL_EXECUTE_MASK		BIT(0)
@@ -154,23 +155,6 @@
 #define	CQSPI_REG_CMDCTRL_RD_BYTES_MASK		0x7
 #define	CQSPI_REG_CMDCTRL_OPCODE_MASK		0xFF
 
-#define	CQSPI_REG_INDIRECTWR			0x70
-#define	CQSPI_REG_INDIRECTWR_START_MASK		BIT(0)
-#define	CQSPI_REG_INDIRECTWR_CANCEL_MASK	BIT(1)
-#define	CQSPI_REG_INDIRECTWR_INPROGRESS_MASK	BIT(2)
-#define	CQSPI_REG_INDIRECTWR_DONE_MASK		BIT(5)
-
-#define	CQSPI_REG_INDIRECTWRWATERMARK		0x74
-#define	CQSPI_REG_INDIRECTWRSTARTADDR		0x78
-#define	CQSPI_REG_INDIRECTWRBYTES		0x7C
-#define CQSPI_INDIRECT_TRIGGER_ADDR_RANGE_REG	0x80
-
-#define	CQSPI_REG_CMDADDRESS			0x94
-#define	CQSPI_REG_CMDREADDATALOWER		0xA0
-#define	CQSPI_REG_CMDREADDATAUPPER		0xA4
-#define	CQSPI_REG_CMDWRITEDATALOWER		0xA8
-#define	CQSPI_REG_CMDWRITEDATAUPPER		0xAC
-
 #define CQSPI_PHY_CONFIG_REG			0xB4
 #define CQSPI_PHY_CONFIG_TX_DLL_DELAY_LSB	16
 #define CQSPI_PHY_CONFIG_RESET_LSB		30
@@ -180,7 +164,27 @@
 #define CQSPI_DLL_OBSERVABLE_LOWER_REG		0xBC
 #define DLL_OBSERVABLE_LOWER_DLL_LOCK_INC_MASK	0x1
 
-#define QSPI_REF_CLK				400000000
+#define	CQSPI_REG_INDIRECTWR			0x70
+#define	CQSPI_REG_INDIRECTWR_START_MASK		BIT(0)
+#define	CQSPI_REG_INDIRECTWR_CANCEL_MASK	BIT(1)
+#define	CQSPI_REG_INDIRECTWR_INPROGRESS_MASK	BIT(2)
+#define	CQSPI_REG_INDIRECTWR_DONE_MASK		BIT(5)
+
+#define	CQSPI_REG_INDIRECTWRWATERMARK		0x74
+#define	CQSPI_REG_INDIRECTWRSTARTADDR		0x78
+#define	CQSPI_REG_INDIRECTWRBYTES		0x7C
+
+#define	CQSPI_REG_CMDADDRESS			0x94
+#define	CQSPI_REG_CMDREADDATALOWER		0xA0
+#define	CQSPI_REG_CMDREADDATAUPPER		0xA4
+#define	CQSPI_REG_CMDWRITEDATALOWER		0xA8
+#define	CQSPI_REG_CMDWRITEDATAUPPER		0xAC
+
+#define READ_ID_CMD				0x9F
+#define SINGLE_BIT_READ_CMD			0x03
+#define SINGLE_BIT_WR_RAND_CMD			0x84
+#define SINGLE_BIT_WR_CMD			0x02
+#define QSPI_REF_CLK				10000000
 
 #define CQSPI_REG_IS_IDLE(base)					\
 	((readl(base + CQSPI_REG_CONFIG) >>		\
@@ -197,6 +201,26 @@
 	(((readl(reg_base + CQSPI_REG_SDRAMLEVEL)) >>	\
 	CQSPI_REG_SDRAMLEVEL_WR_LSB) & CQSPI_REG_SDRAMLEVEL_WR_MASK)
 
+#if defined(CONFIG_SPI_FLASH_QUAD)
+static int check_cmd_is_quad(u8 cmd)
+{
+	int ret;
+
+	switch (cmd) {
+	case SINGLE_BIT_READ_CMD:
+	case SINGLE_BIT_WR_RAND_CMD:
+	case SINGLE_BIT_WR_CMD:
+		ret = 0;
+		break;
+	default:
+		ret = 1;
+		break;
+	}
+
+	return ret;
+}
+#endif /* CONFIG_SPI_FLASH_QUAD */
+
 static unsigned int cadence_qspi_apb_cmd2addr(const unsigned char *addr_buf,
 	unsigned int addr_width)
 {
@@ -207,19 +231,6 @@ static unsigned int cadence_qspi_apb_cmd2addr(const unsigned char *addr_buf,
 	if (addr_width == 4)
 		addr = (addr << 8) | addr_buf[3];
 
-	return addr;
-}
-
-static unsigned int cadence_qspi_indac_addr(const unsigned char *addr_buf,
-    unsigned int addr_width)
-{
-	unsigned int addr;
-
-    addr = (addr_buf[0] << 16) | (addr_buf[1] << 8) | addr_buf[2];
-
-	if (addr_width == 4)
-		addr = (addr << 8) | addr_buf[3];
-	
 	return addr;
 }
 
@@ -287,6 +298,7 @@ static unsigned int cadence_qspi_wait_idle(void *reg_base)
 	/* Timeout, still in busy mode. */
 	printf("QSPI: QSPI is still busy after poll for %d times.\n",
 	       CQSPI_REG_RETRY);
+
 	return 0;
 }
 
@@ -350,77 +362,8 @@ void cadence_qspi_apb_config_baudrate_div(void *reg_base,
 	writel(reg, reg_base + CQSPI_REG_CONFIG);
 
 	cadence_qspi_apb_controller_enable(reg_base);
+
 	return;
-}
-
-static void cadence_qspi_readb(void *ahbbase, u8 *rxbuf,
-                unsigned int bytes_to_read)
-{
-#ifdef CONFIG_SYS_BIG_ENDIAN
-	int i, unaligned_bytes;
-	u8 tmp[4];
-	u8 *ptr = (u8 *) ahbbase;
-
-	unaligned_bytes = bytes_to_read % 4;
-
-	/* read all the data which are aligned */
-	for (i = 0; i < bytes_to_read - unaligned_bytes; i++) {
-		(*(u8 *)(rxbuf + i)) = readb(ptr + i);
-	}
-
-	/* access up to the 4-byte aligned data */
-	for (i = 0; i < 4; i++)
-		tmp[i] = readb(ptr);
-
-	/* swap this data to the rxbuf */
-	for (i = 0; i < unaligned_bytes; i++)
-		rxbuf[bytes_to_read - unaligned_bytes + i] = tmp[4 - i - 1];
-#else
-	readsb(ahbbase, rxbuf, bytes_to_read);
-#endif
-}
-
-static int cadence_qspi_writeb(void *ahbbase, const u8 *txbuf,
-                unsigned int write_bytes)
-{
-#ifdef CONFIG_SYS_BIG_ENDIAN
-	/* For BE systems, the issue arrieses due to the LE hardware.
-	 * The writes to SRAM are in bytes and SRAM writes to flash
-	 * in burst of halfwords and this leads to all sorts of
-	 * endian swapping along the way. The only way to fix this
-	 * is if we do extra bytes writes (force aligning) but that
-	 * is DANGEROUS! Force the upper layers to write 4-byte aligned
-	 */
-	return -EINVAL;
-#else
-	writesb(ahbbase, txbuf, write_bytes);
-#endif
-}
-
-static void cadence_qspi_readl(void *ahbbase, u8 *rxbuf,
-				unsigned int bytes_to_read)
-{
-#ifdef CONFIG_SYS_BIG_ENDIAN
-	int i;
-
-	for (i = 0; i < bytes_to_read; i++)
-		(*(u32 *)(rxbuf + i * 4)) = readl(ahbbase + i * 4);
-#else
-	readsl(ahbbase, rxbuf, bytes_to_read)
-#endif
-}
-
-static void cadence_qspi_writel(void *ahbbase, const u8 *txbuf,
-				unsigned int write_bytes)
-{
-#ifdef CONFIG_SYS_BIG_ENDIAN
-	int i;
-
-	for (i = 0; i < write_bytes; i++)
-		writel((*(u32 *)(txbuf + i * 4)), ahbbase);
-#else
-	writesl(ahbbase, txbuf, write_bytes);
-#endif
 }
 
 void cadence_qspi_apb_set_clk_mode(void *reg_base,
@@ -545,15 +488,15 @@ void cadence_qspi_apb_controller_init(struct cadence_spi_platdata *plat)
 			!= DLL_OBSERVABLE_LOWER_DLL_LOCK_INC_MASK);
 
 	udelay(100);
-#endif
+#endif /* CONFIG_CADENCE_PHY_MODE */
 
 	/* Configure the device size and address bytes */
 	reg = readl(plat->regbase + CQSPI_REG_SIZE);
 	/* Clear the previous value */
 	reg &= ~(CQSPI_REG_SIZE_PAGE_MASK << CQSPI_REG_SIZE_PAGE_LSB);
-	reg &= ~(CQSPI_REG_SIZE_BLOCK_MASK << CQSPI_REG_SIZE_BLOCK_LSB);
+	reg &= ~(CQSPI_REG_SIZE_ADDRESS_MASK << CQSPI_REG_SIZE_ADDRESS_LSB);
 	reg |= (plat->page_size << CQSPI_REG_SIZE_PAGE_LSB);
-	reg |= (plat->block_size << CQSPI_REG_SIZE_BLOCK_LSB);
+	reg |= (0x1 << CQSPI_REG_SIZE_ADDRESS_LSB);
 	writel(reg, plat->regbase + CQSPI_REG_SIZE);
 
 	/* Configure the remap address register, no remap */
@@ -567,7 +510,7 @@ void cadence_qspi_apb_controller_init(struct cadence_spi_platdata *plat)
 
 	/* disable direct access mode */
 	disable_qspi_direct_access(plat->regbase);
-	
+
 	/* re-enable apb controller */
 	cadence_qspi_apb_controller_enable(plat->regbase);
 
@@ -585,8 +528,10 @@ static int cadence_qspi_apb_exec_flash_cmd(void *reg_base,
 
 	/* Write the CMDCTRL without start execution. */
 	writel(reg, reg_base + CQSPI_REG_CMDCTRL);
+
 	/* Start execute */
 	reg |= CQSPI_REG_CMDCTRL_EXECUTE_MASK;
+
 	writel(reg, reg_base + CQSPI_REG_CMDCTRL);
 
 	while (retry--) {
@@ -607,18 +552,30 @@ static int cadence_qspi_apb_exec_flash_cmd(void *reg_base,
 	return 0;
 }
 
+static uint32_t qspi_create_address(const u8 *address, unsigned int cmdlen)
+{
+	uint32_t addr_value = 0;
+
+	addr_value = address[2] << 16 | address[1] << 8 |
+						address[0];
+	if (cmdlen > 3)
+		addr_value |= (address[3] << 24);
+
+	return addr_value;
+}
+
 /* For command RDID, RDSR. */
 int cadence_qspi_apb_command_read(void *reg_base,
 	unsigned int cmdlen, const u8 *cmdbuf, unsigned int rxlen,
 	u8 *rxbuf)
 {
-	unsigned int reg;
 	unsigned int read_len;
+	unsigned int addr_len, dummy_bytes = 0;
 	int status;
-#ifdef CONFIG_SYS_BIG_ENDIAN
-	int i;
+	int i = 0;
 	uint8_t *tmp;
-#endif /* CONFIG_SYS_BIG_ENDIAN */
+	uint32_t addr_value = 0;
+	uint32_t reg = 0;
 
 	if (!cmdlen || rxlen > CQSPI_STIG_DATA_LEN_MAX || rxbuf == NULL) {
 		printf("QSPI: Invalid input arguments cmdlen %d rxlen %d\n",
@@ -626,42 +583,66 @@ int cadence_qspi_apb_command_read(void *reg_base,
 		return -EINVAL;
 	}
 
-	reg = cmdbuf[0] << CQSPI_REG_CMDCTRL_OPCODE_LSB;
-
+	reg |= cmdbuf[0] << CQSPI_REG_CMDCTRL_OPCODE_LSB;
 	reg |= (0x1 << CQSPI_REG_CMDCTRL_RD_EN_LSB);
 
-	/* 0 means 1 byte. */
-	reg |= (((rxlen - 1) & CQSPI_REG_CMDCTRL_RD_BYTES_MASK)
-		<< CQSPI_REG_CMDCTRL_RD_BYTES_LSB);
+#ifndef CONFIG_GIGA_DEVICE_SPINAND
+	/* ReadID (1 dummy bytes + 1 address bytes) */
+	if (cmdbuf[0] == READ_ID_CMD) {
+		dummy_bytes = 1;
+		cmdlen--;
+	}
+#endif
+
+	addr_len = cmdlen - 1;
+	/* includes address value */
+	if (addr_len > 0) {
+		addr_value = qspi_create_address(&cmdbuf[1], cmdlen);
+		writel(addr_value, reg_base + CQSPI_REG_CMDADDRESS);
+		reg |= (0x1 << CQSPI_REG_CMDCTRL_ADDR_EN_LSB);
+		reg |= ((addr_len - 1) << CQSPI_REG_CMDCTRL_ADD_BYTES_LSB);
+	} else {
+		writel(0x0, reg_base + CQSPI_REG_CMDADDRESS);
+	}
+
+	if (dummy_bytes) {
+		reg |= ((dummy_bytes * 8) << FLASH_CMD_CTRL_REG_NUM_DUMMY_CYCLES_FLD_POS);
+	}
+
+	if (rxlen)
+		/* 0 means 1 byte. */
+		reg |= (((rxlen - 1) & CQSPI_REG_CMDCTRL_RD_BYTES_MASK)
+			<< CQSPI_REG_CMDCTRL_RD_BYTES_LSB);
+
+	debug("%s: cmd: 0x%02x, cmdlen: %d, addr_value: 0x%08x, rxlen: %d\n", __func__,
+				cmdbuf[0], cmdlen, addr_value, rxlen);
+
 	status = cadence_qspi_apb_exec_flash_cmd(reg_base, reg);
 	if (status != 0)
 		return status;
 
 	reg = readl(reg_base + CQSPI_REG_CMDREADDATALOWER);
+
 	/* Put the read value into rx_buf */
-	read_len = (rxlen > 4) ? 4 : rxlen;
+	read_len = rxlen;
 
-#ifndef CONFIG_SYS_BIG_ENDIAN
-	memcpy(rxbuf, &reg, read_len);
-#else
+	/* STIG data read is always in LE format */
 	tmp = (u8 *) &reg;
-	for (i = 0; i < read_len; i++)
-		rxbuf[i] = tmp[4 - i - 1];
-#endif /* CONFIG_SYS_BIG_ENDIAN */
-	
-	rxbuf += read_len;
-	if (rxlen > 4) {
-		reg = readl(reg_base + CQSPI_REG_CMDREADDATAUPPER);
-
-		read_len = rxlen - read_len;
-#ifndef CONFIG_SYS_BIG_ENDIAN
-		memcpy(rxbuf, &reg, read_len);
-#else
-		tmp = (u8 *) &reg;
+	if (read_len <= 4) {
 		for (i = 0; i < read_len; i++)
-			rxbuf[i] = tmp[4 - i - 1];
-#endif
+			rxbuf[i] = tmp[4 - 1 - i];
+	} else {
+		for (i = 0; i < 4; i++)
+			rxbuf[i] = tmp[4 - 1 - i];
+
+		reg = readl(reg_base + CQSPI_REG_CMDREADDATAUPPER);
+		tmp = (u8 *) &reg;
+		rxbuf += read_len;
+		read_len = rxlen - 4;
+		for (i = 0; i < read_len; i++)
+			rxbuf[i] = tmp[4 - 1 - i];
 	}
+
 	return 0;
 }
 
@@ -669,15 +650,13 @@ int cadence_qspi_apb_command_read(void *reg_base,
 int cadence_qspi_apb_command_write(void *reg_base, unsigned int cmdlen,
 	const u8 *cmdbuf, unsigned int txlen,  const u8 *txbuf)
 {
-	unsigned int reg = 0;
-	unsigned int addr_value;
-	unsigned int wr_data;
-	unsigned int wr_len;
-	unsigned int status;
-#ifdef CONFIG_SYS_BIG_ENDIAN
-	int i;
+	unsigned int i, wr_len;
+	unsigned int addr_len, dummy_bytes = 0;
 	uint8_t *tmp;
-#endif /* CONFIG_SYS_BIG_ENDIAN */
+	uint32_t addr_value = 0;
+	uint32_t wr_data = 0;
+	uint32_t reg = 0;
+	int status;
 
 	if (!cmdlen || cmdlen > 5 || txlen > 8 || cmdbuf == NULL) {
 		printf("QSPI: Invalid input arguments cmdlen %d txlen %d\n",
@@ -687,19 +666,26 @@ int cadence_qspi_apb_command_write(void *reg_base, unsigned int cmdlen,
 
 	reg |= cmdbuf[0] << CQSPI_REG_CMDCTRL_OPCODE_LSB;
 
-	if (cmdlen == 4 || cmdlen == 5) {
+	addr_len = cmdlen - 1;
+	/* Check if cmd comes with address */
+	if (addr_len > 0) {
+		addr_value = qspi_create_address(&cmdbuf[1], cmdlen);
+		writel(addr_value, reg_base + CQSPI_REG_CMDADDRESS);
+
 		/* Command with address */
 		reg |= (0x1 << CQSPI_REG_CMDCTRL_ADDR_EN_LSB);
-		/* Number of bytes to write. */
-		reg |= ((cmdlen - 2) & CQSPI_REG_CMDCTRL_ADD_BYTES_MASK)
-			<< CQSPI_REG_CMDCTRL_ADD_BYTES_LSB;
-		/* Get address */
-		addr_value = cadence_qspi_apb_cmd2addr(&cmdbuf[1],
-			cmdlen >= 5 ? 4 : 3);
-
-		writel(addr_value, reg_base + CQSPI_REG_CMDADDRESS);
+		/* cmdlen - opcode - 1 */
+		reg |= ((addr_len - 1) & CQSPI_REG_CMDCTRL_ADD_BYTES_MASK)
+				<< CQSPI_REG_CMDCTRL_ADD_BYTES_LSB;
+	} else {
+		addr_len = 0;
+		writel(0x0, reg_base + CQSPI_REG_CMDADDRESS);
 	}
 
+	if (dummy_bytes)
+		reg |= ((dummy_bytes * 8) << FLASH_CMD_CTRL_REG_NUM_DUMMY_CYCLES_FLD_POS);
+
+	/* Data */
 	if (txlen) {
 		/* writing data = yes */
 		reg |= (0x1 << CQSPI_REG_CMDCTRL_WR_EN_LSB);
@@ -707,33 +693,38 @@ int cadence_qspi_apb_command_write(void *reg_base, unsigned int cmdlen,
 			<< CQSPI_REG_CMDCTRL_WR_BYTES_LSB;
 
 		wr_len = txlen > 4 ? 4 : txlen;
-
-#ifdef CONFIG_SYS_BIG_ENDIAN
 		tmp = (u8 *) &wr_data;
 		for (i = 0; i < wr_len; i++)
 			tmp[4 - i - 1] = txbuf[i];
-#else
-		memcpy(&wr_data, txbuf, wr_len);
-#endif /* CONFIG_SYS_BIG_ENDIAN */
 
 		writel(wr_data, reg_base +
 			CQSPI_REG_CMDWRITEDATALOWER);
 
 		if (txlen > 4) {
 			txbuf += wr_len;
+			tmp = (u8 *) &wr_data;
 			wr_len = txlen - wr_len;
-			memcpy(&wr_data, txbuf, wr_len);
+			for (i = 0; i < wr_len; i++)
+				tmp[4 - i - 1] = txbuf[i];
 			writel(wr_data, reg_base +
 				CQSPI_REG_CMDWRITEDATAUPPER);
 		}
+	} else {
+		writel(0x0, reg_base + CQSPI_REG_CMDWRITEDATALOWER);
+		writel(0x0, reg_base + CQSPI_REG_CMDWRITEDATAUPPER);
+
 	}
+
+	debug("%s: cmd: 0x%02x,  cmdlen: %d, addr_value: 0x%08x, txlen: %d\n",
+				__func__, cmdbuf[0], cmdlen, addr_value, txlen);
 
 	/* Execute the command */
 	status = cadence_qspi_apb_exec_flash_cmd(reg_base, reg);
 	if (status != 0)
 		return status;
-	
-	udelay(30);
+
+	udelay(10);
+
 	return 0;
 
 }
@@ -744,10 +735,10 @@ int cadence_qspi_apb_indirect_read_setup(struct cadence_spi_platdata *plat,
 {
 	unsigned int reg;
 	unsigned int rd_reg;
-	unsigned int addr_value;
 	unsigned int dummy_clk;
 	unsigned int dummy_bytes;
 	unsigned int addr_bytes;
+	uint32_t addr_value = 0;
 
 	/*
 	 * Identify addr_byte. All NOR flash device drivers are using fast read
@@ -758,83 +749,71 @@ int cadence_qspi_apb_indirect_read_setup(struct cadence_spi_platdata *plat,
 	 */
 	if (cmdlen >= 5)
 		/* to cater fast read where cmd + addr + dummy */
-		addr_bytes = cmdlen - 2;
+		addr_bytes = cmdlen - 2 - 1;
 	else
-		/* for normal read (only ramtron as of now) */
-		addr_bytes = cmdlen - 1;
+		/* nand flash has at most 16K page, 2 addr bytes */
+		addr_bytes = 2;
 
-	/* Setup the indirect trigger address */
+	/* Setup the endirect trigger address */
 	writel(((u32)plat->ahbbase & CQSPI_INDIRECTTRIGGER_ADDR_MASK),
 	       plat->regbase + CQSPI_REG_INDIRECTTRIGGER);
+
+	/* set device size */
+	reg = readl(plat->regbase + CQSPI_REG_SIZE);
+	reg &= ~(CQSPI_REG_SIZE_ADDRESS_MASK);
+	reg |= addr_bytes - 1;
+	writel(reg, plat->regbase + CQSPI_REG_SIZE);
+
+	/* disable auto-polling */
+	reg = readl(plat->regbase + CQSPI_REG_WRITE_COMPLETION_CTRL);
+	reg |= (1 << WRITE_COMPLETION_CTRL_REG_DISABLE_POLLING_FLD_POS);
+	writel(reg, plat->regbase + CQSPI_REG_WRITE_COMPLETION_CTRL);
 
 	/* Configure the opcode */
 	rd_reg = cmdbuf[0] << CQSPI_REG_RD_INSTR_OPCODE_LSB;
 
-#ifdef CONFIG_SPI_FLASH_QUAD
-	/* Instruction and address at DQ0, data at DQ0-3. */
-	rd_reg |= CQSPI_INST_TYPE_QUAD << CQSPI_REG_RD_INSTR_TYPE_DATA_LSB;
-	rd_reg |= CQSPI_INST_TYPE_QUAD << CQSPI_REG_RD_INSTR_TYPE_ADDR_LSB;
+#if defined(CONFIG_SPI_FLASH_QUAD)
+	/* Instruction and address at DQ0, data at DQ0-3.
+	 * Check for lowest read type command and not program
+	 * using QUAD mode if cmd given is in single bit mode
+	 */
+	if (check_cmd_is_quad(cmdbuf[0]))
+		rd_reg |= CQSPI_INST_TYPE_QUAD << CQSPI_REG_RD_INSTR_TYPE_DATA_LSB;
 #endif
 
-	/* The remaining lenght is dummy bytes. */
-	dummy_bytes = cmdlen - addr_bytes - 1;
-
 	/* Get address */
-#ifdef CONFIG_SYS_BIG_ENDIAN
-	addr_value = cadence_qspi_apb_cmd2addr(&cmdbuf[1], 
-				((dummy_bytes) ? addr_bytes - 1: addr_bytes));
-#else
-	addr_value = cadence_qspi_indac_addr(&cmdbuf[1], addr_bytes);
-#endif /* CONFIG_SYS_BIG_ENDIAN */
+	addr_value = qspi_create_address(&cmdbuf[1], addr_bytes);
 	writel(addr_value, plat->regbase + CQSPI_REG_INDIRECTRDSTARTADDR);
 
+	/* Check for dummy bytes. */
+	dummy_bytes = cmdlen - addr_bytes - 1;
 	if (dummy_bytes) {
 		if (dummy_bytes > CQSPI_DUMMY_BYTES_MAX)
 			dummy_bytes = CQSPI_DUMMY_BYTES_MAX;
-
-#ifndef CONFIG_QSPI_QUAD_MODE
-		/* This configuration causes a byte skew in the 4-read 
-		 * direction observed in Lantiq Cadence based QSPI IP
-		 */
-		rd_reg |= (1 << CQSPI_REG_RD_INSTR_MODE_EN_LSB);
-#endif /* CONFIG_QSPI_QUAD_MODE */
 
 #if defined(CONFIG_SPL_SPI_XIP) && defined(CONFIG_SPL_BUILD)
 		writel(0x0, plat->regbase + CQSPI_REG_MODE_BIT);
 #else
 		writel(0xFF, plat->regbase + CQSPI_REG_MODE_BIT);
 #endif
+
 		/* Convert to clock cycles. */
 		dummy_clk = dummy_bytes * CQSPI_DUMMY_CLKS_PER_BYTE;
-
-#ifndef CONFIG_QSPI_QUAD_MODE
-		/* Need to minus the mode byte (8 clocks). 
-		 * In the Cadence IP for Intel chips, this causes
-		 * two bytes shift on the line in 4-read mode
-		 */
-		dummy_clk -= CQSPI_DUMMY_CLKS_PER_BYTE;
-#endif /* CONFIG_QSPI_QUAD_MODE */
 
 		if (dummy_clk)
 			rd_reg |= (dummy_clk & CQSPI_REG_RD_INSTR_DUMMY_MASK)
 				<< CQSPI_REG_RD_INSTR_DUMMY_LSB;
+	} else {
+		/* for qspi nand, we need at least 8 dummy cycles for rd */
+		rd_reg |= ((1 * CQSPI_DUMMY_CLKS_PER_BYTE)
+				<< CQSPI_REG_RD_INSTR_DUMMY_LSB);
 	}
+
 	writel(rd_reg, plat->regbase + CQSPI_REG_RD_INSTR);
 
-	/* set device size */
-	reg = readl(plat->regbase + CQSPI_REG_SIZE);
-	reg &= ~CQSPI_REG_SIZE_ADDRESS_MASK;
-#ifdef CONFIG_SPI_FLASH_QUAD
-	/* addr_bytes contains dummy bytes
-	 * The controller needs to know the
-	 * exact dummy/addr bytes as described
-	 * in the flash datasheet
-	 */
-	reg |= (addr_bytes - 1 - dummy_bytes);
-#else
-	reg |= (addr_bytes - 1);
-#endif
-	writel(reg, plat->regbase + CQSPI_REG_SIZE);
+	debug("%s: cmd: %02x, dummy_bytes: %d, addr_bytes: %d ", __func__, cmdbuf[0], dummy_bytes, addr_bytes);
+	debug("addr_value: 0x%08x, dev reg: 0x%08x\n", addr_value, rd_reg);
+
 	return 0;
 }
 
@@ -842,10 +821,19 @@ static u32 cadence_qspi_get_rd_sram_level(struct cadence_spi_platdata *plat)
 {
 	u32 reg = readl(plat->regbase + CQSPI_REG_SDRAMLEVEL);
 	reg >>= CQSPI_REG_SDRAMLEVEL_RD_LSB;
+
 	return reg & CQSPI_REG_SDRAMLEVEL_RD_MASK;
 }
 
-static int cadence_qspi_wait_for_data(struct cadence_spi_platdata *plat)
+static u32 cadence_qspi_get_wr_sram_level(struct cadence_spi_platdata *plat)
+{
+	u32 reg = readl(plat->regbase + CQSPI_REG_SDRAMLEVEL);
+	reg >>= CQSPI_REG_SDRAMLEVEL_WR_LSB;
+
+	return reg & CQSPI_REG_SDRAMLEVEL_WR_MASK;
+}
+
+int cadence_qspi_wait_for_data(struct cadence_spi_platdata *plat)
 {
 	unsigned int timeout = 10000;
 	u32 reg;
@@ -863,61 +851,47 @@ static int cadence_qspi_wait_for_data(struct cadence_spi_platdata *plat)
 int cadence_qspi_apb_indirect_read_execute(struct cadence_spi_platdata *plat,
 	unsigned int n_rx, u8 *rxbuf)
 {
+	int ret;
+	int i;
 	unsigned int remaining = n_rx;
 	unsigned int bytes_to_read = 0;
-	int ret;
+	unsigned int read_block_size = 512;
+	uint16_t fill_level;
+	uint32_t reg;
 
-#ifdef CONFIG_SYS_BIG_ENDIAN
-	/* Ugly work around for unaligned access to flash in BE mode.
-	 * So we trick the hardware to read 4 bytes aligned data so that
-	 * we can access the last byte read by the hardware in the SRAM
-	 * and do the swap for the last half-word. The hardware is in LE
-	 * mode, hence data read for half-word will not be what we want
-	 * it to be at the correct memory area
-	*/
-	unsigned int unaligned_read;
-	if (n_rx % 4) {
-		unaligned_read = (n_rx + (4 - (n_rx % 4)));
-		writel(unaligned_read, plat->regbase + CQSPI_REG_INDIRECTRDBYTES);
-	} else {
-		writel(n_rx, plat->regbase + CQSPI_REG_INDIRECTRDBYTES);
-	}
-#else
 	writel(n_rx, plat->regbase + CQSPI_REG_INDIRECTRDBYTES);
-#endif
-	/* set the trigger address range correctly else the 
- 	 * sram level will go beyond the read fifo level at 
- 	 * high freq. causing an exception during reads 
- 	 */
-	writel(0x8, plat->regbase + CQSPI_INDIRECT_TRIGGER_ADDR_RANGE_REG); 
+	writel(0xa, plat->regbase + CQSPI_INDIRECT_TRIGGER_ADDR_RANGE_REG);
+	writel(0x0, plat->regbase + CQSPI_REG_INDIRECTRDWATERMARK);
+
+	asm("sync");
+	reg = readl(plat->regbase + CQSPI_REG_INDIRECTRD);
+
+	reg |= CQSPI_REG_INDIRECTRD_START_MASK;
+	reg |= 0x1;
 	/* Start the indirect read transfer */
-	writel(CQSPI_REG_INDIRECTRD_START_MASK,
-	       plat->regbase + CQSPI_REG_INDIRECTRD);
+	writel(reg, plat->regbase + CQSPI_REG_INDIRECTRD);
+
+	fill_level = (readl(plat->regbase + CQSPI_REG_SDRAMLEVEL) & 0xffff);
+	remaining = n_rx;
 
 	while (remaining > 0) {
-		ret = cadence_qspi_wait_for_data(plat);
-		if (ret < 0) {
-			printf("Indirect write timed out (%i)\n", ret);
-			goto failrd;
-		}
+		fill_level = (readl(plat->regbase + CQSPI_REG_SDRAMLEVEL) & 0xffff);
+		bytes_to_read = fill_level * 4;
 
-		bytes_to_read = ret;
+		if (bytes_to_read >= remaining)
+			bytes_to_read = remaining;
+		else if (bytes_to_read >= read_block_size)
+			bytes_to_read = read_block_size;
 
-		while (bytes_to_read != 0) {
-			bytes_to_read *= CQSPI_FIFO_WIDTH;
-			bytes_to_read = bytes_to_read > remaining ?
-					remaining : bytes_to_read;
-			bytes_to_read = bytes_to_read > 64 ?
-					64 : bytes_to_read;
-			/* Handle non-4-byte aligned access to avoid data abort. */
-			if (((uintptr_t)rxbuf % 4) || (bytes_to_read % 4))
-				cadence_qspi_readb(plat->ahbbase, rxbuf, bytes_to_read);
-			else
-				cadence_qspi_readl(plat->ahbbase, rxbuf, bytes_to_read >> 2);
+		for (i = 0; i < bytes_to_read / 4; i++)
+			(*(u32 *)(rxbuf + i * 4)) = readl(plat->ahbbase + i * 4);
 
+		if ((remaining - bytes_to_read) < 0) {
+			rxbuf += remaining;
+			remaining = 0;
+		} else {
 			rxbuf += bytes_to_read;
 			remaining -= bytes_to_read;
-			bytes_to_read = cadence_qspi_get_rd_sram_level(plat);
 		}
 	}
 
@@ -929,9 +903,6 @@ int cadence_qspi_apb_indirect_read_execute(struct cadence_spi_platdata *plat,
 		goto failrd;
 	}
 
-	/* wait till qspi bus is ready */
-	while (!cadence_qspi_wait_idle(plat->regbase));
-
 	/* Clear indirect completion status */
 	writel(CQSPI_REG_INDIRECTRD_DONE_MASK,
 	       plat->regbase + CQSPI_REG_INDIRECTRD);
@@ -942,6 +913,7 @@ failrd:
 	/* Cancel the indirect read */
 	writel(CQSPI_REG_INDIRECTRD_CANCEL_MASK,
 	       plat->regbase + CQSPI_REG_INDIRECTRD);
+
 	return ret;
 }
 
@@ -949,90 +921,116 @@ failrd:
 int cadence_qspi_apb_indirect_write_setup(struct cadence_spi_platdata *plat,
 	unsigned int cmdlen, const u8 *cmdbuf)
 {
-	unsigned int reg;
-	unsigned int addr_bytes = cmdlen > 4 ? 4 : 3;
+	unsigned int addr_bytes = cmdlen - 1;
+	u32 flash_addr = 0;
+	u32 reg;
 
-	if (cmdlen < 4 || cmdbuf == NULL) {
+	if (cmdlen < 3 || cmdbuf == NULL) {
 		printf("QSPI: Invalid input argument, len %d cmdbuf 0x%08x\n",
 		       cmdlen, (unsigned int)cmdbuf);
 		return -EINVAL;
 	}
+
 	/* Setup the indirect trigger address */
 	writel(((u32)plat->ahbbase & CQSPI_INDIRECTTRIGGER_ADDR_MASK),
 	       plat->regbase + CQSPI_REG_INDIRECTTRIGGER);
 
-	/* Configure the opcode */
+	/* Configure the opcode  & disable WEL */
 	reg = cmdbuf[0] << CQSPI_REG_WR_INSTR_OPCODE_LSB;
-#ifdef CONFIG_SPI_FLASH_QUAD
-	reg |= CQSPI_INST_TYPE_QUAD << CQSPI_REG_RD_INSTR_TYPE_DATA_LSB;
-	reg |= CQSPI_INST_TYPE_QUAD << CQSPI_REG_RD_INSTR_TYPE_ADDR_LSB;
+	reg |= (1 << DEV_INSTR_WR_CONFIG_REG_WEL_DIS_FLD_POS);
+#if defined(CONFIG_SPI_FLASH_QUAD)
+	 /* Check for lowest read type command and not program
+	  * using QUAD mode if cmd given is in single bit mode
+	  */
+	if (check_cmd_is_quad(cmdbuf[0]))
+		reg |= CQSPI_INST_TYPE_QUAD << CQSPI_REG_WR_INSTR_TYPE_DATA_LSB;
 #endif
 	writel(reg, plat->regbase + CQSPI_REG_WR_INSTR);
 
 	/* Setup write address. */
-#ifdef CONFIG_SYS_BIG_ENDIAN
-	reg = cadence_qspi_indac_addr(&cmdbuf[1], addr_bytes);
-#else
-	reg = cadence_qspi_apb_cmd2addr(&cmdbuf[1], addr_bytes);
-#endif /* CONFIG_SYS_BIG_ENDIAN */
-	writel(reg, plat->regbase + CQSPI_REG_INDIRECTWRSTARTADDR);
+	flash_addr = cadence_qspi_apb_cmd2addr(&cmdbuf[1], addr_bytes);
+	writel(flash_addr, plat->regbase + CQSPI_REG_INDIRECTWRSTARTADDR);
 
 	reg = readl(plat->regbase + CQSPI_REG_SIZE);
-	reg &= ~CQSPI_REG_SIZE_ADDRESS_MASK;
+	reg &= ~(CQSPI_REG_SIZE_ADDRESS_MASK);
 	reg |= (addr_bytes - 1);
+    /* configure page number of bytes */
+	reg &= ~(DEV_SIZE_CONFIG_REG_BYTES_PER_DEVICE_PAGE_FLD_MASK);
+	reg |= (0x800 << DEV_SIZE_CONFIG_REG_BYTES_PER_DEVICE_PAGE_FLD_POS);
 	writel(reg, plat->regbase + CQSPI_REG_SIZE);
+
+	/* disable auto-polling */
+	reg = readl(plat->regbase + CQSPI_REG_WRITE_COMPLETION_CTRL);
+	reg |= (1 << 14);
+	writel(reg, plat->regbase + CQSPI_REG_WRITE_COMPLETION_CTRL);
+
+	debug("%s: opcode: 0x%02x, address: 0x%08x, addr_bytes: %d\n",
+			__func__, cmdbuf[0], flash_addr, addr_bytes);
+
 	return 0;
 }
 
 int cadence_qspi_apb_indirect_write_execute(struct cadence_spi_platdata *plat,
 	unsigned int n_tx, const u8 *txbuf)
 {
-	unsigned int page_size = plat->page_size;
-	unsigned int remaining = n_tx;
-	unsigned int write_bytes;
-	int ret;
+	int ret, i;
+	unsigned int write_block_size;
+	unsigned int remaining_bytes, bytes_to_write;
+	uint16_t fill_level = 0;
+	uint32_t retry = 0xffff;
 
-	/* Configure the indirect read transfer bytes */
+	writel(0xa, plat->regbase + CQSPI_INDIRECT_TRIGGER_ADDR_RANGE_REG);
+	writel(0x0, plat->regbase + CQSPI_REG_INDIRECTWRWATERMARK);
+
+	/* Configure the indirect write transfer bytes */
 	writel(n_tx, plat->regbase + CQSPI_REG_INDIRECTWRBYTES);
 
+	asm("sync");
 	/* Start the indirect write transfer */
 	writel(CQSPI_REG_INDIRECTWR_START_MASK,
 	       plat->regbase + CQSPI_REG_INDIRECTWR);
 
-	while (remaining > 0) {
-		write_bytes = remaining > page_size ? page_size : remaining;
-		/* Handle non-4-byte aligned access to avoid data abort. */
-		if (((uintptr_t)txbuf % 4) || (write_bytes % 4)) {
-			ret = cadence_qspi_writeb(plat->ahbbase, txbuf, write_bytes);
-			if (ret) {
-				printf("Unaligned write failed! For BE systems, avoid unaligned writes\n");
-				goto failwr;
-			}
-		} else
-			cadence_qspi_writel(plat->ahbbase, txbuf, write_bytes >> 2);
+	write_block_size = n_tx;
+	remaining_bytes = n_tx;
 
-		ret = wait_for_bit("QSPI", plat->regbase + CQSPI_REG_SDRAMLEVEL,
-				   CQSPI_REG_SDRAMLEVEL_WR_MASK <<
-				   CQSPI_REG_SDRAMLEVEL_WR_LSB, 0, 10, 0);
-		if (ret) {
-			printf("Indirect write timed out (%i)\n", ret);
+	while (remaining_bytes > 0) {
+		bytes_to_write = remaining_bytes;
+		if (bytes_to_write > write_block_size)
+			bytes_to_write = write_block_size;
+
+		/* wait till fill level is empty, then we write to QSPI SRAM  */
+		fill_level = cadence_qspi_get_wr_sram_level(plat);
+
+		debug("%s: sram fill level: 0x%04x remaining_bytes: %d\n",
+				__func__, fill_level, remaining_bytes);
+
+		retry = 0xfff; /* set timeout to 0xfff */
+		while (fill_level > 0 && retry--) {
+			fill_level = cadence_qspi_get_wr_sram_level(plat);
+		}
+
+		if (retry == 0) {
+			ret = -EINVAL;
+			printf("Timeout waiting for write fill level\n");
 			goto failwr;
 		}
 
-		txbuf += write_bytes;
-		remaining -= write_bytes;
+		/* write DDR to QSPI SRAM */
+		for (i = 0; i < (bytes_to_write / 4); i++)
+			writel((*(u32 *)(txbuf + i * 4)),
+					plat->ahbbase + i * 4);
+
+		remaining_bytes -= bytes_to_write;
+		txbuf += bytes_to_write;
 	}
 
-	/* Check indirect write status field */
+	/* Check indirect done status */
 	ret = wait_for_bit("QSPI", plat->regbase + CQSPI_REG_INDIRECTWR,
-				CQSPI_REG_INDIRECTWR_INPROGRESS_MASK, 0, 10, 0);
+			   CQSPI_REG_INDIRECTWR_DONE_MASK, 1, 10, 0);
 	if (ret) {
 		printf("Indirect write completion error (%i)\n", ret);
 		goto failwr;
 	}
-
-	/* wait till SPI bus is ready */
-	while (!cadence_qspi_wait_idle(plat->regbase));
 
 	/* Clear indirect completion status */
 	writel(CQSPI_REG_INDIRECTWR_DONE_MASK,
@@ -1044,6 +1042,7 @@ failwr:
 	/* Cancel the indirect write */
 	writel(CQSPI_REG_INDIRECTWR_CANCEL_MASK,
 	       plat->regbase + CQSPI_REG_INDIRECTWR);
+
 	return ret;
 }
 
