@@ -1,0 +1,10847 @@
+/* Copyright (c) 2017, Intel Corporation.
+ * 
+ * SSX4 XBAR header file
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms and conditions of the GNU General Public License,
+ * version 2, as published by the Free Software Foundation.
+ * This program is distributed in the hope it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+*/
+
+
+#ifndef _SSX4_SSX_H
+#define _SSX4_SSX_H
+
+/*! \defgroup SSX4_SSX Register File SSX4_SSX - SSX4_ssx */
+/*! @{ */
+
+/*! Base Address of SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_MODULE_BASE 0x16000000u
+
+/*! \defgroup REG4_TREG4_RT_TREG4_RT_COMPONENT Register REG4_TREG4_RT_TREG4_RT_COMPONENT - component */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TREG4_RT_TREG4_RT_COMPONENT 0x0
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TREG4_RT_TREG4_RT_COMPONENT 0x16000000u
+
+/*! Register Reset Value */
+#define REG4_TREG4_RT_TREG4_RT_COMPONENT_RST 0x0000000062003532u
+
+/*! Field REV - rev */
+#define REG4_TREG4_RT_TREG4_RT_COMPONENT_REV_POS 0
+/*! Field REV - rev */
+#define REG4_TREG4_RT_TREG4_RT_COMPONENT_REV_MASK 0xFFFFu
+
+/*! Field CODE - code */
+#define REG4_TREG4_RT_TREG4_RT_COMPONENT_CODE_POS 16
+/*! Field CODE - code */
+#define REG4_TREG4_RT_TREG4_RT_COMPONENT_CODE_MASK 0xFFFF0000u
+
+/*! @} */
+
+/*! \defgroup REG4_TREG4_RT_TREG4_RT_NETWORK Register REG4_TREG4_RT_TREG4_RT_NETWORK - network */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TREG4_RT_TREG4_RT_NETWORK 0x10
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TREG4_RT_TREG4_RT_NETWORK 0x16000010u
+
+/*! Register Reset Value */
+#define REG4_TREG4_RT_TREG4_RT_NETWORK_RST 0x0000000000000000u
+
+/*! Field REV - rev */
+#define REG4_TREG4_RT_TREG4_RT_NETWORK_REV_POS 32
+/*! Field REV - rev */
+#define REG4_TREG4_RT_TREG4_RT_NETWORK_REV_MASK 0xFFFF00000000u
+
+/*! Field ID - id */
+#define REG4_TREG4_RT_TREG4_RT_NETWORK_ID_POS 48
+/*! Field ID - id */
+#define REG4_TREG4_RT_TREG4_RT_NETWORK_ID_MASK 0xFFFF000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TREG4_RT_TREG4_RT_INITID_READBACK Register REG4_TREG4_RT_TREG4_RT_INITID_READBACK - initid_readback */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TREG4_RT_TREG4_RT_INITID_READBACK 0x70
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TREG4_RT_TREG4_RT_INITID_READBACK 0x16000070u
+
+/*! Register Reset Value */
+#define REG4_TREG4_RT_TREG4_RT_INITID_READBACK_RST 0x0000000000000000u
+
+/*! Field INITID - initid */
+#define REG4_TREG4_RT_TREG4_RT_INITID_READBACK_INITID_POS 0
+/*! Field INITID - initid */
+#define REG4_TREG4_RT_TREG4_RT_INITID_READBACK_INITID_MASK 0xFFu
+
+/*! @} */
+
+/*! \defgroup REG4_TREG4_RT_TREG4_RT_NETWORK_CONTROL Register REG4_TREG4_RT_TREG4_RT_NETWORK_CONTROL - network_control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TREG4_RT_TREG4_RT_NETWORK_CONTROL 0x78
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TREG4_RT_TREG4_RT_NETWORK_CONTROL 0x16000078u
+
+/*! Register Reset Value */
+#define REG4_TREG4_RT_TREG4_RT_NETWORK_CONTROL_RST 0x0000000000000000u
+
+/*! Field TIMEOUT_BASE - timeout_base */
+#define REG4_TREG4_RT_TREG4_RT_NETWORK_CONTROL_TIMEOUT_BASE_POS 8
+/*! Field TIMEOUT_BASE - timeout_base */
+#define REG4_TREG4_RT_TREG4_RT_NETWORK_CONTROL_TIMEOUT_BASE_MASK 0x700u
+
+/*! Field CLOCK_GATE_DISABLE - clock_gate_disable */
+#define REG4_TREG4_RT_TREG4_RT_NETWORK_CONTROL_CLOCK_GATE_DISABLE_POS 56
+/*! Field CLOCK_GATE_DISABLE - clock_gate_disable */
+#define REG4_TREG4_RT_TREG4_RT_NETWORK_CONTROL_CLOCK_GATE_DISABLE_MASK 0x100000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TREG4_SI_TREG4_SI_CONTROL Register REG4_TREG4_SI_TREG4_SI_CONTROL - control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TREG4_SI_TREG4_SI_CONTROL 0x420
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TREG4_SI_TREG4_SI_CONTROL 0x16000420u
+
+/*! Register Reset Value */
+#define REG4_TREG4_SI_TREG4_SI_CONTROL_RST 0x0000000000000000u
+
+/*! Field CLOCK_GATE_DISABLE - clock_gate_disable */
+#define REG4_TREG4_SI_TREG4_SI_CONTROL_CLOCK_GATE_DISABLE_POS 56
+/*! Field CLOCK_GATE_DISABLE - clock_gate_disable */
+#define REG4_TREG4_SI_TREG4_SI_CONTROL_CLOCK_GATE_DISABLE_MASK 0x100000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TREG4_SI_TREG4_SI_FLAG_STATUS_0 Register REG4_TREG4_SI_TREG4_SI_FLAG_STATUS_0 - flag_status_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TREG4_SI_TREG4_SI_FLAG_STATUS_0 0x510
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TREG4_SI_TREG4_SI_FLAG_STATUS_0 0x16000510u
+
+/*! Register Reset Value */
+#define REG4_TREG4_SI_TREG4_SI_FLAG_STATUS_0_RST 0x0000000000000000u
+
+/*! Field STATUS - status */
+#define REG4_TREG4_SI_TREG4_SI_FLAG_STATUS_0_STATUS_POS 0
+/*! Field STATUS - status */
+#define REG4_TREG4_SI_TREG4_SI_FLAG_STATUS_0_STATUS_MASK 0xFFFFFFFFFFFFFFFFu
+
+/*! @} */
+
+/*! \defgroup REG4_TREG4_SI_TREG4_SI_FLAG_STATUS_1 Register REG4_TREG4_SI_TREG4_SI_FLAG_STATUS_1 - flag_status_1 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TREG4_SI_TREG4_SI_FLAG_STATUS_1 0x530
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TREG4_SI_TREG4_SI_FLAG_STATUS_1 0x16000530u
+
+/*! Register Reset Value */
+#define REG4_TREG4_SI_TREG4_SI_FLAG_STATUS_1_RST 0x0000000000000000u
+
+/*! Field STATUS - status */
+#define REG4_TREG4_SI_TREG4_SI_FLAG_STATUS_1_STATUS_POS 0
+/*! Field STATUS - status */
+#define REG4_TREG4_SI_TREG4_SI_FLAG_STATUS_1_STATUS_MASK 0xFFFFFFFFFFFFFFFFu
+
+/*! @} */
+
+/*! \defgroup REG4_TCGU_TA_TCGU_TA_COMPONENT Register REG4_TCGU_TA_TCGU_TA_COMPONENT - component */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TCGU_TA_TCGU_TA_COMPONENT 0x1000
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TCGU_TA_TCGU_TA_COMPONENT 0x16001000u
+
+/*! Register Reset Value */
+#define REG4_TCGU_TA_TCGU_TA_COMPONENT_RST 0x0000000060203532u
+
+/*! Field REV - rev */
+#define REG4_TCGU_TA_TCGU_TA_COMPONENT_REV_POS 0
+/*! Field REV - rev */
+#define REG4_TCGU_TA_TCGU_TA_COMPONENT_REV_MASK 0xFFFFu
+
+/*! Field CODE - code */
+#define REG4_TCGU_TA_TCGU_TA_COMPONENT_CODE_POS 16
+/*! Field CODE - code */
+#define REG4_TCGU_TA_TCGU_TA_COMPONENT_CODE_MASK 0xFFFF0000u
+
+/*! @} */
+
+/*! \defgroup REG4_TCGU_TA_TCGU_TA_CORE Register REG4_TCGU_TA_TCGU_TA_CORE - core */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TCGU_TA_TCGU_TA_CORE 0x1018
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TCGU_TA_TCGU_TA_CORE 0x16001018u
+
+/*! Register Reset Value */
+#define REG4_TCGU_TA_TCGU_TA_CORE_RST 0x000088C300410001u
+
+/*! Field REV_CODE - rev_code */
+#define REG4_TCGU_TA_TCGU_TA_CORE_REV_CODE_POS 0
+/*! Field REV_CODE - rev_code */
+#define REG4_TCGU_TA_TCGU_TA_CORE_REV_CODE_MASK 0xFFFFu
+
+/*! Field CORE_CODE - core_code */
+#define REG4_TCGU_TA_TCGU_TA_CORE_CORE_CODE_POS 16
+/*! Field CORE_CODE - core_code */
+#define REG4_TCGU_TA_TCGU_TA_CORE_CORE_CODE_MASK 0xFFFF0000u
+
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TCGU_TA_TCGU_TA_CORE_VENDOR_CODE_POS 32
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TCGU_TA_TCGU_TA_CORE_VENDOR_CODE_MASK 0xFFFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL Register REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL - agent_control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL 0x1020
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL 0x16001020u
+
+/*! Register Reset Value */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_CORE_RESET_MASK 0x1u
+
+/*! Field REJECT - reject */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_REJECT_POS 4
+/*! Field REJECT - reject */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_REJECT_MASK 0x10u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_REQ_TIMEOUT_MASK 0x700u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_POS 16
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_MASK 0x70000u
+
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_SERROR_REP_POS 24
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_SERROR_REP_MASK 0x1000000u
+
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_POS 25
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_MASK 0x2000000u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_POS 26
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_MASK 0x4000000u
+
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_POS 27
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_MASK 0x8000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_RFU2_POS 30
+/*! Field RFU2 - rfu2 */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_RFU2_MASK 0x40000000u
+
+/*! Field RFU3 - rfu3 */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_RFU3_POS 31
+/*! Field RFU3 - rfu3 */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_CONTROL_RFU3_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TCGU_TA_TCGU_TA_AGENT_STATUS Register REG4_TCGU_TA_TCGU_TA_AGENT_STATUS - agent_status */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS 0x1028
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TCGU_TA_TCGU_TA_AGENT_STATUS 0x16001028u
+
+/*! Register Reset Value */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_CORE_RESET_MASK 0x1u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_POS 3
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_MASK 0x8u
+
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_REQ_WAITING_POS 4
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_REQ_WAITING_MASK 0x10u
+
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_RESP_ACTIVE_POS 5
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_RESP_ACTIVE_MASK 0x20u
+
+/*! Field BURST - burst */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_BURST_POS 6
+/*! Field BURST - burst */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_BURST_MASK 0x40u
+
+/*! Field READEX - readex */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_READEX_POS 7
+/*! Field READEX - readex */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_READEX_MASK 0x80u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_REQ_TIMEOUT_MASK 0x100u
+
+/*! Field TIMEBASE - timebase */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_TIMEBASE_POS 12
+/*! Field TIMEBASE - timebase */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_TIMEBASE_MASK 0xF000u
+
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_BURST_CLOSE_POS 16
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_BURST_CLOSE_MASK 0x10000u
+
+/*! Field SERROR - serror */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_SERROR_POS 24
+/*! Field SERROR - serror */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_SERROR_MASK 0x1000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_RFU2_POS 31
+/*! Field RFU2 - rfu2 */
+#define REG4_TCGU_TA_TCGU_TA_AGENT_STATUS_RFU2_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TCGU_TA_TCGU_TA_ERROR_LOG Register REG4_TCGU_TA_TCGU_TA_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TCGU_TA_TCGU_TA_ERROR_LOG 0x1058
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TCGU_TA_TCGU_TA_ERROR_LOG 0x16001058u
+
+/*! Register Reset Value */
+#define REG4_TCGU_TA_TCGU_TA_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TCGU_TA_TCGU_TA_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TCGU_TA_TCGU_TA_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field INITID - initid */
+#define REG4_TCGU_TA_TCGU_TA_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TCGU_TA_TCGU_TA_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field CODE - code */
+#define REG4_TCGU_TA_TCGU_TA_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TCGU_TA_TCGU_TA_ERROR_LOG_CODE_MASK 0xF000000u
+
+/*! Field MULTI - multi */
+#define REG4_TCGU_TA_TCGU_TA_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TCGU_TA_TCGU_TA_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TCGU_TA_TCGU_TA_ERROR_LOG_REQ_INFO_POS 32
+/*! Field REQ_INFO - req_info */
+#define REG4_TCGU_TA_TCGU_TA_ERROR_LOG_REQ_INFO_MASK 0xFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TCGU_TA_TCGU_TA_ERROR_LOG_ADDR Register REG4_TCGU_TA_TCGU_TA_ERROR_LOG_ADDR - error_log_addr */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TCGU_TA_TCGU_TA_ERROR_LOG_ADDR 0x1060
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TCGU_TA_TCGU_TA_ERROR_LOG_ADDR 0x16001060u
+
+/*! Register Reset Value */
+#define REG4_TCGU_TA_TCGU_TA_ERROR_LOG_ADDR_RST 0x0000000000000000u
+
+/*! Field ADDR - addr */
+#define REG4_TCGU_TA_TCGU_TA_ERROR_LOG_ADDR_ADDR_POS 0
+/*! Field ADDR - addr */
+#define REG4_TCGU_TA_TCGU_TA_ERROR_LOG_ADDR_ADDR_MASK 0xFFFFFFFFu
+
+/*! @} */
+
+/*! \defgroup REG4_TCGU_TA_TCGU_TA_BANDWIDTH_0 Register REG4_TCGU_TA_TCGU_TA_BANDWIDTH_0 - bandwidth_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_0 0x1100
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TCGU_TA_TCGU_TA_BANDWIDTH_0 0x16001100u
+
+/*! Register Reset Value */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_0_RST 0x0000000000000000u
+
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_0_FRACTION_0_POS 8
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_0_FRACTION_0_MASK 0xFF00u
+
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_0_FRACTION_1_POS 24
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_0_FRACTION_1_MASK 0xFF000000u
+
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_0_FRACTION_2_POS 40
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_0_FRACTION_2_MASK 0xFF0000000000u
+
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_0_FRACTION_3_POS 56
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_0_FRACTION_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TCGU_TA_TCGU_TA_BANDWIDTH_1 Register REG4_TCGU_TA_TCGU_TA_BANDWIDTH_1 - bandwidth_1 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_1 0x1108
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TCGU_TA_TCGU_TA_BANDWIDTH_1 0x16001108u
+
+/*! Register Reset Value */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_1_RST 0x0000000000000000u
+
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_1_FRACTION_4_POS 8
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_1_FRACTION_4_MASK 0xFF00u
+
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_1_FRACTION_5_POS 24
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_1_FRACTION_5_MASK 0xFF000000u
+
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_1_FRACTION_6_POS 40
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_1_FRACTION_6_MASK 0xFF0000000000u
+
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_1_FRACTION_7_POS 56
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_1_FRACTION_7_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TCGU_TA_TCGU_TA_BANDWIDTH_2 Register REG4_TCGU_TA_TCGU_TA_BANDWIDTH_2 - bandwidth_2 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_2 0x1110
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TCGU_TA_TCGU_TA_BANDWIDTH_2 0x16001110u
+
+/*! Register Reset Value */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_2_RST 0x0000000000000000u
+
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_2_FRACTION_8_POS 8
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_2_FRACTION_8_MASK 0xFF00u
+
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_2_FRACTION_9_POS 24
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_2_FRACTION_9_MASK 0xFF000000u
+
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_2_FRACTION_10_POS 40
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_2_FRACTION_10_MASK 0xFF0000000000u
+
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_2_FRACTION_11_POS 56
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_2_FRACTION_11_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TCGU_TA_TCGU_TA_BANDWIDTH_3 Register REG4_TCGU_TA_TCGU_TA_BANDWIDTH_3 - bandwidth_3 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_3 0x1118
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TCGU_TA_TCGU_TA_BANDWIDTH_3 0x16001118u
+
+/*! Register Reset Value */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_3_RST 0x0000000000000000u
+
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_3_FRACTION_12_POS 8
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_3_FRACTION_12_MASK 0xFF00u
+
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_3_FRACTION_13_POS 24
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_3_FRACTION_13_MASK 0xFF000000u
+
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_3_FRACTION_14_POS 40
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_3_FRACTION_14_MASK 0xFF0000000000u
+
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_3_FRACTION_15_POS 56
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TCGU_TA_TCGU_TA_BANDWIDTH_3_FRACTION_15_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TCGU_TA_TCGU_TA_ALLOC_LIMIT_0 Register REG4_TCGU_TA_TCGU_TA_ALLOC_LIMIT_0 - alloc_limit_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TCGU_TA_TCGU_TA_ALLOC_LIMIT_0 0x1200
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TCGU_TA_TCGU_TA_ALLOC_LIMIT_0 0x16001200u
+
+/*! Register Reset Value */
+#define REG4_TCGU_TA_TCGU_TA_ALLOC_LIMIT_0_RST 0x0000000000000000u
+
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TCGU_TA_TCGU_TA_ALLOC_LIMIT_0_MIN_VALUE_0_POS 0
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TCGU_TA_TCGU_TA_ALLOC_LIMIT_0_MIN_VALUE_0_MASK 0xFFu
+
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TCGU_TA_TCGU_TA_ALLOC_LIMIT_0_MAX_VALUE_0_POS 8
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TCGU_TA_TCGU_TA_ALLOC_LIMIT_0_MAX_VALUE_0_MASK 0xFF00u
+
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TCGU_TA_TCGU_TA_ALLOC_LIMIT_0_MIN_VALUE_1_POS 16
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TCGU_TA_TCGU_TA_ALLOC_LIMIT_0_MIN_VALUE_1_MASK 0xFF0000u
+
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TCGU_TA_TCGU_TA_ALLOC_LIMIT_0_MAX_VALUE_1_POS 24
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TCGU_TA_TCGU_TA_ALLOC_LIMIT_0_MAX_VALUE_1_MASK 0xFF000000u
+
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TCGU_TA_TCGU_TA_ALLOC_LIMIT_0_MIN_VALUE_2_POS 32
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TCGU_TA_TCGU_TA_ALLOC_LIMIT_0_MIN_VALUE_2_MASK 0xFF00000000u
+
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TCGU_TA_TCGU_TA_ALLOC_LIMIT_0_MAX_VALUE_2_POS 40
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TCGU_TA_TCGU_TA_ALLOC_LIMIT_0_MAX_VALUE_2_MASK 0xFF0000000000u
+
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TCGU_TA_TCGU_TA_ALLOC_LIMIT_0_MIN_VALUE_3_POS 48
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TCGU_TA_TCGU_TA_ALLOC_LIMIT_0_MIN_VALUE_3_MASK 0xFF000000000000u
+
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TCGU_TA_TCGU_TA_ALLOC_LIMIT_0_MAX_VALUE_3_POS 56
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TCGU_TA_TCGU_TA_ALLOC_LIMIT_0_MAX_VALUE_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TRCU_TA_TRCU_TA_COMPONENT Register REG4_TRCU_TA_TRCU_TA_COMPONENT - component */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TRCU_TA_TRCU_TA_COMPONENT 0x1400
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TRCU_TA_TRCU_TA_COMPONENT 0x16001400u
+
+/*! Register Reset Value */
+#define REG4_TRCU_TA_TRCU_TA_COMPONENT_RST 0x0000000060203532u
+
+/*! Field REV - rev */
+#define REG4_TRCU_TA_TRCU_TA_COMPONENT_REV_POS 0
+/*! Field REV - rev */
+#define REG4_TRCU_TA_TRCU_TA_COMPONENT_REV_MASK 0xFFFFu
+
+/*! Field CODE - code */
+#define REG4_TRCU_TA_TRCU_TA_COMPONENT_CODE_POS 16
+/*! Field CODE - code */
+#define REG4_TRCU_TA_TRCU_TA_COMPONENT_CODE_MASK 0xFFFF0000u
+
+/*! @} */
+
+/*! \defgroup REG4_TRCU_TA_TRCU_TA_CORE Register REG4_TRCU_TA_TRCU_TA_CORE - core */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TRCU_TA_TRCU_TA_CORE 0x1418
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TRCU_TA_TRCU_TA_CORE 0x16001418u
+
+/*! Register Reset Value */
+#define REG4_TRCU_TA_TRCU_TA_CORE_RST 0x000088C300420001u
+
+/*! Field REV_CODE - rev_code */
+#define REG4_TRCU_TA_TRCU_TA_CORE_REV_CODE_POS 0
+/*! Field REV_CODE - rev_code */
+#define REG4_TRCU_TA_TRCU_TA_CORE_REV_CODE_MASK 0xFFFFu
+
+/*! Field CORE_CODE - core_code */
+#define REG4_TRCU_TA_TRCU_TA_CORE_CORE_CODE_POS 16
+/*! Field CORE_CODE - core_code */
+#define REG4_TRCU_TA_TRCU_TA_CORE_CORE_CODE_MASK 0xFFFF0000u
+
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TRCU_TA_TRCU_TA_CORE_VENDOR_CODE_POS 32
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TRCU_TA_TRCU_TA_CORE_VENDOR_CODE_MASK 0xFFFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL Register REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL - agent_control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL 0x1420
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL 0x16001420u
+
+/*! Register Reset Value */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_CORE_RESET_MASK 0x1u
+
+/*! Field REJECT - reject */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_REJECT_POS 4
+/*! Field REJECT - reject */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_REJECT_MASK 0x10u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_REQ_TIMEOUT_MASK 0x700u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_POS 16
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_MASK 0x70000u
+
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_SERROR_REP_POS 24
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_SERROR_REP_MASK 0x1000000u
+
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_POS 25
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_MASK 0x2000000u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_POS 26
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_MASK 0x4000000u
+
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_POS 27
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_MASK 0x8000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_RFU2_POS 30
+/*! Field RFU2 - rfu2 */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_RFU2_MASK 0x40000000u
+
+/*! Field RFU3 - rfu3 */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_RFU3_POS 31
+/*! Field RFU3 - rfu3 */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_CONTROL_RFU3_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TRCU_TA_TRCU_TA_AGENT_STATUS Register REG4_TRCU_TA_TRCU_TA_AGENT_STATUS - agent_status */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS 0x1428
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TRCU_TA_TRCU_TA_AGENT_STATUS 0x16001428u
+
+/*! Register Reset Value */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_CORE_RESET_MASK 0x1u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_POS 3
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_MASK 0x8u
+
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_REQ_WAITING_POS 4
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_REQ_WAITING_MASK 0x10u
+
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_RESP_ACTIVE_POS 5
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_RESP_ACTIVE_MASK 0x20u
+
+/*! Field BURST - burst */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_BURST_POS 6
+/*! Field BURST - burst */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_BURST_MASK 0x40u
+
+/*! Field READEX - readex */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_READEX_POS 7
+/*! Field READEX - readex */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_READEX_MASK 0x80u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_REQ_TIMEOUT_MASK 0x100u
+
+/*! Field TIMEBASE - timebase */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_TIMEBASE_POS 12
+/*! Field TIMEBASE - timebase */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_TIMEBASE_MASK 0xF000u
+
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_BURST_CLOSE_POS 16
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_BURST_CLOSE_MASK 0x10000u
+
+/*! Field SERROR - serror */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_SERROR_POS 24
+/*! Field SERROR - serror */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_SERROR_MASK 0x1000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_RFU2_POS 31
+/*! Field RFU2 - rfu2 */
+#define REG4_TRCU_TA_TRCU_TA_AGENT_STATUS_RFU2_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TRCU_TA_TRCU_TA_ERROR_LOG Register REG4_TRCU_TA_TRCU_TA_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TRCU_TA_TRCU_TA_ERROR_LOG 0x1458
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TRCU_TA_TRCU_TA_ERROR_LOG 0x16001458u
+
+/*! Register Reset Value */
+#define REG4_TRCU_TA_TRCU_TA_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TRCU_TA_TRCU_TA_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TRCU_TA_TRCU_TA_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field INITID - initid */
+#define REG4_TRCU_TA_TRCU_TA_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TRCU_TA_TRCU_TA_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field CODE - code */
+#define REG4_TRCU_TA_TRCU_TA_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TRCU_TA_TRCU_TA_ERROR_LOG_CODE_MASK 0xF000000u
+
+/*! Field MULTI - multi */
+#define REG4_TRCU_TA_TRCU_TA_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TRCU_TA_TRCU_TA_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TRCU_TA_TRCU_TA_ERROR_LOG_REQ_INFO_POS 32
+/*! Field REQ_INFO - req_info */
+#define REG4_TRCU_TA_TRCU_TA_ERROR_LOG_REQ_INFO_MASK 0xFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TRCU_TA_TRCU_TA_ERROR_LOG_ADDR Register REG4_TRCU_TA_TRCU_TA_ERROR_LOG_ADDR - error_log_addr */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TRCU_TA_TRCU_TA_ERROR_LOG_ADDR 0x1460
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TRCU_TA_TRCU_TA_ERROR_LOG_ADDR 0x16001460u
+
+/*! Register Reset Value */
+#define REG4_TRCU_TA_TRCU_TA_ERROR_LOG_ADDR_RST 0x0000000000000000u
+
+/*! Field ADDR - addr */
+#define REG4_TRCU_TA_TRCU_TA_ERROR_LOG_ADDR_ADDR_POS 0
+/*! Field ADDR - addr */
+#define REG4_TRCU_TA_TRCU_TA_ERROR_LOG_ADDR_ADDR_MASK 0xFFFFFFFFu
+
+/*! @} */
+
+/*! \defgroup REG4_TRCU_TA_TRCU_TA_BANDWIDTH_0 Register REG4_TRCU_TA_TRCU_TA_BANDWIDTH_0 - bandwidth_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_0 0x1500
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TRCU_TA_TRCU_TA_BANDWIDTH_0 0x16001500u
+
+/*! Register Reset Value */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_0_RST 0x0000000000000000u
+
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_0_FRACTION_0_POS 8
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_0_FRACTION_0_MASK 0xFF00u
+
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_0_FRACTION_1_POS 24
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_0_FRACTION_1_MASK 0xFF000000u
+
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_0_FRACTION_2_POS 40
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_0_FRACTION_2_MASK 0xFF0000000000u
+
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_0_FRACTION_3_POS 56
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_0_FRACTION_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TRCU_TA_TRCU_TA_BANDWIDTH_1 Register REG4_TRCU_TA_TRCU_TA_BANDWIDTH_1 - bandwidth_1 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_1 0x1508
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TRCU_TA_TRCU_TA_BANDWIDTH_1 0x16001508u
+
+/*! Register Reset Value */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_1_RST 0x0000000000000000u
+
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_1_FRACTION_4_POS 8
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_1_FRACTION_4_MASK 0xFF00u
+
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_1_FRACTION_5_POS 24
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_1_FRACTION_5_MASK 0xFF000000u
+
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_1_FRACTION_6_POS 40
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_1_FRACTION_6_MASK 0xFF0000000000u
+
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_1_FRACTION_7_POS 56
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_1_FRACTION_7_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TRCU_TA_TRCU_TA_BANDWIDTH_2 Register REG4_TRCU_TA_TRCU_TA_BANDWIDTH_2 - bandwidth_2 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_2 0x1510
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TRCU_TA_TRCU_TA_BANDWIDTH_2 0x16001510u
+
+/*! Register Reset Value */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_2_RST 0x0000000000000000u
+
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_2_FRACTION_8_POS 8
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_2_FRACTION_8_MASK 0xFF00u
+
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_2_FRACTION_9_POS 24
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_2_FRACTION_9_MASK 0xFF000000u
+
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_2_FRACTION_10_POS 40
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_2_FRACTION_10_MASK 0xFF0000000000u
+
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_2_FRACTION_11_POS 56
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_2_FRACTION_11_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TRCU_TA_TRCU_TA_BANDWIDTH_3 Register REG4_TRCU_TA_TRCU_TA_BANDWIDTH_3 - bandwidth_3 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_3 0x1518
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TRCU_TA_TRCU_TA_BANDWIDTH_3 0x16001518u
+
+/*! Register Reset Value */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_3_RST 0x0000000000000000u
+
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_3_FRACTION_12_POS 8
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_3_FRACTION_12_MASK 0xFF00u
+
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_3_FRACTION_13_POS 24
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_3_FRACTION_13_MASK 0xFF000000u
+
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_3_FRACTION_14_POS 40
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_3_FRACTION_14_MASK 0xFF0000000000u
+
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_3_FRACTION_15_POS 56
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TRCU_TA_TRCU_TA_BANDWIDTH_3_FRACTION_15_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TRCU_TA_TRCU_TA_ALLOC_LIMIT_0 Register REG4_TRCU_TA_TRCU_TA_ALLOC_LIMIT_0 - alloc_limit_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TRCU_TA_TRCU_TA_ALLOC_LIMIT_0 0x1600
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TRCU_TA_TRCU_TA_ALLOC_LIMIT_0 0x16001600u
+
+/*! Register Reset Value */
+#define REG4_TRCU_TA_TRCU_TA_ALLOC_LIMIT_0_RST 0x0000000000000000u
+
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TRCU_TA_TRCU_TA_ALLOC_LIMIT_0_MIN_VALUE_0_POS 0
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TRCU_TA_TRCU_TA_ALLOC_LIMIT_0_MIN_VALUE_0_MASK 0xFFu
+
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TRCU_TA_TRCU_TA_ALLOC_LIMIT_0_MAX_VALUE_0_POS 8
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TRCU_TA_TRCU_TA_ALLOC_LIMIT_0_MAX_VALUE_0_MASK 0xFF00u
+
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TRCU_TA_TRCU_TA_ALLOC_LIMIT_0_MIN_VALUE_1_POS 16
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TRCU_TA_TRCU_TA_ALLOC_LIMIT_0_MIN_VALUE_1_MASK 0xFF0000u
+
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TRCU_TA_TRCU_TA_ALLOC_LIMIT_0_MAX_VALUE_1_POS 24
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TRCU_TA_TRCU_TA_ALLOC_LIMIT_0_MAX_VALUE_1_MASK 0xFF000000u
+
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TRCU_TA_TRCU_TA_ALLOC_LIMIT_0_MIN_VALUE_2_POS 32
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TRCU_TA_TRCU_TA_ALLOC_LIMIT_0_MIN_VALUE_2_MASK 0xFF00000000u
+
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TRCU_TA_TRCU_TA_ALLOC_LIMIT_0_MAX_VALUE_2_POS 40
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TRCU_TA_TRCU_TA_ALLOC_LIMIT_0_MAX_VALUE_2_MASK 0xFF0000000000u
+
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TRCU_TA_TRCU_TA_ALLOC_LIMIT_0_MIN_VALUE_3_POS 48
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TRCU_TA_TRCU_TA_ALLOC_LIMIT_0_MIN_VALUE_3_MASK 0xFF000000000000u
+
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TRCU_TA_TRCU_TA_ALLOC_LIMIT_0_MAX_VALUE_3_POS 56
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TRCU_TA_TRCU_TA_ALLOC_LIMIT_0_MAX_VALUE_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPMU_TA_TPMU_TA_COMPONENT Register REG4_TPMU_TA_TPMU_TA_COMPONENT - component */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPMU_TA_TPMU_TA_COMPONENT 0x1800
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPMU_TA_TPMU_TA_COMPONENT 0x16001800u
+
+/*! Register Reset Value */
+#define REG4_TPMU_TA_TPMU_TA_COMPONENT_RST 0x0000000060203532u
+
+/*! Field REV - rev */
+#define REG4_TPMU_TA_TPMU_TA_COMPONENT_REV_POS 0
+/*! Field REV - rev */
+#define REG4_TPMU_TA_TPMU_TA_COMPONENT_REV_MASK 0xFFFFu
+
+/*! Field CODE - code */
+#define REG4_TPMU_TA_TPMU_TA_COMPONENT_CODE_POS 16
+/*! Field CODE - code */
+#define REG4_TPMU_TA_TPMU_TA_COMPONENT_CODE_MASK 0xFFFF0000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPMU_TA_TPMU_TA_CORE Register REG4_TPMU_TA_TPMU_TA_CORE - core */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPMU_TA_TPMU_TA_CORE 0x1818
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPMU_TA_TPMU_TA_CORE 0x16001818u
+
+/*! Register Reset Value */
+#define REG4_TPMU_TA_TPMU_TA_CORE_RST 0x000088C300430001u
+
+/*! Field REV_CODE - rev_code */
+#define REG4_TPMU_TA_TPMU_TA_CORE_REV_CODE_POS 0
+/*! Field REV_CODE - rev_code */
+#define REG4_TPMU_TA_TPMU_TA_CORE_REV_CODE_MASK 0xFFFFu
+
+/*! Field CORE_CODE - core_code */
+#define REG4_TPMU_TA_TPMU_TA_CORE_CORE_CODE_POS 16
+/*! Field CORE_CODE - core_code */
+#define REG4_TPMU_TA_TPMU_TA_CORE_CORE_CODE_MASK 0xFFFF0000u
+
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TPMU_TA_TPMU_TA_CORE_VENDOR_CODE_POS 32
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TPMU_TA_TPMU_TA_CORE_VENDOR_CODE_MASK 0xFFFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL Register REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL - agent_control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL 0x1820
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL 0x16001820u
+
+/*! Register Reset Value */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_CORE_RESET_MASK 0x1u
+
+/*! Field REJECT - reject */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_REJECT_POS 4
+/*! Field REJECT - reject */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_REJECT_MASK 0x10u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_REQ_TIMEOUT_MASK 0x700u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_POS 16
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_MASK 0x70000u
+
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_SERROR_REP_POS 24
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_SERROR_REP_MASK 0x1000000u
+
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_POS 25
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_MASK 0x2000000u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_POS 26
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_MASK 0x4000000u
+
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_POS 27
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_MASK 0x8000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_RFU2_POS 30
+/*! Field RFU2 - rfu2 */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_RFU2_MASK 0x40000000u
+
+/*! Field RFU3 - rfu3 */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_RFU3_POS 31
+/*! Field RFU3 - rfu3 */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_CONTROL_RFU3_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPMU_TA_TPMU_TA_AGENT_STATUS Register REG4_TPMU_TA_TPMU_TA_AGENT_STATUS - agent_status */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS 0x1828
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPMU_TA_TPMU_TA_AGENT_STATUS 0x16001828u
+
+/*! Register Reset Value */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_CORE_RESET_MASK 0x1u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_POS 3
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_MASK 0x8u
+
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_REQ_WAITING_POS 4
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_REQ_WAITING_MASK 0x10u
+
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_RESP_ACTIVE_POS 5
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_RESP_ACTIVE_MASK 0x20u
+
+/*! Field BURST - burst */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_BURST_POS 6
+/*! Field BURST - burst */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_BURST_MASK 0x40u
+
+/*! Field READEX - readex */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_READEX_POS 7
+/*! Field READEX - readex */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_READEX_MASK 0x80u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_REQ_TIMEOUT_MASK 0x100u
+
+/*! Field TIMEBASE - timebase */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_TIMEBASE_POS 12
+/*! Field TIMEBASE - timebase */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_TIMEBASE_MASK 0xF000u
+
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_BURST_CLOSE_POS 16
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_BURST_CLOSE_MASK 0x10000u
+
+/*! Field SERROR - serror */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_SERROR_POS 24
+/*! Field SERROR - serror */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_SERROR_MASK 0x1000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_RFU2_POS 31
+/*! Field RFU2 - rfu2 */
+#define REG4_TPMU_TA_TPMU_TA_AGENT_STATUS_RFU2_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPMU_TA_TPMU_TA_ERROR_LOG Register REG4_TPMU_TA_TPMU_TA_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPMU_TA_TPMU_TA_ERROR_LOG 0x1858
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPMU_TA_TPMU_TA_ERROR_LOG 0x16001858u
+
+/*! Register Reset Value */
+#define REG4_TPMU_TA_TPMU_TA_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TPMU_TA_TPMU_TA_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TPMU_TA_TPMU_TA_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field INITID - initid */
+#define REG4_TPMU_TA_TPMU_TA_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TPMU_TA_TPMU_TA_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field CODE - code */
+#define REG4_TPMU_TA_TPMU_TA_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TPMU_TA_TPMU_TA_ERROR_LOG_CODE_MASK 0xF000000u
+
+/*! Field MULTI - multi */
+#define REG4_TPMU_TA_TPMU_TA_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TPMU_TA_TPMU_TA_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TPMU_TA_TPMU_TA_ERROR_LOG_REQ_INFO_POS 32
+/*! Field REQ_INFO - req_info */
+#define REG4_TPMU_TA_TPMU_TA_ERROR_LOG_REQ_INFO_MASK 0xFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPMU_TA_TPMU_TA_ERROR_LOG_ADDR Register REG4_TPMU_TA_TPMU_TA_ERROR_LOG_ADDR - error_log_addr */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPMU_TA_TPMU_TA_ERROR_LOG_ADDR 0x1860
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPMU_TA_TPMU_TA_ERROR_LOG_ADDR 0x16001860u
+
+/*! Register Reset Value */
+#define REG4_TPMU_TA_TPMU_TA_ERROR_LOG_ADDR_RST 0x0000000000000000u
+
+/*! Field ADDR - addr */
+#define REG4_TPMU_TA_TPMU_TA_ERROR_LOG_ADDR_ADDR_POS 0
+/*! Field ADDR - addr */
+#define REG4_TPMU_TA_TPMU_TA_ERROR_LOG_ADDR_ADDR_MASK 0xFFFFFFFFu
+
+/*! @} */
+
+/*! \defgroup REG4_TPMU_TA_TPMU_TA_BANDWIDTH_0 Register REG4_TPMU_TA_TPMU_TA_BANDWIDTH_0 - bandwidth_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_0 0x1900
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPMU_TA_TPMU_TA_BANDWIDTH_0 0x16001900u
+
+/*! Register Reset Value */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_0_RST 0x0000000000000000u
+
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_0_FRACTION_0_POS 8
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_0_FRACTION_0_MASK 0xFF00u
+
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_0_FRACTION_1_POS 24
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_0_FRACTION_1_MASK 0xFF000000u
+
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_0_FRACTION_2_POS 40
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_0_FRACTION_2_MASK 0xFF0000000000u
+
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_0_FRACTION_3_POS 56
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_0_FRACTION_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPMU_TA_TPMU_TA_BANDWIDTH_1 Register REG4_TPMU_TA_TPMU_TA_BANDWIDTH_1 - bandwidth_1 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_1 0x1908
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPMU_TA_TPMU_TA_BANDWIDTH_1 0x16001908u
+
+/*! Register Reset Value */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_1_RST 0x0000000000000000u
+
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_1_FRACTION_4_POS 8
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_1_FRACTION_4_MASK 0xFF00u
+
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_1_FRACTION_5_POS 24
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_1_FRACTION_5_MASK 0xFF000000u
+
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_1_FRACTION_6_POS 40
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_1_FRACTION_6_MASK 0xFF0000000000u
+
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_1_FRACTION_7_POS 56
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_1_FRACTION_7_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPMU_TA_TPMU_TA_BANDWIDTH_2 Register REG4_TPMU_TA_TPMU_TA_BANDWIDTH_2 - bandwidth_2 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_2 0x1910
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPMU_TA_TPMU_TA_BANDWIDTH_2 0x16001910u
+
+/*! Register Reset Value */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_2_RST 0x0000000000000000u
+
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_2_FRACTION_8_POS 8
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_2_FRACTION_8_MASK 0xFF00u
+
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_2_FRACTION_9_POS 24
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_2_FRACTION_9_MASK 0xFF000000u
+
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_2_FRACTION_10_POS 40
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_2_FRACTION_10_MASK 0xFF0000000000u
+
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_2_FRACTION_11_POS 56
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_2_FRACTION_11_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPMU_TA_TPMU_TA_BANDWIDTH_3 Register REG4_TPMU_TA_TPMU_TA_BANDWIDTH_3 - bandwidth_3 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_3 0x1918
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPMU_TA_TPMU_TA_BANDWIDTH_3 0x16001918u
+
+/*! Register Reset Value */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_3_RST 0x0000000000000000u
+
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_3_FRACTION_12_POS 8
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_3_FRACTION_12_MASK 0xFF00u
+
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_3_FRACTION_13_POS 24
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_3_FRACTION_13_MASK 0xFF000000u
+
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_3_FRACTION_14_POS 40
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_3_FRACTION_14_MASK 0xFF0000000000u
+
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_3_FRACTION_15_POS 56
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TPMU_TA_TPMU_TA_BANDWIDTH_3_FRACTION_15_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPMU_TA_TPMU_TA_ALLOC_LIMIT_0 Register REG4_TPMU_TA_TPMU_TA_ALLOC_LIMIT_0 - alloc_limit_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPMU_TA_TPMU_TA_ALLOC_LIMIT_0 0x1A00
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPMU_TA_TPMU_TA_ALLOC_LIMIT_0 0x16001A00u
+
+/*! Register Reset Value */
+#define REG4_TPMU_TA_TPMU_TA_ALLOC_LIMIT_0_RST 0x0000000000000000u
+
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TPMU_TA_TPMU_TA_ALLOC_LIMIT_0_MIN_VALUE_0_POS 0
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TPMU_TA_TPMU_TA_ALLOC_LIMIT_0_MIN_VALUE_0_MASK 0xFFu
+
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TPMU_TA_TPMU_TA_ALLOC_LIMIT_0_MAX_VALUE_0_POS 8
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TPMU_TA_TPMU_TA_ALLOC_LIMIT_0_MAX_VALUE_0_MASK 0xFF00u
+
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TPMU_TA_TPMU_TA_ALLOC_LIMIT_0_MIN_VALUE_1_POS 16
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TPMU_TA_TPMU_TA_ALLOC_LIMIT_0_MIN_VALUE_1_MASK 0xFF0000u
+
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TPMU_TA_TPMU_TA_ALLOC_LIMIT_0_MAX_VALUE_1_POS 24
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TPMU_TA_TPMU_TA_ALLOC_LIMIT_0_MAX_VALUE_1_MASK 0xFF000000u
+
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TPMU_TA_TPMU_TA_ALLOC_LIMIT_0_MIN_VALUE_2_POS 32
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TPMU_TA_TPMU_TA_ALLOC_LIMIT_0_MIN_VALUE_2_MASK 0xFF00000000u
+
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TPMU_TA_TPMU_TA_ALLOC_LIMIT_0_MAX_VALUE_2_POS 40
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TPMU_TA_TPMU_TA_ALLOC_LIMIT_0_MAX_VALUE_2_MASK 0xFF0000000000u
+
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TPMU_TA_TPMU_TA_ALLOC_LIMIT_0_MIN_VALUE_3_POS 48
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TPMU_TA_TPMU_TA_ALLOC_LIMIT_0_MIN_VALUE_3_MASK 0xFF000000000000u
+
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TPMU_TA_TPMU_TA_ALLOC_LIMIT_0_MAX_VALUE_3_POS 56
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TPMU_TA_TPMU_TA_ALLOC_LIMIT_0_MAX_VALUE_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPCM_TA_TPCM_TA_COMPONENT Register REG4_TPCM_TA_TPCM_TA_COMPONENT - component */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPCM_TA_TPCM_TA_COMPONENT 0x1C00
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPCM_TA_TPCM_TA_COMPONENT 0x16001C00u
+
+/*! Register Reset Value */
+#define REG4_TPCM_TA_TPCM_TA_COMPONENT_RST 0x0000000060203532u
+
+/*! Field REV - rev */
+#define REG4_TPCM_TA_TPCM_TA_COMPONENT_REV_POS 0
+/*! Field REV - rev */
+#define REG4_TPCM_TA_TPCM_TA_COMPONENT_REV_MASK 0xFFFFu
+
+/*! Field CODE - code */
+#define REG4_TPCM_TA_TPCM_TA_COMPONENT_CODE_POS 16
+/*! Field CODE - code */
+#define REG4_TPCM_TA_TPCM_TA_COMPONENT_CODE_MASK 0xFFFF0000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPCM_TA_TPCM_TA_CORE Register REG4_TPCM_TA_TPCM_TA_CORE - core */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPCM_TA_TPCM_TA_CORE 0x1C18
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPCM_TA_TPCM_TA_CORE 0x16001C18u
+
+/*! Register Reset Value */
+#define REG4_TPCM_TA_TPCM_TA_CORE_RST 0x000088C300440001u
+
+/*! Field REV_CODE - rev_code */
+#define REG4_TPCM_TA_TPCM_TA_CORE_REV_CODE_POS 0
+/*! Field REV_CODE - rev_code */
+#define REG4_TPCM_TA_TPCM_TA_CORE_REV_CODE_MASK 0xFFFFu
+
+/*! Field CORE_CODE - core_code */
+#define REG4_TPCM_TA_TPCM_TA_CORE_CORE_CODE_POS 16
+/*! Field CORE_CODE - core_code */
+#define REG4_TPCM_TA_TPCM_TA_CORE_CORE_CODE_MASK 0xFFFF0000u
+
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TPCM_TA_TPCM_TA_CORE_VENDOR_CODE_POS 32
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TPCM_TA_TPCM_TA_CORE_VENDOR_CODE_MASK 0xFFFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL Register REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL - agent_control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL 0x1C20
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL 0x16001C20u
+
+/*! Register Reset Value */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_CORE_RESET_MASK 0x1u
+
+/*! Field REJECT - reject */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_REJECT_POS 4
+/*! Field REJECT - reject */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_REJECT_MASK 0x10u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_REQ_TIMEOUT_MASK 0x700u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_POS 16
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_MASK 0x70000u
+
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_SERROR_REP_POS 24
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_SERROR_REP_MASK 0x1000000u
+
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_POS 25
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_MASK 0x2000000u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_POS 26
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_MASK 0x4000000u
+
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_POS 27
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_MASK 0x8000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_RFU2_POS 30
+/*! Field RFU2 - rfu2 */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_RFU2_MASK 0x40000000u
+
+/*! Field RFU3 - rfu3 */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_RFU3_POS 31
+/*! Field RFU3 - rfu3 */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_CONTROL_RFU3_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPCM_TA_TPCM_TA_AGENT_STATUS Register REG4_TPCM_TA_TPCM_TA_AGENT_STATUS - agent_status */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS 0x1C28
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPCM_TA_TPCM_TA_AGENT_STATUS 0x16001C28u
+
+/*! Register Reset Value */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_CORE_RESET_MASK 0x1u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_POS 3
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_MASK 0x8u
+
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_REQ_WAITING_POS 4
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_REQ_WAITING_MASK 0x10u
+
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_RESP_ACTIVE_POS 5
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_RESP_ACTIVE_MASK 0x20u
+
+/*! Field BURST - burst */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_BURST_POS 6
+/*! Field BURST - burst */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_BURST_MASK 0x40u
+
+/*! Field READEX - readex */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_READEX_POS 7
+/*! Field READEX - readex */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_READEX_MASK 0x80u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_REQ_TIMEOUT_MASK 0x100u
+
+/*! Field TIMEBASE - timebase */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_TIMEBASE_POS 12
+/*! Field TIMEBASE - timebase */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_TIMEBASE_MASK 0xF000u
+
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_BURST_CLOSE_POS 16
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_BURST_CLOSE_MASK 0x10000u
+
+/*! Field SERROR - serror */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_SERROR_POS 24
+/*! Field SERROR - serror */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_SERROR_MASK 0x1000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_RFU2_POS 31
+/*! Field RFU2 - rfu2 */
+#define REG4_TPCM_TA_TPCM_TA_AGENT_STATUS_RFU2_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPCM_TA_TPCM_TA_ERROR_LOG Register REG4_TPCM_TA_TPCM_TA_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPCM_TA_TPCM_TA_ERROR_LOG 0x1C58
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPCM_TA_TPCM_TA_ERROR_LOG 0x16001C58u
+
+/*! Register Reset Value */
+#define REG4_TPCM_TA_TPCM_TA_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TPCM_TA_TPCM_TA_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TPCM_TA_TPCM_TA_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field INITID - initid */
+#define REG4_TPCM_TA_TPCM_TA_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TPCM_TA_TPCM_TA_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field CODE - code */
+#define REG4_TPCM_TA_TPCM_TA_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TPCM_TA_TPCM_TA_ERROR_LOG_CODE_MASK 0xF000000u
+
+/*! Field MULTI - multi */
+#define REG4_TPCM_TA_TPCM_TA_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TPCM_TA_TPCM_TA_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TPCM_TA_TPCM_TA_ERROR_LOG_REQ_INFO_POS 32
+/*! Field REQ_INFO - req_info */
+#define REG4_TPCM_TA_TPCM_TA_ERROR_LOG_REQ_INFO_MASK 0xFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPCM_TA_TPCM_TA_ERROR_LOG_ADDR Register REG4_TPCM_TA_TPCM_TA_ERROR_LOG_ADDR - error_log_addr */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPCM_TA_TPCM_TA_ERROR_LOG_ADDR 0x1C60
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPCM_TA_TPCM_TA_ERROR_LOG_ADDR 0x16001C60u
+
+/*! Register Reset Value */
+#define REG4_TPCM_TA_TPCM_TA_ERROR_LOG_ADDR_RST 0x0000000000000000u
+
+/*! Field ADDR - addr */
+#define REG4_TPCM_TA_TPCM_TA_ERROR_LOG_ADDR_ADDR_POS 0
+/*! Field ADDR - addr */
+#define REG4_TPCM_TA_TPCM_TA_ERROR_LOG_ADDR_ADDR_MASK 0xFFFFFFFFu
+
+/*! @} */
+
+/*! \defgroup REG4_TPCM_TA_TPCM_TA_BANDWIDTH_0 Register REG4_TPCM_TA_TPCM_TA_BANDWIDTH_0 - bandwidth_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_0 0x1D00
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPCM_TA_TPCM_TA_BANDWIDTH_0 0x16001D00u
+
+/*! Register Reset Value */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_0_RST 0x0000000000000000u
+
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_0_FRACTION_0_POS 8
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_0_FRACTION_0_MASK 0xFF00u
+
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_0_FRACTION_1_POS 24
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_0_FRACTION_1_MASK 0xFF000000u
+
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_0_FRACTION_2_POS 40
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_0_FRACTION_2_MASK 0xFF0000000000u
+
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_0_FRACTION_3_POS 56
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_0_FRACTION_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPCM_TA_TPCM_TA_BANDWIDTH_1 Register REG4_TPCM_TA_TPCM_TA_BANDWIDTH_1 - bandwidth_1 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_1 0x1D08
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPCM_TA_TPCM_TA_BANDWIDTH_1 0x16001D08u
+
+/*! Register Reset Value */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_1_RST 0x0000000000000000u
+
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_1_FRACTION_4_POS 8
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_1_FRACTION_4_MASK 0xFF00u
+
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_1_FRACTION_5_POS 24
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_1_FRACTION_5_MASK 0xFF000000u
+
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_1_FRACTION_6_POS 40
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_1_FRACTION_6_MASK 0xFF0000000000u
+
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_1_FRACTION_7_POS 56
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_1_FRACTION_7_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPCM_TA_TPCM_TA_BANDWIDTH_2 Register REG4_TPCM_TA_TPCM_TA_BANDWIDTH_2 - bandwidth_2 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_2 0x1D10
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPCM_TA_TPCM_TA_BANDWIDTH_2 0x16001D10u
+
+/*! Register Reset Value */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_2_RST 0x0000000000000000u
+
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_2_FRACTION_8_POS 8
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_2_FRACTION_8_MASK 0xFF00u
+
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_2_FRACTION_9_POS 24
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_2_FRACTION_9_MASK 0xFF000000u
+
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_2_FRACTION_10_POS 40
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_2_FRACTION_10_MASK 0xFF0000000000u
+
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_2_FRACTION_11_POS 56
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_2_FRACTION_11_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPCM_TA_TPCM_TA_BANDWIDTH_3 Register REG4_TPCM_TA_TPCM_TA_BANDWIDTH_3 - bandwidth_3 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_3 0x1D18
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPCM_TA_TPCM_TA_BANDWIDTH_3 0x16001D18u
+
+/*! Register Reset Value */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_3_RST 0x0000000000000000u
+
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_3_FRACTION_12_POS 8
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_3_FRACTION_12_MASK 0xFF00u
+
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_3_FRACTION_13_POS 24
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_3_FRACTION_13_MASK 0xFF000000u
+
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_3_FRACTION_14_POS 40
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_3_FRACTION_14_MASK 0xFF0000000000u
+
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_3_FRACTION_15_POS 56
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TPCM_TA_TPCM_TA_BANDWIDTH_3_FRACTION_15_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPCM_TA_TPCM_TA_ALLOC_LIMIT_0 Register REG4_TPCM_TA_TPCM_TA_ALLOC_LIMIT_0 - alloc_limit_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPCM_TA_TPCM_TA_ALLOC_LIMIT_0 0x1E00
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPCM_TA_TPCM_TA_ALLOC_LIMIT_0 0x16001E00u
+
+/*! Register Reset Value */
+#define REG4_TPCM_TA_TPCM_TA_ALLOC_LIMIT_0_RST 0x0000000000000000u
+
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TPCM_TA_TPCM_TA_ALLOC_LIMIT_0_MIN_VALUE_0_POS 0
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TPCM_TA_TPCM_TA_ALLOC_LIMIT_0_MIN_VALUE_0_MASK 0xFFu
+
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TPCM_TA_TPCM_TA_ALLOC_LIMIT_0_MAX_VALUE_0_POS 8
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TPCM_TA_TPCM_TA_ALLOC_LIMIT_0_MAX_VALUE_0_MASK 0xFF00u
+
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TPCM_TA_TPCM_TA_ALLOC_LIMIT_0_MIN_VALUE_1_POS 16
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TPCM_TA_TPCM_TA_ALLOC_LIMIT_0_MIN_VALUE_1_MASK 0xFF0000u
+
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TPCM_TA_TPCM_TA_ALLOC_LIMIT_0_MAX_VALUE_1_POS 24
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TPCM_TA_TPCM_TA_ALLOC_LIMIT_0_MAX_VALUE_1_MASK 0xFF000000u
+
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TPCM_TA_TPCM_TA_ALLOC_LIMIT_0_MIN_VALUE_2_POS 32
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TPCM_TA_TPCM_TA_ALLOC_LIMIT_0_MIN_VALUE_2_MASK 0xFF00000000u
+
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TPCM_TA_TPCM_TA_ALLOC_LIMIT_0_MAX_VALUE_2_POS 40
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TPCM_TA_TPCM_TA_ALLOC_LIMIT_0_MAX_VALUE_2_MASK 0xFF0000000000u
+
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TPCM_TA_TPCM_TA_ALLOC_LIMIT_0_MIN_VALUE_3_POS 48
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TPCM_TA_TPCM_TA_ALLOC_LIMIT_0_MIN_VALUE_3_MASK 0xFF000000000000u
+
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TPCM_TA_TPCM_TA_ALLOC_LIMIT_0_MAX_VALUE_3_POS 56
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TPCM_TA_TPCM_TA_ALLOC_LIMIT_0_MAX_VALUE_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPIO_TA_TGPIO_TA_COMPONENT Register REG4_TGPIO_TA_TGPIO_TA_COMPONENT - component */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPIO_TA_TGPIO_TA_COMPONENT 0x2000
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPIO_TA_TGPIO_TA_COMPONENT 0x16002000u
+
+/*! Register Reset Value */
+#define REG4_TGPIO_TA_TGPIO_TA_COMPONENT_RST 0x0000000060203532u
+
+/*! Field REV - rev */
+#define REG4_TGPIO_TA_TGPIO_TA_COMPONENT_REV_POS 0
+/*! Field REV - rev */
+#define REG4_TGPIO_TA_TGPIO_TA_COMPONENT_REV_MASK 0xFFFFu
+
+/*! Field CODE - code */
+#define REG4_TGPIO_TA_TGPIO_TA_COMPONENT_CODE_POS 16
+/*! Field CODE - code */
+#define REG4_TGPIO_TA_TGPIO_TA_COMPONENT_CODE_MASK 0xFFFF0000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPIO_TA_TGPIO_TA_CORE Register REG4_TGPIO_TA_TGPIO_TA_CORE - core */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPIO_TA_TGPIO_TA_CORE 0x2018
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPIO_TA_TGPIO_TA_CORE 0x16002018u
+
+/*! Register Reset Value */
+#define REG4_TGPIO_TA_TGPIO_TA_CORE_RST 0x000088C300450001u
+
+/*! Field REV_CODE - rev_code */
+#define REG4_TGPIO_TA_TGPIO_TA_CORE_REV_CODE_POS 0
+/*! Field REV_CODE - rev_code */
+#define REG4_TGPIO_TA_TGPIO_TA_CORE_REV_CODE_MASK 0xFFFFu
+
+/*! Field CORE_CODE - core_code */
+#define REG4_TGPIO_TA_TGPIO_TA_CORE_CORE_CODE_POS 16
+/*! Field CORE_CODE - core_code */
+#define REG4_TGPIO_TA_TGPIO_TA_CORE_CORE_CODE_MASK 0xFFFF0000u
+
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TGPIO_TA_TGPIO_TA_CORE_VENDOR_CODE_POS 32
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TGPIO_TA_TGPIO_TA_CORE_VENDOR_CODE_MASK 0xFFFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL Register REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL - agent_control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL 0x2020
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL 0x16002020u
+
+/*! Register Reset Value */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_CORE_RESET_MASK 0x1u
+
+/*! Field REJECT - reject */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_REJECT_POS 4
+/*! Field REJECT - reject */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_REJECT_MASK 0x10u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_REQ_TIMEOUT_MASK 0x700u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_POS 16
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_MASK 0x70000u
+
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_SERROR_REP_POS 24
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_SERROR_REP_MASK 0x1000000u
+
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_POS 25
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_MASK 0x2000000u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_POS 26
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_MASK 0x4000000u
+
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_POS 27
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_MASK 0x8000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_RFU2_POS 30
+/*! Field RFU2 - rfu2 */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_RFU2_MASK 0x40000000u
+
+/*! Field RFU3 - rfu3 */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_RFU3_POS 31
+/*! Field RFU3 - rfu3 */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_CONTROL_RFU3_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS Register REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS - agent_status */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS 0x2028
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS 0x16002028u
+
+/*! Register Reset Value */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_CORE_RESET_MASK 0x1u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_POS 3
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_MASK 0x8u
+
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_REQ_WAITING_POS 4
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_REQ_WAITING_MASK 0x10u
+
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_RESP_ACTIVE_POS 5
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_RESP_ACTIVE_MASK 0x20u
+
+/*! Field BURST - burst */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_BURST_POS 6
+/*! Field BURST - burst */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_BURST_MASK 0x40u
+
+/*! Field READEX - readex */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_READEX_POS 7
+/*! Field READEX - readex */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_READEX_MASK 0x80u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_REQ_TIMEOUT_MASK 0x100u
+
+/*! Field TIMEBASE - timebase */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_TIMEBASE_POS 12
+/*! Field TIMEBASE - timebase */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_TIMEBASE_MASK 0xF000u
+
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_BURST_CLOSE_POS 16
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_BURST_CLOSE_MASK 0x10000u
+
+/*! Field SERROR - serror */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_SERROR_POS 24
+/*! Field SERROR - serror */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_SERROR_MASK 0x1000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_RFU2_POS 31
+/*! Field RFU2 - rfu2 */
+#define REG4_TGPIO_TA_TGPIO_TA_AGENT_STATUS_RFU2_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG Register REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG 0x2058
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG 0x16002058u
+
+/*! Register Reset Value */
+#define REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field INITID - initid */
+#define REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field CODE - code */
+#define REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG_CODE_MASK 0xF000000u
+
+/*! Field MULTI - multi */
+#define REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG_REQ_INFO_POS 32
+/*! Field REQ_INFO - req_info */
+#define REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG_REQ_INFO_MASK 0xFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG_ADDR Register REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG_ADDR - error_log_addr */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG_ADDR 0x2060
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG_ADDR 0x16002060u
+
+/*! Register Reset Value */
+#define REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG_ADDR_RST 0x0000000000000000u
+
+/*! Field ADDR - addr */
+#define REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG_ADDR_ADDR_POS 0
+/*! Field ADDR - addr */
+#define REG4_TGPIO_TA_TGPIO_TA_ERROR_LOG_ADDR_ADDR_MASK 0xFFFFFFFFu
+
+/*! @} */
+
+/*! \defgroup REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_0 Register REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_0 - bandwidth_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_0 0x2100
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_0 0x16002100u
+
+/*! Register Reset Value */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_0_RST 0x0000000000000000u
+
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_0_FRACTION_0_POS 8
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_0_FRACTION_0_MASK 0xFF00u
+
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_0_FRACTION_1_POS 24
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_0_FRACTION_1_MASK 0xFF000000u
+
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_0_FRACTION_2_POS 40
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_0_FRACTION_2_MASK 0xFF0000000000u
+
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_0_FRACTION_3_POS 56
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_0_FRACTION_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_1 Register REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_1 - bandwidth_1 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_1 0x2108
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_1 0x16002108u
+
+/*! Register Reset Value */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_1_RST 0x0000000000000000u
+
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_1_FRACTION_4_POS 8
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_1_FRACTION_4_MASK 0xFF00u
+
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_1_FRACTION_5_POS 24
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_1_FRACTION_5_MASK 0xFF000000u
+
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_1_FRACTION_6_POS 40
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_1_FRACTION_6_MASK 0xFF0000000000u
+
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_1_FRACTION_7_POS 56
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_1_FRACTION_7_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_2 Register REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_2 - bandwidth_2 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_2 0x2110
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_2 0x16002110u
+
+/*! Register Reset Value */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_2_RST 0x0000000000000000u
+
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_2_FRACTION_8_POS 8
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_2_FRACTION_8_MASK 0xFF00u
+
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_2_FRACTION_9_POS 24
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_2_FRACTION_9_MASK 0xFF000000u
+
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_2_FRACTION_10_POS 40
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_2_FRACTION_10_MASK 0xFF0000000000u
+
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_2_FRACTION_11_POS 56
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_2_FRACTION_11_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_3 Register REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_3 - bandwidth_3 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_3 0x2118
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_3 0x16002118u
+
+/*! Register Reset Value */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_3_RST 0x0000000000000000u
+
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_3_FRACTION_12_POS 8
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_3_FRACTION_12_MASK 0xFF00u
+
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_3_FRACTION_13_POS 24
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_3_FRACTION_13_MASK 0xFF000000u
+
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_3_FRACTION_14_POS 40
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_3_FRACTION_14_MASK 0xFF0000000000u
+
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_3_FRACTION_15_POS 56
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TGPIO_TA_TGPIO_TA_BANDWIDTH_3_FRACTION_15_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPIO_TA_TGPIO_TA_ALLOC_LIMIT_0 Register REG4_TGPIO_TA_TGPIO_TA_ALLOC_LIMIT_0 - alloc_limit_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPIO_TA_TGPIO_TA_ALLOC_LIMIT_0 0x2200
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPIO_TA_TGPIO_TA_ALLOC_LIMIT_0 0x16002200u
+
+/*! Register Reset Value */
+#define REG4_TGPIO_TA_TGPIO_TA_ALLOC_LIMIT_0_RST 0x0000000000000000u
+
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TGPIO_TA_TGPIO_TA_ALLOC_LIMIT_0_MIN_VALUE_0_POS 0
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TGPIO_TA_TGPIO_TA_ALLOC_LIMIT_0_MIN_VALUE_0_MASK 0xFFu
+
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TGPIO_TA_TGPIO_TA_ALLOC_LIMIT_0_MAX_VALUE_0_POS 8
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TGPIO_TA_TGPIO_TA_ALLOC_LIMIT_0_MAX_VALUE_0_MASK 0xFF00u
+
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TGPIO_TA_TGPIO_TA_ALLOC_LIMIT_0_MIN_VALUE_1_POS 16
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TGPIO_TA_TGPIO_TA_ALLOC_LIMIT_0_MIN_VALUE_1_MASK 0xFF0000u
+
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TGPIO_TA_TGPIO_TA_ALLOC_LIMIT_0_MAX_VALUE_1_POS 24
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TGPIO_TA_TGPIO_TA_ALLOC_LIMIT_0_MAX_VALUE_1_MASK 0xFF000000u
+
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TGPIO_TA_TGPIO_TA_ALLOC_LIMIT_0_MIN_VALUE_2_POS 32
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TGPIO_TA_TGPIO_TA_ALLOC_LIMIT_0_MIN_VALUE_2_MASK 0xFF00000000u
+
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TGPIO_TA_TGPIO_TA_ALLOC_LIMIT_0_MAX_VALUE_2_POS 40
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TGPIO_TA_TGPIO_TA_ALLOC_LIMIT_0_MAX_VALUE_2_MASK 0xFF0000000000u
+
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TGPIO_TA_TGPIO_TA_ALLOC_LIMIT_0_MIN_VALUE_3_POS 48
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TGPIO_TA_TGPIO_TA_ALLOC_LIMIT_0_MIN_VALUE_3_MASK 0xFF000000000000u
+
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TGPIO_TA_TGPIO_TA_ALLOC_LIMIT_0_MAX_VALUE_3_POS 56
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TGPIO_TA_TGPIO_TA_ALLOC_LIMIT_0_MAX_VALUE_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TLEDC_TA_TLEDC_TA_COMPONENT Register REG4_TLEDC_TA_TLEDC_TA_COMPONENT - component */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TLEDC_TA_TLEDC_TA_COMPONENT 0x2400
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TLEDC_TA_TLEDC_TA_COMPONENT 0x16002400u
+
+/*! Register Reset Value */
+#define REG4_TLEDC_TA_TLEDC_TA_COMPONENT_RST 0x0000000060203532u
+
+/*! Field REV - rev */
+#define REG4_TLEDC_TA_TLEDC_TA_COMPONENT_REV_POS 0
+/*! Field REV - rev */
+#define REG4_TLEDC_TA_TLEDC_TA_COMPONENT_REV_MASK 0xFFFFu
+
+/*! Field CODE - code */
+#define REG4_TLEDC_TA_TLEDC_TA_COMPONENT_CODE_POS 16
+/*! Field CODE - code */
+#define REG4_TLEDC_TA_TLEDC_TA_COMPONENT_CODE_MASK 0xFFFF0000u
+
+/*! @} */
+
+/*! \defgroup REG4_TLEDC_TA_TLEDC_TA_CORE Register REG4_TLEDC_TA_TLEDC_TA_CORE - core */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TLEDC_TA_TLEDC_TA_CORE 0x2418
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TLEDC_TA_TLEDC_TA_CORE 0x16002418u
+
+/*! Register Reset Value */
+#define REG4_TLEDC_TA_TLEDC_TA_CORE_RST 0x000088C300460001u
+
+/*! Field REV_CODE - rev_code */
+#define REG4_TLEDC_TA_TLEDC_TA_CORE_REV_CODE_POS 0
+/*! Field REV_CODE - rev_code */
+#define REG4_TLEDC_TA_TLEDC_TA_CORE_REV_CODE_MASK 0xFFFFu
+
+/*! Field CORE_CODE - core_code */
+#define REG4_TLEDC_TA_TLEDC_TA_CORE_CORE_CODE_POS 16
+/*! Field CORE_CODE - core_code */
+#define REG4_TLEDC_TA_TLEDC_TA_CORE_CORE_CODE_MASK 0xFFFF0000u
+
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TLEDC_TA_TLEDC_TA_CORE_VENDOR_CODE_POS 32
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TLEDC_TA_TLEDC_TA_CORE_VENDOR_CODE_MASK 0xFFFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL Register REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL - agent_control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL 0x2420
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL 0x16002420u
+
+/*! Register Reset Value */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_CORE_RESET_MASK 0x1u
+
+/*! Field REJECT - reject */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_REJECT_POS 4
+/*! Field REJECT - reject */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_REJECT_MASK 0x10u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_REQ_TIMEOUT_MASK 0x700u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_POS 16
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_MASK 0x70000u
+
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_SERROR_REP_POS 24
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_SERROR_REP_MASK 0x1000000u
+
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_POS 25
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_MASK 0x2000000u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_POS 26
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_MASK 0x4000000u
+
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_POS 27
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_MASK 0x8000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_RFU2_POS 30
+/*! Field RFU2 - rfu2 */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_RFU2_MASK 0x40000000u
+
+/*! Field RFU3 - rfu3 */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_RFU3_POS 31
+/*! Field RFU3 - rfu3 */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_CONTROL_RFU3_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS Register REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS - agent_status */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS 0x2428
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS 0x16002428u
+
+/*! Register Reset Value */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_CORE_RESET_MASK 0x1u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_POS 3
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_MASK 0x8u
+
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_REQ_WAITING_POS 4
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_REQ_WAITING_MASK 0x10u
+
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_RESP_ACTIVE_POS 5
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_RESP_ACTIVE_MASK 0x20u
+
+/*! Field BURST - burst */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_BURST_POS 6
+/*! Field BURST - burst */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_BURST_MASK 0x40u
+
+/*! Field READEX - readex */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_READEX_POS 7
+/*! Field READEX - readex */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_READEX_MASK 0x80u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_REQ_TIMEOUT_MASK 0x100u
+
+/*! Field TIMEBASE - timebase */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_TIMEBASE_POS 12
+/*! Field TIMEBASE - timebase */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_TIMEBASE_MASK 0xF000u
+
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_BURST_CLOSE_POS 16
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_BURST_CLOSE_MASK 0x10000u
+
+/*! Field SERROR - serror */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_SERROR_POS 24
+/*! Field SERROR - serror */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_SERROR_MASK 0x1000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_RFU2_POS 31
+/*! Field RFU2 - rfu2 */
+#define REG4_TLEDC_TA_TLEDC_TA_AGENT_STATUS_RFU2_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG Register REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG 0x2458
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG 0x16002458u
+
+/*! Register Reset Value */
+#define REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field INITID - initid */
+#define REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field CODE - code */
+#define REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG_CODE_MASK 0xF000000u
+
+/*! Field MULTI - multi */
+#define REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG_REQ_INFO_POS 32
+/*! Field REQ_INFO - req_info */
+#define REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG_REQ_INFO_MASK 0xFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG_ADDR Register REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG_ADDR - error_log_addr */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG_ADDR 0x2460
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG_ADDR 0x16002460u
+
+/*! Register Reset Value */
+#define REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG_ADDR_RST 0x0000000000000000u
+
+/*! Field ADDR - addr */
+#define REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG_ADDR_ADDR_POS 0
+/*! Field ADDR - addr */
+#define REG4_TLEDC_TA_TLEDC_TA_ERROR_LOG_ADDR_ADDR_MASK 0xFFFFFFFFu
+
+/*! @} */
+
+/*! \defgroup REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_0 Register REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_0 - bandwidth_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_0 0x2500
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_0 0x16002500u
+
+/*! Register Reset Value */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_0_RST 0x0000000000000000u
+
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_0_FRACTION_0_POS 8
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_0_FRACTION_0_MASK 0xFF00u
+
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_0_FRACTION_1_POS 24
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_0_FRACTION_1_MASK 0xFF000000u
+
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_0_FRACTION_2_POS 40
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_0_FRACTION_2_MASK 0xFF0000000000u
+
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_0_FRACTION_3_POS 56
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_0_FRACTION_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_1 Register REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_1 - bandwidth_1 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_1 0x2508
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_1 0x16002508u
+
+/*! Register Reset Value */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_1_RST 0x0000000000000000u
+
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_1_FRACTION_4_POS 8
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_1_FRACTION_4_MASK 0xFF00u
+
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_1_FRACTION_5_POS 24
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_1_FRACTION_5_MASK 0xFF000000u
+
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_1_FRACTION_6_POS 40
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_1_FRACTION_6_MASK 0xFF0000000000u
+
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_1_FRACTION_7_POS 56
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_1_FRACTION_7_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_2 Register REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_2 - bandwidth_2 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_2 0x2510
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_2 0x16002510u
+
+/*! Register Reset Value */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_2_RST 0x0000000000000000u
+
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_2_FRACTION_8_POS 8
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_2_FRACTION_8_MASK 0xFF00u
+
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_2_FRACTION_9_POS 24
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_2_FRACTION_9_MASK 0xFF000000u
+
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_2_FRACTION_10_POS 40
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_2_FRACTION_10_MASK 0xFF0000000000u
+
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_2_FRACTION_11_POS 56
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_2_FRACTION_11_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_3 Register REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_3 - bandwidth_3 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_3 0x2518
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_3 0x16002518u
+
+/*! Register Reset Value */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_3_RST 0x0000000000000000u
+
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_3_FRACTION_12_POS 8
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_3_FRACTION_12_MASK 0xFF00u
+
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_3_FRACTION_13_POS 24
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_3_FRACTION_13_MASK 0xFF000000u
+
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_3_FRACTION_14_POS 40
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_3_FRACTION_14_MASK 0xFF0000000000u
+
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_3_FRACTION_15_POS 56
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TLEDC_TA_TLEDC_TA_BANDWIDTH_3_FRACTION_15_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TLEDC_TA_TLEDC_TA_ALLOC_LIMIT_0 Register REG4_TLEDC_TA_TLEDC_TA_ALLOC_LIMIT_0 - alloc_limit_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TLEDC_TA_TLEDC_TA_ALLOC_LIMIT_0 0x2600
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TLEDC_TA_TLEDC_TA_ALLOC_LIMIT_0 0x16002600u
+
+/*! Register Reset Value */
+#define REG4_TLEDC_TA_TLEDC_TA_ALLOC_LIMIT_0_RST 0x0000000000000000u
+
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TLEDC_TA_TLEDC_TA_ALLOC_LIMIT_0_MIN_VALUE_0_POS 0
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TLEDC_TA_TLEDC_TA_ALLOC_LIMIT_0_MIN_VALUE_0_MASK 0xFFu
+
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TLEDC_TA_TLEDC_TA_ALLOC_LIMIT_0_MAX_VALUE_0_POS 8
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TLEDC_TA_TLEDC_TA_ALLOC_LIMIT_0_MAX_VALUE_0_MASK 0xFF00u
+
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TLEDC_TA_TLEDC_TA_ALLOC_LIMIT_0_MIN_VALUE_1_POS 16
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TLEDC_TA_TLEDC_TA_ALLOC_LIMIT_0_MIN_VALUE_1_MASK 0xFF0000u
+
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TLEDC_TA_TLEDC_TA_ALLOC_LIMIT_0_MAX_VALUE_1_POS 24
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TLEDC_TA_TLEDC_TA_ALLOC_LIMIT_0_MAX_VALUE_1_MASK 0xFF000000u
+
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TLEDC_TA_TLEDC_TA_ALLOC_LIMIT_0_MIN_VALUE_2_POS 32
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TLEDC_TA_TLEDC_TA_ALLOC_LIMIT_0_MIN_VALUE_2_MASK 0xFF00000000u
+
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TLEDC_TA_TLEDC_TA_ALLOC_LIMIT_0_MAX_VALUE_2_POS 40
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TLEDC_TA_TLEDC_TA_ALLOC_LIMIT_0_MAX_VALUE_2_MASK 0xFF0000000000u
+
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TLEDC_TA_TLEDC_TA_ALLOC_LIMIT_0_MIN_VALUE_3_POS 48
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TLEDC_TA_TLEDC_TA_ALLOC_LIMIT_0_MIN_VALUE_3_MASK 0xFF000000000000u
+
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TLEDC_TA_TLEDC_TA_ALLOC_LIMIT_0_MAX_VALUE_3_POS 56
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TLEDC_TA_TLEDC_TA_ALLOC_LIMIT_0_MAX_VALUE_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C_TA_TI2C0_TA_COMPONENT Register REG4_TI2C_TA_TI2C0_TA_COMPONENT - component */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C_TA_TI2C0_TA_COMPONENT 0x2800
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C_TA_TI2C0_TA_COMPONENT 0x16002800u
+
+/*! Register Reset Value */
+#define REG4_TI2C_TA_TI2C0_TA_COMPONENT_RST 0x0000000060203532u
+
+/*! Field REV - rev */
+#define REG4_TI2C_TA_TI2C0_TA_COMPONENT_REV_POS 0
+/*! Field REV - rev */
+#define REG4_TI2C_TA_TI2C0_TA_COMPONENT_REV_MASK 0xFFFFu
+
+/*! Field CODE - code */
+#define REG4_TI2C_TA_TI2C0_TA_COMPONENT_CODE_POS 16
+/*! Field CODE - code */
+#define REG4_TI2C_TA_TI2C0_TA_COMPONENT_CODE_MASK 0xFFFF0000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C_TA_TI2C0_TA_CORE Register REG4_TI2C_TA_TI2C0_TA_CORE - core */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C_TA_TI2C0_TA_CORE 0x2818
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C_TA_TI2C0_TA_CORE 0x16002818u
+
+/*! Register Reset Value */
+#define REG4_TI2C_TA_TI2C0_TA_CORE_RST 0x000050C500470001u
+
+/*! Field REV_CODE - rev_code */
+#define REG4_TI2C_TA_TI2C0_TA_CORE_REV_CODE_POS 0
+/*! Field REV_CODE - rev_code */
+#define REG4_TI2C_TA_TI2C0_TA_CORE_REV_CODE_MASK 0xFFFFu
+
+/*! Field CORE_CODE - core_code */
+#define REG4_TI2C_TA_TI2C0_TA_CORE_CORE_CODE_POS 16
+/*! Field CORE_CODE - core_code */
+#define REG4_TI2C_TA_TI2C0_TA_CORE_CORE_CODE_MASK 0xFFFF0000u
+
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TI2C_TA_TI2C0_TA_CORE_VENDOR_CODE_POS 32
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TI2C_TA_TI2C0_TA_CORE_VENDOR_CODE_MASK 0xFFFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL Register REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL - agent_control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL 0x2820
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL 0x16002820u
+
+/*! Register Reset Value */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_CORE_RESET_MASK 0x1u
+
+/*! Field REJECT - reject */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_REJECT_POS 4
+/*! Field REJECT - reject */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_REJECT_MASK 0x10u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_REQ_TIMEOUT_MASK 0x700u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_POS 16
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_MASK 0x70000u
+
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_SERROR_REP_POS 24
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_SERROR_REP_MASK 0x1000000u
+
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_POS 25
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_MASK 0x2000000u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_POS 26
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_MASK 0x4000000u
+
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_POS 27
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_MASK 0x8000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_RFU2_POS 30
+/*! Field RFU2 - rfu2 */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_RFU2_MASK 0x40000000u
+
+/*! Field RFU3 - rfu3 */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_RFU3_POS 31
+/*! Field RFU3 - rfu3 */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_CONTROL_RFU3_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS Register REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS - agent_status */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS 0x2828
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS 0x16002828u
+
+/*! Register Reset Value */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_CORE_RESET_MASK 0x1u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_POS 3
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_MASK 0x8u
+
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_REQ_WAITING_POS 4
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_REQ_WAITING_MASK 0x10u
+
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_RESP_ACTIVE_POS 5
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_RESP_ACTIVE_MASK 0x20u
+
+/*! Field BURST - burst */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_BURST_POS 6
+/*! Field BURST - burst */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_BURST_MASK 0x40u
+
+/*! Field READEX - readex */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_READEX_POS 7
+/*! Field READEX - readex */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_READEX_MASK 0x80u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_REQ_TIMEOUT_MASK 0x100u
+
+/*! Field TIMEBASE - timebase */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_TIMEBASE_POS 12
+/*! Field TIMEBASE - timebase */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_TIMEBASE_MASK 0xF000u
+
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_BURST_CLOSE_POS 16
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_BURST_CLOSE_MASK 0x10000u
+
+/*! Field SERROR - serror */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_SERROR_POS 24
+/*! Field SERROR - serror */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_SERROR_MASK 0x1000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_RFU2_POS 31
+/*! Field RFU2 - rfu2 */
+#define REG4_TI2C_TA_TI2C0_TA_AGENT_STATUS_RFU2_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C_TA_TI2C0_TA_ERROR_LOG Register REG4_TI2C_TA_TI2C0_TA_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C_TA_TI2C0_TA_ERROR_LOG 0x2858
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C_TA_TI2C0_TA_ERROR_LOG 0x16002858u
+
+/*! Register Reset Value */
+#define REG4_TI2C_TA_TI2C0_TA_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TI2C_TA_TI2C0_TA_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TI2C_TA_TI2C0_TA_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field INITID - initid */
+#define REG4_TI2C_TA_TI2C0_TA_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TI2C_TA_TI2C0_TA_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field CODE - code */
+#define REG4_TI2C_TA_TI2C0_TA_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TI2C_TA_TI2C0_TA_ERROR_LOG_CODE_MASK 0xF000000u
+
+/*! Field MULTI - multi */
+#define REG4_TI2C_TA_TI2C0_TA_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TI2C_TA_TI2C0_TA_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TI2C_TA_TI2C0_TA_ERROR_LOG_REQ_INFO_POS 32
+/*! Field REQ_INFO - req_info */
+#define REG4_TI2C_TA_TI2C0_TA_ERROR_LOG_REQ_INFO_MASK 0xFFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C_TA_TI2C0_TA_ERROR_LOG_ADDR Register REG4_TI2C_TA_TI2C0_TA_ERROR_LOG_ADDR - error_log_addr */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C_TA_TI2C0_TA_ERROR_LOG_ADDR 0x2860
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C_TA_TI2C0_TA_ERROR_LOG_ADDR 0x16002860u
+
+/*! Register Reset Value */
+#define REG4_TI2C_TA_TI2C0_TA_ERROR_LOG_ADDR_RST 0x0000000000000000u
+
+/*! Field ADDR - addr */
+#define REG4_TI2C_TA_TI2C0_TA_ERROR_LOG_ADDR_ADDR_POS 0
+/*! Field ADDR - addr */
+#define REG4_TI2C_TA_TI2C0_TA_ERROR_LOG_ADDR_ADDR_MASK 0xFFFFFFFFu
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_0 Register REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_0 - bandwidth_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_0 0x2900
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_0 0x16002900u
+
+/*! Register Reset Value */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_0_RST 0x0000000000000000u
+
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_0_FRACTION_0_POS 8
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_0_FRACTION_0_MASK 0xFF00u
+
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_0_FRACTION_1_POS 24
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_0_FRACTION_1_MASK 0xFF000000u
+
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_0_FRACTION_2_POS 40
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_0_FRACTION_2_MASK 0xFF0000000000u
+
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_0_FRACTION_3_POS 56
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_0_FRACTION_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_1 Register REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_1 - bandwidth_1 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_1 0x2908
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_1 0x16002908u
+
+/*! Register Reset Value */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_1_RST 0x0000000000000000u
+
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_1_FRACTION_4_POS 8
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_1_FRACTION_4_MASK 0xFF00u
+
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_1_FRACTION_5_POS 24
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_1_FRACTION_5_MASK 0xFF000000u
+
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_1_FRACTION_6_POS 40
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_1_FRACTION_6_MASK 0xFF0000000000u
+
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_1_FRACTION_7_POS 56
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_1_FRACTION_7_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_2 Register REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_2 - bandwidth_2 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_2 0x2910
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_2 0x16002910u
+
+/*! Register Reset Value */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_2_RST 0x0000000000000000u
+
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_2_FRACTION_8_POS 8
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_2_FRACTION_8_MASK 0xFF00u
+
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_2_FRACTION_9_POS 24
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_2_FRACTION_9_MASK 0xFF000000u
+
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_2_FRACTION_10_POS 40
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_2_FRACTION_10_MASK 0xFF0000000000u
+
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_2_FRACTION_11_POS 56
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_2_FRACTION_11_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_3 Register REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_3 - bandwidth_3 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_3 0x2918
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_3 0x16002918u
+
+/*! Register Reset Value */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_3_RST 0x0000000000000000u
+
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_3_FRACTION_12_POS 8
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_3_FRACTION_12_MASK 0xFF00u
+
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_3_FRACTION_13_POS 24
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_3_FRACTION_13_MASK 0xFF000000u
+
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_3_FRACTION_14_POS 40
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_3_FRACTION_14_MASK 0xFF0000000000u
+
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_3_FRACTION_15_POS 56
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TI2C_TA_TI2C0_TA_BANDWIDTH_3_FRACTION_15_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C_TA_TI2C0_TA_ALLOC_LIMIT_0 Register REG4_TI2C_TA_TI2C0_TA_ALLOC_LIMIT_0 - alloc_limit_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C_TA_TI2C0_TA_ALLOC_LIMIT_0 0x2A00
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C_TA_TI2C0_TA_ALLOC_LIMIT_0 0x16002A00u
+
+/*! Register Reset Value */
+#define REG4_TI2C_TA_TI2C0_TA_ALLOC_LIMIT_0_RST 0x0000000000000000u
+
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TI2C_TA_TI2C0_TA_ALLOC_LIMIT_0_MIN_VALUE_0_POS 0
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TI2C_TA_TI2C0_TA_ALLOC_LIMIT_0_MIN_VALUE_0_MASK 0xFFu
+
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TI2C_TA_TI2C0_TA_ALLOC_LIMIT_0_MAX_VALUE_0_POS 8
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TI2C_TA_TI2C0_TA_ALLOC_LIMIT_0_MAX_VALUE_0_MASK 0xFF00u
+
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TI2C_TA_TI2C0_TA_ALLOC_LIMIT_0_MIN_VALUE_1_POS 16
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TI2C_TA_TI2C0_TA_ALLOC_LIMIT_0_MIN_VALUE_1_MASK 0xFF0000u
+
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TI2C_TA_TI2C0_TA_ALLOC_LIMIT_0_MAX_VALUE_1_POS 24
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TI2C_TA_TI2C0_TA_ALLOC_LIMIT_0_MAX_VALUE_1_MASK 0xFF000000u
+
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TI2C_TA_TI2C0_TA_ALLOC_LIMIT_0_MIN_VALUE_2_POS 32
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TI2C_TA_TI2C0_TA_ALLOC_LIMIT_0_MIN_VALUE_2_MASK 0xFF00000000u
+
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TI2C_TA_TI2C0_TA_ALLOC_LIMIT_0_MAX_VALUE_2_POS 40
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TI2C_TA_TI2C0_TA_ALLOC_LIMIT_0_MAX_VALUE_2_MASK 0xFF0000000000u
+
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TI2C_TA_TI2C0_TA_ALLOC_LIMIT_0_MIN_VALUE_3_POS 48
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TI2C_TA_TI2C0_TA_ALLOC_LIMIT_0_MIN_VALUE_3_MASK 0xFF000000000000u
+
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TI2C_TA_TI2C0_TA_ALLOC_LIMIT_0_MAX_VALUE_3_POS 56
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TI2C_TA_TI2C0_TA_ALLOC_LIMIT_0_MAX_VALUE_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC0_TA_TASC0_TA_COMPONENT Register REG4_TASC0_TA_TASC0_TA_COMPONENT - component */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC0_TA_TASC0_TA_COMPONENT 0x2C00
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC0_TA_TASC0_TA_COMPONENT 0x16002C00u
+
+/*! Register Reset Value */
+#define REG4_TASC0_TA_TASC0_TA_COMPONENT_RST 0x0000000060203532u
+
+/*! Field REV - rev */
+#define REG4_TASC0_TA_TASC0_TA_COMPONENT_REV_POS 0
+/*! Field REV - rev */
+#define REG4_TASC0_TA_TASC0_TA_COMPONENT_REV_MASK 0xFFFFu
+
+/*! Field CODE - code */
+#define REG4_TASC0_TA_TASC0_TA_COMPONENT_CODE_POS 16
+/*! Field CODE - code */
+#define REG4_TASC0_TA_TASC0_TA_COMPONENT_CODE_MASK 0xFFFF0000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC0_TA_TASC0_TA_CORE Register REG4_TASC0_TA_TASC0_TA_CORE - core */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC0_TA_TASC0_TA_CORE 0x2C18
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC0_TA_TASC0_TA_CORE 0x16002C18u
+
+/*! Register Reset Value */
+#define REG4_TASC0_TA_TASC0_TA_CORE_RST 0x000088C300480001u
+
+/*! Field REV_CODE - rev_code */
+#define REG4_TASC0_TA_TASC0_TA_CORE_REV_CODE_POS 0
+/*! Field REV_CODE - rev_code */
+#define REG4_TASC0_TA_TASC0_TA_CORE_REV_CODE_MASK 0xFFFFu
+
+/*! Field CORE_CODE - core_code */
+#define REG4_TASC0_TA_TASC0_TA_CORE_CORE_CODE_POS 16
+/*! Field CORE_CODE - core_code */
+#define REG4_TASC0_TA_TASC0_TA_CORE_CORE_CODE_MASK 0xFFFF0000u
+
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TASC0_TA_TASC0_TA_CORE_VENDOR_CODE_POS 32
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TASC0_TA_TASC0_TA_CORE_VENDOR_CODE_MASK 0xFFFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL Register REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL - agent_control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL 0x2C20
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL 0x16002C20u
+
+/*! Register Reset Value */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_CORE_RESET_MASK 0x1u
+
+/*! Field REJECT - reject */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_REJECT_POS 4
+/*! Field REJECT - reject */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_REJECT_MASK 0x10u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_REQ_TIMEOUT_MASK 0x700u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_POS 16
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_MASK 0x70000u
+
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_SERROR_REP_POS 24
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_SERROR_REP_MASK 0x1000000u
+
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_POS 25
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_MASK 0x2000000u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_POS 26
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_MASK 0x4000000u
+
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_POS 27
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_MASK 0x8000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_RFU2_POS 30
+/*! Field RFU2 - rfu2 */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_RFU2_MASK 0x40000000u
+
+/*! Field RFU3 - rfu3 */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_RFU3_POS 31
+/*! Field RFU3 - rfu3 */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_CONTROL_RFU3_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC0_TA_TASC0_TA_AGENT_STATUS Register REG4_TASC0_TA_TASC0_TA_AGENT_STATUS - agent_status */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS 0x2C28
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC0_TA_TASC0_TA_AGENT_STATUS 0x16002C28u
+
+/*! Register Reset Value */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_CORE_RESET_MASK 0x1u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_POS 3
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_MASK 0x8u
+
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_REQ_WAITING_POS 4
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_REQ_WAITING_MASK 0x10u
+
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_RESP_ACTIVE_POS 5
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_RESP_ACTIVE_MASK 0x20u
+
+/*! Field BURST - burst */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_BURST_POS 6
+/*! Field BURST - burst */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_BURST_MASK 0x40u
+
+/*! Field READEX - readex */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_READEX_POS 7
+/*! Field READEX - readex */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_READEX_MASK 0x80u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_REQ_TIMEOUT_MASK 0x100u
+
+/*! Field TIMEBASE - timebase */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_TIMEBASE_POS 12
+/*! Field TIMEBASE - timebase */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_TIMEBASE_MASK 0xF000u
+
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_BURST_CLOSE_POS 16
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_BURST_CLOSE_MASK 0x10000u
+
+/*! Field SERROR - serror */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_SERROR_POS 24
+/*! Field SERROR - serror */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_SERROR_MASK 0x1000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_RFU2_POS 31
+/*! Field RFU2 - rfu2 */
+#define REG4_TASC0_TA_TASC0_TA_AGENT_STATUS_RFU2_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC0_TA_TASC0_TA_ERROR_LOG Register REG4_TASC0_TA_TASC0_TA_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC0_TA_TASC0_TA_ERROR_LOG 0x2C58
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC0_TA_TASC0_TA_ERROR_LOG 0x16002C58u
+
+/*! Register Reset Value */
+#define REG4_TASC0_TA_TASC0_TA_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TASC0_TA_TASC0_TA_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TASC0_TA_TASC0_TA_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field INITID - initid */
+#define REG4_TASC0_TA_TASC0_TA_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TASC0_TA_TASC0_TA_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field CODE - code */
+#define REG4_TASC0_TA_TASC0_TA_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TASC0_TA_TASC0_TA_ERROR_LOG_CODE_MASK 0xF000000u
+
+/*! Field MULTI - multi */
+#define REG4_TASC0_TA_TASC0_TA_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TASC0_TA_TASC0_TA_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TASC0_TA_TASC0_TA_ERROR_LOG_REQ_INFO_POS 32
+/*! Field REQ_INFO - req_info */
+#define REG4_TASC0_TA_TASC0_TA_ERROR_LOG_REQ_INFO_MASK 0xFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC0_TA_TASC0_TA_ERROR_LOG_ADDR Register REG4_TASC0_TA_TASC0_TA_ERROR_LOG_ADDR - error_log_addr */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC0_TA_TASC0_TA_ERROR_LOG_ADDR 0x2C60
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC0_TA_TASC0_TA_ERROR_LOG_ADDR 0x16002C60u
+
+/*! Register Reset Value */
+#define REG4_TASC0_TA_TASC0_TA_ERROR_LOG_ADDR_RST 0x0000000000000000u
+
+/*! Field ADDR - addr */
+#define REG4_TASC0_TA_TASC0_TA_ERROR_LOG_ADDR_ADDR_POS 0
+/*! Field ADDR - addr */
+#define REG4_TASC0_TA_TASC0_TA_ERROR_LOG_ADDR_ADDR_MASK 0xFFFFFFFFu
+
+/*! @} */
+
+/*! \defgroup REG4_TASC0_TA_TASC0_TA_BANDWIDTH_0 Register REG4_TASC0_TA_TASC0_TA_BANDWIDTH_0 - bandwidth_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_0 0x2D00
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC0_TA_TASC0_TA_BANDWIDTH_0 0x16002D00u
+
+/*! Register Reset Value */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_0_RST 0x0000000000000000u
+
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_0_FRACTION_0_POS 8
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_0_FRACTION_0_MASK 0xFF00u
+
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_0_FRACTION_1_POS 24
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_0_FRACTION_1_MASK 0xFF000000u
+
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_0_FRACTION_2_POS 40
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_0_FRACTION_2_MASK 0xFF0000000000u
+
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_0_FRACTION_3_POS 56
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_0_FRACTION_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC0_TA_TASC0_TA_BANDWIDTH_1 Register REG4_TASC0_TA_TASC0_TA_BANDWIDTH_1 - bandwidth_1 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_1 0x2D08
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC0_TA_TASC0_TA_BANDWIDTH_1 0x16002D08u
+
+/*! Register Reset Value */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_1_RST 0x0000000000000000u
+
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_1_FRACTION_4_POS 8
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_1_FRACTION_4_MASK 0xFF00u
+
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_1_FRACTION_5_POS 24
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_1_FRACTION_5_MASK 0xFF000000u
+
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_1_FRACTION_6_POS 40
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_1_FRACTION_6_MASK 0xFF0000000000u
+
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_1_FRACTION_7_POS 56
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_1_FRACTION_7_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC0_TA_TASC0_TA_BANDWIDTH_2 Register REG4_TASC0_TA_TASC0_TA_BANDWIDTH_2 - bandwidth_2 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_2 0x2D10
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC0_TA_TASC0_TA_BANDWIDTH_2 0x16002D10u
+
+/*! Register Reset Value */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_2_RST 0x0000000000000000u
+
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_2_FRACTION_8_POS 8
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_2_FRACTION_8_MASK 0xFF00u
+
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_2_FRACTION_9_POS 24
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_2_FRACTION_9_MASK 0xFF000000u
+
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_2_FRACTION_10_POS 40
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_2_FRACTION_10_MASK 0xFF0000000000u
+
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_2_FRACTION_11_POS 56
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_2_FRACTION_11_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC0_TA_TASC0_TA_BANDWIDTH_3 Register REG4_TASC0_TA_TASC0_TA_BANDWIDTH_3 - bandwidth_3 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_3 0x2D18
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC0_TA_TASC0_TA_BANDWIDTH_3 0x16002D18u
+
+/*! Register Reset Value */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_3_RST 0x0000000000000000u
+
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_3_FRACTION_12_POS 8
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_3_FRACTION_12_MASK 0xFF00u
+
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_3_FRACTION_13_POS 24
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_3_FRACTION_13_MASK 0xFF000000u
+
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_3_FRACTION_14_POS 40
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_3_FRACTION_14_MASK 0xFF0000000000u
+
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_3_FRACTION_15_POS 56
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TASC0_TA_TASC0_TA_BANDWIDTH_3_FRACTION_15_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC0_TA_TASC0_TA_ALLOC_LIMIT_0 Register REG4_TASC0_TA_TASC0_TA_ALLOC_LIMIT_0 - alloc_limit_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC0_TA_TASC0_TA_ALLOC_LIMIT_0 0x2E00
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC0_TA_TASC0_TA_ALLOC_LIMIT_0 0x16002E00u
+
+/*! Register Reset Value */
+#define REG4_TASC0_TA_TASC0_TA_ALLOC_LIMIT_0_RST 0x0000000000000000u
+
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TASC0_TA_TASC0_TA_ALLOC_LIMIT_0_MIN_VALUE_0_POS 0
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TASC0_TA_TASC0_TA_ALLOC_LIMIT_0_MIN_VALUE_0_MASK 0xFFu
+
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TASC0_TA_TASC0_TA_ALLOC_LIMIT_0_MAX_VALUE_0_POS 8
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TASC0_TA_TASC0_TA_ALLOC_LIMIT_0_MAX_VALUE_0_MASK 0xFF00u
+
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TASC0_TA_TASC0_TA_ALLOC_LIMIT_0_MIN_VALUE_1_POS 16
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TASC0_TA_TASC0_TA_ALLOC_LIMIT_0_MIN_VALUE_1_MASK 0xFF0000u
+
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TASC0_TA_TASC0_TA_ALLOC_LIMIT_0_MAX_VALUE_1_POS 24
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TASC0_TA_TASC0_TA_ALLOC_LIMIT_0_MAX_VALUE_1_MASK 0xFF000000u
+
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TASC0_TA_TASC0_TA_ALLOC_LIMIT_0_MIN_VALUE_2_POS 32
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TASC0_TA_TASC0_TA_ALLOC_LIMIT_0_MIN_VALUE_2_MASK 0xFF00000000u
+
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TASC0_TA_TASC0_TA_ALLOC_LIMIT_0_MAX_VALUE_2_POS 40
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TASC0_TA_TASC0_TA_ALLOC_LIMIT_0_MAX_VALUE_2_MASK 0xFF0000000000u
+
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TASC0_TA_TASC0_TA_ALLOC_LIMIT_0_MIN_VALUE_3_POS 48
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TASC0_TA_TASC0_TA_ALLOC_LIMIT_0_MIN_VALUE_3_MASK 0xFF000000000000u
+
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TASC0_TA_TASC0_TA_ALLOC_LIMIT_0_MAX_VALUE_3_POS 56
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TASC0_TA_TASC0_TA_ALLOC_LIMIT_0_MAX_VALUE_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC1_TA_TASC1_TA_COMPONENT Register REG4_TASC1_TA_TASC1_TA_COMPONENT - component */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC1_TA_TASC1_TA_COMPONENT 0x3000
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC1_TA_TASC1_TA_COMPONENT 0x16003000u
+
+/*! Register Reset Value */
+#define REG4_TASC1_TA_TASC1_TA_COMPONENT_RST 0x0000000060203532u
+
+/*! Field REV - rev */
+#define REG4_TASC1_TA_TASC1_TA_COMPONENT_REV_POS 0
+/*! Field REV - rev */
+#define REG4_TASC1_TA_TASC1_TA_COMPONENT_REV_MASK 0xFFFFu
+
+/*! Field CODE - code */
+#define REG4_TASC1_TA_TASC1_TA_COMPONENT_CODE_POS 16
+/*! Field CODE - code */
+#define REG4_TASC1_TA_TASC1_TA_COMPONENT_CODE_MASK 0xFFFF0000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC1_TA_TASC1_TA_CORE Register REG4_TASC1_TA_TASC1_TA_CORE - core */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC1_TA_TASC1_TA_CORE 0x3018
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC1_TA_TASC1_TA_CORE 0x16003018u
+
+/*! Register Reset Value */
+#define REG4_TASC1_TA_TASC1_TA_CORE_RST 0x000088C300490001u
+
+/*! Field REV_CODE - rev_code */
+#define REG4_TASC1_TA_TASC1_TA_CORE_REV_CODE_POS 0
+/*! Field REV_CODE - rev_code */
+#define REG4_TASC1_TA_TASC1_TA_CORE_REV_CODE_MASK 0xFFFFu
+
+/*! Field CORE_CODE - core_code */
+#define REG4_TASC1_TA_TASC1_TA_CORE_CORE_CODE_POS 16
+/*! Field CORE_CODE - core_code */
+#define REG4_TASC1_TA_TASC1_TA_CORE_CORE_CODE_MASK 0xFFFF0000u
+
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TASC1_TA_TASC1_TA_CORE_VENDOR_CODE_POS 32
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TASC1_TA_TASC1_TA_CORE_VENDOR_CODE_MASK 0xFFFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL Register REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL - agent_control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL 0x3020
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL 0x16003020u
+
+/*! Register Reset Value */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_CORE_RESET_MASK 0x1u
+
+/*! Field REJECT - reject */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_REJECT_POS 4
+/*! Field REJECT - reject */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_REJECT_MASK 0x10u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_REQ_TIMEOUT_MASK 0x700u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_POS 16
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_MASK 0x70000u
+
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_SERROR_REP_POS 24
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_SERROR_REP_MASK 0x1000000u
+
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_POS 25
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_MASK 0x2000000u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_POS 26
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_MASK 0x4000000u
+
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_POS 27
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_MASK 0x8000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_RFU2_POS 30
+/*! Field RFU2 - rfu2 */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_RFU2_MASK 0x40000000u
+
+/*! Field RFU3 - rfu3 */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_RFU3_POS 31
+/*! Field RFU3 - rfu3 */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_CONTROL_RFU3_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC1_TA_TASC1_TA_AGENT_STATUS Register REG4_TASC1_TA_TASC1_TA_AGENT_STATUS - agent_status */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS 0x3028
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC1_TA_TASC1_TA_AGENT_STATUS 0x16003028u
+
+/*! Register Reset Value */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_CORE_RESET_MASK 0x1u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_POS 3
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_MASK 0x8u
+
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_REQ_WAITING_POS 4
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_REQ_WAITING_MASK 0x10u
+
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_RESP_ACTIVE_POS 5
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_RESP_ACTIVE_MASK 0x20u
+
+/*! Field BURST - burst */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_BURST_POS 6
+/*! Field BURST - burst */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_BURST_MASK 0x40u
+
+/*! Field READEX - readex */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_READEX_POS 7
+/*! Field READEX - readex */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_READEX_MASK 0x80u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_REQ_TIMEOUT_MASK 0x100u
+
+/*! Field TIMEBASE - timebase */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_TIMEBASE_POS 12
+/*! Field TIMEBASE - timebase */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_TIMEBASE_MASK 0xF000u
+
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_BURST_CLOSE_POS 16
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_BURST_CLOSE_MASK 0x10000u
+
+/*! Field SERROR - serror */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_SERROR_POS 24
+/*! Field SERROR - serror */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_SERROR_MASK 0x1000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_RFU2_POS 31
+/*! Field RFU2 - rfu2 */
+#define REG4_TASC1_TA_TASC1_TA_AGENT_STATUS_RFU2_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC1_TA_TASC1_TA_ERROR_LOG Register REG4_TASC1_TA_TASC1_TA_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC1_TA_TASC1_TA_ERROR_LOG 0x3058
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC1_TA_TASC1_TA_ERROR_LOG 0x16003058u
+
+/*! Register Reset Value */
+#define REG4_TASC1_TA_TASC1_TA_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TASC1_TA_TASC1_TA_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TASC1_TA_TASC1_TA_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field INITID - initid */
+#define REG4_TASC1_TA_TASC1_TA_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TASC1_TA_TASC1_TA_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field CODE - code */
+#define REG4_TASC1_TA_TASC1_TA_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TASC1_TA_TASC1_TA_ERROR_LOG_CODE_MASK 0xF000000u
+
+/*! Field MULTI - multi */
+#define REG4_TASC1_TA_TASC1_TA_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TASC1_TA_TASC1_TA_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TASC1_TA_TASC1_TA_ERROR_LOG_REQ_INFO_POS 32
+/*! Field REQ_INFO - req_info */
+#define REG4_TASC1_TA_TASC1_TA_ERROR_LOG_REQ_INFO_MASK 0xFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC1_TA_TASC1_TA_ERROR_LOG_ADDR Register REG4_TASC1_TA_TASC1_TA_ERROR_LOG_ADDR - error_log_addr */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC1_TA_TASC1_TA_ERROR_LOG_ADDR 0x3060
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC1_TA_TASC1_TA_ERROR_LOG_ADDR 0x16003060u
+
+/*! Register Reset Value */
+#define REG4_TASC1_TA_TASC1_TA_ERROR_LOG_ADDR_RST 0x0000000000000000u
+
+/*! Field ADDR - addr */
+#define REG4_TASC1_TA_TASC1_TA_ERROR_LOG_ADDR_ADDR_POS 0
+/*! Field ADDR - addr */
+#define REG4_TASC1_TA_TASC1_TA_ERROR_LOG_ADDR_ADDR_MASK 0xFFFFFFFFu
+
+/*! @} */
+
+/*! \defgroup REG4_TASC1_TA_TASC1_TA_BANDWIDTH_0 Register REG4_TASC1_TA_TASC1_TA_BANDWIDTH_0 - bandwidth_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_0 0x3100
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC1_TA_TASC1_TA_BANDWIDTH_0 0x16003100u
+
+/*! Register Reset Value */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_0_RST 0x0000000000000000u
+
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_0_FRACTION_0_POS 8
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_0_FRACTION_0_MASK 0xFF00u
+
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_0_FRACTION_1_POS 24
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_0_FRACTION_1_MASK 0xFF000000u
+
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_0_FRACTION_2_POS 40
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_0_FRACTION_2_MASK 0xFF0000000000u
+
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_0_FRACTION_3_POS 56
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_0_FRACTION_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC1_TA_TASC1_TA_BANDWIDTH_1 Register REG4_TASC1_TA_TASC1_TA_BANDWIDTH_1 - bandwidth_1 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_1 0x3108
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC1_TA_TASC1_TA_BANDWIDTH_1 0x16003108u
+
+/*! Register Reset Value */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_1_RST 0x0000000000000000u
+
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_1_FRACTION_4_POS 8
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_1_FRACTION_4_MASK 0xFF00u
+
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_1_FRACTION_5_POS 24
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_1_FRACTION_5_MASK 0xFF000000u
+
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_1_FRACTION_6_POS 40
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_1_FRACTION_6_MASK 0xFF0000000000u
+
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_1_FRACTION_7_POS 56
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_1_FRACTION_7_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC1_TA_TASC1_TA_BANDWIDTH_2 Register REG4_TASC1_TA_TASC1_TA_BANDWIDTH_2 - bandwidth_2 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_2 0x3110
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC1_TA_TASC1_TA_BANDWIDTH_2 0x16003110u
+
+/*! Register Reset Value */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_2_RST 0x0000000000000000u
+
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_2_FRACTION_8_POS 8
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_2_FRACTION_8_MASK 0xFF00u
+
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_2_FRACTION_9_POS 24
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_2_FRACTION_9_MASK 0xFF000000u
+
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_2_FRACTION_10_POS 40
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_2_FRACTION_10_MASK 0xFF0000000000u
+
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_2_FRACTION_11_POS 56
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_2_FRACTION_11_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC1_TA_TASC1_TA_BANDWIDTH_3 Register REG4_TASC1_TA_TASC1_TA_BANDWIDTH_3 - bandwidth_3 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_3 0x3118
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC1_TA_TASC1_TA_BANDWIDTH_3 0x16003118u
+
+/*! Register Reset Value */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_3_RST 0x0000000000000000u
+
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_3_FRACTION_12_POS 8
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_3_FRACTION_12_MASK 0xFF00u
+
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_3_FRACTION_13_POS 24
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_3_FRACTION_13_MASK 0xFF000000u
+
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_3_FRACTION_14_POS 40
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_3_FRACTION_14_MASK 0xFF0000000000u
+
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_3_FRACTION_15_POS 56
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TASC1_TA_TASC1_TA_BANDWIDTH_3_FRACTION_15_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC1_TA_TASC1_TA_ALLOC_LIMIT_0 Register REG4_TASC1_TA_TASC1_TA_ALLOC_LIMIT_0 - alloc_limit_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC1_TA_TASC1_TA_ALLOC_LIMIT_0 0x3200
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC1_TA_TASC1_TA_ALLOC_LIMIT_0 0x16003200u
+
+/*! Register Reset Value */
+#define REG4_TASC1_TA_TASC1_TA_ALLOC_LIMIT_0_RST 0x0000000000000000u
+
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TASC1_TA_TASC1_TA_ALLOC_LIMIT_0_MIN_VALUE_0_POS 0
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TASC1_TA_TASC1_TA_ALLOC_LIMIT_0_MIN_VALUE_0_MASK 0xFFu
+
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TASC1_TA_TASC1_TA_ALLOC_LIMIT_0_MAX_VALUE_0_POS 8
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TASC1_TA_TASC1_TA_ALLOC_LIMIT_0_MAX_VALUE_0_MASK 0xFF00u
+
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TASC1_TA_TASC1_TA_ALLOC_LIMIT_0_MIN_VALUE_1_POS 16
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TASC1_TA_TASC1_TA_ALLOC_LIMIT_0_MIN_VALUE_1_MASK 0xFF0000u
+
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TASC1_TA_TASC1_TA_ALLOC_LIMIT_0_MAX_VALUE_1_POS 24
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TASC1_TA_TASC1_TA_ALLOC_LIMIT_0_MAX_VALUE_1_MASK 0xFF000000u
+
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TASC1_TA_TASC1_TA_ALLOC_LIMIT_0_MIN_VALUE_2_POS 32
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TASC1_TA_TASC1_TA_ALLOC_LIMIT_0_MIN_VALUE_2_MASK 0xFF00000000u
+
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TASC1_TA_TASC1_TA_ALLOC_LIMIT_0_MAX_VALUE_2_POS 40
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TASC1_TA_TASC1_TA_ALLOC_LIMIT_0_MAX_VALUE_2_MASK 0xFF0000000000u
+
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TASC1_TA_TASC1_TA_ALLOC_LIMIT_0_MIN_VALUE_3_POS 48
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TASC1_TA_TASC1_TA_ALLOC_LIMIT_0_MIN_VALUE_3_MASK 0xFF000000000000u
+
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TASC1_TA_TASC1_TA_ALLOC_LIMIT_0_MAX_VALUE_3_POS 56
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TASC1_TA_TASC1_TA_ALLOC_LIMIT_0_MAX_VALUE_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT_TA_TGPT0_TA_COMPONENT Register REG4_TGPT_TA_TGPT0_TA_COMPONENT - component */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT_TA_TGPT0_TA_COMPONENT 0x3400
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT_TA_TGPT0_TA_COMPONENT 0x16003400u
+
+/*! Register Reset Value */
+#define REG4_TGPT_TA_TGPT0_TA_COMPONENT_RST 0x0000000060203532u
+
+/*! Field REV - rev */
+#define REG4_TGPT_TA_TGPT0_TA_COMPONENT_REV_POS 0
+/*! Field REV - rev */
+#define REG4_TGPT_TA_TGPT0_TA_COMPONENT_REV_MASK 0xFFFFu
+
+/*! Field CODE - code */
+#define REG4_TGPT_TA_TGPT0_TA_COMPONENT_CODE_POS 16
+/*! Field CODE - code */
+#define REG4_TGPT_TA_TGPT0_TA_COMPONENT_CODE_MASK 0xFFFF0000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT_TA_TGPT0_TA_CORE Register REG4_TGPT_TA_TGPT0_TA_CORE - core */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT_TA_TGPT0_TA_CORE 0x3418
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT_TA_TGPT0_TA_CORE 0x16003418u
+
+/*! Register Reset Value */
+#define REG4_TGPT_TA_TGPT0_TA_CORE_RST 0x000088C3004A0001u
+
+/*! Field REV_CODE - rev_code */
+#define REG4_TGPT_TA_TGPT0_TA_CORE_REV_CODE_POS 0
+/*! Field REV_CODE - rev_code */
+#define REG4_TGPT_TA_TGPT0_TA_CORE_REV_CODE_MASK 0xFFFFu
+
+/*! Field CORE_CODE - core_code */
+#define REG4_TGPT_TA_TGPT0_TA_CORE_CORE_CODE_POS 16
+/*! Field CORE_CODE - core_code */
+#define REG4_TGPT_TA_TGPT0_TA_CORE_CORE_CODE_MASK 0xFFFF0000u
+
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TGPT_TA_TGPT0_TA_CORE_VENDOR_CODE_POS 32
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TGPT_TA_TGPT0_TA_CORE_VENDOR_CODE_MASK 0xFFFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL Register REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL - agent_control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL 0x3420
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL 0x16003420u
+
+/*! Register Reset Value */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_CORE_RESET_MASK 0x1u
+
+/*! Field REJECT - reject */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_REJECT_POS 4
+/*! Field REJECT - reject */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_REJECT_MASK 0x10u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_REQ_TIMEOUT_MASK 0x700u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_POS 16
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_MASK 0x70000u
+
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_SERROR_REP_POS 24
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_SERROR_REP_MASK 0x1000000u
+
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_POS 25
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_MASK 0x2000000u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_POS 26
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_MASK 0x4000000u
+
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_POS 27
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_MASK 0x8000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_RFU2_POS 30
+/*! Field RFU2 - rfu2 */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_RFU2_MASK 0x40000000u
+
+/*! Field RFU3 - rfu3 */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_RFU3_POS 31
+/*! Field RFU3 - rfu3 */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_CONTROL_RFU3_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS Register REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS - agent_status */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS 0x3428
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS 0x16003428u
+
+/*! Register Reset Value */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_CORE_RESET_MASK 0x1u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_POS 3
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_MASK 0x8u
+
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_REQ_WAITING_POS 4
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_REQ_WAITING_MASK 0x10u
+
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_RESP_ACTIVE_POS 5
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_RESP_ACTIVE_MASK 0x20u
+
+/*! Field BURST - burst */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_BURST_POS 6
+/*! Field BURST - burst */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_BURST_MASK 0x40u
+
+/*! Field READEX - readex */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_READEX_POS 7
+/*! Field READEX - readex */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_READEX_MASK 0x80u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_REQ_TIMEOUT_MASK 0x100u
+
+/*! Field TIMEBASE - timebase */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_TIMEBASE_POS 12
+/*! Field TIMEBASE - timebase */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_TIMEBASE_MASK 0xF000u
+
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_BURST_CLOSE_POS 16
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_BURST_CLOSE_MASK 0x10000u
+
+/*! Field SERROR - serror */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_SERROR_POS 24
+/*! Field SERROR - serror */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_SERROR_MASK 0x1000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_RFU2_POS 31
+/*! Field RFU2 - rfu2 */
+#define REG4_TGPT_TA_TGPT0_TA_AGENT_STATUS_RFU2_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT_TA_TGPT0_TA_ERROR_LOG Register REG4_TGPT_TA_TGPT0_TA_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT_TA_TGPT0_TA_ERROR_LOG 0x3458
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT_TA_TGPT0_TA_ERROR_LOG 0x16003458u
+
+/*! Register Reset Value */
+#define REG4_TGPT_TA_TGPT0_TA_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TGPT_TA_TGPT0_TA_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TGPT_TA_TGPT0_TA_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field INITID - initid */
+#define REG4_TGPT_TA_TGPT0_TA_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TGPT_TA_TGPT0_TA_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field CODE - code */
+#define REG4_TGPT_TA_TGPT0_TA_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TGPT_TA_TGPT0_TA_ERROR_LOG_CODE_MASK 0xF000000u
+
+/*! Field MULTI - multi */
+#define REG4_TGPT_TA_TGPT0_TA_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TGPT_TA_TGPT0_TA_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TGPT_TA_TGPT0_TA_ERROR_LOG_REQ_INFO_POS 32
+/*! Field REQ_INFO - req_info */
+#define REG4_TGPT_TA_TGPT0_TA_ERROR_LOG_REQ_INFO_MASK 0xFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT_TA_TGPT0_TA_ERROR_LOG_ADDR Register REG4_TGPT_TA_TGPT0_TA_ERROR_LOG_ADDR - error_log_addr */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT_TA_TGPT0_TA_ERROR_LOG_ADDR 0x3460
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT_TA_TGPT0_TA_ERROR_LOG_ADDR 0x16003460u
+
+/*! Register Reset Value */
+#define REG4_TGPT_TA_TGPT0_TA_ERROR_LOG_ADDR_RST 0x0000000000000000u
+
+/*! Field ADDR - addr */
+#define REG4_TGPT_TA_TGPT0_TA_ERROR_LOG_ADDR_ADDR_POS 0
+/*! Field ADDR - addr */
+#define REG4_TGPT_TA_TGPT0_TA_ERROR_LOG_ADDR_ADDR_MASK 0xFFFFFFFFu
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_0 Register REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_0 - bandwidth_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_0 0x3500
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_0 0x16003500u
+
+/*! Register Reset Value */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_0_RST 0x0000000000000000u
+
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_0_FRACTION_0_POS 8
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_0_FRACTION_0_MASK 0xFF00u
+
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_0_FRACTION_1_POS 24
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_0_FRACTION_1_MASK 0xFF000000u
+
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_0_FRACTION_2_POS 40
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_0_FRACTION_2_MASK 0xFF0000000000u
+
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_0_FRACTION_3_POS 56
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_0_FRACTION_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_1 Register REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_1 - bandwidth_1 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_1 0x3508
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_1 0x16003508u
+
+/*! Register Reset Value */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_1_RST 0x0000000000000000u
+
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_1_FRACTION_4_POS 8
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_1_FRACTION_4_MASK 0xFF00u
+
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_1_FRACTION_5_POS 24
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_1_FRACTION_5_MASK 0xFF000000u
+
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_1_FRACTION_6_POS 40
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_1_FRACTION_6_MASK 0xFF0000000000u
+
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_1_FRACTION_7_POS 56
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_1_FRACTION_7_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_2 Register REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_2 - bandwidth_2 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_2 0x3510
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_2 0x16003510u
+
+/*! Register Reset Value */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_2_RST 0x0000000000000000u
+
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_2_FRACTION_8_POS 8
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_2_FRACTION_8_MASK 0xFF00u
+
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_2_FRACTION_9_POS 24
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_2_FRACTION_9_MASK 0xFF000000u
+
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_2_FRACTION_10_POS 40
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_2_FRACTION_10_MASK 0xFF0000000000u
+
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_2_FRACTION_11_POS 56
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_2_FRACTION_11_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_3 Register REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_3 - bandwidth_3 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_3 0x3518
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_3 0x16003518u
+
+/*! Register Reset Value */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_3_RST 0x0000000000000000u
+
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_3_FRACTION_12_POS 8
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_3_FRACTION_12_MASK 0xFF00u
+
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_3_FRACTION_13_POS 24
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_3_FRACTION_13_MASK 0xFF000000u
+
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_3_FRACTION_14_POS 40
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_3_FRACTION_14_MASK 0xFF0000000000u
+
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_3_FRACTION_15_POS 56
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TGPT_TA_TGPT0_TA_BANDWIDTH_3_FRACTION_15_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT_TA_TGPT0_TA_ALLOC_LIMIT_0 Register REG4_TGPT_TA_TGPT0_TA_ALLOC_LIMIT_0 - alloc_limit_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT_TA_TGPT0_TA_ALLOC_LIMIT_0 0x3600
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT_TA_TGPT0_TA_ALLOC_LIMIT_0 0x16003600u
+
+/*! Register Reset Value */
+#define REG4_TGPT_TA_TGPT0_TA_ALLOC_LIMIT_0_RST 0x0000000000000000u
+
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TGPT_TA_TGPT0_TA_ALLOC_LIMIT_0_MIN_VALUE_0_POS 0
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TGPT_TA_TGPT0_TA_ALLOC_LIMIT_0_MIN_VALUE_0_MASK 0xFFu
+
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TGPT_TA_TGPT0_TA_ALLOC_LIMIT_0_MAX_VALUE_0_POS 8
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TGPT_TA_TGPT0_TA_ALLOC_LIMIT_0_MAX_VALUE_0_MASK 0xFF00u
+
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TGPT_TA_TGPT0_TA_ALLOC_LIMIT_0_MIN_VALUE_1_POS 16
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TGPT_TA_TGPT0_TA_ALLOC_LIMIT_0_MIN_VALUE_1_MASK 0xFF0000u
+
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TGPT_TA_TGPT0_TA_ALLOC_LIMIT_0_MAX_VALUE_1_POS 24
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TGPT_TA_TGPT0_TA_ALLOC_LIMIT_0_MAX_VALUE_1_MASK 0xFF000000u
+
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TGPT_TA_TGPT0_TA_ALLOC_LIMIT_0_MIN_VALUE_2_POS 32
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TGPT_TA_TGPT0_TA_ALLOC_LIMIT_0_MIN_VALUE_2_MASK 0xFF00000000u
+
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TGPT_TA_TGPT0_TA_ALLOC_LIMIT_0_MAX_VALUE_2_POS 40
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TGPT_TA_TGPT0_TA_ALLOC_LIMIT_0_MAX_VALUE_2_MASK 0xFF0000000000u
+
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TGPT_TA_TGPT0_TA_ALLOC_LIMIT_0_MIN_VALUE_3_POS 48
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TGPT_TA_TGPT0_TA_ALLOC_LIMIT_0_MIN_VALUE_3_MASK 0xFF000000000000u
+
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TGPT_TA_TGPT0_TA_ALLOC_LIMIT_0_MAX_VALUE_3_POS 56
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TGPT_TA_TGPT0_TA_ALLOC_LIMIT_0_MAX_VALUE_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC0_TA_TSSC0_TA_COMPONENT Register REG4_TSSC0_TA_TSSC0_TA_COMPONENT - component */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC0_TA_TSSC0_TA_COMPONENT 0x3800
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC0_TA_TSSC0_TA_COMPONENT 0x16003800u
+
+/*! Register Reset Value */
+#define REG4_TSSC0_TA_TSSC0_TA_COMPONENT_RST 0x0000000060203532u
+
+/*! Field REV - rev */
+#define REG4_TSSC0_TA_TSSC0_TA_COMPONENT_REV_POS 0
+/*! Field REV - rev */
+#define REG4_TSSC0_TA_TSSC0_TA_COMPONENT_REV_MASK 0xFFFFu
+
+/*! Field CODE - code */
+#define REG4_TSSC0_TA_TSSC0_TA_COMPONENT_CODE_POS 16
+/*! Field CODE - code */
+#define REG4_TSSC0_TA_TSSC0_TA_COMPONENT_CODE_MASK 0xFFFF0000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC0_TA_TSSC0_TA_CORE Register REG4_TSSC0_TA_TSSC0_TA_CORE - core */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC0_TA_TSSC0_TA_CORE 0x3818
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC0_TA_TSSC0_TA_CORE 0x16003818u
+
+/*! Register Reset Value */
+#define REG4_TSSC0_TA_TSSC0_TA_CORE_RST 0x000088C3004D0001u
+
+/*! Field REV_CODE - rev_code */
+#define REG4_TSSC0_TA_TSSC0_TA_CORE_REV_CODE_POS 0
+/*! Field REV_CODE - rev_code */
+#define REG4_TSSC0_TA_TSSC0_TA_CORE_REV_CODE_MASK 0xFFFFu
+
+/*! Field CORE_CODE - core_code */
+#define REG4_TSSC0_TA_TSSC0_TA_CORE_CORE_CODE_POS 16
+/*! Field CORE_CODE - core_code */
+#define REG4_TSSC0_TA_TSSC0_TA_CORE_CORE_CODE_MASK 0xFFFF0000u
+
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TSSC0_TA_TSSC0_TA_CORE_VENDOR_CODE_POS 32
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TSSC0_TA_TSSC0_TA_CORE_VENDOR_CODE_MASK 0xFFFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL Register REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL - agent_control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL 0x3820
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL 0x16003820u
+
+/*! Register Reset Value */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_CORE_RESET_MASK 0x1u
+
+/*! Field REJECT - reject */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_REJECT_POS 4
+/*! Field REJECT - reject */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_REJECT_MASK 0x10u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_REQ_TIMEOUT_MASK 0x700u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_POS 16
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_MASK 0x70000u
+
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_SERROR_REP_POS 24
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_SERROR_REP_MASK 0x1000000u
+
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_POS 25
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_MASK 0x2000000u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_POS 26
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_MASK 0x4000000u
+
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_POS 27
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_MASK 0x8000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_RFU2_POS 30
+/*! Field RFU2 - rfu2 */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_RFU2_MASK 0x40000000u
+
+/*! Field RFU3 - rfu3 */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_RFU3_POS 31
+/*! Field RFU3 - rfu3 */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_CONTROL_RFU3_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS Register REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS - agent_status */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS 0x3828
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS 0x16003828u
+
+/*! Register Reset Value */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_CORE_RESET_MASK 0x1u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_POS 3
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_MASK 0x8u
+
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_REQ_WAITING_POS 4
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_REQ_WAITING_MASK 0x10u
+
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_RESP_ACTIVE_POS 5
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_RESP_ACTIVE_MASK 0x20u
+
+/*! Field BURST - burst */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_BURST_POS 6
+/*! Field BURST - burst */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_BURST_MASK 0x40u
+
+/*! Field READEX - readex */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_READEX_POS 7
+/*! Field READEX - readex */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_READEX_MASK 0x80u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_REQ_TIMEOUT_MASK 0x100u
+
+/*! Field TIMEBASE - timebase */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_TIMEBASE_POS 12
+/*! Field TIMEBASE - timebase */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_TIMEBASE_MASK 0xF000u
+
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_BURST_CLOSE_POS 16
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_BURST_CLOSE_MASK 0x10000u
+
+/*! Field SERROR - serror */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_SERROR_POS 24
+/*! Field SERROR - serror */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_SERROR_MASK 0x1000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_RFU2_POS 31
+/*! Field RFU2 - rfu2 */
+#define REG4_TSSC0_TA_TSSC0_TA_AGENT_STATUS_RFU2_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG Register REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG 0x3858
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG 0x16003858u
+
+/*! Register Reset Value */
+#define REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field INITID - initid */
+#define REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field CODE - code */
+#define REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG_CODE_MASK 0xF000000u
+
+/*! Field MULTI - multi */
+#define REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG_REQ_INFO_POS 32
+/*! Field REQ_INFO - req_info */
+#define REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG_REQ_INFO_MASK 0xFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG_ADDR Register REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG_ADDR - error_log_addr */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG_ADDR 0x3860
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG_ADDR 0x16003860u
+
+/*! Register Reset Value */
+#define REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG_ADDR_RST 0x0000000000000000u
+
+/*! Field ADDR - addr */
+#define REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG_ADDR_ADDR_POS 0
+/*! Field ADDR - addr */
+#define REG4_TSSC0_TA_TSSC0_TA_ERROR_LOG_ADDR_ADDR_MASK 0xFFFFFFFFu
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_0 Register REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_0 - bandwidth_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_0 0x3900
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_0 0x16003900u
+
+/*! Register Reset Value */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_0_RST 0x0000000000000000u
+
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_0_FRACTION_0_POS 8
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_0_FRACTION_0_MASK 0xFF00u
+
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_0_FRACTION_1_POS 24
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_0_FRACTION_1_MASK 0xFF000000u
+
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_0_FRACTION_2_POS 40
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_0_FRACTION_2_MASK 0xFF0000000000u
+
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_0_FRACTION_3_POS 56
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_0_FRACTION_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_1 Register REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_1 - bandwidth_1 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_1 0x3908
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_1 0x16003908u
+
+/*! Register Reset Value */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_1_RST 0x0000000000000000u
+
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_1_FRACTION_4_POS 8
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_1_FRACTION_4_MASK 0xFF00u
+
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_1_FRACTION_5_POS 24
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_1_FRACTION_5_MASK 0xFF000000u
+
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_1_FRACTION_6_POS 40
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_1_FRACTION_6_MASK 0xFF0000000000u
+
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_1_FRACTION_7_POS 56
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_1_FRACTION_7_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_2 Register REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_2 - bandwidth_2 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_2 0x3910
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_2 0x16003910u
+
+/*! Register Reset Value */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_2_RST 0x0000000000000000u
+
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_2_FRACTION_8_POS 8
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_2_FRACTION_8_MASK 0xFF00u
+
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_2_FRACTION_9_POS 24
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_2_FRACTION_9_MASK 0xFF000000u
+
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_2_FRACTION_10_POS 40
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_2_FRACTION_10_MASK 0xFF0000000000u
+
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_2_FRACTION_11_POS 56
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_2_FRACTION_11_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_3 Register REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_3 - bandwidth_3 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_3 0x3918
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_3 0x16003918u
+
+/*! Register Reset Value */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_3_RST 0x0000000000000000u
+
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_3_FRACTION_12_POS 8
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_3_FRACTION_12_MASK 0xFF00u
+
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_3_FRACTION_13_POS 24
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_3_FRACTION_13_MASK 0xFF000000u
+
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_3_FRACTION_14_POS 40
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_3_FRACTION_14_MASK 0xFF0000000000u
+
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_3_FRACTION_15_POS 56
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TSSC0_TA_TSSC0_TA_BANDWIDTH_3_FRACTION_15_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC0_TA_TSSC0_TA_ALLOC_LIMIT_0 Register REG4_TSSC0_TA_TSSC0_TA_ALLOC_LIMIT_0 - alloc_limit_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC0_TA_TSSC0_TA_ALLOC_LIMIT_0 0x3A00
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC0_TA_TSSC0_TA_ALLOC_LIMIT_0 0x16003A00u
+
+/*! Register Reset Value */
+#define REG4_TSSC0_TA_TSSC0_TA_ALLOC_LIMIT_0_RST 0x0000000000000000u
+
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TSSC0_TA_TSSC0_TA_ALLOC_LIMIT_0_MIN_VALUE_0_POS 0
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TSSC0_TA_TSSC0_TA_ALLOC_LIMIT_0_MIN_VALUE_0_MASK 0xFFu
+
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TSSC0_TA_TSSC0_TA_ALLOC_LIMIT_0_MAX_VALUE_0_POS 8
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TSSC0_TA_TSSC0_TA_ALLOC_LIMIT_0_MAX_VALUE_0_MASK 0xFF00u
+
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TSSC0_TA_TSSC0_TA_ALLOC_LIMIT_0_MIN_VALUE_1_POS 16
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TSSC0_TA_TSSC0_TA_ALLOC_LIMIT_0_MIN_VALUE_1_MASK 0xFF0000u
+
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TSSC0_TA_TSSC0_TA_ALLOC_LIMIT_0_MAX_VALUE_1_POS 24
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TSSC0_TA_TSSC0_TA_ALLOC_LIMIT_0_MAX_VALUE_1_MASK 0xFF000000u
+
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TSSC0_TA_TSSC0_TA_ALLOC_LIMIT_0_MIN_VALUE_2_POS 32
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TSSC0_TA_TSSC0_TA_ALLOC_LIMIT_0_MIN_VALUE_2_MASK 0xFF00000000u
+
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TSSC0_TA_TSSC0_TA_ALLOC_LIMIT_0_MAX_VALUE_2_POS 40
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TSSC0_TA_TSSC0_TA_ALLOC_LIMIT_0_MAX_VALUE_2_MASK 0xFF0000000000u
+
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TSSC0_TA_TSSC0_TA_ALLOC_LIMIT_0_MIN_VALUE_3_POS 48
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TSSC0_TA_TSSC0_TA_ALLOC_LIMIT_0_MIN_VALUE_3_MASK 0xFF000000000000u
+
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TSSC0_TA_TSSC0_TA_ALLOC_LIMIT_0_MAX_VALUE_3_POS 56
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TSSC0_TA_TSSC0_TA_ALLOC_LIMIT_0_MAX_VALUE_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC1_TA_TSSC1_TA_COMPONENT Register REG4_TSSC1_TA_TSSC1_TA_COMPONENT - component */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC1_TA_TSSC1_TA_COMPONENT 0x3C00
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC1_TA_TSSC1_TA_COMPONENT 0x16003C00u
+
+/*! Register Reset Value */
+#define REG4_TSSC1_TA_TSSC1_TA_COMPONENT_RST 0x0000000060203532u
+
+/*! Field REV - rev */
+#define REG4_TSSC1_TA_TSSC1_TA_COMPONENT_REV_POS 0
+/*! Field REV - rev */
+#define REG4_TSSC1_TA_TSSC1_TA_COMPONENT_REV_MASK 0xFFFFu
+
+/*! Field CODE - code */
+#define REG4_TSSC1_TA_TSSC1_TA_COMPONENT_CODE_POS 16
+/*! Field CODE - code */
+#define REG4_TSSC1_TA_TSSC1_TA_COMPONENT_CODE_MASK 0xFFFF0000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC1_TA_TSSC1_TA_CORE Register REG4_TSSC1_TA_TSSC1_TA_CORE - core */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC1_TA_TSSC1_TA_CORE 0x3C18
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC1_TA_TSSC1_TA_CORE 0x16003C18u
+
+/*! Register Reset Value */
+#define REG4_TSSC1_TA_TSSC1_TA_CORE_RST 0x000088C3004E0001u
+
+/*! Field REV_CODE - rev_code */
+#define REG4_TSSC1_TA_TSSC1_TA_CORE_REV_CODE_POS 0
+/*! Field REV_CODE - rev_code */
+#define REG4_TSSC1_TA_TSSC1_TA_CORE_REV_CODE_MASK 0xFFFFu
+
+/*! Field CORE_CODE - core_code */
+#define REG4_TSSC1_TA_TSSC1_TA_CORE_CORE_CODE_POS 16
+/*! Field CORE_CODE - core_code */
+#define REG4_TSSC1_TA_TSSC1_TA_CORE_CORE_CODE_MASK 0xFFFF0000u
+
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TSSC1_TA_TSSC1_TA_CORE_VENDOR_CODE_POS 32
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TSSC1_TA_TSSC1_TA_CORE_VENDOR_CODE_MASK 0xFFFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL Register REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL - agent_control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL 0x3C20
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL 0x16003C20u
+
+/*! Register Reset Value */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_CORE_RESET_MASK 0x1u
+
+/*! Field REJECT - reject */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_REJECT_POS 4
+/*! Field REJECT - reject */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_REJECT_MASK 0x10u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_REQ_TIMEOUT_MASK 0x700u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_POS 16
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_MASK 0x70000u
+
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_SERROR_REP_POS 24
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_SERROR_REP_MASK 0x1000000u
+
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_POS 25
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_MASK 0x2000000u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_POS 26
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_MASK 0x4000000u
+
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_POS 27
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_MASK 0x8000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_RFU2_POS 30
+/*! Field RFU2 - rfu2 */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_RFU2_MASK 0x40000000u
+
+/*! Field RFU3 - rfu3 */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_RFU3_POS 31
+/*! Field RFU3 - rfu3 */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_CONTROL_RFU3_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS Register REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS - agent_status */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS 0x3C28
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS 0x16003C28u
+
+/*! Register Reset Value */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_CORE_RESET_MASK 0x1u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_POS 3
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_MASK 0x8u
+
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_REQ_WAITING_POS 4
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_REQ_WAITING_MASK 0x10u
+
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_RESP_ACTIVE_POS 5
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_RESP_ACTIVE_MASK 0x20u
+
+/*! Field BURST - burst */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_BURST_POS 6
+/*! Field BURST - burst */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_BURST_MASK 0x40u
+
+/*! Field READEX - readex */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_READEX_POS 7
+/*! Field READEX - readex */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_READEX_MASK 0x80u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_REQ_TIMEOUT_MASK 0x100u
+
+/*! Field TIMEBASE - timebase */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_TIMEBASE_POS 12
+/*! Field TIMEBASE - timebase */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_TIMEBASE_MASK 0xF000u
+
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_BURST_CLOSE_POS 16
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_BURST_CLOSE_MASK 0x10000u
+
+/*! Field SERROR - serror */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_SERROR_POS 24
+/*! Field SERROR - serror */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_SERROR_MASK 0x1000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_RFU2_POS 31
+/*! Field RFU2 - rfu2 */
+#define REG4_TSSC1_TA_TSSC1_TA_AGENT_STATUS_RFU2_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG Register REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG 0x3C58
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG 0x16003C58u
+
+/*! Register Reset Value */
+#define REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field INITID - initid */
+#define REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field CODE - code */
+#define REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG_CODE_MASK 0xF000000u
+
+/*! Field MULTI - multi */
+#define REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG_REQ_INFO_POS 32
+/*! Field REQ_INFO - req_info */
+#define REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG_REQ_INFO_MASK 0xFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG_ADDR Register REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG_ADDR - error_log_addr */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG_ADDR 0x3C60
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG_ADDR 0x16003C60u
+
+/*! Register Reset Value */
+#define REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG_ADDR_RST 0x0000000000000000u
+
+/*! Field ADDR - addr */
+#define REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG_ADDR_ADDR_POS 0
+/*! Field ADDR - addr */
+#define REG4_TSSC1_TA_TSSC1_TA_ERROR_LOG_ADDR_ADDR_MASK 0xFFFFFFFFu
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_0 Register REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_0 - bandwidth_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_0 0x3D00
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_0 0x16003D00u
+
+/*! Register Reset Value */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_0_RST 0x0000000000000000u
+
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_0_FRACTION_0_POS 8
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_0_FRACTION_0_MASK 0xFF00u
+
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_0_FRACTION_1_POS 24
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_0_FRACTION_1_MASK 0xFF000000u
+
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_0_FRACTION_2_POS 40
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_0_FRACTION_2_MASK 0xFF0000000000u
+
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_0_FRACTION_3_POS 56
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_0_FRACTION_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_1 Register REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_1 - bandwidth_1 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_1 0x3D08
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_1 0x16003D08u
+
+/*! Register Reset Value */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_1_RST 0x0000000000000000u
+
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_1_FRACTION_4_POS 8
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_1_FRACTION_4_MASK 0xFF00u
+
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_1_FRACTION_5_POS 24
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_1_FRACTION_5_MASK 0xFF000000u
+
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_1_FRACTION_6_POS 40
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_1_FRACTION_6_MASK 0xFF0000000000u
+
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_1_FRACTION_7_POS 56
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_1_FRACTION_7_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_2 Register REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_2 - bandwidth_2 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_2 0x3D10
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_2 0x16003D10u
+
+/*! Register Reset Value */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_2_RST 0x0000000000000000u
+
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_2_FRACTION_8_POS 8
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_2_FRACTION_8_MASK 0xFF00u
+
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_2_FRACTION_9_POS 24
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_2_FRACTION_9_MASK 0xFF000000u
+
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_2_FRACTION_10_POS 40
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_2_FRACTION_10_MASK 0xFF0000000000u
+
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_2_FRACTION_11_POS 56
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_2_FRACTION_11_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_3 Register REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_3 - bandwidth_3 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_3 0x3D18
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_3 0x16003D18u
+
+/*! Register Reset Value */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_3_RST 0x0000000000000000u
+
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_3_FRACTION_12_POS 8
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_3_FRACTION_12_MASK 0xFF00u
+
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_3_FRACTION_13_POS 24
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_3_FRACTION_13_MASK 0xFF000000u
+
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_3_FRACTION_14_POS 40
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_3_FRACTION_14_MASK 0xFF0000000000u
+
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_3_FRACTION_15_POS 56
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TSSC1_TA_TSSC1_TA_BANDWIDTH_3_FRACTION_15_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC1_TA_TSSC1_TA_ALLOC_LIMIT_0 Register REG4_TSSC1_TA_TSSC1_TA_ALLOC_LIMIT_0 - alloc_limit_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC1_TA_TSSC1_TA_ALLOC_LIMIT_0 0x3E00
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC1_TA_TSSC1_TA_ALLOC_LIMIT_0 0x16003E00u
+
+/*! Register Reset Value */
+#define REG4_TSSC1_TA_TSSC1_TA_ALLOC_LIMIT_0_RST 0x0000000000000000u
+
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TSSC1_TA_TSSC1_TA_ALLOC_LIMIT_0_MIN_VALUE_0_POS 0
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TSSC1_TA_TSSC1_TA_ALLOC_LIMIT_0_MIN_VALUE_0_MASK 0xFFu
+
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TSSC1_TA_TSSC1_TA_ALLOC_LIMIT_0_MAX_VALUE_0_POS 8
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TSSC1_TA_TSSC1_TA_ALLOC_LIMIT_0_MAX_VALUE_0_MASK 0xFF00u
+
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TSSC1_TA_TSSC1_TA_ALLOC_LIMIT_0_MIN_VALUE_1_POS 16
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TSSC1_TA_TSSC1_TA_ALLOC_LIMIT_0_MIN_VALUE_1_MASK 0xFF0000u
+
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TSSC1_TA_TSSC1_TA_ALLOC_LIMIT_0_MAX_VALUE_1_POS 24
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TSSC1_TA_TSSC1_TA_ALLOC_LIMIT_0_MAX_VALUE_1_MASK 0xFF000000u
+
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TSSC1_TA_TSSC1_TA_ALLOC_LIMIT_0_MIN_VALUE_2_POS 32
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TSSC1_TA_TSSC1_TA_ALLOC_LIMIT_0_MIN_VALUE_2_MASK 0xFF00000000u
+
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TSSC1_TA_TSSC1_TA_ALLOC_LIMIT_0_MAX_VALUE_2_POS 40
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TSSC1_TA_TSSC1_TA_ALLOC_LIMIT_0_MAX_VALUE_2_MASK 0xFF0000000000u
+
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TSSC1_TA_TSSC1_TA_ALLOC_LIMIT_0_MIN_VALUE_3_POS 48
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TSSC1_TA_TSSC1_TA_ALLOC_LIMIT_0_MIN_VALUE_3_MASK 0xFF000000000000u
+
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TSSC1_TA_TSSC1_TA_ALLOC_LIMIT_0_MAX_VALUE_3_POS 56
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TSSC1_TA_TSSC1_TA_ALLOC_LIMIT_0_MAX_VALUE_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TDMA0_TA_TDM0_TA_COMPONENT Register REG4_TDMA0_TA_TDM0_TA_COMPONENT - component */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TDMA0_TA_TDM0_TA_COMPONENT 0x4000
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TDMA0_TA_TDM0_TA_COMPONENT 0x16004000u
+
+/*! Register Reset Value */
+#define REG4_TDMA0_TA_TDM0_TA_COMPONENT_RST 0x0000000060203532u
+
+/*! Field REV - rev */
+#define REG4_TDMA0_TA_TDM0_TA_COMPONENT_REV_POS 0
+/*! Field REV - rev */
+#define REG4_TDMA0_TA_TDM0_TA_COMPONENT_REV_MASK 0xFFFFu
+
+/*! Field CODE - code */
+#define REG4_TDMA0_TA_TDM0_TA_COMPONENT_CODE_POS 16
+/*! Field CODE - code */
+#define REG4_TDMA0_TA_TDM0_TA_COMPONENT_CODE_MASK 0xFFFF0000u
+
+/*! @} */
+
+/*! \defgroup REG4_TDMA0_TA_TDM0_TA_CORE Register REG4_TDMA0_TA_TDM0_TA_CORE - core */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TDMA0_TA_TDM0_TA_CORE 0x4018
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TDMA0_TA_TDM0_TA_CORE 0x16004018u
+
+/*! Register Reset Value */
+#define REG4_TDMA0_TA_TDM0_TA_CORE_RST 0x000088C3004F0001u
+
+/*! Field REV_CODE - rev_code */
+#define REG4_TDMA0_TA_TDM0_TA_CORE_REV_CODE_POS 0
+/*! Field REV_CODE - rev_code */
+#define REG4_TDMA0_TA_TDM0_TA_CORE_REV_CODE_MASK 0xFFFFu
+
+/*! Field CORE_CODE - core_code */
+#define REG4_TDMA0_TA_TDM0_TA_CORE_CORE_CODE_POS 16
+/*! Field CORE_CODE - core_code */
+#define REG4_TDMA0_TA_TDM0_TA_CORE_CORE_CODE_MASK 0xFFFF0000u
+
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TDMA0_TA_TDM0_TA_CORE_VENDOR_CODE_POS 32
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TDMA0_TA_TDM0_TA_CORE_VENDOR_CODE_MASK 0xFFFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL Register REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL - agent_control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL 0x4020
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL 0x16004020u
+
+/*! Register Reset Value */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_CORE_RESET_MASK 0x1u
+
+/*! Field REJECT - reject */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_REJECT_POS 4
+/*! Field REJECT - reject */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_REJECT_MASK 0x10u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_REQ_TIMEOUT_MASK 0x700u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_POS 16
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_MASK 0x70000u
+
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_SERROR_REP_POS 24
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_SERROR_REP_MASK 0x1000000u
+
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_POS 25
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_MASK 0x2000000u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_POS 26
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_MASK 0x4000000u
+
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_POS 27
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_MASK 0x8000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_RFU2_POS 30
+/*! Field RFU2 - rfu2 */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_RFU2_MASK 0x40000000u
+
+/*! Field RFU3 - rfu3 */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_RFU3_POS 31
+/*! Field RFU3 - rfu3 */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_CONTROL_RFU3_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS Register REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS - agent_status */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS 0x4028
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS 0x16004028u
+
+/*! Register Reset Value */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_CORE_RESET_MASK 0x1u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_POS 3
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_MASK 0x8u
+
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_REQ_WAITING_POS 4
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_REQ_WAITING_MASK 0x10u
+
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_RESP_ACTIVE_POS 5
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_RESP_ACTIVE_MASK 0x20u
+
+/*! Field BURST - burst */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_BURST_POS 6
+/*! Field BURST - burst */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_BURST_MASK 0x40u
+
+/*! Field READEX - readex */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_READEX_POS 7
+/*! Field READEX - readex */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_READEX_MASK 0x80u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_REQ_TIMEOUT_MASK 0x100u
+
+/*! Field TIMEBASE - timebase */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_TIMEBASE_POS 12
+/*! Field TIMEBASE - timebase */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_TIMEBASE_MASK 0xF000u
+
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_BURST_CLOSE_POS 16
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_BURST_CLOSE_MASK 0x10000u
+
+/*! Field SERROR - serror */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_SERROR_POS 24
+/*! Field SERROR - serror */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_SERROR_MASK 0x1000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_RFU2_POS 31
+/*! Field RFU2 - rfu2 */
+#define REG4_TDMA0_TA_TDM0_TA_AGENT_STATUS_RFU2_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TDMA0_TA_TDM0_TA_ERROR_LOG Register REG4_TDMA0_TA_TDM0_TA_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TDMA0_TA_TDM0_TA_ERROR_LOG 0x4058
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TDMA0_TA_TDM0_TA_ERROR_LOG 0x16004058u
+
+/*! Register Reset Value */
+#define REG4_TDMA0_TA_TDM0_TA_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TDMA0_TA_TDM0_TA_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TDMA0_TA_TDM0_TA_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field INITID - initid */
+#define REG4_TDMA0_TA_TDM0_TA_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TDMA0_TA_TDM0_TA_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field CODE - code */
+#define REG4_TDMA0_TA_TDM0_TA_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TDMA0_TA_TDM0_TA_ERROR_LOG_CODE_MASK 0xF000000u
+
+/*! Field MULTI - multi */
+#define REG4_TDMA0_TA_TDM0_TA_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TDMA0_TA_TDM0_TA_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TDMA0_TA_TDM0_TA_ERROR_LOG_REQ_INFO_POS 32
+/*! Field REQ_INFO - req_info */
+#define REG4_TDMA0_TA_TDM0_TA_ERROR_LOG_REQ_INFO_MASK 0xFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TDMA0_TA_TDM0_TA_ERROR_LOG_ADDR Register REG4_TDMA0_TA_TDM0_TA_ERROR_LOG_ADDR - error_log_addr */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TDMA0_TA_TDM0_TA_ERROR_LOG_ADDR 0x4060
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TDMA0_TA_TDM0_TA_ERROR_LOG_ADDR 0x16004060u
+
+/*! Register Reset Value */
+#define REG4_TDMA0_TA_TDM0_TA_ERROR_LOG_ADDR_RST 0x0000000000000000u
+
+/*! Field ADDR - addr */
+#define REG4_TDMA0_TA_TDM0_TA_ERROR_LOG_ADDR_ADDR_POS 0
+/*! Field ADDR - addr */
+#define REG4_TDMA0_TA_TDM0_TA_ERROR_LOG_ADDR_ADDR_MASK 0xFFFFFFFFu
+
+/*! @} */
+
+/*! \defgroup REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_0 Register REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_0 - bandwidth_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_0 0x4100
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_0 0x16004100u
+
+/*! Register Reset Value */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_0_RST 0x0000000000000000u
+
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_0_FRACTION_0_POS 8
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_0_FRACTION_0_MASK 0xFF00u
+
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_0_FRACTION_1_POS 24
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_0_FRACTION_1_MASK 0xFF000000u
+
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_0_FRACTION_2_POS 40
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_0_FRACTION_2_MASK 0xFF0000000000u
+
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_0_FRACTION_3_POS 56
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_0_FRACTION_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_1 Register REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_1 - bandwidth_1 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_1 0x4108
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_1 0x16004108u
+
+/*! Register Reset Value */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_1_RST 0x0000000000000000u
+
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_1_FRACTION_4_POS 8
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_1_FRACTION_4_MASK 0xFF00u
+
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_1_FRACTION_5_POS 24
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_1_FRACTION_5_MASK 0xFF000000u
+
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_1_FRACTION_6_POS 40
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_1_FRACTION_6_MASK 0xFF0000000000u
+
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_1_FRACTION_7_POS 56
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_1_FRACTION_7_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_2 Register REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_2 - bandwidth_2 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_2 0x4110
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_2 0x16004110u
+
+/*! Register Reset Value */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_2_RST 0x0000000000000000u
+
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_2_FRACTION_8_POS 8
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_2_FRACTION_8_MASK 0xFF00u
+
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_2_FRACTION_9_POS 24
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_2_FRACTION_9_MASK 0xFF000000u
+
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_2_FRACTION_10_POS 40
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_2_FRACTION_10_MASK 0xFF0000000000u
+
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_2_FRACTION_11_POS 56
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_2_FRACTION_11_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_3 Register REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_3 - bandwidth_3 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_3 0x4118
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_3 0x16004118u
+
+/*! Register Reset Value */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_3_RST 0x0000000000000000u
+
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_3_FRACTION_12_POS 8
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_3_FRACTION_12_MASK 0xFF00u
+
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_3_FRACTION_13_POS 24
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_3_FRACTION_13_MASK 0xFF000000u
+
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_3_FRACTION_14_POS 40
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_3_FRACTION_14_MASK 0xFF0000000000u
+
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_3_FRACTION_15_POS 56
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TDMA0_TA_TDM0_TA_BANDWIDTH_3_FRACTION_15_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TDMA0_TA_TDM0_TA_ALLOC_LIMIT_0 Register REG4_TDMA0_TA_TDM0_TA_ALLOC_LIMIT_0 - alloc_limit_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TDMA0_TA_TDM0_TA_ALLOC_LIMIT_0 0x4200
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TDMA0_TA_TDM0_TA_ALLOC_LIMIT_0 0x16004200u
+
+/*! Register Reset Value */
+#define REG4_TDMA0_TA_TDM0_TA_ALLOC_LIMIT_0_RST 0x0000000000000000u
+
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TDMA0_TA_TDM0_TA_ALLOC_LIMIT_0_MIN_VALUE_0_POS 0
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TDMA0_TA_TDM0_TA_ALLOC_LIMIT_0_MIN_VALUE_0_MASK 0xFFu
+
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TDMA0_TA_TDM0_TA_ALLOC_LIMIT_0_MAX_VALUE_0_POS 8
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TDMA0_TA_TDM0_TA_ALLOC_LIMIT_0_MAX_VALUE_0_MASK 0xFF00u
+
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TDMA0_TA_TDM0_TA_ALLOC_LIMIT_0_MIN_VALUE_1_POS 16
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TDMA0_TA_TDM0_TA_ALLOC_LIMIT_0_MIN_VALUE_1_MASK 0xFF0000u
+
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TDMA0_TA_TDM0_TA_ALLOC_LIMIT_0_MAX_VALUE_1_POS 24
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TDMA0_TA_TDM0_TA_ALLOC_LIMIT_0_MAX_VALUE_1_MASK 0xFF000000u
+
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TDMA0_TA_TDM0_TA_ALLOC_LIMIT_0_MIN_VALUE_2_POS 32
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TDMA0_TA_TDM0_TA_ALLOC_LIMIT_0_MIN_VALUE_2_MASK 0xFF00000000u
+
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TDMA0_TA_TDM0_TA_ALLOC_LIMIT_0_MAX_VALUE_2_POS 40
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TDMA0_TA_TDM0_TA_ALLOC_LIMIT_0_MAX_VALUE_2_MASK 0xFF0000000000u
+
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TDMA0_TA_TDM0_TA_ALLOC_LIMIT_0_MIN_VALUE_3_POS 48
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TDMA0_TA_TDM0_TA_ALLOC_LIMIT_0_MIN_VALUE_3_MASK 0xFF000000000000u
+
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TDMA0_TA_TDM0_TA_ALLOC_LIMIT_0_MAX_VALUE_3_POS 56
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TDMA0_TA_TDM0_TA_ALLOC_LIMIT_0_MAX_VALUE_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT1_TA_TGPT1_TA_COMPONENT Register REG4_TGPT1_TA_TGPT1_TA_COMPONENT - component */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT1_TA_TGPT1_TA_COMPONENT 0x4800
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT1_TA_TGPT1_TA_COMPONENT 0x16004800u
+
+/*! Register Reset Value */
+#define REG4_TGPT1_TA_TGPT1_TA_COMPONENT_RST 0x0000000060203532u
+
+/*! Field REV - rev */
+#define REG4_TGPT1_TA_TGPT1_TA_COMPONENT_REV_POS 0
+/*! Field REV - rev */
+#define REG4_TGPT1_TA_TGPT1_TA_COMPONENT_REV_MASK 0xFFFFu
+
+/*! Field CODE - code */
+#define REG4_TGPT1_TA_TGPT1_TA_COMPONENT_CODE_POS 16
+/*! Field CODE - code */
+#define REG4_TGPT1_TA_TGPT1_TA_COMPONENT_CODE_MASK 0xFFFF0000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT1_TA_TGPT1_TA_CORE Register REG4_TGPT1_TA_TGPT1_TA_CORE - core */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT1_TA_TGPT1_TA_CORE 0x4818
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT1_TA_TGPT1_TA_CORE 0x16004818u
+
+/*! Register Reset Value */
+#define REG4_TGPT1_TA_TGPT1_TA_CORE_RST 0x000088C3004B0001u
+
+/*! Field REV_CODE - rev_code */
+#define REG4_TGPT1_TA_TGPT1_TA_CORE_REV_CODE_POS 0
+/*! Field REV_CODE - rev_code */
+#define REG4_TGPT1_TA_TGPT1_TA_CORE_REV_CODE_MASK 0xFFFFu
+
+/*! Field CORE_CODE - core_code */
+#define REG4_TGPT1_TA_TGPT1_TA_CORE_CORE_CODE_POS 16
+/*! Field CORE_CODE - core_code */
+#define REG4_TGPT1_TA_TGPT1_TA_CORE_CORE_CODE_MASK 0xFFFF0000u
+
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TGPT1_TA_TGPT1_TA_CORE_VENDOR_CODE_POS 32
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TGPT1_TA_TGPT1_TA_CORE_VENDOR_CODE_MASK 0xFFFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL Register REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL - agent_control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL 0x4820
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL 0x16004820u
+
+/*! Register Reset Value */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_CORE_RESET_MASK 0x1u
+
+/*! Field REJECT - reject */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_REJECT_POS 4
+/*! Field REJECT - reject */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_REJECT_MASK 0x10u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_REQ_TIMEOUT_MASK 0x700u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_POS 16
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_MASK 0x70000u
+
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_SERROR_REP_POS 24
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_SERROR_REP_MASK 0x1000000u
+
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_POS 25
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_MASK 0x2000000u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_POS 26
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_MASK 0x4000000u
+
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_POS 27
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_MASK 0x8000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_RFU2_POS 30
+/*! Field RFU2 - rfu2 */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_RFU2_MASK 0x40000000u
+
+/*! Field RFU3 - rfu3 */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_RFU3_POS 31
+/*! Field RFU3 - rfu3 */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_CONTROL_RFU3_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS Register REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS - agent_status */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS 0x4828
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS 0x16004828u
+
+/*! Register Reset Value */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_CORE_RESET_MASK 0x1u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_POS 3
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_MASK 0x8u
+
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_REQ_WAITING_POS 4
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_REQ_WAITING_MASK 0x10u
+
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_RESP_ACTIVE_POS 5
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_RESP_ACTIVE_MASK 0x20u
+
+/*! Field BURST - burst */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_BURST_POS 6
+/*! Field BURST - burst */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_BURST_MASK 0x40u
+
+/*! Field READEX - readex */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_READEX_POS 7
+/*! Field READEX - readex */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_READEX_MASK 0x80u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_REQ_TIMEOUT_MASK 0x100u
+
+/*! Field TIMEBASE - timebase */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_TIMEBASE_POS 12
+/*! Field TIMEBASE - timebase */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_TIMEBASE_MASK 0xF000u
+
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_BURST_CLOSE_POS 16
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_BURST_CLOSE_MASK 0x10000u
+
+/*! Field SERROR - serror */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_SERROR_POS 24
+/*! Field SERROR - serror */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_SERROR_MASK 0x1000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_RFU2_POS 31
+/*! Field RFU2 - rfu2 */
+#define REG4_TGPT1_TA_TGPT1_TA_AGENT_STATUS_RFU2_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG Register REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG 0x4858
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG 0x16004858u
+
+/*! Register Reset Value */
+#define REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field INITID - initid */
+#define REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field CODE - code */
+#define REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG_CODE_MASK 0xF000000u
+
+/*! Field MULTI - multi */
+#define REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG_REQ_INFO_POS 32
+/*! Field REQ_INFO - req_info */
+#define REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG_REQ_INFO_MASK 0xFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG_ADDR Register REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG_ADDR - error_log_addr */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG_ADDR 0x4860
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG_ADDR 0x16004860u
+
+/*! Register Reset Value */
+#define REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG_ADDR_RST 0x0000000000000000u
+
+/*! Field ADDR - addr */
+#define REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG_ADDR_ADDR_POS 0
+/*! Field ADDR - addr */
+#define REG4_TGPT1_TA_TGPT1_TA_ERROR_LOG_ADDR_ADDR_MASK 0xFFFFFFFFu
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_0 Register REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_0 - bandwidth_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_0 0x4900
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_0 0x16004900u
+
+/*! Register Reset Value */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_0_RST 0x0000000000000000u
+
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_0_FRACTION_0_POS 8
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_0_FRACTION_0_MASK 0xFF00u
+
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_0_FRACTION_1_POS 24
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_0_FRACTION_1_MASK 0xFF000000u
+
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_0_FRACTION_2_POS 40
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_0_FRACTION_2_MASK 0xFF0000000000u
+
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_0_FRACTION_3_POS 56
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_0_FRACTION_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_1 Register REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_1 - bandwidth_1 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_1 0x4908
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_1 0x16004908u
+
+/*! Register Reset Value */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_1_RST 0x0000000000000000u
+
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_1_FRACTION_4_POS 8
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_1_FRACTION_4_MASK 0xFF00u
+
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_1_FRACTION_5_POS 24
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_1_FRACTION_5_MASK 0xFF000000u
+
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_1_FRACTION_6_POS 40
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_1_FRACTION_6_MASK 0xFF0000000000u
+
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_1_FRACTION_7_POS 56
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_1_FRACTION_7_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_2 Register REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_2 - bandwidth_2 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_2 0x4910
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_2 0x16004910u
+
+/*! Register Reset Value */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_2_RST 0x0000000000000000u
+
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_2_FRACTION_8_POS 8
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_2_FRACTION_8_MASK 0xFF00u
+
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_2_FRACTION_9_POS 24
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_2_FRACTION_9_MASK 0xFF000000u
+
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_2_FRACTION_10_POS 40
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_2_FRACTION_10_MASK 0xFF0000000000u
+
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_2_FRACTION_11_POS 56
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_2_FRACTION_11_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_3 Register REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_3 - bandwidth_3 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_3 0x4918
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_3 0x16004918u
+
+/*! Register Reset Value */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_3_RST 0x0000000000000000u
+
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_3_FRACTION_12_POS 8
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_3_FRACTION_12_MASK 0xFF00u
+
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_3_FRACTION_13_POS 24
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_3_FRACTION_13_MASK 0xFF000000u
+
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_3_FRACTION_14_POS 40
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_3_FRACTION_14_MASK 0xFF0000000000u
+
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_3_FRACTION_15_POS 56
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TGPT1_TA_TGPT1_TA_BANDWIDTH_3_FRACTION_15_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT1_TA_TGPT1_TA_ALLOC_LIMIT_0 Register REG4_TGPT1_TA_TGPT1_TA_ALLOC_LIMIT_0 - alloc_limit_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT1_TA_TGPT1_TA_ALLOC_LIMIT_0 0x4A00
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT1_TA_TGPT1_TA_ALLOC_LIMIT_0 0x16004A00u
+
+/*! Register Reset Value */
+#define REG4_TGPT1_TA_TGPT1_TA_ALLOC_LIMIT_0_RST 0x0000000000000000u
+
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TGPT1_TA_TGPT1_TA_ALLOC_LIMIT_0_MIN_VALUE_0_POS 0
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TGPT1_TA_TGPT1_TA_ALLOC_LIMIT_0_MIN_VALUE_0_MASK 0xFFu
+
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TGPT1_TA_TGPT1_TA_ALLOC_LIMIT_0_MAX_VALUE_0_POS 8
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TGPT1_TA_TGPT1_TA_ALLOC_LIMIT_0_MAX_VALUE_0_MASK 0xFF00u
+
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TGPT1_TA_TGPT1_TA_ALLOC_LIMIT_0_MIN_VALUE_1_POS 16
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TGPT1_TA_TGPT1_TA_ALLOC_LIMIT_0_MIN_VALUE_1_MASK 0xFF0000u
+
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TGPT1_TA_TGPT1_TA_ALLOC_LIMIT_0_MAX_VALUE_1_POS 24
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TGPT1_TA_TGPT1_TA_ALLOC_LIMIT_0_MAX_VALUE_1_MASK 0xFF000000u
+
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TGPT1_TA_TGPT1_TA_ALLOC_LIMIT_0_MIN_VALUE_2_POS 32
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TGPT1_TA_TGPT1_TA_ALLOC_LIMIT_0_MIN_VALUE_2_MASK 0xFF00000000u
+
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TGPT1_TA_TGPT1_TA_ALLOC_LIMIT_0_MAX_VALUE_2_POS 40
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TGPT1_TA_TGPT1_TA_ALLOC_LIMIT_0_MAX_VALUE_2_MASK 0xFF0000000000u
+
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TGPT1_TA_TGPT1_TA_ALLOC_LIMIT_0_MIN_VALUE_3_POS 48
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TGPT1_TA_TGPT1_TA_ALLOC_LIMIT_0_MIN_VALUE_3_MASK 0xFF000000000000u
+
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TGPT1_TA_TGPT1_TA_ALLOC_LIMIT_0_MAX_VALUE_3_POS 56
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TGPT1_TA_TGPT1_TA_ALLOC_LIMIT_0_MAX_VALUE_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT2_TA_TGPT2_TA_COMPONENT Register REG4_TGPT2_TA_TGPT2_TA_COMPONENT - component */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT2_TA_TGPT2_TA_COMPONENT 0x4C00
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT2_TA_TGPT2_TA_COMPONENT 0x16004C00u
+
+/*! Register Reset Value */
+#define REG4_TGPT2_TA_TGPT2_TA_COMPONENT_RST 0x0000000060203532u
+
+/*! Field REV - rev */
+#define REG4_TGPT2_TA_TGPT2_TA_COMPONENT_REV_POS 0
+/*! Field REV - rev */
+#define REG4_TGPT2_TA_TGPT2_TA_COMPONENT_REV_MASK 0xFFFFu
+
+/*! Field CODE - code */
+#define REG4_TGPT2_TA_TGPT2_TA_COMPONENT_CODE_POS 16
+/*! Field CODE - code */
+#define REG4_TGPT2_TA_TGPT2_TA_COMPONENT_CODE_MASK 0xFFFF0000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT2_TA_TGPT2_TA_CORE Register REG4_TGPT2_TA_TGPT2_TA_CORE - core */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT2_TA_TGPT2_TA_CORE 0x4C18
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT2_TA_TGPT2_TA_CORE 0x16004C18u
+
+/*! Register Reset Value */
+#define REG4_TGPT2_TA_TGPT2_TA_CORE_RST 0x000088C3004C0001u
+
+/*! Field REV_CODE - rev_code */
+#define REG4_TGPT2_TA_TGPT2_TA_CORE_REV_CODE_POS 0
+/*! Field REV_CODE - rev_code */
+#define REG4_TGPT2_TA_TGPT2_TA_CORE_REV_CODE_MASK 0xFFFFu
+
+/*! Field CORE_CODE - core_code */
+#define REG4_TGPT2_TA_TGPT2_TA_CORE_CORE_CODE_POS 16
+/*! Field CORE_CODE - core_code */
+#define REG4_TGPT2_TA_TGPT2_TA_CORE_CORE_CODE_MASK 0xFFFF0000u
+
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TGPT2_TA_TGPT2_TA_CORE_VENDOR_CODE_POS 32
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TGPT2_TA_TGPT2_TA_CORE_VENDOR_CODE_MASK 0xFFFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL Register REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL - agent_control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL 0x4C20
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL 0x16004C20u
+
+/*! Register Reset Value */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_CORE_RESET_MASK 0x1u
+
+/*! Field REJECT - reject */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_REJECT_POS 4
+/*! Field REJECT - reject */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_REJECT_MASK 0x10u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_REQ_TIMEOUT_MASK 0x700u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_POS 16
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_MASK 0x70000u
+
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_SERROR_REP_POS 24
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_SERROR_REP_MASK 0x1000000u
+
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_POS 25
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_MASK 0x2000000u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_POS 26
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_MASK 0x4000000u
+
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_POS 27
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_MASK 0x8000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_RFU2_POS 30
+/*! Field RFU2 - rfu2 */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_RFU2_MASK 0x40000000u
+
+/*! Field RFU3 - rfu3 */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_RFU3_POS 31
+/*! Field RFU3 - rfu3 */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_CONTROL_RFU3_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS Register REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS - agent_status */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS 0x4C28
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS 0x16004C28u
+
+/*! Register Reset Value */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_CORE_RESET_MASK 0x1u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_POS 3
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_MASK 0x8u
+
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_REQ_WAITING_POS 4
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_REQ_WAITING_MASK 0x10u
+
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_RESP_ACTIVE_POS 5
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_RESP_ACTIVE_MASK 0x20u
+
+/*! Field BURST - burst */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_BURST_POS 6
+/*! Field BURST - burst */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_BURST_MASK 0x40u
+
+/*! Field READEX - readex */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_READEX_POS 7
+/*! Field READEX - readex */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_READEX_MASK 0x80u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_REQ_TIMEOUT_MASK 0x100u
+
+/*! Field TIMEBASE - timebase */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_TIMEBASE_POS 12
+/*! Field TIMEBASE - timebase */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_TIMEBASE_MASK 0xF000u
+
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_BURST_CLOSE_POS 16
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_BURST_CLOSE_MASK 0x10000u
+
+/*! Field SERROR - serror */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_SERROR_POS 24
+/*! Field SERROR - serror */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_SERROR_MASK 0x1000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_RFU2_POS 31
+/*! Field RFU2 - rfu2 */
+#define REG4_TGPT2_TA_TGPT2_TA_AGENT_STATUS_RFU2_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG Register REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG 0x4C58
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG 0x16004C58u
+
+/*! Register Reset Value */
+#define REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field INITID - initid */
+#define REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field CODE - code */
+#define REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG_CODE_MASK 0xF000000u
+
+/*! Field MULTI - multi */
+#define REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG_REQ_INFO_POS 32
+/*! Field REQ_INFO - req_info */
+#define REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG_REQ_INFO_MASK 0xFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG_ADDR Register REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG_ADDR - error_log_addr */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG_ADDR 0x4C60
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG_ADDR 0x16004C60u
+
+/*! Register Reset Value */
+#define REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG_ADDR_RST 0x0000000000000000u
+
+/*! Field ADDR - addr */
+#define REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG_ADDR_ADDR_POS 0
+/*! Field ADDR - addr */
+#define REG4_TGPT2_TA_TGPT2_TA_ERROR_LOG_ADDR_ADDR_MASK 0xFFFFFFFFu
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_0 Register REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_0 - bandwidth_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_0 0x4D00
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_0 0x16004D00u
+
+/*! Register Reset Value */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_0_RST 0x0000000000000000u
+
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_0_FRACTION_0_POS 8
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_0_FRACTION_0_MASK 0xFF00u
+
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_0_FRACTION_1_POS 24
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_0_FRACTION_1_MASK 0xFF000000u
+
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_0_FRACTION_2_POS 40
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_0_FRACTION_2_MASK 0xFF0000000000u
+
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_0_FRACTION_3_POS 56
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_0_FRACTION_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_1 Register REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_1 - bandwidth_1 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_1 0x4D08
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_1 0x16004D08u
+
+/*! Register Reset Value */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_1_RST 0x0000000000000000u
+
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_1_FRACTION_4_POS 8
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_1_FRACTION_4_MASK 0xFF00u
+
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_1_FRACTION_5_POS 24
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_1_FRACTION_5_MASK 0xFF000000u
+
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_1_FRACTION_6_POS 40
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_1_FRACTION_6_MASK 0xFF0000000000u
+
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_1_FRACTION_7_POS 56
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_1_FRACTION_7_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_2 Register REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_2 - bandwidth_2 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_2 0x4D10
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_2 0x16004D10u
+
+/*! Register Reset Value */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_2_RST 0x0000000000000000u
+
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_2_FRACTION_8_POS 8
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_2_FRACTION_8_MASK 0xFF00u
+
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_2_FRACTION_9_POS 24
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_2_FRACTION_9_MASK 0xFF000000u
+
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_2_FRACTION_10_POS 40
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_2_FRACTION_10_MASK 0xFF0000000000u
+
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_2_FRACTION_11_POS 56
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_2_FRACTION_11_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_3 Register REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_3 - bandwidth_3 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_3 0x4D18
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_3 0x16004D18u
+
+/*! Register Reset Value */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_3_RST 0x0000000000000000u
+
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_3_FRACTION_12_POS 8
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_3_FRACTION_12_MASK 0xFF00u
+
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_3_FRACTION_13_POS 24
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_3_FRACTION_13_MASK 0xFF000000u
+
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_3_FRACTION_14_POS 40
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_3_FRACTION_14_MASK 0xFF0000000000u
+
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_3_FRACTION_15_POS 56
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TGPT2_TA_TGPT2_TA_BANDWIDTH_3_FRACTION_15_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT2_TA_TGPT2_TA_ALLOC_LIMIT_0 Register REG4_TGPT2_TA_TGPT2_TA_ALLOC_LIMIT_0 - alloc_limit_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT2_TA_TGPT2_TA_ALLOC_LIMIT_0 0x4E00
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT2_TA_TGPT2_TA_ALLOC_LIMIT_0 0x16004E00u
+
+/*! Register Reset Value */
+#define REG4_TGPT2_TA_TGPT2_TA_ALLOC_LIMIT_0_RST 0x0000000000000000u
+
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TGPT2_TA_TGPT2_TA_ALLOC_LIMIT_0_MIN_VALUE_0_POS 0
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TGPT2_TA_TGPT2_TA_ALLOC_LIMIT_0_MIN_VALUE_0_MASK 0xFFu
+
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TGPT2_TA_TGPT2_TA_ALLOC_LIMIT_0_MAX_VALUE_0_POS 8
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TGPT2_TA_TGPT2_TA_ALLOC_LIMIT_0_MAX_VALUE_0_MASK 0xFF00u
+
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TGPT2_TA_TGPT2_TA_ALLOC_LIMIT_0_MIN_VALUE_1_POS 16
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TGPT2_TA_TGPT2_TA_ALLOC_LIMIT_0_MIN_VALUE_1_MASK 0xFF0000u
+
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TGPT2_TA_TGPT2_TA_ALLOC_LIMIT_0_MAX_VALUE_1_POS 24
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TGPT2_TA_TGPT2_TA_ALLOC_LIMIT_0_MAX_VALUE_1_MASK 0xFF000000u
+
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TGPT2_TA_TGPT2_TA_ALLOC_LIMIT_0_MIN_VALUE_2_POS 32
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TGPT2_TA_TGPT2_TA_ALLOC_LIMIT_0_MIN_VALUE_2_MASK 0xFF00000000u
+
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TGPT2_TA_TGPT2_TA_ALLOC_LIMIT_0_MAX_VALUE_2_POS 40
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TGPT2_TA_TGPT2_TA_ALLOC_LIMIT_0_MAX_VALUE_2_MASK 0xFF0000000000u
+
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TGPT2_TA_TGPT2_TA_ALLOC_LIMIT_0_MIN_VALUE_3_POS 48
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TGPT2_TA_TGPT2_TA_ALLOC_LIMIT_0_MIN_VALUE_3_MASK 0xFF000000000000u
+
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TGPT2_TA_TGPT2_TA_ALLOC_LIMIT_0_MAX_VALUE_3_POS 56
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TGPT2_TA_TGPT2_TA_ALLOC_LIMIT_0_MAX_VALUE_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TIC0_TA_TI2C1_TA_COMPONENT Register REG4_TIC0_TA_TI2C1_TA_COMPONENT - component */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TIC0_TA_TI2C1_TA_COMPONENT 0x5000
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TIC0_TA_TI2C1_TA_COMPONENT 0x16005000u
+
+/*! Register Reset Value */
+#define REG4_TIC0_TA_TI2C1_TA_COMPONENT_RST 0x0000000060203532u
+
+/*! Field REV - rev */
+#define REG4_TIC0_TA_TI2C1_TA_COMPONENT_REV_POS 0
+/*! Field REV - rev */
+#define REG4_TIC0_TA_TI2C1_TA_COMPONENT_REV_MASK 0xFFFFu
+
+/*! Field CODE - code */
+#define REG4_TIC0_TA_TI2C1_TA_COMPONENT_CODE_POS 16
+/*! Field CODE - code */
+#define REG4_TIC0_TA_TI2C1_TA_COMPONENT_CODE_MASK 0xFFFF0000u
+
+/*! @} */
+
+/*! \defgroup REG4_TIC0_TA_TI2C1_TA_CORE Register REG4_TIC0_TA_TI2C1_TA_CORE - core */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TIC0_TA_TI2C1_TA_CORE 0x5018
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TIC0_TA_TI2C1_TA_CORE 0x16005018u
+
+/*! Register Reset Value */
+#define REG4_TIC0_TA_TI2C1_TA_CORE_RST 0x000050C500660001u
+
+/*! Field REV_CODE - rev_code */
+#define REG4_TIC0_TA_TI2C1_TA_CORE_REV_CODE_POS 0
+/*! Field REV_CODE - rev_code */
+#define REG4_TIC0_TA_TI2C1_TA_CORE_REV_CODE_MASK 0xFFFFu
+
+/*! Field CORE_CODE - core_code */
+#define REG4_TIC0_TA_TI2C1_TA_CORE_CORE_CODE_POS 16
+/*! Field CORE_CODE - core_code */
+#define REG4_TIC0_TA_TI2C1_TA_CORE_CORE_CODE_MASK 0xFFFF0000u
+
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TIC0_TA_TI2C1_TA_CORE_VENDOR_CODE_POS 32
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TIC0_TA_TI2C1_TA_CORE_VENDOR_CODE_MASK 0xFFFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL Register REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL - agent_control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL 0x5020
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL 0x16005020u
+
+/*! Register Reset Value */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_CORE_RESET_MASK 0x1u
+
+/*! Field REJECT - reject */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_REJECT_POS 4
+/*! Field REJECT - reject */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_REJECT_MASK 0x10u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_REQ_TIMEOUT_MASK 0x700u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_POS 16
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_MASK 0x70000u
+
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_SERROR_REP_POS 24
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_SERROR_REP_MASK 0x1000000u
+
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_POS 25
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_MASK 0x2000000u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_POS 26
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_MASK 0x4000000u
+
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_POS 27
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_MASK 0x8000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_RFU2_POS 30
+/*! Field RFU2 - rfu2 */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_RFU2_MASK 0x40000000u
+
+/*! Field RFU3 - rfu3 */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_RFU3_POS 31
+/*! Field RFU3 - rfu3 */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_CONTROL_RFU3_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS Register REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS - agent_status */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS 0x5028
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS 0x16005028u
+
+/*! Register Reset Value */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_CORE_RESET_MASK 0x1u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_POS 3
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_MASK 0x8u
+
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_REQ_WAITING_POS 4
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_REQ_WAITING_MASK 0x10u
+
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_RESP_ACTIVE_POS 5
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_RESP_ACTIVE_MASK 0x20u
+
+/*! Field BURST - burst */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_BURST_POS 6
+/*! Field BURST - burst */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_BURST_MASK 0x40u
+
+/*! Field READEX - readex */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_READEX_POS 7
+/*! Field READEX - readex */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_READEX_MASK 0x80u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_REQ_TIMEOUT_MASK 0x100u
+
+/*! Field TIMEBASE - timebase */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_TIMEBASE_POS 12
+/*! Field TIMEBASE - timebase */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_TIMEBASE_MASK 0xF000u
+
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_BURST_CLOSE_POS 16
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_BURST_CLOSE_MASK 0x10000u
+
+/*! Field SERROR - serror */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_SERROR_POS 24
+/*! Field SERROR - serror */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_SERROR_MASK 0x1000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_RFU2_POS 31
+/*! Field RFU2 - rfu2 */
+#define REG4_TIC0_TA_TI2C1_TA_AGENT_STATUS_RFU2_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TIC0_TA_TI2C1_TA_ERROR_LOG Register REG4_TIC0_TA_TI2C1_TA_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TIC0_TA_TI2C1_TA_ERROR_LOG 0x5058
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TIC0_TA_TI2C1_TA_ERROR_LOG 0x16005058u
+
+/*! Register Reset Value */
+#define REG4_TIC0_TA_TI2C1_TA_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TIC0_TA_TI2C1_TA_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TIC0_TA_TI2C1_TA_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field INITID - initid */
+#define REG4_TIC0_TA_TI2C1_TA_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TIC0_TA_TI2C1_TA_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field CODE - code */
+#define REG4_TIC0_TA_TI2C1_TA_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TIC0_TA_TI2C1_TA_ERROR_LOG_CODE_MASK 0xF000000u
+
+/*! Field MULTI - multi */
+#define REG4_TIC0_TA_TI2C1_TA_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TIC0_TA_TI2C1_TA_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TIC0_TA_TI2C1_TA_ERROR_LOG_REQ_INFO_POS 32
+/*! Field REQ_INFO - req_info */
+#define REG4_TIC0_TA_TI2C1_TA_ERROR_LOG_REQ_INFO_MASK 0xFFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TIC0_TA_TI2C1_TA_ERROR_LOG_ADDR Register REG4_TIC0_TA_TI2C1_TA_ERROR_LOG_ADDR - error_log_addr */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TIC0_TA_TI2C1_TA_ERROR_LOG_ADDR 0x5060
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TIC0_TA_TI2C1_TA_ERROR_LOG_ADDR 0x16005060u
+
+/*! Register Reset Value */
+#define REG4_TIC0_TA_TI2C1_TA_ERROR_LOG_ADDR_RST 0x0000000000000000u
+
+/*! Field ADDR - addr */
+#define REG4_TIC0_TA_TI2C1_TA_ERROR_LOG_ADDR_ADDR_POS 0
+/*! Field ADDR - addr */
+#define REG4_TIC0_TA_TI2C1_TA_ERROR_LOG_ADDR_ADDR_MASK 0xFFFFFFFFu
+
+/*! @} */
+
+/*! \defgroup REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_0 Register REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_0 - bandwidth_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_0 0x5100
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_0 0x16005100u
+
+/*! Register Reset Value */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_0_RST 0x0000000000000000u
+
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_0_FRACTION_0_POS 8
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_0_FRACTION_0_MASK 0xFF00u
+
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_0_FRACTION_1_POS 24
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_0_FRACTION_1_MASK 0xFF000000u
+
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_0_FRACTION_2_POS 40
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_0_FRACTION_2_MASK 0xFF0000000000u
+
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_0_FRACTION_3_POS 56
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_0_FRACTION_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_1 Register REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_1 - bandwidth_1 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_1 0x5108
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_1 0x16005108u
+
+/*! Register Reset Value */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_1_RST 0x0000000000000000u
+
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_1_FRACTION_4_POS 8
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_1_FRACTION_4_MASK 0xFF00u
+
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_1_FRACTION_5_POS 24
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_1_FRACTION_5_MASK 0xFF000000u
+
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_1_FRACTION_6_POS 40
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_1_FRACTION_6_MASK 0xFF0000000000u
+
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_1_FRACTION_7_POS 56
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_1_FRACTION_7_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_2 Register REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_2 - bandwidth_2 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_2 0x5110
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_2 0x16005110u
+
+/*! Register Reset Value */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_2_RST 0x0000000000000000u
+
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_2_FRACTION_8_POS 8
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_2_FRACTION_8_MASK 0xFF00u
+
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_2_FRACTION_9_POS 24
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_2_FRACTION_9_MASK 0xFF000000u
+
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_2_FRACTION_10_POS 40
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_2_FRACTION_10_MASK 0xFF0000000000u
+
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_2_FRACTION_11_POS 56
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_2_FRACTION_11_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_3 Register REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_3 - bandwidth_3 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_3 0x5118
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_3 0x16005118u
+
+/*! Register Reset Value */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_3_RST 0x0000000000000000u
+
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_3_FRACTION_12_POS 8
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_3_FRACTION_12_MASK 0xFF00u
+
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_3_FRACTION_13_POS 24
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_3_FRACTION_13_MASK 0xFF000000u
+
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_3_FRACTION_14_POS 40
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_3_FRACTION_14_MASK 0xFF0000000000u
+
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_3_FRACTION_15_POS 56
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TIC0_TA_TI2C1_TA_BANDWIDTH_3_FRACTION_15_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TIC0_TA_TI2C1_TA_ALLOC_LIMIT_0 Register REG4_TIC0_TA_TI2C1_TA_ALLOC_LIMIT_0 - alloc_limit_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TIC0_TA_TI2C1_TA_ALLOC_LIMIT_0 0x5200
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TIC0_TA_TI2C1_TA_ALLOC_LIMIT_0 0x16005200u
+
+/*! Register Reset Value */
+#define REG4_TIC0_TA_TI2C1_TA_ALLOC_LIMIT_0_RST 0x0000000000000000u
+
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TIC0_TA_TI2C1_TA_ALLOC_LIMIT_0_MIN_VALUE_0_POS 0
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TIC0_TA_TI2C1_TA_ALLOC_LIMIT_0_MIN_VALUE_0_MASK 0xFFu
+
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TIC0_TA_TI2C1_TA_ALLOC_LIMIT_0_MAX_VALUE_0_POS 8
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TIC0_TA_TI2C1_TA_ALLOC_LIMIT_0_MAX_VALUE_0_MASK 0xFF00u
+
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TIC0_TA_TI2C1_TA_ALLOC_LIMIT_0_MIN_VALUE_1_POS 16
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TIC0_TA_TI2C1_TA_ALLOC_LIMIT_0_MIN_VALUE_1_MASK 0xFF0000u
+
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TIC0_TA_TI2C1_TA_ALLOC_LIMIT_0_MAX_VALUE_1_POS 24
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TIC0_TA_TI2C1_TA_ALLOC_LIMIT_0_MAX_VALUE_1_MASK 0xFF000000u
+
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TIC0_TA_TI2C1_TA_ALLOC_LIMIT_0_MIN_VALUE_2_POS 32
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TIC0_TA_TI2C1_TA_ALLOC_LIMIT_0_MIN_VALUE_2_MASK 0xFF00000000u
+
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TIC0_TA_TI2C1_TA_ALLOC_LIMIT_0_MAX_VALUE_2_POS 40
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TIC0_TA_TI2C1_TA_ALLOC_LIMIT_0_MAX_VALUE_2_MASK 0xFF0000000000u
+
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TIC0_TA_TI2C1_TA_ALLOC_LIMIT_0_MIN_VALUE_3_POS 48
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TIC0_TA_TI2C1_TA_ALLOC_LIMIT_0_MIN_VALUE_3_MASK 0xFF000000000000u
+
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TIC0_TA_TI2C1_TA_ALLOC_LIMIT_0_MAX_VALUE_3_POS 56
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TIC0_TA_TI2C1_TA_ALLOC_LIMIT_0_MAX_VALUE_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C1_TA_TI2C2_TA_COMPONENT Register REG4_TI2C1_TA_TI2C2_TA_COMPONENT - component */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C1_TA_TI2C2_TA_COMPONENT 0x5400
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C1_TA_TI2C2_TA_COMPONENT 0x16005400u
+
+/*! Register Reset Value */
+#define REG4_TI2C1_TA_TI2C2_TA_COMPONENT_RST 0x0000000060203532u
+
+/*! Field REV - rev */
+#define REG4_TI2C1_TA_TI2C2_TA_COMPONENT_REV_POS 0
+/*! Field REV - rev */
+#define REG4_TI2C1_TA_TI2C2_TA_COMPONENT_REV_MASK 0xFFFFu
+
+/*! Field CODE - code */
+#define REG4_TI2C1_TA_TI2C2_TA_COMPONENT_CODE_POS 16
+/*! Field CODE - code */
+#define REG4_TI2C1_TA_TI2C2_TA_COMPONENT_CODE_MASK 0xFFFF0000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C1_TA_TI2C2_TA_CORE Register REG4_TI2C1_TA_TI2C2_TA_CORE - core */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C1_TA_TI2C2_TA_CORE 0x5418
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C1_TA_TI2C2_TA_CORE 0x16005418u
+
+/*! Register Reset Value */
+#define REG4_TI2C1_TA_TI2C2_TA_CORE_RST 0x000050C500670001u
+
+/*! Field REV_CODE - rev_code */
+#define REG4_TI2C1_TA_TI2C2_TA_CORE_REV_CODE_POS 0
+/*! Field REV_CODE - rev_code */
+#define REG4_TI2C1_TA_TI2C2_TA_CORE_REV_CODE_MASK 0xFFFFu
+
+/*! Field CORE_CODE - core_code */
+#define REG4_TI2C1_TA_TI2C2_TA_CORE_CORE_CODE_POS 16
+/*! Field CORE_CODE - core_code */
+#define REG4_TI2C1_TA_TI2C2_TA_CORE_CORE_CODE_MASK 0xFFFF0000u
+
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TI2C1_TA_TI2C2_TA_CORE_VENDOR_CODE_POS 32
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_TI2C1_TA_TI2C2_TA_CORE_VENDOR_CODE_MASK 0xFFFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL Register REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL - agent_control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL 0x5420
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL 0x16005420u
+
+/*! Register Reset Value */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_CORE_RESET_MASK 0x1u
+
+/*! Field REJECT - reject */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_REJECT_POS 4
+/*! Field REJECT - reject */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_REJECT_MASK 0x10u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_REQ_TIMEOUT_MASK 0x700u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_POS 16
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_MASK 0x70000u
+
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_SERROR_REP_POS 24
+/*! Field SERROR_REP - serror_rep */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_SERROR_REP_MASK 0x1000000u
+
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_POS 25
+/*! Field REQ_TIMEOUT_REP - req_timeout_rep */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_REQ_TIMEOUT_REP_MASK 0x2000000u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_POS 26
+/*! Field FUNCTIONAL_RESET_TIMEOUT_REP - functional_reset_timeout_rep */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_FUNCTIONAL_RESET_TIMEOUT_REP_MASK 0x4000000u
+
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_POS 27
+/*! Field AUTO_WAKEUP_RESP_CODE - auto_wakeup_resp_code */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_AUTO_WAKEUP_RESP_CODE_MASK 0x8000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_RFU2_POS 30
+/*! Field RFU2 - rfu2 */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_RFU2_MASK 0x40000000u
+
+/*! Field RFU3 - rfu3 */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_RFU3_POS 31
+/*! Field RFU3 - rfu3 */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_CONTROL_RFU3_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS Register REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS - agent_status */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS 0x5428
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS 0x16005428u
+
+/*! Register Reset Value */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_CORE_RESET_MASK 0x1u
+
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_POS 3
+/*! Field FUNCTIONAL_RESET_TIMEOUT - functional_reset_timeout */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_FUNCTIONAL_RESET_TIMEOUT_MASK 0x8u
+
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_REQ_WAITING_POS 4
+/*! Field REQ_WAITING - req_waiting */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_REQ_WAITING_MASK 0x10u
+
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_RESP_ACTIVE_POS 5
+/*! Field RESP_ACTIVE - resp_active */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_RESP_ACTIVE_MASK 0x20u
+
+/*! Field BURST - burst */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_BURST_POS 6
+/*! Field BURST - burst */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_BURST_MASK 0x40u
+
+/*! Field READEX - readex */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_READEX_POS 7
+/*! Field READEX - readex */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_READEX_MASK 0x80u
+
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_REQ_TIMEOUT_POS 8
+/*! Field REQ_TIMEOUT - req_timeout */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_REQ_TIMEOUT_MASK 0x100u
+
+/*! Field TIMEBASE - timebase */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_TIMEBASE_POS 12
+/*! Field TIMEBASE - timebase */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_TIMEBASE_MASK 0xF000u
+
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_BURST_CLOSE_POS 16
+/*! Field BURST_CLOSE - burst_close */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_BURST_CLOSE_MASK 0x10000u
+
+/*! Field SERROR - serror */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_SERROR_POS 24
+/*! Field SERROR - serror */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_SERROR_MASK 0x1000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_RFU0_POS 28
+/*! Field RFU0 - rfu0 */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_RFU0_MASK 0x10000000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_RFU1_POS 29
+/*! Field RFU1 - rfu1 */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_RFU1_MASK 0x20000000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_RFU2_POS 31
+/*! Field RFU2 - rfu2 */
+#define REG4_TI2C1_TA_TI2C2_TA_AGENT_STATUS_RFU2_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG Register REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG 0x5458
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG 0x16005458u
+
+/*! Register Reset Value */
+#define REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field INITID - initid */
+#define REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field CODE - code */
+#define REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG_CODE_MASK 0xF000000u
+
+/*! Field MULTI - multi */
+#define REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG_REQ_INFO_POS 32
+/*! Field REQ_INFO - req_info */
+#define REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG_REQ_INFO_MASK 0xFFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG_ADDR Register REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG_ADDR - error_log_addr */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG_ADDR 0x5460
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG_ADDR 0x16005460u
+
+/*! Register Reset Value */
+#define REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG_ADDR_RST 0x0000000000000000u
+
+/*! Field ADDR - addr */
+#define REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG_ADDR_ADDR_POS 0
+/*! Field ADDR - addr */
+#define REG4_TI2C1_TA_TI2C2_TA_ERROR_LOG_ADDR_ADDR_MASK 0xFFFFFFFFu
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_0 Register REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_0 - bandwidth_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_0 0x5500
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_0 0x16005500u
+
+/*! Register Reset Value */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_0_RST 0x0000000000000000u
+
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_0_FRACTION_0_POS 8
+/*! Field FRACTION_0 - fraction_0 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_0_FRACTION_0_MASK 0xFF00u
+
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_0_FRACTION_1_POS 24
+/*! Field FRACTION_1 - fraction_1 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_0_FRACTION_1_MASK 0xFF000000u
+
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_0_FRACTION_2_POS 40
+/*! Field FRACTION_2 - fraction_2 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_0_FRACTION_2_MASK 0xFF0000000000u
+
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_0_FRACTION_3_POS 56
+/*! Field FRACTION_3 - fraction_3 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_0_FRACTION_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_1 Register REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_1 - bandwidth_1 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_1 0x5508
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_1 0x16005508u
+
+/*! Register Reset Value */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_1_RST 0x0000000000000000u
+
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_1_FRACTION_4_POS 8
+/*! Field FRACTION_4 - fraction_4 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_1_FRACTION_4_MASK 0xFF00u
+
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_1_FRACTION_5_POS 24
+/*! Field FRACTION_5 - fraction_5 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_1_FRACTION_5_MASK 0xFF000000u
+
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_1_FRACTION_6_POS 40
+/*! Field FRACTION_6 - fraction_6 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_1_FRACTION_6_MASK 0xFF0000000000u
+
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_1_FRACTION_7_POS 56
+/*! Field FRACTION_7 - fraction_7 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_1_FRACTION_7_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_2 Register REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_2 - bandwidth_2 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_2 0x5510
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_2 0x16005510u
+
+/*! Register Reset Value */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_2_RST 0x0000000000000000u
+
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_2_FRACTION_8_POS 8
+/*! Field FRACTION_8 - fraction_8 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_2_FRACTION_8_MASK 0xFF00u
+
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_2_FRACTION_9_POS 24
+/*! Field FRACTION_9 - fraction_9 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_2_FRACTION_9_MASK 0xFF000000u
+
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_2_FRACTION_10_POS 40
+/*! Field FRACTION_10 - fraction_10 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_2_FRACTION_10_MASK 0xFF0000000000u
+
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_2_FRACTION_11_POS 56
+/*! Field FRACTION_11 - fraction_11 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_2_FRACTION_11_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_3 Register REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_3 - bandwidth_3 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_3 0x5518
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_3 0x16005518u
+
+/*! Register Reset Value */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_3_RST 0x0000000000000000u
+
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_3_FRACTION_12_POS 8
+/*! Field FRACTION_12 - fraction_12 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_3_FRACTION_12_MASK 0xFF00u
+
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_3_FRACTION_13_POS 24
+/*! Field FRACTION_13 - fraction_13 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_3_FRACTION_13_MASK 0xFF000000u
+
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_3_FRACTION_14_POS 40
+/*! Field FRACTION_14 - fraction_14 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_3_FRACTION_14_MASK 0xFF0000000000u
+
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_3_FRACTION_15_POS 56
+/*! Field FRACTION_15 - fraction_15 */
+#define REG4_TI2C1_TA_TI2C2_TA_BANDWIDTH_3_FRACTION_15_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C1_TA_TI2C2_TA_ALLOC_LIMIT_0 Register REG4_TI2C1_TA_TI2C2_TA_ALLOC_LIMIT_0 - alloc_limit_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C1_TA_TI2C2_TA_ALLOC_LIMIT_0 0x5600
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C1_TA_TI2C2_TA_ALLOC_LIMIT_0 0x16005600u
+
+/*! Register Reset Value */
+#define REG4_TI2C1_TA_TI2C2_TA_ALLOC_LIMIT_0_RST 0x0000000000000000u
+
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TI2C1_TA_TI2C2_TA_ALLOC_LIMIT_0_MIN_VALUE_0_POS 0
+/*! Field MIN_VALUE_0 - min_value_0 */
+#define REG4_TI2C1_TA_TI2C2_TA_ALLOC_LIMIT_0_MIN_VALUE_0_MASK 0xFFu
+
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TI2C1_TA_TI2C2_TA_ALLOC_LIMIT_0_MAX_VALUE_0_POS 8
+/*! Field MAX_VALUE_0 - max_value_0 */
+#define REG4_TI2C1_TA_TI2C2_TA_ALLOC_LIMIT_0_MAX_VALUE_0_MASK 0xFF00u
+
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TI2C1_TA_TI2C2_TA_ALLOC_LIMIT_0_MIN_VALUE_1_POS 16
+/*! Field MIN_VALUE_1 - min_value_1 */
+#define REG4_TI2C1_TA_TI2C2_TA_ALLOC_LIMIT_0_MIN_VALUE_1_MASK 0xFF0000u
+
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TI2C1_TA_TI2C2_TA_ALLOC_LIMIT_0_MAX_VALUE_1_POS 24
+/*! Field MAX_VALUE_1 - max_value_1 */
+#define REG4_TI2C1_TA_TI2C2_TA_ALLOC_LIMIT_0_MAX_VALUE_1_MASK 0xFF000000u
+
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TI2C1_TA_TI2C2_TA_ALLOC_LIMIT_0_MIN_VALUE_2_POS 32
+/*! Field MIN_VALUE_2 - min_value_2 */
+#define REG4_TI2C1_TA_TI2C2_TA_ALLOC_LIMIT_0_MIN_VALUE_2_MASK 0xFF00000000u
+
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TI2C1_TA_TI2C2_TA_ALLOC_LIMIT_0_MAX_VALUE_2_POS 40
+/*! Field MAX_VALUE_2 - max_value_2 */
+#define REG4_TI2C1_TA_TI2C2_TA_ALLOC_LIMIT_0_MAX_VALUE_2_MASK 0xFF0000000000u
+
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TI2C1_TA_TI2C2_TA_ALLOC_LIMIT_0_MIN_VALUE_3_POS 48
+/*! Field MIN_VALUE_3 - min_value_3 */
+#define REG4_TI2C1_TA_TI2C2_TA_ALLOC_LIMIT_0_MIN_VALUE_3_MASK 0xFF000000000000u
+
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TI2C1_TA_TI2C2_TA_ALLOC_LIMIT_0_MAX_VALUE_3_POS 56
+/*! Field MAX_VALUE_3 - max_value_3 */
+#define REG4_TI2C1_TA_TI2C2_TA_ALLOC_LIMIT_0_MAX_VALUE_3_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_IEX04_IA_IEX04_IA_COMPONENT Register REG4_IEX04_IA_IEX04_IA_COMPONENT - component */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_IEX04_IA_IEX04_IA_COMPONENT 0x10000
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_IEX04_IA_IEX04_IA_COMPONENT 0x16010000u
+
+/*! Register Reset Value */
+#define REG4_IEX04_IA_IEX04_IA_COMPONENT_RST 0x0000000060103532u
+
+/*! Field REV - rev */
+#define REG4_IEX04_IA_IEX04_IA_COMPONENT_REV_POS 0
+/*! Field REV - rev */
+#define REG4_IEX04_IA_IEX04_IA_COMPONENT_REV_MASK 0xFFFFu
+
+/*! Field CODE - code */
+#define REG4_IEX04_IA_IEX04_IA_COMPONENT_CODE_POS 16
+/*! Field CODE - code */
+#define REG4_IEX04_IA_IEX04_IA_COMPONENT_CODE_MASK 0xFFFF0000u
+
+/*! @} */
+
+/*! \defgroup REG4_IEX04_IA_IEX04_IA_CORE Register REG4_IEX04_IA_IEX04_IA_CORE - core */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_IEX04_IA_IEX04_IA_CORE 0x10018
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_IEX04_IA_IEX04_IA_CORE 0x16010018u
+
+/*! Register Reset Value */
+#define REG4_IEX04_IA_IEX04_IA_CORE_RST 0x000050C50F040001u
+
+/*! Field REV_CODE - rev_code */
+#define REG4_IEX04_IA_IEX04_IA_CORE_REV_CODE_POS 0
+/*! Field REV_CODE - rev_code */
+#define REG4_IEX04_IA_IEX04_IA_CORE_REV_CODE_MASK 0xFFFFu
+
+/*! Field CORE_CODE - core_code */
+#define REG4_IEX04_IA_IEX04_IA_CORE_CORE_CODE_POS 16
+/*! Field CORE_CODE - core_code */
+#define REG4_IEX04_IA_IEX04_IA_CORE_CORE_CODE_MASK 0xFFFF0000u
+
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_IEX04_IA_IEX04_IA_CORE_VENDOR_CODE_POS 32
+/*! Field VENDOR_CODE - vendor_code */
+#define REG4_IEX04_IA_IEX04_IA_CORE_VENDOR_CODE_MASK 0xFFFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL Register REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL - agent_control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL 0x10020
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL 0x16010020u
+
+/*! Register Reset Value */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_CORE_RESET_MASK 0x1u
+
+/*! Field REJECT - reject */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_REJECT_POS 4
+/*! Field REJECT - reject */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_REJECT_MASK 0x10u
+
+/*! Field RESP_TIMEOUT - resp_timeout */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_RESP_TIMEOUT_POS 8
+/*! Field RESP_TIMEOUT - resp_timeout */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_RESP_TIMEOUT_MASK 0x700u
+
+/*! Field BURST_TIMEOUT - burst_timeout */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_BURST_TIMEOUT_POS 16
+/*! Field BURST_TIMEOUT - burst_timeout */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_BURST_TIMEOUT_MASK 0x70000u
+
+/*! Field MERROR_REP - merror_rep */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_MERROR_REP_POS 24
+/*! Field MERROR_REP - merror_rep */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_MERROR_REP_MASK 0x1000000u
+
+/*! Field RESP_TIMEOUT_REP - resp_timeout_rep */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_RESP_TIMEOUT_REP_POS 25
+/*! Field RESP_TIMEOUT_REP - resp_timeout_rep */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_RESP_TIMEOUT_REP_MASK 0x2000000u
+
+/*! Field BURST_TIMEOUT_REP - burst_timeout_rep */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_BURST_TIMEOUT_REP_POS 26
+/*! Field BURST_TIMEOUT_REP - burst_timeout_rep */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_BURST_TIMEOUT_REP_MASK 0x4000000u
+
+/*! Field ALL_INBAND_ERROR_REP - all_inband_error_rep */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_ALL_INBAND_ERROR_REP_POS 27
+/*! Field ALL_INBAND_ERROR_REP - all_inband_error_rep */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_ALL_INBAND_ERROR_REP_MASK 0x8000000u
+
+/*! Field INBAND_ERROR_PRIMARY_REP - inband_error_primary_rep */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_INBAND_ERROR_PRIMARY_REP_POS 28
+/*! Field INBAND_ERROR_PRIMARY_REP - inband_error_primary_rep */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_INBAND_ERROR_PRIMARY_REP_MASK 0x10000000u
+
+/*! Field INBAND_ERROR_SECONDARY_REP - inband_error_secondary_rep */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_INBAND_ERROR_SECONDARY_REP_POS 29
+/*! Field INBAND_ERROR_SECONDARY_REP - inband_error_secondary_rep */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_INBAND_ERROR_SECONDARY_REP_MASK 0x20000000u
+
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_SECONDARY_REP_SHADOW_POS 30
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_SECONDARY_REP_SHADOW_MASK 0x40000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_RFU0_POS 31
+/*! Field RFU0 - rfu0 */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_CONTROL_RFU0_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_IEX04_IA_IEX04_IA_AGENT_STATUS Register REG4_IEX04_IA_IEX04_IA_AGENT_STATUS - agent_status */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS 0x10028
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_IEX04_IA_IEX04_IA_AGENT_STATUS 0x16010028u
+
+/*! Register Reset Value */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_RST 0x0000000000000000u
+
+/*! Field CORE_RESET - core_reset */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_CORE_RESET_POS 0
+/*! Field CORE_RESET - core_reset */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_CORE_RESET_MASK 0x1u
+
+/*! Field REQ_ACTIVE - req_active */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_REQ_ACTIVE_POS 4
+/*! Field REQ_ACTIVE - req_active */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_REQ_ACTIVE_MASK 0x10u
+
+/*! Field RESP_WAITING - resp_waiting */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_RESP_WAITING_POS 5
+/*! Field RESP_WAITING - resp_waiting */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_RESP_WAITING_MASK 0x20u
+
+/*! Field BURST - burst */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_BURST_POS 6
+/*! Field BURST - burst */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_BURST_MASK 0x40u
+
+/*! Field READEX - readex */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_READEX_POS 7
+/*! Field READEX - readex */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_READEX_MASK 0x80u
+
+/*! Field RESP_TIMEOUT - resp_timeout */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_RESP_TIMEOUT_POS 8
+/*! Field RESP_TIMEOUT - resp_timeout */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_RESP_TIMEOUT_MASK 0x100u
+
+/*! Field TIMEBASE - timebase */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_TIMEBASE_POS 12
+/*! Field TIMEBASE - timebase */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_TIMEBASE_MASK 0xF000u
+
+/*! Field BURST_TIMEOUT - burst_timeout */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_BURST_TIMEOUT_POS 16
+/*! Field BURST_TIMEOUT - burst_timeout */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_BURST_TIMEOUT_MASK 0x10000u
+
+/*! Field MERROR - merror */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_MERROR_POS 24
+/*! Field MERROR - merror */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_MERROR_MASK 0x1000000u
+
+/*! Field INBAND_ERROR_PRIMARY - inband_error_primary */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_INBAND_ERROR_PRIMARY_POS 28
+/*! Field INBAND_ERROR_PRIMARY - inband_error_primary */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_INBAND_ERROR_PRIMARY_MASK 0x10000000u
+
+/*! Field INBAND_ERROR_SECONDARY - inband_error_secondary */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_INBAND_ERROR_SECONDARY_POS 29
+/*! Field INBAND_ERROR_SECONDARY - inband_error_secondary */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_INBAND_ERROR_SECONDARY_MASK 0x20000000u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_RFU0_POS 31
+/*! Field RFU0 - rfu0 */
+#define REG4_IEX04_IA_IEX04_IA_AGENT_STATUS_RFU0_MASK 0x80000000u
+
+/*! @} */
+
+/*! \defgroup REG4_IEX04_IA_IEX04_IA_ERROR_LOG Register REG4_IEX04_IA_IEX04_IA_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG 0x10058
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_IEX04_IA_IEX04_IA_ERROR_LOG 0x16010058u
+
+/*! Register Reset Value */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field INITID - initid */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field RFU0 - rfu0 */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_RFU0_POS 16
+/*! Field RFU0 - rfu0 */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_RFU0_MASK 0x30000u
+
+/*! Field RFU1 - rfu1 */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_RFU1_POS 18
+/*! Field RFU1 - rfu1 */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_RFU1_MASK 0xC0000u
+
+/*! Field RFU2 - rfu2 */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_RFU2_POS 20
+/*! Field RFU2 - rfu2 */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_RFU2_MASK 0xF00000u
+
+/*! Field CODE - code */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_CODE_MASK 0x7000000u
+
+/*! Field SECONDARY - secondary */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_SECONDARY_POS 30
+/*! Field SECONDARY - secondary */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_SECONDARY_MASK 0x40000000u
+
+/*! Field MULTI - multi */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_REQ_INFO_POS 32
+/*! Field REQ_INFO - req_info */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_REQ_INFO_MASK 0xFF00000000u
+
+/*! @} */
+
+/*! \defgroup REG4_IEX04_IA_IEX04_IA_ERROR_LOG_ADDR Register REG4_IEX04_IA_IEX04_IA_ERROR_LOG_ADDR - error_log_addr */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_ADDR 0x10060
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_IEX04_IA_IEX04_IA_ERROR_LOG_ADDR 0x16010060u
+
+/*! Register Reset Value */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_ADDR_RST 0x0000000000000000u
+
+/*! Field ADDR - addr */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_ADDR_ADDR_POS 2
+/*! Field ADDR - addr */
+#define REG4_IEX04_IA_IEX04_IA_ERROR_LOG_ADDR_ADDR_MASK 0xFFFFFFFCu
+
+/*! @} */
+
+/*! \defgroup REG4_IEX04_IA_IEX04_IA_BANDWIDTH_0 Register REG4_IEX04_IA_IEX04_IA_BANDWIDTH_0 - bandwidth_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_IEX04_IA_IEX04_IA_BANDWIDTH_0 0x10100
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_IEX04_IA_IEX04_IA_BANDWIDTH_0 0x16010100u
+
+/*! Register Reset Value */
+#define REG4_IEX04_IA_IEX04_IA_BANDWIDTH_0_RST 0x0101010101010101u
+
+/*! Field TARGET_GROUP_0 - target_group_0 */
+#define REG4_IEX04_IA_IEX04_IA_BANDWIDTH_0_TARGET_GROUP_0_POS 0
+/*! Field TARGET_GROUP_0 - target_group_0 */
+#define REG4_IEX04_IA_IEX04_IA_BANDWIDTH_0_TARGET_GROUP_0_MASK 0xFFu
+
+/*! Field TARGET_GROUP_1 - target_group_1 */
+#define REG4_IEX04_IA_IEX04_IA_BANDWIDTH_0_TARGET_GROUP_1_POS 8
+/*! Field TARGET_GROUP_1 - target_group_1 */
+#define REG4_IEX04_IA_IEX04_IA_BANDWIDTH_0_TARGET_GROUP_1_MASK 0xFF00u
+
+/*! Field TARGET_GROUP_2 - target_group_2 */
+#define REG4_IEX04_IA_IEX04_IA_BANDWIDTH_0_TARGET_GROUP_2_POS 16
+/*! Field TARGET_GROUP_2 - target_group_2 */
+#define REG4_IEX04_IA_IEX04_IA_BANDWIDTH_0_TARGET_GROUP_2_MASK 0xFF0000u
+
+/*! Field TARGET_GROUP_3 - target_group_3 */
+#define REG4_IEX04_IA_IEX04_IA_BANDWIDTH_0_TARGET_GROUP_3_POS 24
+/*! Field TARGET_GROUP_3 - target_group_3 */
+#define REG4_IEX04_IA_IEX04_IA_BANDWIDTH_0_TARGET_GROUP_3_MASK 0xFF000000u
+
+/*! Field TARGET_GROUP_4 - target_group_4 */
+#define REG4_IEX04_IA_IEX04_IA_BANDWIDTH_0_TARGET_GROUP_4_POS 32
+/*! Field TARGET_GROUP_4 - target_group_4 */
+#define REG4_IEX04_IA_IEX04_IA_BANDWIDTH_0_TARGET_GROUP_4_MASK 0xFF00000000u
+
+/*! Field TARGET_GROUP_5 - target_group_5 */
+#define REG4_IEX04_IA_IEX04_IA_BANDWIDTH_0_TARGET_GROUP_5_POS 40
+/*! Field TARGET_GROUP_5 - target_group_5 */
+#define REG4_IEX04_IA_IEX04_IA_BANDWIDTH_0_TARGET_GROUP_5_MASK 0xFF0000000000u
+
+/*! Field TARGET_GROUP_6 - target_group_6 */
+#define REG4_IEX04_IA_IEX04_IA_BANDWIDTH_0_TARGET_GROUP_6_POS 48
+/*! Field TARGET_GROUP_6 - target_group_6 */
+#define REG4_IEX04_IA_IEX04_IA_BANDWIDTH_0_TARGET_GROUP_6_MASK 0xFF000000000000u
+
+/*! Field TARGET_GROUP_7 - target_group_7 */
+#define REG4_IEX04_IA_IEX04_IA_BANDWIDTH_0_TARGET_GROUP_7_POS 56
+/*! Field TARGET_GROUP_7 - target_group_7 */
+#define REG4_IEX04_IA_IEX04_IA_BANDWIDTH_0_TARGET_GROUP_7_MASK 0xFF00000000000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TREG4_PM_TREG4_PM_ERROR_LOG Register REG4_TREG4_PM_TREG4_PM_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_LOG 0x80020
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TREG4_PM_TREG4_PM_ERROR_LOG 0x16080020u
+
+/*! Register Reset Value */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field REGION - region */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_LOG_REGION_POS 4
+/*! Field REGION - region */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_LOG_REGION_MASK 0x10u
+
+/*! Field INITID - initid */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_LOG_REQ_INFO_POS 16
+/*! Field REQ_INFO - req_info */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_LOG_REQ_INFO_MASK 0x1F0000u
+
+/*! Field CODE - code */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_LOG_CODE_MASK 0x3000000u
+
+/*! Field SECONDARY - secondary */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_LOG_SECONDARY_POS 30
+/*! Field SECONDARY - secondary */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_LOG_SECONDARY_MASK 0x40000000u
+
+/*! Field MULTI - multi */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field GROUP - group */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_LOG_GROUP_POS 32
+/*! Field GROUP - group */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_LOG_GROUP_MASK 0x700000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TREG4_PM_TREG4_PM_CONTROL Register REG4_TREG4_PM_TREG4_PM_CONTROL - control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TREG4_PM_TREG4_PM_CONTROL 0x80028
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TREG4_PM_TREG4_PM_CONTROL 0x16080028u
+
+/*! Register Reset Value */
+#define REG4_TREG4_PM_TREG4_PM_CONTROL_RST 0x0000000000000000u
+
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TREG4_PM_TREG4_PM_CONTROL_ERROR_PRIMARY_REP_POS 24
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TREG4_PM_TREG4_PM_CONTROL_ERROR_PRIMARY_REP_MASK 0x1000000u
+
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TREG4_PM_TREG4_PM_CONTROL_ERROR_SECONDARY_REP_POS 25
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TREG4_PM_TREG4_PM_CONTROL_ERROR_SECONDARY_REP_MASK 0x2000000u
+
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TREG4_PM_TREG4_PM_CONTROL_SECONDARY_REP_SHADOW_POS 30
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TREG4_PM_TREG4_PM_CONTROL_SECONDARY_REP_SHADOW_MASK 0x40000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TREG4_PM_TREG4_PM_ERROR_CLEAR_SINGLE Register REG4_TREG4_PM_TREG4_PM_ERROR_CLEAR_SINGLE - error_clear_single */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_CLEAR_SINGLE 0x80030
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TREG4_PM_TREG4_PM_ERROR_CLEAR_SINGLE 0x16080030u
+
+/*! Register Reset Value */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_CLEAR_SINGLE_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_CLEAR_SINGLE_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_CLEAR_SINGLE_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TREG4_PM_TREG4_PM_ERROR_CLEAR_MULTI Register REG4_TREG4_PM_TREG4_PM_ERROR_CLEAR_MULTI - error_clear_multi */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_CLEAR_MULTI 0x80038
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TREG4_PM_TREG4_PM_ERROR_CLEAR_MULTI 0x16080038u
+
+/*! Register Reset Value */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_CLEAR_MULTI_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_CLEAR_MULTI_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TREG4_PM_TREG4_PM_ERROR_CLEAR_MULTI_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TREG4_PM_TREG4_PM_READ_PERMISSION_0 Register REG4_TREG4_PM_TREG4_PM_READ_PERMISSION_0 - read_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TREG4_PM_TREG4_PM_READ_PERMISSION_0 0x80050
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TREG4_PM_TREG4_PM_READ_PERMISSION_0 0x16080050u
+
+/*! Register Reset Value */
+#define REG4_TREG4_PM_TREG4_PM_READ_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TREG4_PM_TREG4_PM_READ_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TREG4_PM_TREG4_PM_READ_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TREG4_PM_TREG4_PM_WRITE_PERMISSION_0 Register REG4_TREG4_PM_TREG4_PM_WRITE_PERMISSION_0 - write_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TREG4_PM_TREG4_PM_WRITE_PERMISSION_0 0x80058
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TREG4_PM_TREG4_PM_WRITE_PERMISSION_0 0x16080058u
+
+/*! Register Reset Value */
+#define REG4_TREG4_PM_TREG4_PM_WRITE_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TREG4_PM_TREG4_PM_WRITE_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TREG4_PM_TREG4_PM_WRITE_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TREG4_PM_TREG4_PM_ADDR_MATCH_1 Register REG4_TREG4_PM_TREG4_PM_ADDR_MATCH_1 - addr_match_1 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TREG4_PM_TREG4_PM_ADDR_MATCH_1 0x80060
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TREG4_PM_TREG4_PM_ADDR_MATCH_1 0x16080060u
+
+/*! Register Reset Value */
+#define REG4_TREG4_PM_TREG4_PM_ADDR_MATCH_1_RST 0x0000000000080050u
+
+/*! Field ADDR_SPACE - addr_space */
+#define REG4_TREG4_PM_TREG4_PM_ADDR_MATCH_1_ADDR_SPACE_POS 0
+/*! Field ADDR_SPACE - addr_space */
+#define REG4_TREG4_PM_TREG4_PM_ADDR_MATCH_1_ADDR_SPACE_MASK 0x7u
+
+/*! Field SIZE - size */
+#define REG4_TREG4_PM_TREG4_PM_ADDR_MATCH_1_SIZE_POS 3
+/*! Field SIZE - size */
+#define REG4_TREG4_PM_TREG4_PM_ADDR_MATCH_1_SIZE_MASK 0xF8u
+
+/*! Field LEVEL - level */
+#define REG4_TREG4_PM_TREG4_PM_ADDR_MATCH_1_LEVEL_POS 9
+/*! Field LEVEL - level */
+#define REG4_TREG4_PM_TREG4_PM_ADDR_MATCH_1_LEVEL_MASK 0x200u
+
+/*! Field BASE_ADDR - base_addr */
+#define REG4_TREG4_PM_TREG4_PM_ADDR_MATCH_1_BASE_ADDR_POS 10
+/*! Field BASE_ADDR - base_addr */
+#define REG4_TREG4_PM_TREG4_PM_ADDR_MATCH_1_BASE_ADDR_MASK 0xFFC00u
+
+/*! @} */
+
+/*! \defgroup REG4_TREG4_PM_TREG4_PM_READ_PERMISSION_1 Register REG4_TREG4_PM_TREG4_PM_READ_PERMISSION_1 - read_permission_1 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TREG4_PM_TREG4_PM_READ_PERMISSION_1 0x80070
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TREG4_PM_TREG4_PM_READ_PERMISSION_1 0x16080070u
+
+/*! Register Reset Value */
+#define REG4_TREG4_PM_TREG4_PM_READ_PERMISSION_1_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TREG4_PM_TREG4_PM_READ_PERMISSION_1_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TREG4_PM_TREG4_PM_READ_PERMISSION_1_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TREG4_PM_TREG4_PM_WRITE_PERMISSION_1 Register REG4_TREG4_PM_TREG4_PM_WRITE_PERMISSION_1 - write_permission_1 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TREG4_PM_TREG4_PM_WRITE_PERMISSION_1 0x80078
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TREG4_PM_TREG4_PM_WRITE_PERMISSION_1 0x16080078u
+
+/*! Register Reset Value */
+#define REG4_TREG4_PM_TREG4_PM_WRITE_PERMISSION_1_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TREG4_PM_TREG4_PM_WRITE_PERMISSION_1_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TREG4_PM_TREG4_PM_WRITE_PERMISSION_1_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TCGU_PM_TCGU_PM_ERROR_LOG Register REG4_TCGU_PM_TCGU_PM_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_LOG 0x80420
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TCGU_PM_TCGU_PM_ERROR_LOG 0x16080420u
+
+/*! Register Reset Value */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field REGION - region */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_LOG_REGION_POS 4
+/*! Field REGION - region */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_LOG_REGION_MASK 0xF0u
+
+/*! Field INITID - initid */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_LOG_REQ_INFO_POS 16
+/*! Field REQ_INFO - req_info */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_LOG_REQ_INFO_MASK 0x1F0000u
+
+/*! Field CODE - code */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_LOG_CODE_MASK 0x3000000u
+
+/*! Field SECONDARY - secondary */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_LOG_SECONDARY_POS 30
+/*! Field SECONDARY - secondary */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_LOG_SECONDARY_MASK 0x40000000u
+
+/*! Field MULTI - multi */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field GROUP - group */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_LOG_GROUP_POS 32
+/*! Field GROUP - group */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_LOG_GROUP_MASK 0x700000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TCGU_PM_TCGU_PM_CONTROL Register REG4_TCGU_PM_TCGU_PM_CONTROL - control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TCGU_PM_TCGU_PM_CONTROL 0x80428
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TCGU_PM_TCGU_PM_CONTROL 0x16080428u
+
+/*! Register Reset Value */
+#define REG4_TCGU_PM_TCGU_PM_CONTROL_RST 0x0000000000000000u
+
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TCGU_PM_TCGU_PM_CONTROL_ERROR_PRIMARY_REP_POS 24
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TCGU_PM_TCGU_PM_CONTROL_ERROR_PRIMARY_REP_MASK 0x1000000u
+
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TCGU_PM_TCGU_PM_CONTROL_ERROR_SECONDARY_REP_POS 25
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TCGU_PM_TCGU_PM_CONTROL_ERROR_SECONDARY_REP_MASK 0x2000000u
+
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TCGU_PM_TCGU_PM_CONTROL_SECONDARY_REP_SHADOW_POS 30
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TCGU_PM_TCGU_PM_CONTROL_SECONDARY_REP_SHADOW_MASK 0x40000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TCGU_PM_TCGU_PM_ERROR_CLEAR_SINGLE Register REG4_TCGU_PM_TCGU_PM_ERROR_CLEAR_SINGLE - error_clear_single */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_CLEAR_SINGLE 0x80430
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TCGU_PM_TCGU_PM_ERROR_CLEAR_SINGLE 0x16080430u
+
+/*! Register Reset Value */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_CLEAR_SINGLE_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_CLEAR_SINGLE_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_CLEAR_SINGLE_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TCGU_PM_TCGU_PM_ERROR_CLEAR_MULTI Register REG4_TCGU_PM_TCGU_PM_ERROR_CLEAR_MULTI - error_clear_multi */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_CLEAR_MULTI 0x80438
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TCGU_PM_TCGU_PM_ERROR_CLEAR_MULTI 0x16080438u
+
+/*! Register Reset Value */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_CLEAR_MULTI_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_CLEAR_MULTI_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TCGU_PM_TCGU_PM_ERROR_CLEAR_MULTI_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TCGU_PM_TCGU_PM_READ_PERMISSION_0 Register REG4_TCGU_PM_TCGU_PM_READ_PERMISSION_0 - read_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TCGU_PM_TCGU_PM_READ_PERMISSION_0 0x80450
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TCGU_PM_TCGU_PM_READ_PERMISSION_0 0x16080450u
+
+/*! Register Reset Value */
+#define REG4_TCGU_PM_TCGU_PM_READ_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TCGU_PM_TCGU_PM_READ_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TCGU_PM_TCGU_PM_READ_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TCGU_PM_TCGU_PM_WRITE_PERMISSION_0 Register REG4_TCGU_PM_TCGU_PM_WRITE_PERMISSION_0 - write_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TCGU_PM_TCGU_PM_WRITE_PERMISSION_0 0x80458
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TCGU_PM_TCGU_PM_WRITE_PERMISSION_0 0x16080458u
+
+/*! Register Reset Value */
+#define REG4_TCGU_PM_TCGU_PM_WRITE_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TCGU_PM_TCGU_PM_WRITE_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TCGU_PM_TCGU_PM_WRITE_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TRCU_PM_TRCU_PM_ERROR_LOG Register REG4_TRCU_PM_TRCU_PM_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_LOG 0x80820
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TRCU_PM_TRCU_PM_ERROR_LOG 0x16080820u
+
+/*! Register Reset Value */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field REGION - region */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_LOG_REGION_POS 4
+/*! Field REGION - region */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_LOG_REGION_MASK 0xF0u
+
+/*! Field INITID - initid */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_LOG_REQ_INFO_POS 16
+/*! Field REQ_INFO - req_info */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_LOG_REQ_INFO_MASK 0x1F0000u
+
+/*! Field CODE - code */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_LOG_CODE_MASK 0x3000000u
+
+/*! Field SECONDARY - secondary */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_LOG_SECONDARY_POS 30
+/*! Field SECONDARY - secondary */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_LOG_SECONDARY_MASK 0x40000000u
+
+/*! Field MULTI - multi */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field GROUP - group */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_LOG_GROUP_POS 32
+/*! Field GROUP - group */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_LOG_GROUP_MASK 0x700000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TRCU_PM_TRCU_PM_CONTROL Register REG4_TRCU_PM_TRCU_PM_CONTROL - control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TRCU_PM_TRCU_PM_CONTROL 0x80828
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TRCU_PM_TRCU_PM_CONTROL 0x16080828u
+
+/*! Register Reset Value */
+#define REG4_TRCU_PM_TRCU_PM_CONTROL_RST 0x0000000000000000u
+
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TRCU_PM_TRCU_PM_CONTROL_ERROR_PRIMARY_REP_POS 24
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TRCU_PM_TRCU_PM_CONTROL_ERROR_PRIMARY_REP_MASK 0x1000000u
+
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TRCU_PM_TRCU_PM_CONTROL_ERROR_SECONDARY_REP_POS 25
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TRCU_PM_TRCU_PM_CONTROL_ERROR_SECONDARY_REP_MASK 0x2000000u
+
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TRCU_PM_TRCU_PM_CONTROL_SECONDARY_REP_SHADOW_POS 30
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TRCU_PM_TRCU_PM_CONTROL_SECONDARY_REP_SHADOW_MASK 0x40000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TRCU_PM_TRCU_PM_ERROR_CLEAR_SINGLE Register REG4_TRCU_PM_TRCU_PM_ERROR_CLEAR_SINGLE - error_clear_single */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_CLEAR_SINGLE 0x80830
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TRCU_PM_TRCU_PM_ERROR_CLEAR_SINGLE 0x16080830u
+
+/*! Register Reset Value */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_CLEAR_SINGLE_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_CLEAR_SINGLE_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_CLEAR_SINGLE_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TRCU_PM_TRCU_PM_ERROR_CLEAR_MULTI Register REG4_TRCU_PM_TRCU_PM_ERROR_CLEAR_MULTI - error_clear_multi */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_CLEAR_MULTI 0x80838
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TRCU_PM_TRCU_PM_ERROR_CLEAR_MULTI 0x16080838u
+
+/*! Register Reset Value */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_CLEAR_MULTI_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_CLEAR_MULTI_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TRCU_PM_TRCU_PM_ERROR_CLEAR_MULTI_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TRCU_PM_TRCU_PM_READ_PERMISSION_0 Register REG4_TRCU_PM_TRCU_PM_READ_PERMISSION_0 - read_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TRCU_PM_TRCU_PM_READ_PERMISSION_0 0x80850
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TRCU_PM_TRCU_PM_READ_PERMISSION_0 0x16080850u
+
+/*! Register Reset Value */
+#define REG4_TRCU_PM_TRCU_PM_READ_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TRCU_PM_TRCU_PM_READ_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TRCU_PM_TRCU_PM_READ_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TRCU_PM_TRCU_PM_WRITE_PERMISSION_0 Register REG4_TRCU_PM_TRCU_PM_WRITE_PERMISSION_0 - write_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TRCU_PM_TRCU_PM_WRITE_PERMISSION_0 0x80858
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TRCU_PM_TRCU_PM_WRITE_PERMISSION_0 0x16080858u
+
+/*! Register Reset Value */
+#define REG4_TRCU_PM_TRCU_PM_WRITE_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TRCU_PM_TRCU_PM_WRITE_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TRCU_PM_TRCU_PM_WRITE_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TPMU_PM_TPMU_PM_ERROR_LOG Register REG4_TPMU_PM_TPMU_PM_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_LOG 0x80C20
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPMU_PM_TPMU_PM_ERROR_LOG 0x16080C20u
+
+/*! Register Reset Value */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field REGION - region */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_LOG_REGION_POS 4
+/*! Field REGION - region */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_LOG_REGION_MASK 0xF0u
+
+/*! Field INITID - initid */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_LOG_REQ_INFO_POS 16
+/*! Field REQ_INFO - req_info */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_LOG_REQ_INFO_MASK 0x1F0000u
+
+/*! Field CODE - code */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_LOG_CODE_MASK 0x3000000u
+
+/*! Field SECONDARY - secondary */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_LOG_SECONDARY_POS 30
+/*! Field SECONDARY - secondary */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_LOG_SECONDARY_MASK 0x40000000u
+
+/*! Field MULTI - multi */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field GROUP - group */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_LOG_GROUP_POS 32
+/*! Field GROUP - group */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_LOG_GROUP_MASK 0x700000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPMU_PM_TPMU_PM_CONTROL Register REG4_TPMU_PM_TPMU_PM_CONTROL - control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPMU_PM_TPMU_PM_CONTROL 0x80C28
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPMU_PM_TPMU_PM_CONTROL 0x16080C28u
+
+/*! Register Reset Value */
+#define REG4_TPMU_PM_TPMU_PM_CONTROL_RST 0x0000000000000000u
+
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TPMU_PM_TPMU_PM_CONTROL_ERROR_PRIMARY_REP_POS 24
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TPMU_PM_TPMU_PM_CONTROL_ERROR_PRIMARY_REP_MASK 0x1000000u
+
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TPMU_PM_TPMU_PM_CONTROL_ERROR_SECONDARY_REP_POS 25
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TPMU_PM_TPMU_PM_CONTROL_ERROR_SECONDARY_REP_MASK 0x2000000u
+
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TPMU_PM_TPMU_PM_CONTROL_SECONDARY_REP_SHADOW_POS 30
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TPMU_PM_TPMU_PM_CONTROL_SECONDARY_REP_SHADOW_MASK 0x40000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPMU_PM_TPMU_PM_ERROR_CLEAR_SINGLE Register REG4_TPMU_PM_TPMU_PM_ERROR_CLEAR_SINGLE - error_clear_single */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_CLEAR_SINGLE 0x80C30
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPMU_PM_TPMU_PM_ERROR_CLEAR_SINGLE 0x16080C30u
+
+/*! Register Reset Value */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_CLEAR_SINGLE_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_CLEAR_SINGLE_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_CLEAR_SINGLE_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TPMU_PM_TPMU_PM_ERROR_CLEAR_MULTI Register REG4_TPMU_PM_TPMU_PM_ERROR_CLEAR_MULTI - error_clear_multi */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_CLEAR_MULTI 0x80C38
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPMU_PM_TPMU_PM_ERROR_CLEAR_MULTI 0x16080C38u
+
+/*! Register Reset Value */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_CLEAR_MULTI_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_CLEAR_MULTI_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TPMU_PM_TPMU_PM_ERROR_CLEAR_MULTI_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TPMU_PM_TPMU_PM_READ_PERMISSION_0 Register REG4_TPMU_PM_TPMU_PM_READ_PERMISSION_0 - read_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPMU_PM_TPMU_PM_READ_PERMISSION_0 0x80C50
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPMU_PM_TPMU_PM_READ_PERMISSION_0 0x16080C50u
+
+/*! Register Reset Value */
+#define REG4_TPMU_PM_TPMU_PM_READ_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TPMU_PM_TPMU_PM_READ_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TPMU_PM_TPMU_PM_READ_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TPMU_PM_TPMU_PM_WRITE_PERMISSION_0 Register REG4_TPMU_PM_TPMU_PM_WRITE_PERMISSION_0 - write_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPMU_PM_TPMU_PM_WRITE_PERMISSION_0 0x80C58
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPMU_PM_TPMU_PM_WRITE_PERMISSION_0 0x16080C58u
+
+/*! Register Reset Value */
+#define REG4_TPMU_PM_TPMU_PM_WRITE_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TPMU_PM_TPMU_PM_WRITE_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TPMU_PM_TPMU_PM_WRITE_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TPCM_PM_TPCM_PM_ERROR_LOG Register REG4_TPCM_PM_TPCM_PM_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_LOG 0x81020
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPCM_PM_TPCM_PM_ERROR_LOG 0x16081020u
+
+/*! Register Reset Value */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field REGION - region */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_LOG_REGION_POS 4
+/*! Field REGION - region */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_LOG_REGION_MASK 0xF0u
+
+/*! Field INITID - initid */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_LOG_REQ_INFO_POS 16
+/*! Field REQ_INFO - req_info */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_LOG_REQ_INFO_MASK 0x1F0000u
+
+/*! Field CODE - code */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_LOG_CODE_MASK 0x3000000u
+
+/*! Field SECONDARY - secondary */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_LOG_SECONDARY_POS 30
+/*! Field SECONDARY - secondary */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_LOG_SECONDARY_MASK 0x40000000u
+
+/*! Field MULTI - multi */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field GROUP - group */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_LOG_GROUP_POS 32
+/*! Field GROUP - group */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_LOG_GROUP_MASK 0x700000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPCM_PM_TPCM_PM_CONTROL Register REG4_TPCM_PM_TPCM_PM_CONTROL - control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPCM_PM_TPCM_PM_CONTROL 0x81028
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPCM_PM_TPCM_PM_CONTROL 0x16081028u
+
+/*! Register Reset Value */
+#define REG4_TPCM_PM_TPCM_PM_CONTROL_RST 0x0000000000000000u
+
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TPCM_PM_TPCM_PM_CONTROL_ERROR_PRIMARY_REP_POS 24
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TPCM_PM_TPCM_PM_CONTROL_ERROR_PRIMARY_REP_MASK 0x1000000u
+
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TPCM_PM_TPCM_PM_CONTROL_ERROR_SECONDARY_REP_POS 25
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TPCM_PM_TPCM_PM_CONTROL_ERROR_SECONDARY_REP_MASK 0x2000000u
+
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TPCM_PM_TPCM_PM_CONTROL_SECONDARY_REP_SHADOW_POS 30
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TPCM_PM_TPCM_PM_CONTROL_SECONDARY_REP_SHADOW_MASK 0x40000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TPCM_PM_TPCM_PM_ERROR_CLEAR_SINGLE Register REG4_TPCM_PM_TPCM_PM_ERROR_CLEAR_SINGLE - error_clear_single */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_CLEAR_SINGLE 0x81030
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPCM_PM_TPCM_PM_ERROR_CLEAR_SINGLE 0x16081030u
+
+/*! Register Reset Value */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_CLEAR_SINGLE_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_CLEAR_SINGLE_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_CLEAR_SINGLE_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TPCM_PM_TPCM_PM_ERROR_CLEAR_MULTI Register REG4_TPCM_PM_TPCM_PM_ERROR_CLEAR_MULTI - error_clear_multi */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_CLEAR_MULTI 0x81038
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPCM_PM_TPCM_PM_ERROR_CLEAR_MULTI 0x16081038u
+
+/*! Register Reset Value */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_CLEAR_MULTI_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_CLEAR_MULTI_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TPCM_PM_TPCM_PM_ERROR_CLEAR_MULTI_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TPCM_PM_TPCM_PM_READ_PERMISSION_0 Register REG4_TPCM_PM_TPCM_PM_READ_PERMISSION_0 - read_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPCM_PM_TPCM_PM_READ_PERMISSION_0 0x81050
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPCM_PM_TPCM_PM_READ_PERMISSION_0 0x16081050u
+
+/*! Register Reset Value */
+#define REG4_TPCM_PM_TPCM_PM_READ_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TPCM_PM_TPCM_PM_READ_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TPCM_PM_TPCM_PM_READ_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TPCM_PM_TPCM_PM_WRITE_PERMISSION_0 Register REG4_TPCM_PM_TPCM_PM_WRITE_PERMISSION_0 - write_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TPCM_PM_TPCM_PM_WRITE_PERMISSION_0 0x81058
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TPCM_PM_TPCM_PM_WRITE_PERMISSION_0 0x16081058u
+
+/*! Register Reset Value */
+#define REG4_TPCM_PM_TPCM_PM_WRITE_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TPCM_PM_TPCM_PM_WRITE_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TPCM_PM_TPCM_PM_WRITE_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TGPIO_PM_TGPIO_PM_ERROR_LOG Register REG4_TGPIO_PM_TGPIO_PM_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_LOG 0x81420
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPIO_PM_TGPIO_PM_ERROR_LOG 0x16081420u
+
+/*! Register Reset Value */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field REGION - region */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_LOG_REGION_POS 4
+/*! Field REGION - region */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_LOG_REGION_MASK 0xF0u
+
+/*! Field INITID - initid */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_LOG_REQ_INFO_POS 16
+/*! Field REQ_INFO - req_info */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_LOG_REQ_INFO_MASK 0x1F0000u
+
+/*! Field CODE - code */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_LOG_CODE_MASK 0x3000000u
+
+/*! Field SECONDARY - secondary */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_LOG_SECONDARY_POS 30
+/*! Field SECONDARY - secondary */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_LOG_SECONDARY_MASK 0x40000000u
+
+/*! Field MULTI - multi */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field GROUP - group */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_LOG_GROUP_POS 32
+/*! Field GROUP - group */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_LOG_GROUP_MASK 0x700000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPIO_PM_TGPIO_PM_CONTROL Register REG4_TGPIO_PM_TGPIO_PM_CONTROL - control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPIO_PM_TGPIO_PM_CONTROL 0x81428
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPIO_PM_TGPIO_PM_CONTROL 0x16081428u
+
+/*! Register Reset Value */
+#define REG4_TGPIO_PM_TGPIO_PM_CONTROL_RST 0x0000000000000000u
+
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TGPIO_PM_TGPIO_PM_CONTROL_ERROR_PRIMARY_REP_POS 24
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TGPIO_PM_TGPIO_PM_CONTROL_ERROR_PRIMARY_REP_MASK 0x1000000u
+
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TGPIO_PM_TGPIO_PM_CONTROL_ERROR_SECONDARY_REP_POS 25
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TGPIO_PM_TGPIO_PM_CONTROL_ERROR_SECONDARY_REP_MASK 0x2000000u
+
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TGPIO_PM_TGPIO_PM_CONTROL_SECONDARY_REP_SHADOW_POS 30
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TGPIO_PM_TGPIO_PM_CONTROL_SECONDARY_REP_SHADOW_MASK 0x40000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPIO_PM_TGPIO_PM_ERROR_CLEAR_SINGLE Register REG4_TGPIO_PM_TGPIO_PM_ERROR_CLEAR_SINGLE - error_clear_single */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_CLEAR_SINGLE 0x81430
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPIO_PM_TGPIO_PM_ERROR_CLEAR_SINGLE 0x16081430u
+
+/*! Register Reset Value */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_CLEAR_SINGLE_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_CLEAR_SINGLE_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_CLEAR_SINGLE_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPIO_PM_TGPIO_PM_ERROR_CLEAR_MULTI Register REG4_TGPIO_PM_TGPIO_PM_ERROR_CLEAR_MULTI - error_clear_multi */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_CLEAR_MULTI 0x81438
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPIO_PM_TGPIO_PM_ERROR_CLEAR_MULTI 0x16081438u
+
+/*! Register Reset Value */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_CLEAR_MULTI_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_CLEAR_MULTI_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TGPIO_PM_TGPIO_PM_ERROR_CLEAR_MULTI_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPIO_PM_TGPIO_PM_READ_PERMISSION_0 Register REG4_TGPIO_PM_TGPIO_PM_READ_PERMISSION_0 - read_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPIO_PM_TGPIO_PM_READ_PERMISSION_0 0x81450
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPIO_PM_TGPIO_PM_READ_PERMISSION_0 0x16081450u
+
+/*! Register Reset Value */
+#define REG4_TGPIO_PM_TGPIO_PM_READ_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TGPIO_PM_TGPIO_PM_READ_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TGPIO_PM_TGPIO_PM_READ_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TGPIO_PM_TGPIO_PM_WRITE_PERMISSION_0 Register REG4_TGPIO_PM_TGPIO_PM_WRITE_PERMISSION_0 - write_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPIO_PM_TGPIO_PM_WRITE_PERMISSION_0 0x81458
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPIO_PM_TGPIO_PM_WRITE_PERMISSION_0 0x16081458u
+
+/*! Register Reset Value */
+#define REG4_TGPIO_PM_TGPIO_PM_WRITE_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TGPIO_PM_TGPIO_PM_WRITE_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TGPIO_PM_TGPIO_PM_WRITE_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TLEDC_PM_TLEDC_PM_ERROR_LOG Register REG4_TLEDC_PM_TLEDC_PM_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_LOG 0x81820
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TLEDC_PM_TLEDC_PM_ERROR_LOG 0x16081820u
+
+/*! Register Reset Value */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field REGION - region */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_LOG_REGION_POS 4
+/*! Field REGION - region */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_LOG_REGION_MASK 0xF0u
+
+/*! Field INITID - initid */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_LOG_REQ_INFO_POS 16
+/*! Field REQ_INFO - req_info */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_LOG_REQ_INFO_MASK 0x1F0000u
+
+/*! Field CODE - code */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_LOG_CODE_MASK 0x3000000u
+
+/*! Field SECONDARY - secondary */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_LOG_SECONDARY_POS 30
+/*! Field SECONDARY - secondary */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_LOG_SECONDARY_MASK 0x40000000u
+
+/*! Field MULTI - multi */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field GROUP - group */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_LOG_GROUP_POS 32
+/*! Field GROUP - group */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_LOG_GROUP_MASK 0x700000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TLEDC_PM_TLEDC_PM_CONTROL Register REG4_TLEDC_PM_TLEDC_PM_CONTROL - control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TLEDC_PM_TLEDC_PM_CONTROL 0x81828
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TLEDC_PM_TLEDC_PM_CONTROL 0x16081828u
+
+/*! Register Reset Value */
+#define REG4_TLEDC_PM_TLEDC_PM_CONTROL_RST 0x0000000000000000u
+
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TLEDC_PM_TLEDC_PM_CONTROL_ERROR_PRIMARY_REP_POS 24
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TLEDC_PM_TLEDC_PM_CONTROL_ERROR_PRIMARY_REP_MASK 0x1000000u
+
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TLEDC_PM_TLEDC_PM_CONTROL_ERROR_SECONDARY_REP_POS 25
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TLEDC_PM_TLEDC_PM_CONTROL_ERROR_SECONDARY_REP_MASK 0x2000000u
+
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TLEDC_PM_TLEDC_PM_CONTROL_SECONDARY_REP_SHADOW_POS 30
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TLEDC_PM_TLEDC_PM_CONTROL_SECONDARY_REP_SHADOW_MASK 0x40000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TLEDC_PM_TLEDC_PM_ERROR_CLEAR_SINGLE Register REG4_TLEDC_PM_TLEDC_PM_ERROR_CLEAR_SINGLE - error_clear_single */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_CLEAR_SINGLE 0x81830
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TLEDC_PM_TLEDC_PM_ERROR_CLEAR_SINGLE 0x16081830u
+
+/*! Register Reset Value */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_CLEAR_SINGLE_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_CLEAR_SINGLE_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_CLEAR_SINGLE_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TLEDC_PM_TLEDC_PM_ERROR_CLEAR_MULTI Register REG4_TLEDC_PM_TLEDC_PM_ERROR_CLEAR_MULTI - error_clear_multi */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_CLEAR_MULTI 0x81838
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TLEDC_PM_TLEDC_PM_ERROR_CLEAR_MULTI 0x16081838u
+
+/*! Register Reset Value */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_CLEAR_MULTI_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_CLEAR_MULTI_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TLEDC_PM_TLEDC_PM_ERROR_CLEAR_MULTI_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TLEDC_PM_TLEDC_PM_READ_PERMISSION_0 Register REG4_TLEDC_PM_TLEDC_PM_READ_PERMISSION_0 - read_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TLEDC_PM_TLEDC_PM_READ_PERMISSION_0 0x81850
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TLEDC_PM_TLEDC_PM_READ_PERMISSION_0 0x16081850u
+
+/*! Register Reset Value */
+#define REG4_TLEDC_PM_TLEDC_PM_READ_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TLEDC_PM_TLEDC_PM_READ_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TLEDC_PM_TLEDC_PM_READ_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TLEDC_PM_TLEDC_PM_WRITE_PERMISSION_0 Register REG4_TLEDC_PM_TLEDC_PM_WRITE_PERMISSION_0 - write_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TLEDC_PM_TLEDC_PM_WRITE_PERMISSION_0 0x81858
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TLEDC_PM_TLEDC_PM_WRITE_PERMISSION_0 0x16081858u
+
+/*! Register Reset Value */
+#define REG4_TLEDC_PM_TLEDC_PM_WRITE_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TLEDC_PM_TLEDC_PM_WRITE_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TLEDC_PM_TLEDC_PM_WRITE_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C_PM_TI2C0_PM_ERROR_LOG Register REG4_TI2C_PM_TI2C0_PM_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_LOG 0x81C20
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C_PM_TI2C0_PM_ERROR_LOG 0x16081C20u
+
+/*! Register Reset Value */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field REGION - region */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_LOG_REGION_POS 4
+/*! Field REGION - region */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_LOG_REGION_MASK 0xF0u
+
+/*! Field INITID - initid */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_LOG_REQ_INFO_POS 16
+/*! Field REQ_INFO - req_info */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_LOG_REQ_INFO_MASK 0x1F0000u
+
+/*! Field CODE - code */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_LOG_CODE_MASK 0x3000000u
+
+/*! Field SECONDARY - secondary */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_LOG_SECONDARY_POS 30
+/*! Field SECONDARY - secondary */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_LOG_SECONDARY_MASK 0x40000000u
+
+/*! Field MULTI - multi */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field GROUP - group */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_LOG_GROUP_POS 32
+/*! Field GROUP - group */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_LOG_GROUP_MASK 0x700000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C_PM_TI2C0_PM_CONTROL Register REG4_TI2C_PM_TI2C0_PM_CONTROL - control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C_PM_TI2C0_PM_CONTROL 0x81C28
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C_PM_TI2C0_PM_CONTROL 0x16081C28u
+
+/*! Register Reset Value */
+#define REG4_TI2C_PM_TI2C0_PM_CONTROL_RST 0x0000000000000000u
+
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TI2C_PM_TI2C0_PM_CONTROL_ERROR_PRIMARY_REP_POS 24
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TI2C_PM_TI2C0_PM_CONTROL_ERROR_PRIMARY_REP_MASK 0x1000000u
+
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TI2C_PM_TI2C0_PM_CONTROL_ERROR_SECONDARY_REP_POS 25
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TI2C_PM_TI2C0_PM_CONTROL_ERROR_SECONDARY_REP_MASK 0x2000000u
+
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TI2C_PM_TI2C0_PM_CONTROL_SECONDARY_REP_SHADOW_POS 30
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TI2C_PM_TI2C0_PM_CONTROL_SECONDARY_REP_SHADOW_MASK 0x40000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C_PM_TI2C0_PM_ERROR_CLEAR_SINGLE Register REG4_TI2C_PM_TI2C0_PM_ERROR_CLEAR_SINGLE - error_clear_single */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_CLEAR_SINGLE 0x81C30
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C_PM_TI2C0_PM_ERROR_CLEAR_SINGLE 0x16081C30u
+
+/*! Register Reset Value */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_CLEAR_SINGLE_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_CLEAR_SINGLE_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_CLEAR_SINGLE_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C_PM_TI2C0_PM_ERROR_CLEAR_MULTI Register REG4_TI2C_PM_TI2C0_PM_ERROR_CLEAR_MULTI - error_clear_multi */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_CLEAR_MULTI 0x81C38
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C_PM_TI2C0_PM_ERROR_CLEAR_MULTI 0x16081C38u
+
+/*! Register Reset Value */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_CLEAR_MULTI_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_CLEAR_MULTI_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TI2C_PM_TI2C0_PM_ERROR_CLEAR_MULTI_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C_PM_TI2C0_PM_READ_PERMISSION_0 Register REG4_TI2C_PM_TI2C0_PM_READ_PERMISSION_0 - read_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C_PM_TI2C0_PM_READ_PERMISSION_0 0x81C50
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C_PM_TI2C0_PM_READ_PERMISSION_0 0x16081C50u
+
+/*! Register Reset Value */
+#define REG4_TI2C_PM_TI2C0_PM_READ_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TI2C_PM_TI2C0_PM_READ_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TI2C_PM_TI2C0_PM_READ_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C_PM_TI2C0_PM_WRITE_PERMISSION_0 Register REG4_TI2C_PM_TI2C0_PM_WRITE_PERMISSION_0 - write_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C_PM_TI2C0_PM_WRITE_PERMISSION_0 0x81C58
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C_PM_TI2C0_PM_WRITE_PERMISSION_0 0x16081C58u
+
+/*! Register Reset Value */
+#define REG4_TI2C_PM_TI2C0_PM_WRITE_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TI2C_PM_TI2C0_PM_WRITE_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TI2C_PM_TI2C0_PM_WRITE_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TASC0_PM_TASC0_PM_ERROR_LOG Register REG4_TASC0_PM_TASC0_PM_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_LOG 0x82020
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC0_PM_TASC0_PM_ERROR_LOG 0x16082020u
+
+/*! Register Reset Value */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field REGION - region */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_LOG_REGION_POS 4
+/*! Field REGION - region */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_LOG_REGION_MASK 0xF0u
+
+/*! Field INITID - initid */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_LOG_REQ_INFO_POS 16
+/*! Field REQ_INFO - req_info */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_LOG_REQ_INFO_MASK 0x1F0000u
+
+/*! Field CODE - code */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_LOG_CODE_MASK 0x3000000u
+
+/*! Field SECONDARY - secondary */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_LOG_SECONDARY_POS 30
+/*! Field SECONDARY - secondary */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_LOG_SECONDARY_MASK 0x40000000u
+
+/*! Field MULTI - multi */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field GROUP - group */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_LOG_GROUP_POS 32
+/*! Field GROUP - group */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_LOG_GROUP_MASK 0x700000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC0_PM_TASC0_PM_CONTROL Register REG4_TASC0_PM_TASC0_PM_CONTROL - control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC0_PM_TASC0_PM_CONTROL 0x82028
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC0_PM_TASC0_PM_CONTROL 0x16082028u
+
+/*! Register Reset Value */
+#define REG4_TASC0_PM_TASC0_PM_CONTROL_RST 0x0000000000000000u
+
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TASC0_PM_TASC0_PM_CONTROL_ERROR_PRIMARY_REP_POS 24
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TASC0_PM_TASC0_PM_CONTROL_ERROR_PRIMARY_REP_MASK 0x1000000u
+
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TASC0_PM_TASC0_PM_CONTROL_ERROR_SECONDARY_REP_POS 25
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TASC0_PM_TASC0_PM_CONTROL_ERROR_SECONDARY_REP_MASK 0x2000000u
+
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TASC0_PM_TASC0_PM_CONTROL_SECONDARY_REP_SHADOW_POS 30
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TASC0_PM_TASC0_PM_CONTROL_SECONDARY_REP_SHADOW_MASK 0x40000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC0_PM_TASC0_PM_ERROR_CLEAR_SINGLE Register REG4_TASC0_PM_TASC0_PM_ERROR_CLEAR_SINGLE - error_clear_single */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_CLEAR_SINGLE 0x82030
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC0_PM_TASC0_PM_ERROR_CLEAR_SINGLE 0x16082030u
+
+/*! Register Reset Value */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_CLEAR_SINGLE_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_CLEAR_SINGLE_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_CLEAR_SINGLE_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC0_PM_TASC0_PM_ERROR_CLEAR_MULTI Register REG4_TASC0_PM_TASC0_PM_ERROR_CLEAR_MULTI - error_clear_multi */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_CLEAR_MULTI 0x82038
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC0_PM_TASC0_PM_ERROR_CLEAR_MULTI 0x16082038u
+
+/*! Register Reset Value */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_CLEAR_MULTI_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_CLEAR_MULTI_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TASC0_PM_TASC0_PM_ERROR_CLEAR_MULTI_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC0_PM_TASC0_PM_READ_PERMISSION_0 Register REG4_TASC0_PM_TASC0_PM_READ_PERMISSION_0 - read_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC0_PM_TASC0_PM_READ_PERMISSION_0 0x82050
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC0_PM_TASC0_PM_READ_PERMISSION_0 0x16082050u
+
+/*! Register Reset Value */
+#define REG4_TASC0_PM_TASC0_PM_READ_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TASC0_PM_TASC0_PM_READ_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TASC0_PM_TASC0_PM_READ_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TASC0_PM_TASC0_PM_WRITE_PERMISSION_0 Register REG4_TASC0_PM_TASC0_PM_WRITE_PERMISSION_0 - write_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC0_PM_TASC0_PM_WRITE_PERMISSION_0 0x82058
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC0_PM_TASC0_PM_WRITE_PERMISSION_0 0x16082058u
+
+/*! Register Reset Value */
+#define REG4_TASC0_PM_TASC0_PM_WRITE_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TASC0_PM_TASC0_PM_WRITE_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TASC0_PM_TASC0_PM_WRITE_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TASC1_PM_TASC1_PM_ERROR_LOG Register REG4_TASC1_PM_TASC1_PM_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_LOG 0x82420
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC1_PM_TASC1_PM_ERROR_LOG 0x16082420u
+
+/*! Register Reset Value */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field REGION - region */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_LOG_REGION_POS 4
+/*! Field REGION - region */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_LOG_REGION_MASK 0xF0u
+
+/*! Field INITID - initid */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_LOG_REQ_INFO_POS 16
+/*! Field REQ_INFO - req_info */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_LOG_REQ_INFO_MASK 0x1F0000u
+
+/*! Field CODE - code */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_LOG_CODE_MASK 0x3000000u
+
+/*! Field SECONDARY - secondary */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_LOG_SECONDARY_POS 30
+/*! Field SECONDARY - secondary */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_LOG_SECONDARY_MASK 0x40000000u
+
+/*! Field MULTI - multi */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field GROUP - group */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_LOG_GROUP_POS 32
+/*! Field GROUP - group */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_LOG_GROUP_MASK 0x700000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC1_PM_TASC1_PM_CONTROL Register REG4_TASC1_PM_TASC1_PM_CONTROL - control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC1_PM_TASC1_PM_CONTROL 0x82428
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC1_PM_TASC1_PM_CONTROL 0x16082428u
+
+/*! Register Reset Value */
+#define REG4_TASC1_PM_TASC1_PM_CONTROL_RST 0x0000000000000000u
+
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TASC1_PM_TASC1_PM_CONTROL_ERROR_PRIMARY_REP_POS 24
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TASC1_PM_TASC1_PM_CONTROL_ERROR_PRIMARY_REP_MASK 0x1000000u
+
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TASC1_PM_TASC1_PM_CONTROL_ERROR_SECONDARY_REP_POS 25
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TASC1_PM_TASC1_PM_CONTROL_ERROR_SECONDARY_REP_MASK 0x2000000u
+
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TASC1_PM_TASC1_PM_CONTROL_SECONDARY_REP_SHADOW_POS 30
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TASC1_PM_TASC1_PM_CONTROL_SECONDARY_REP_SHADOW_MASK 0x40000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC1_PM_TASC1_PM_ERROR_CLEAR_SINGLE Register REG4_TASC1_PM_TASC1_PM_ERROR_CLEAR_SINGLE - error_clear_single */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_CLEAR_SINGLE 0x82430
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC1_PM_TASC1_PM_ERROR_CLEAR_SINGLE 0x16082430u
+
+/*! Register Reset Value */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_CLEAR_SINGLE_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_CLEAR_SINGLE_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_CLEAR_SINGLE_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC1_PM_TASC1_PM_ERROR_CLEAR_MULTI Register REG4_TASC1_PM_TASC1_PM_ERROR_CLEAR_MULTI - error_clear_multi */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_CLEAR_MULTI 0x82438
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC1_PM_TASC1_PM_ERROR_CLEAR_MULTI 0x16082438u
+
+/*! Register Reset Value */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_CLEAR_MULTI_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_CLEAR_MULTI_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TASC1_PM_TASC1_PM_ERROR_CLEAR_MULTI_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TASC1_PM_TASC1_PM_READ_PERMISSION_0 Register REG4_TASC1_PM_TASC1_PM_READ_PERMISSION_0 - read_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC1_PM_TASC1_PM_READ_PERMISSION_0 0x82450
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC1_PM_TASC1_PM_READ_PERMISSION_0 0x16082450u
+
+/*! Register Reset Value */
+#define REG4_TASC1_PM_TASC1_PM_READ_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TASC1_PM_TASC1_PM_READ_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TASC1_PM_TASC1_PM_READ_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TASC1_PM_TASC1_PM_WRITE_PERMISSION_0 Register REG4_TASC1_PM_TASC1_PM_WRITE_PERMISSION_0 - write_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TASC1_PM_TASC1_PM_WRITE_PERMISSION_0 0x82458
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TASC1_PM_TASC1_PM_WRITE_PERMISSION_0 0x16082458u
+
+/*! Register Reset Value */
+#define REG4_TASC1_PM_TASC1_PM_WRITE_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TASC1_PM_TASC1_PM_WRITE_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TASC1_PM_TASC1_PM_WRITE_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT0_PM_TGPT0_PM_ERROR_LOG Register REG4_TGPT0_PM_TGPT0_PM_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_LOG 0x82820
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT0_PM_TGPT0_PM_ERROR_LOG 0x16082820u
+
+/*! Register Reset Value */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field REGION - region */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_LOG_REGION_POS 4
+/*! Field REGION - region */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_LOG_REGION_MASK 0xF0u
+
+/*! Field INITID - initid */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_LOG_REQ_INFO_POS 16
+/*! Field REQ_INFO - req_info */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_LOG_REQ_INFO_MASK 0x1F0000u
+
+/*! Field CODE - code */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_LOG_CODE_MASK 0x3000000u
+
+/*! Field SECONDARY - secondary */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_LOG_SECONDARY_POS 30
+/*! Field SECONDARY - secondary */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_LOG_SECONDARY_MASK 0x40000000u
+
+/*! Field MULTI - multi */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field GROUP - group */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_LOG_GROUP_POS 32
+/*! Field GROUP - group */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_LOG_GROUP_MASK 0x700000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT0_PM_TGPT0_PM_CONTROL Register REG4_TGPT0_PM_TGPT0_PM_CONTROL - control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT0_PM_TGPT0_PM_CONTROL 0x82828
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT0_PM_TGPT0_PM_CONTROL 0x16082828u
+
+/*! Register Reset Value */
+#define REG4_TGPT0_PM_TGPT0_PM_CONTROL_RST 0x0000000000000000u
+
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TGPT0_PM_TGPT0_PM_CONTROL_ERROR_PRIMARY_REP_POS 24
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TGPT0_PM_TGPT0_PM_CONTROL_ERROR_PRIMARY_REP_MASK 0x1000000u
+
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TGPT0_PM_TGPT0_PM_CONTROL_ERROR_SECONDARY_REP_POS 25
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TGPT0_PM_TGPT0_PM_CONTROL_ERROR_SECONDARY_REP_MASK 0x2000000u
+
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TGPT0_PM_TGPT0_PM_CONTROL_SECONDARY_REP_SHADOW_POS 30
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TGPT0_PM_TGPT0_PM_CONTROL_SECONDARY_REP_SHADOW_MASK 0x40000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT0_PM_TGPT0_PM_ERROR_CLEAR_SINGLE Register REG4_TGPT0_PM_TGPT0_PM_ERROR_CLEAR_SINGLE - error_clear_single */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_CLEAR_SINGLE 0x82830
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT0_PM_TGPT0_PM_ERROR_CLEAR_SINGLE 0x16082830u
+
+/*! Register Reset Value */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_CLEAR_SINGLE_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_CLEAR_SINGLE_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_CLEAR_SINGLE_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT0_PM_TGPT0_PM_ERROR_CLEAR_MULTI Register REG4_TGPT0_PM_TGPT0_PM_ERROR_CLEAR_MULTI - error_clear_multi */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_CLEAR_MULTI 0x82838
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT0_PM_TGPT0_PM_ERROR_CLEAR_MULTI 0x16082838u
+
+/*! Register Reset Value */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_CLEAR_MULTI_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_CLEAR_MULTI_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TGPT0_PM_TGPT0_PM_ERROR_CLEAR_MULTI_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT0_PM_TGPT0_PM_READ_PERMISSION_0 Register REG4_TGPT0_PM_TGPT0_PM_READ_PERMISSION_0 - read_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT0_PM_TGPT0_PM_READ_PERMISSION_0 0x82850
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT0_PM_TGPT0_PM_READ_PERMISSION_0 0x16082850u
+
+/*! Register Reset Value */
+#define REG4_TGPT0_PM_TGPT0_PM_READ_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TGPT0_PM_TGPT0_PM_READ_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TGPT0_PM_TGPT0_PM_READ_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT0_PM_TGPT0_PM_WRITE_PERMISSION_0 Register REG4_TGPT0_PM_TGPT0_PM_WRITE_PERMISSION_0 - write_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT0_PM_TGPT0_PM_WRITE_PERMISSION_0 0x82858
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT0_PM_TGPT0_PM_WRITE_PERMISSION_0 0x16082858u
+
+/*! Register Reset Value */
+#define REG4_TGPT0_PM_TGPT0_PM_WRITE_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TGPT0_PM_TGPT0_PM_WRITE_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TGPT0_PM_TGPT0_PM_WRITE_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC0_PM_TSSC0_PM_ERROR_LOG Register REG4_TSSC0_PM_TSSC0_PM_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_LOG 0x82C20
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC0_PM_TSSC0_PM_ERROR_LOG 0x16082C20u
+
+/*! Register Reset Value */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field REGION - region */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_LOG_REGION_POS 4
+/*! Field REGION - region */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_LOG_REGION_MASK 0xF0u
+
+/*! Field INITID - initid */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_LOG_REQ_INFO_POS 16
+/*! Field REQ_INFO - req_info */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_LOG_REQ_INFO_MASK 0x1F0000u
+
+/*! Field CODE - code */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_LOG_CODE_MASK 0x3000000u
+
+/*! Field SECONDARY - secondary */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_LOG_SECONDARY_POS 30
+/*! Field SECONDARY - secondary */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_LOG_SECONDARY_MASK 0x40000000u
+
+/*! Field MULTI - multi */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field GROUP - group */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_LOG_GROUP_POS 32
+/*! Field GROUP - group */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_LOG_GROUP_MASK 0x700000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC0_PM_TSSC0_PM_CONTROL Register REG4_TSSC0_PM_TSSC0_PM_CONTROL - control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC0_PM_TSSC0_PM_CONTROL 0x82C28
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC0_PM_TSSC0_PM_CONTROL 0x16082C28u
+
+/*! Register Reset Value */
+#define REG4_TSSC0_PM_TSSC0_PM_CONTROL_RST 0x0000000000000000u
+
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TSSC0_PM_TSSC0_PM_CONTROL_ERROR_PRIMARY_REP_POS 24
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TSSC0_PM_TSSC0_PM_CONTROL_ERROR_PRIMARY_REP_MASK 0x1000000u
+
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TSSC0_PM_TSSC0_PM_CONTROL_ERROR_SECONDARY_REP_POS 25
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TSSC0_PM_TSSC0_PM_CONTROL_ERROR_SECONDARY_REP_MASK 0x2000000u
+
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TSSC0_PM_TSSC0_PM_CONTROL_SECONDARY_REP_SHADOW_POS 30
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TSSC0_PM_TSSC0_PM_CONTROL_SECONDARY_REP_SHADOW_MASK 0x40000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC0_PM_TSSC0_PM_ERROR_CLEAR_SINGLE Register REG4_TSSC0_PM_TSSC0_PM_ERROR_CLEAR_SINGLE - error_clear_single */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_CLEAR_SINGLE 0x82C30
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC0_PM_TSSC0_PM_ERROR_CLEAR_SINGLE 0x16082C30u
+
+/*! Register Reset Value */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_CLEAR_SINGLE_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_CLEAR_SINGLE_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_CLEAR_SINGLE_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC0_PM_TSSC0_PM_ERROR_CLEAR_MULTI Register REG4_TSSC0_PM_TSSC0_PM_ERROR_CLEAR_MULTI - error_clear_multi */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_CLEAR_MULTI 0x82C38
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC0_PM_TSSC0_PM_ERROR_CLEAR_MULTI 0x16082C38u
+
+/*! Register Reset Value */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_CLEAR_MULTI_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_CLEAR_MULTI_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TSSC0_PM_TSSC0_PM_ERROR_CLEAR_MULTI_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC0_PM_TSSC0_PM_READ_PERMISSION_0 Register REG4_TSSC0_PM_TSSC0_PM_READ_PERMISSION_0 - read_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC0_PM_TSSC0_PM_READ_PERMISSION_0 0x82C50
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC0_PM_TSSC0_PM_READ_PERMISSION_0 0x16082C50u
+
+/*! Register Reset Value */
+#define REG4_TSSC0_PM_TSSC0_PM_READ_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TSSC0_PM_TSSC0_PM_READ_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TSSC0_PM_TSSC0_PM_READ_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC0_PM_TSSC0_PM_WRITE_PERMISSION_0 Register REG4_TSSC0_PM_TSSC0_PM_WRITE_PERMISSION_0 - write_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC0_PM_TSSC0_PM_WRITE_PERMISSION_0 0x82C58
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC0_PM_TSSC0_PM_WRITE_PERMISSION_0 0x16082C58u
+
+/*! Register Reset Value */
+#define REG4_TSSC0_PM_TSSC0_PM_WRITE_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TSSC0_PM_TSSC0_PM_WRITE_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TSSC0_PM_TSSC0_PM_WRITE_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC1_PM_TSSC1_PM_ERROR_LOG Register REG4_TSSC1_PM_TSSC1_PM_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_LOG 0x83020
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC1_PM_TSSC1_PM_ERROR_LOG 0x16083020u
+
+/*! Register Reset Value */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field REGION - region */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_LOG_REGION_POS 4
+/*! Field REGION - region */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_LOG_REGION_MASK 0xF0u
+
+/*! Field INITID - initid */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_LOG_REQ_INFO_POS 16
+/*! Field REQ_INFO - req_info */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_LOG_REQ_INFO_MASK 0x1F0000u
+
+/*! Field CODE - code */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_LOG_CODE_MASK 0x3000000u
+
+/*! Field SECONDARY - secondary */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_LOG_SECONDARY_POS 30
+/*! Field SECONDARY - secondary */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_LOG_SECONDARY_MASK 0x40000000u
+
+/*! Field MULTI - multi */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field GROUP - group */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_LOG_GROUP_POS 32
+/*! Field GROUP - group */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_LOG_GROUP_MASK 0x700000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC1_PM_TSSC1_PM_CONTROL Register REG4_TSSC1_PM_TSSC1_PM_CONTROL - control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC1_PM_TSSC1_PM_CONTROL 0x83028
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC1_PM_TSSC1_PM_CONTROL 0x16083028u
+
+/*! Register Reset Value */
+#define REG4_TSSC1_PM_TSSC1_PM_CONTROL_RST 0x0000000000000000u
+
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TSSC1_PM_TSSC1_PM_CONTROL_ERROR_PRIMARY_REP_POS 24
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TSSC1_PM_TSSC1_PM_CONTROL_ERROR_PRIMARY_REP_MASK 0x1000000u
+
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TSSC1_PM_TSSC1_PM_CONTROL_ERROR_SECONDARY_REP_POS 25
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TSSC1_PM_TSSC1_PM_CONTROL_ERROR_SECONDARY_REP_MASK 0x2000000u
+
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TSSC1_PM_TSSC1_PM_CONTROL_SECONDARY_REP_SHADOW_POS 30
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TSSC1_PM_TSSC1_PM_CONTROL_SECONDARY_REP_SHADOW_MASK 0x40000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC1_PM_TSSC1_PM_ERROR_CLEAR_SINGLE Register REG4_TSSC1_PM_TSSC1_PM_ERROR_CLEAR_SINGLE - error_clear_single */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_CLEAR_SINGLE 0x83030
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC1_PM_TSSC1_PM_ERROR_CLEAR_SINGLE 0x16083030u
+
+/*! Register Reset Value */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_CLEAR_SINGLE_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_CLEAR_SINGLE_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_CLEAR_SINGLE_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC1_PM_TSSC1_PM_ERROR_CLEAR_MULTI Register REG4_TSSC1_PM_TSSC1_PM_ERROR_CLEAR_MULTI - error_clear_multi */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_CLEAR_MULTI 0x83038
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC1_PM_TSSC1_PM_ERROR_CLEAR_MULTI 0x16083038u
+
+/*! Register Reset Value */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_CLEAR_MULTI_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_CLEAR_MULTI_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TSSC1_PM_TSSC1_PM_ERROR_CLEAR_MULTI_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC1_PM_TSSC1_PM_READ_PERMISSION_0 Register REG4_TSSC1_PM_TSSC1_PM_READ_PERMISSION_0 - read_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC1_PM_TSSC1_PM_READ_PERMISSION_0 0x83050
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC1_PM_TSSC1_PM_READ_PERMISSION_0 0x16083050u
+
+/*! Register Reset Value */
+#define REG4_TSSC1_PM_TSSC1_PM_READ_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TSSC1_PM_TSSC1_PM_READ_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TSSC1_PM_TSSC1_PM_READ_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TSSC1_PM_TSSC1_PM_WRITE_PERMISSION_0 Register REG4_TSSC1_PM_TSSC1_PM_WRITE_PERMISSION_0 - write_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TSSC1_PM_TSSC1_PM_WRITE_PERMISSION_0 0x83058
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TSSC1_PM_TSSC1_PM_WRITE_PERMISSION_0 0x16083058u
+
+/*! Register Reset Value */
+#define REG4_TSSC1_PM_TSSC1_PM_WRITE_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TSSC1_PM_TSSC1_PM_WRITE_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TSSC1_PM_TSSC1_PM_WRITE_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TDMA0_PM_TDM0_PM_ERROR_LOG Register REG4_TDMA0_PM_TDM0_PM_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_LOG 0x83420
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TDMA0_PM_TDM0_PM_ERROR_LOG 0x16083420u
+
+/*! Register Reset Value */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field REGION - region */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_LOG_REGION_POS 4
+/*! Field REGION - region */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_LOG_REGION_MASK 0xF0u
+
+/*! Field INITID - initid */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_LOG_REQ_INFO_POS 16
+/*! Field REQ_INFO - req_info */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_LOG_REQ_INFO_MASK 0x1F0000u
+
+/*! Field CODE - code */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_LOG_CODE_MASK 0x3000000u
+
+/*! Field SECONDARY - secondary */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_LOG_SECONDARY_POS 30
+/*! Field SECONDARY - secondary */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_LOG_SECONDARY_MASK 0x40000000u
+
+/*! Field MULTI - multi */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field GROUP - group */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_LOG_GROUP_POS 32
+/*! Field GROUP - group */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_LOG_GROUP_MASK 0x700000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TDMA0_PM_TDM0_PM_CONTROL Register REG4_TDMA0_PM_TDM0_PM_CONTROL - control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TDMA0_PM_TDM0_PM_CONTROL 0x83428
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TDMA0_PM_TDM0_PM_CONTROL 0x16083428u
+
+/*! Register Reset Value */
+#define REG4_TDMA0_PM_TDM0_PM_CONTROL_RST 0x0000000000000000u
+
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TDMA0_PM_TDM0_PM_CONTROL_ERROR_PRIMARY_REP_POS 24
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TDMA0_PM_TDM0_PM_CONTROL_ERROR_PRIMARY_REP_MASK 0x1000000u
+
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TDMA0_PM_TDM0_PM_CONTROL_ERROR_SECONDARY_REP_POS 25
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TDMA0_PM_TDM0_PM_CONTROL_ERROR_SECONDARY_REP_MASK 0x2000000u
+
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TDMA0_PM_TDM0_PM_CONTROL_SECONDARY_REP_SHADOW_POS 30
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TDMA0_PM_TDM0_PM_CONTROL_SECONDARY_REP_SHADOW_MASK 0x40000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TDMA0_PM_TDM0_PM_ERROR_CLEAR_SINGLE Register REG4_TDMA0_PM_TDM0_PM_ERROR_CLEAR_SINGLE - error_clear_single */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_CLEAR_SINGLE 0x83430
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TDMA0_PM_TDM0_PM_ERROR_CLEAR_SINGLE 0x16083430u
+
+/*! Register Reset Value */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_CLEAR_SINGLE_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_CLEAR_SINGLE_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_CLEAR_SINGLE_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TDMA0_PM_TDM0_PM_ERROR_CLEAR_MULTI Register REG4_TDMA0_PM_TDM0_PM_ERROR_CLEAR_MULTI - error_clear_multi */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_CLEAR_MULTI 0x83438
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TDMA0_PM_TDM0_PM_ERROR_CLEAR_MULTI 0x16083438u
+
+/*! Register Reset Value */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_CLEAR_MULTI_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_CLEAR_MULTI_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TDMA0_PM_TDM0_PM_ERROR_CLEAR_MULTI_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TDMA0_PM_TDM0_PM_READ_PERMISSION_0 Register REG4_TDMA0_PM_TDM0_PM_READ_PERMISSION_0 - read_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TDMA0_PM_TDM0_PM_READ_PERMISSION_0 0x83450
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TDMA0_PM_TDM0_PM_READ_PERMISSION_0 0x16083450u
+
+/*! Register Reset Value */
+#define REG4_TDMA0_PM_TDM0_PM_READ_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TDMA0_PM_TDM0_PM_READ_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TDMA0_PM_TDM0_PM_READ_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TDMA0_PM_TDM0_PM_WRITE_PERMISSION_0 Register REG4_TDMA0_PM_TDM0_PM_WRITE_PERMISSION_0 - write_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TDMA0_PM_TDM0_PM_WRITE_PERMISSION_0 0x83458
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TDMA0_PM_TDM0_PM_WRITE_PERMISSION_0 0x16083458u
+
+/*! Register Reset Value */
+#define REG4_TDMA0_PM_TDM0_PM_WRITE_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TDMA0_PM_TDM0_PM_WRITE_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TDMA0_PM_TDM0_PM_WRITE_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT1_PM_TGPT1_PM_ERROR_LOG Register REG4_TGPT1_PM_TGPT1_PM_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_LOG 0x83C20
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT1_PM_TGPT1_PM_ERROR_LOG 0x16083C20u
+
+/*! Register Reset Value */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field REGION - region */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_LOG_REGION_POS 4
+/*! Field REGION - region */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_LOG_REGION_MASK 0xF0u
+
+/*! Field INITID - initid */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_LOG_REQ_INFO_POS 16
+/*! Field REQ_INFO - req_info */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_LOG_REQ_INFO_MASK 0x1F0000u
+
+/*! Field CODE - code */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_LOG_CODE_MASK 0x3000000u
+
+/*! Field SECONDARY - secondary */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_LOG_SECONDARY_POS 30
+/*! Field SECONDARY - secondary */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_LOG_SECONDARY_MASK 0x40000000u
+
+/*! Field MULTI - multi */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field GROUP - group */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_LOG_GROUP_POS 32
+/*! Field GROUP - group */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_LOG_GROUP_MASK 0x700000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT1_PM_TGPT1_PM_CONTROL Register REG4_TGPT1_PM_TGPT1_PM_CONTROL - control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT1_PM_TGPT1_PM_CONTROL 0x83C28
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT1_PM_TGPT1_PM_CONTROL 0x16083C28u
+
+/*! Register Reset Value */
+#define REG4_TGPT1_PM_TGPT1_PM_CONTROL_RST 0x0000000000000000u
+
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TGPT1_PM_TGPT1_PM_CONTROL_ERROR_PRIMARY_REP_POS 24
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TGPT1_PM_TGPT1_PM_CONTROL_ERROR_PRIMARY_REP_MASK 0x1000000u
+
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TGPT1_PM_TGPT1_PM_CONTROL_ERROR_SECONDARY_REP_POS 25
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TGPT1_PM_TGPT1_PM_CONTROL_ERROR_SECONDARY_REP_MASK 0x2000000u
+
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TGPT1_PM_TGPT1_PM_CONTROL_SECONDARY_REP_SHADOW_POS 30
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TGPT1_PM_TGPT1_PM_CONTROL_SECONDARY_REP_SHADOW_MASK 0x40000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT1_PM_TGPT1_PM_ERROR_CLEAR_SINGLE Register REG4_TGPT1_PM_TGPT1_PM_ERROR_CLEAR_SINGLE - error_clear_single */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_CLEAR_SINGLE 0x83C30
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT1_PM_TGPT1_PM_ERROR_CLEAR_SINGLE 0x16083C30u
+
+/*! Register Reset Value */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_CLEAR_SINGLE_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_CLEAR_SINGLE_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_CLEAR_SINGLE_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT1_PM_TGPT1_PM_ERROR_CLEAR_MULTI Register REG4_TGPT1_PM_TGPT1_PM_ERROR_CLEAR_MULTI - error_clear_multi */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_CLEAR_MULTI 0x83C38
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT1_PM_TGPT1_PM_ERROR_CLEAR_MULTI 0x16083C38u
+
+/*! Register Reset Value */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_CLEAR_MULTI_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_CLEAR_MULTI_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TGPT1_PM_TGPT1_PM_ERROR_CLEAR_MULTI_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT1_PM_TGPT1_PM_READ_PERMISSION_0 Register REG4_TGPT1_PM_TGPT1_PM_READ_PERMISSION_0 - read_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT1_PM_TGPT1_PM_READ_PERMISSION_0 0x83C50
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT1_PM_TGPT1_PM_READ_PERMISSION_0 0x16083C50u
+
+/*! Register Reset Value */
+#define REG4_TGPT1_PM_TGPT1_PM_READ_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TGPT1_PM_TGPT1_PM_READ_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TGPT1_PM_TGPT1_PM_READ_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT1_PM_TGPT1_PM_WRITE_PERMISSION_0 Register REG4_TGPT1_PM_TGPT1_PM_WRITE_PERMISSION_0 - write_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT1_PM_TGPT1_PM_WRITE_PERMISSION_0 0x83C58
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT1_PM_TGPT1_PM_WRITE_PERMISSION_0 0x16083C58u
+
+/*! Register Reset Value */
+#define REG4_TGPT1_PM_TGPT1_PM_WRITE_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TGPT1_PM_TGPT1_PM_WRITE_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TGPT1_PM_TGPT1_PM_WRITE_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT2_PM_TGPT2_PM_ERROR_LOG Register REG4_TGPT2_PM_TGPT2_PM_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_LOG 0x84020
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT2_PM_TGPT2_PM_ERROR_LOG 0x16084020u
+
+/*! Register Reset Value */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field REGION - region */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_LOG_REGION_POS 4
+/*! Field REGION - region */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_LOG_REGION_MASK 0xF0u
+
+/*! Field INITID - initid */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_LOG_REQ_INFO_POS 16
+/*! Field REQ_INFO - req_info */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_LOG_REQ_INFO_MASK 0x1F0000u
+
+/*! Field CODE - code */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_LOG_CODE_MASK 0x3000000u
+
+/*! Field SECONDARY - secondary */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_LOG_SECONDARY_POS 30
+/*! Field SECONDARY - secondary */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_LOG_SECONDARY_MASK 0x40000000u
+
+/*! Field MULTI - multi */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field GROUP - group */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_LOG_GROUP_POS 32
+/*! Field GROUP - group */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_LOG_GROUP_MASK 0x700000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT2_PM_TGPT2_PM_CONTROL Register REG4_TGPT2_PM_TGPT2_PM_CONTROL - control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT2_PM_TGPT2_PM_CONTROL 0x84028
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT2_PM_TGPT2_PM_CONTROL 0x16084028u
+
+/*! Register Reset Value */
+#define REG4_TGPT2_PM_TGPT2_PM_CONTROL_RST 0x0000000000000000u
+
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TGPT2_PM_TGPT2_PM_CONTROL_ERROR_PRIMARY_REP_POS 24
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TGPT2_PM_TGPT2_PM_CONTROL_ERROR_PRIMARY_REP_MASK 0x1000000u
+
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TGPT2_PM_TGPT2_PM_CONTROL_ERROR_SECONDARY_REP_POS 25
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TGPT2_PM_TGPT2_PM_CONTROL_ERROR_SECONDARY_REP_MASK 0x2000000u
+
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TGPT2_PM_TGPT2_PM_CONTROL_SECONDARY_REP_SHADOW_POS 30
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TGPT2_PM_TGPT2_PM_CONTROL_SECONDARY_REP_SHADOW_MASK 0x40000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT2_PM_TGPT2_PM_ERROR_CLEAR_SINGLE Register REG4_TGPT2_PM_TGPT2_PM_ERROR_CLEAR_SINGLE - error_clear_single */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_CLEAR_SINGLE 0x84030
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT2_PM_TGPT2_PM_ERROR_CLEAR_SINGLE 0x16084030u
+
+/*! Register Reset Value */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_CLEAR_SINGLE_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_CLEAR_SINGLE_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_CLEAR_SINGLE_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT2_PM_TGPT2_PM_ERROR_CLEAR_MULTI Register REG4_TGPT2_PM_TGPT2_PM_ERROR_CLEAR_MULTI - error_clear_multi */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_CLEAR_MULTI 0x84038
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT2_PM_TGPT2_PM_ERROR_CLEAR_MULTI 0x16084038u
+
+/*! Register Reset Value */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_CLEAR_MULTI_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_CLEAR_MULTI_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TGPT2_PM_TGPT2_PM_ERROR_CLEAR_MULTI_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT2_PM_TGPT2_PM_READ_PERMISSION_0 Register REG4_TGPT2_PM_TGPT2_PM_READ_PERMISSION_0 - read_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT2_PM_TGPT2_PM_READ_PERMISSION_0 0x84050
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT2_PM_TGPT2_PM_READ_PERMISSION_0 0x16084050u
+
+/*! Register Reset Value */
+#define REG4_TGPT2_PM_TGPT2_PM_READ_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TGPT2_PM_TGPT2_PM_READ_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TGPT2_PM_TGPT2_PM_READ_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TGPT2_PM_TGPT2_PM_WRITE_PERMISSION_0 Register REG4_TGPT2_PM_TGPT2_PM_WRITE_PERMISSION_0 - write_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TGPT2_PM_TGPT2_PM_WRITE_PERMISSION_0 0x84058
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TGPT2_PM_TGPT2_PM_WRITE_PERMISSION_0 0x16084058u
+
+/*! Register Reset Value */
+#define REG4_TGPT2_PM_TGPT2_PM_WRITE_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TGPT2_PM_TGPT2_PM_WRITE_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TGPT2_PM_TGPT2_PM_WRITE_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C0_PM_TI2C1_PM_ERROR_LOG Register REG4_TI2C0_PM_TI2C1_PM_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_LOG 0x85020
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C0_PM_TI2C1_PM_ERROR_LOG 0x16085020u
+
+/*! Register Reset Value */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field REGION - region */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_LOG_REGION_POS 4
+/*! Field REGION - region */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_LOG_REGION_MASK 0xF0u
+
+/*! Field INITID - initid */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_LOG_REQ_INFO_POS 16
+/*! Field REQ_INFO - req_info */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_LOG_REQ_INFO_MASK 0x1F0000u
+
+/*! Field CODE - code */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_LOG_CODE_MASK 0x3000000u
+
+/*! Field SECONDARY - secondary */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_LOG_SECONDARY_POS 30
+/*! Field SECONDARY - secondary */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_LOG_SECONDARY_MASK 0x40000000u
+
+/*! Field MULTI - multi */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field GROUP - group */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_LOG_GROUP_POS 32
+/*! Field GROUP - group */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_LOG_GROUP_MASK 0x700000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C0_PM_TI2C1_PM_CONTROL Register REG4_TI2C0_PM_TI2C1_PM_CONTROL - control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C0_PM_TI2C1_PM_CONTROL 0x85028
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C0_PM_TI2C1_PM_CONTROL 0x16085028u
+
+/*! Register Reset Value */
+#define REG4_TI2C0_PM_TI2C1_PM_CONTROL_RST 0x0000000000000000u
+
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TI2C0_PM_TI2C1_PM_CONTROL_ERROR_PRIMARY_REP_POS 24
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TI2C0_PM_TI2C1_PM_CONTROL_ERROR_PRIMARY_REP_MASK 0x1000000u
+
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TI2C0_PM_TI2C1_PM_CONTROL_ERROR_SECONDARY_REP_POS 25
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TI2C0_PM_TI2C1_PM_CONTROL_ERROR_SECONDARY_REP_MASK 0x2000000u
+
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TI2C0_PM_TI2C1_PM_CONTROL_SECONDARY_REP_SHADOW_POS 30
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TI2C0_PM_TI2C1_PM_CONTROL_SECONDARY_REP_SHADOW_MASK 0x40000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C0_PM_TI2C1_PM_ERROR_CLEAR_SINGLE Register REG4_TI2C0_PM_TI2C1_PM_ERROR_CLEAR_SINGLE - error_clear_single */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_CLEAR_SINGLE 0x85030
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C0_PM_TI2C1_PM_ERROR_CLEAR_SINGLE 0x16085030u
+
+/*! Register Reset Value */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_CLEAR_SINGLE_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_CLEAR_SINGLE_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_CLEAR_SINGLE_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C0_PM_TI2C1_PM_ERROR_CLEAR_MULTI Register REG4_TI2C0_PM_TI2C1_PM_ERROR_CLEAR_MULTI - error_clear_multi */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_CLEAR_MULTI 0x85038
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C0_PM_TI2C1_PM_ERROR_CLEAR_MULTI 0x16085038u
+
+/*! Register Reset Value */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_CLEAR_MULTI_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_CLEAR_MULTI_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TI2C0_PM_TI2C1_PM_ERROR_CLEAR_MULTI_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C0_PM_TI2C1_PM_READ_PERMISSION_0 Register REG4_TI2C0_PM_TI2C1_PM_READ_PERMISSION_0 - read_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C0_PM_TI2C1_PM_READ_PERMISSION_0 0x85050
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C0_PM_TI2C1_PM_READ_PERMISSION_0 0x16085050u
+
+/*! Register Reset Value */
+#define REG4_TI2C0_PM_TI2C1_PM_READ_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TI2C0_PM_TI2C1_PM_READ_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TI2C0_PM_TI2C1_PM_READ_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C0_PM_TI2C1_PM_WRITE_PERMISSION_0 Register REG4_TI2C0_PM_TI2C1_PM_WRITE_PERMISSION_0 - write_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C0_PM_TI2C1_PM_WRITE_PERMISSION_0 0x85058
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C0_PM_TI2C1_PM_WRITE_PERMISSION_0 0x16085058u
+
+/*! Register Reset Value */
+#define REG4_TI2C0_PM_TI2C1_PM_WRITE_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TI2C0_PM_TI2C1_PM_WRITE_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TI2C0_PM_TI2C1_PM_WRITE_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C1_PM_TI2C2_PM_ERROR_LOG Register REG4_TI2C1_PM_TI2C2_PM_ERROR_LOG - error_log */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_LOG 0x85420
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C1_PM_TI2C2_PM_ERROR_LOG 0x16085420u
+
+/*! Register Reset Value */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_LOG_RST 0x0000000000000000u
+
+/*! Field CMD - cmd */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_LOG_CMD_POS 0
+/*! Field CMD - cmd */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_LOG_CMD_MASK 0x7u
+
+/*! Field REGION - region */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_LOG_REGION_POS 4
+/*! Field REGION - region */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_LOG_REGION_MASK 0xF0u
+
+/*! Field INITID - initid */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_LOG_INITID_POS 8
+/*! Field INITID - initid */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_LOG_INITID_MASK 0x3F00u
+
+/*! Field REQ_INFO - req_info */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_LOG_REQ_INFO_POS 16
+/*! Field REQ_INFO - req_info */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_LOG_REQ_INFO_MASK 0x1F0000u
+
+/*! Field CODE - code */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_LOG_CODE_POS 24
+/*! Field CODE - code */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_LOG_CODE_MASK 0x3000000u
+
+/*! Field SECONDARY - secondary */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_LOG_SECONDARY_POS 30
+/*! Field SECONDARY - secondary */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_LOG_SECONDARY_MASK 0x40000000u
+
+/*! Field MULTI - multi */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_LOG_MULTI_POS 31
+/*! Field MULTI - multi */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_LOG_MULTI_MASK 0x80000000u
+
+/*! Field GROUP - group */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_LOG_GROUP_POS 32
+/*! Field GROUP - group */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_LOG_GROUP_MASK 0x700000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C1_PM_TI2C2_PM_CONTROL Register REG4_TI2C1_PM_TI2C2_PM_CONTROL - control */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C1_PM_TI2C2_PM_CONTROL 0x85428
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C1_PM_TI2C2_PM_CONTROL 0x16085428u
+
+/*! Register Reset Value */
+#define REG4_TI2C1_PM_TI2C2_PM_CONTROL_RST 0x0000000000000000u
+
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TI2C1_PM_TI2C2_PM_CONTROL_ERROR_PRIMARY_REP_POS 24
+/*! Field ERROR_PRIMARY_REP - error_primary_rep */
+#define REG4_TI2C1_PM_TI2C2_PM_CONTROL_ERROR_PRIMARY_REP_MASK 0x1000000u
+
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TI2C1_PM_TI2C2_PM_CONTROL_ERROR_SECONDARY_REP_POS 25
+/*! Field ERROR_SECONDARY_REP - error_secondary_rep */
+#define REG4_TI2C1_PM_TI2C2_PM_CONTROL_ERROR_SECONDARY_REP_MASK 0x2000000u
+
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TI2C1_PM_TI2C2_PM_CONTROL_SECONDARY_REP_SHADOW_POS 30
+/*! Field SECONDARY_REP_SHADOW - secondary_rep_shadow */
+#define REG4_TI2C1_PM_TI2C2_PM_CONTROL_SECONDARY_REP_SHADOW_MASK 0x40000000u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C1_PM_TI2C2_PM_ERROR_CLEAR_SINGLE Register REG4_TI2C1_PM_TI2C2_PM_ERROR_CLEAR_SINGLE - error_clear_single */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_CLEAR_SINGLE 0x85430
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C1_PM_TI2C2_PM_ERROR_CLEAR_SINGLE 0x16085430u
+
+/*! Register Reset Value */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_CLEAR_SINGLE_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_CLEAR_SINGLE_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_CLEAR_SINGLE_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C1_PM_TI2C2_PM_ERROR_CLEAR_MULTI Register REG4_TI2C1_PM_TI2C2_PM_ERROR_CLEAR_MULTI - error_clear_multi */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_CLEAR_MULTI 0x85438
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C1_PM_TI2C2_PM_ERROR_CLEAR_MULTI 0x16085438u
+
+/*! Register Reset Value */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_CLEAR_MULTI_RST 0x0000000000000000u
+
+/*! Field CLEAR - clear */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_CLEAR_MULTI_CLEAR_POS 0
+/*! Field CLEAR - clear */
+#define REG4_TI2C1_PM_TI2C2_PM_ERROR_CLEAR_MULTI_CLEAR_MASK 0x1u
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C1_PM_TI2C2_PM_READ_PERMISSION_0 Register REG4_TI2C1_PM_TI2C2_PM_READ_PERMISSION_0 - read_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C1_PM_TI2C2_PM_READ_PERMISSION_0 0x85450
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C1_PM_TI2C2_PM_READ_PERMISSION_0 0x16085450u
+
+/*! Register Reset Value */
+#define REG4_TI2C1_PM_TI2C2_PM_READ_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TI2C1_PM_TI2C2_PM_READ_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TI2C1_PM_TI2C2_PM_READ_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! \defgroup REG4_TI2C1_PM_TI2C2_PM_WRITE_PERMISSION_0 Register REG4_TI2C1_PM_TI2C2_PM_WRITE_PERMISSION_0 - write_permission_0 */
+/*! @{ */
+
+/*! Register Offset (relative) */
+#define REG4_TI2C1_PM_TI2C2_PM_WRITE_PERMISSION_0 0x85458
+/*! Register Offset (absolute) for 1st Instance SSX4_SHARED_LINK */
+#define SSX4_SHARED_LINK_REG4_TI2C1_PM_TI2C2_PM_WRITE_PERMISSION_0 0x16085458u
+
+/*! Register Reset Value */
+#define REG4_TI2C1_PM_TI2C2_PM_WRITE_PERMISSION_0_RST 0x0000000000000001u
+
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TI2C1_PM_TI2C2_PM_WRITE_PERMISSION_0_BIT_VECTOR_POS 0
+/*! Field BIT_VECTOR - bit_vector */
+#define REG4_TI2C1_PM_TI2C2_PM_WRITE_PERMISSION_0_BIT_VECTOR_MASK 0x1Fu
+
+/*! @} */
+
+/*! @} */
+
+#endif
