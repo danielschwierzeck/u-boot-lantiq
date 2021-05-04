@@ -216,8 +216,40 @@ int env_import(const char *buf, int check)
 	if (himport_r(&env_htab, (char *)ep->data, ENV_SIZE, '\0', 0, 0,
 			0, NULL)) {
 		gd->flags |= GD_FLG_ENV_READY;
+		#ifndef CONFIG_SB_ENV_PROTECTION
+		return 1;
+		#endif /* CONFIG_SB_ENV_PROTECTION */
+	}
+
+#ifdef CONFIG_SB_ENV_PROTECTION
+/* !<WW: basically this is calculated out for PRX300, perhap work with GRX350 */
+/* anything other than that you have to make your own assumption */
+{
+	image_header_t *pimg_header = (image_header_t *)(CONFIG_BOOTSTRAP_TEXT_BASE + 10240);
+	u32 image_len =	ntohl(pimg_header->ih_size);
+	u32 ltq_end = CONFIG_BOOTSTRAP_TEXT_BASE + 10240 + image_len + sizeof(image_header_t);
+	ep = (env_t *)(ltq_end + ((0x20 - (ltq_end % 0x20)) % 0x20));
+
+	#if 0 // enable crc check
+	check =1; //force check
+	if (check) {
+		uint32_t crc;
+
+		memcpy(&crc, &ep->crc, sizeof(crc));
+
+		if (crc32(0, ep->data, ENV_SIZE) != crc) {
+			return 1;
+		}
+	}
+	#endif
+
+	if (himport_r(&env_htab, (char *)ep->data, ENV_SIZE, '\0', H_NOCLEAR, 0,
+			0, NULL)) {
+		gd->flags |= GD_FLG_ENV_READY;
 		return 1;
 	}
+}
+#endif /* CONFIG_SB_ENV_PROTECTION */
 
 	error("Cannot import environment: errno = %d\n", errno);
 
