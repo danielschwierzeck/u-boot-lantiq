@@ -14,6 +14,7 @@ obj-$(CONFIG_SYS_I2C_ADI) += adi_i2c.o
 obj-$(CONFIG_I2C_MV) += mv_i2c.o
 obj-$(CONFIG_PCA9564_I2C) += pca9564_i2c.o
 obj-$(CONFIG_TSI108_I2C) += tsi108_i2c.o
+obj-$(CONFIG_LTQ_I2C) += lq_i2c.o
 obj-$(CONFIG_SH_SH7734_I2C) += sh_sh7734_i2c.o
 obj-$(CONFIG_SYS_I2C) += i2c_core.o
 obj-$(CONFIG_SYS_I2C_CADENCE) += i2c-cdns.o
