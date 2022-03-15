@@ -162,7 +162,7 @@ void ltq_gpio_init(u32 sso_init_value)
 			writel(0xff, sso + SSO_DUTY_CYCLE(i));
 
 		writel(SSO_CON0_RZFL, sso + SSO_CON0);
-		writel(SSO_CON1_US_FPID | SSO_CON1_FPID_8 | SSO_CON1_GROUP,
+		writel(SSO_CON1_US_FPID | SSO_CON1_FPID_8 | SSO_CON1_FCDSC_12_5 | SSO_CON1_GROUP,
 			sso + SSO_CON1);
 	}
 }
