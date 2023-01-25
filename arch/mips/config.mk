@@ -61,12 +61,12 @@ ifdef CONFIG_SPL_BUILD
 ifneq ($(CONFIG_ARCH_LANTIQ),y)
 PF_ABICALLS			:= -mno-abicalls
 PF_PIC				:= -fno-pic
-else
-PF_ABICALLS			:= -mabicalls
-PF_PIC				:= -fpic
-endif
-
 PF_PIE				:=
+else
+PF_ABICALLS			:= -mabicalls -mno-relax-pic-calls
+PF_PIC				:= -fpic
+PF_PIE				:= -pie
+endif
 else
 PF_ABICALLS			:= -mabicalls
 PF_PIC				:= -fpic
